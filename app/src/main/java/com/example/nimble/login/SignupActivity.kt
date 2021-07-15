@@ -3,7 +3,7 @@
  * Horia Gligor
  */
 
-package com.example.nimble
+package com.example.nimble.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.example.nimble.*
 
 class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,37 +32,39 @@ class SignupActivity : AppCompatActivity() {
             val tbSignupEmail = findViewById<View>(R.id.tbSignupEmail) as EditText
             val email = tbSignupEmail.text.toString()
 
-            /// get password from tbSignupPassword
+            /// get password from tbSignupPassword & hash it
             val tbSignupPassword = findViewById<View>(R.id.tbSignupPassword) as EditText
-            val password = tbSignupPassword.text.toString()
+            val password = hashPassword(tbSignupPassword.text.toString())
 
-            /// get password from tbSignupPassword
+            /// get password from tbSignupPassword & hash it
             val tbSignupConfPassword = findViewById<View>(R.id.tbSignupConfPassword) as EditText
-            val confpassword = tbSignupConfPassword.text.toString()
+            val confpassword = hashPassword(tbSignupConfPassword.text.toString())
 
             /// validate signup
             val signupSuccess = validateSignup(email, password, confpassword)
             when (signupSuccess) {
                 0 -> { /// success
+                    /// TODO send verification code (might need a new activity)
+
+                    /// TODO if verification code is correct
+                    /// TODO add email & password in database
                     /// go to MainActivity & destroy LoginActivity & SignupActivity
                     val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
+
+                    /// TODO else (verification code is incorrect)
+                    /// TODO Have a "resend code" and a "cancel" button on the alert
+                    //alertUser(this, "Incorrect code", "The verification code you inputted is incorrect")
                 }
                 1 -> { /// email already in use
-                    val alert = AlertDialog.Builder(this)
-                    alert.setTitle("Sign up Failed")
-                    alert.setMessage("E-mail already in use. Try logging in or using a different e-mail")
-                    alert.show()
+                    alertUser(this, "Sign up Failed", "E-mail already in use. Try logging in or using a different e-mail")
                 }
                 2 -> { /// password != confpassword
-                    val alert = AlertDialog.Builder(this)
-                    alert.setTitle("Sign up Failed")
-                    alert.setMessage("The password and confirmation password do not match")
-                    alert.show()
+                    alertUser(this, "Sign up Failed", "The password and confirmation password do not match")
                 }
                 else -> { /// should never happen
-                    Error(this, 1)
+                    errorMsg(this, 1)
                 }
             }
         }
@@ -75,5 +78,9 @@ class SignupActivity : AppCompatActivity() {
  * returns 2 if password != confpassword
  */
 fun validateSignup (email: String, password: String, confpassword: String): Int {
-    return 7;
+    /// TODO Check email
+    /// Check password != confpassword
+    if (password != confpassword)
+        return 2
+    return 0
 }

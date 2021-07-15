@@ -3,7 +3,7 @@
  * Horia Gligor
  */
 
-package com.example.nimble
+package com.example.nimble.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.example.nimble.MainActivity
+import com.example.nimble.R
+import com.example.nimble.alertUser
+import com.example.nimble.hashPassword
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,9 +36,9 @@ class LoginActivity : AppCompatActivity() {
             val tbLoginEmail = findViewById<View>(R.id.tbLoginEmail) as EditText
             val email = tbLoginEmail.text.toString()
 
-            /// get password from tbLoginPassword
+            /// get password from tbLoginPassword & hash it
             val tbLoginPassword = findViewById<View>(R.id.tbLoginPassword) as EditText
-            val password = tbLoginPassword.text.toString()
+            val password = hashPassword(tbLoginPassword.text.toString())
 
             /// validate login
             if (validateLogin(email, password)) { /// login success
@@ -43,15 +47,14 @@ class LoginActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             } else { /// login failed
-                val alert = AlertDialog.Builder(this)
-                alert.setTitle("Login Failed")
-                alert.setMessage("E-mail or password is incorrect")
-                alert.show()
+                alertUser(this, "Login Failed", "E-mail or password is incorrect")
             }
         }
     }
 }
 
 fun validateLogin (email: String, password: String): Boolean {
+    /// TODO check if email exists
+    /// TODO check if password is correct
     return false;
 }
