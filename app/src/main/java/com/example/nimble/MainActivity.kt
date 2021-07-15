@@ -1,3 +1,7 @@
+/**
+ * Main menu screen
+ */
+
 package com.example.nimble
 
 import androidx.appcompat.app.AppCompatActivity

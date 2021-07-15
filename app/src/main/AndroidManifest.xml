@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".LoginActivity"> <!-- Start Activity (change this later probably, idk) -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

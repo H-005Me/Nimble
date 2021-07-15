@@ -1,0 +1,5 @@
+FORMAT:
+	errcode - filepath - functionpath - description
+
+ERROR CODES:
+	1 - app/java/com.example.nimble/SignupActivity.kt - SignupActivity.onCreate() - validateSignup() returned a bad value

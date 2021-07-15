@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/txMiddle2"
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txMiddle" />
+
+    <Button
+        android:id="@+id/btSignup"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Sign up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txMiddle2"
+        app:layout_constraintTop_toBottomOf="@+id/txMiddle" />
+
+    <Button
+        android:id="@+id/btFacebook"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:text="Facebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txMiddle"
+        app:layout_constraintTop_toBottomOf="@+id/tbLoginPassword" />
+
+    <EditText
+        android:id="@+id/tbLoginEmail"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="E-Mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/tbLoginPassword"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbLoginEmail" />
+
+    <Button
+        android:id="@+id/btGoogle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:text="Google"
+        app:layout_constraintEnd_toStartOf="@+id/txMiddle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbLoginPassword" />
+
+    <Button
+        android:id="@+id/btLoginSubmit"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Login"
+        app:layout_constraintEnd_toStartOf="@+id/txMiddle2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txMiddle" />
+
+    <Button
+        android:id="@+id/btQR"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:text="QR"
+        app:layout_constraintBottom_toTopOf="@+id/txContact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txContact"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:text="Contact Support:\nnimble.meals.contact@gmail.com"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txMiddle"
+        android:layout_width="1dp"
+        android:layout_height="75dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbLoginPassword" />
+</androidx.constraintlayout.widget.ConstraintLayout>
