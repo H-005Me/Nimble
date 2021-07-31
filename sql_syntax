@@ -1,0 +1,27 @@
+val result = db.runUpdate("""
+    CREATE TABLE tbl_users (
+        autoid INT IDENTITY(1,1) PRIMARY KEY,
+        email NVARCHAR(255) NOT NULL,
+        password CHAR(64) NOT NULL
+    );
+""".trimIndent())
+println("Result: $result")
+
+val pass = sha256("Hello World")
+val result2 = db.runUpdate("""
+    INSERT INTO tbl_users (email, password)
+    VALUES ('myemail@gmail.com', '$pass')
+""".trimIndent())
+println("Result2: $result2")
+
+val result3 = db.runQuery("""
+    SELECT * FROM tbl_users
+""".trimIndent())
+if (result3 != null) {
+    println("Result3:")
+    while (result3.next()) {
+        println(result3.getString(1) + ' ' + result3.getString(2) + ' ' + result3.getString(3))
+    }
+} else {
+    println("result3 is NULL")
+}

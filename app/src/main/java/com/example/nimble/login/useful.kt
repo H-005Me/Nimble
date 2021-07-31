@@ -7,10 +7,10 @@ import java.security.MessageDigest
 /**
  * Usually you call it like this: errorMsg(this, n) where n is the error code (also write it in errcodes.txt)
  */
-fun errorMsg (activity: AppCompatActivity, errcode: Int) {
+fun errorMsg (activity: AppCompatActivity, errcode: Int, errmsg: String) {
     val alert = AlertDialog.Builder(activity)
     alert.setTitle("Error")
-    alert.setMessage("An error has occurred. Please contact the developers.\nError code: $errcode")
+    alert.setMessage("An error has occurred.\nError code: $errcode\nError message: $errmsg")
     alert.show()
 }
 
@@ -32,9 +32,15 @@ fun sha256 (str: String): String {
 }
 
 /**
- * hashPassword(my_password) returns the hashed password
- * TODO should also add salt here
+ * returns the hashed password
  */
-fun hashPassword (password: String): String {
-    return sha256(password)
+fun hashPassword (email: String, password: String, hash1: String): String {
+    return sha256(email + password + hash1)
+}
+
+/**
+ * returns hash1 (which is used in hashing the password & is stored in the db)
+ */
+fun makeHash1 (email: String, time: Long, randomNr: Int): String {
+    return sha256(time.toString() + email + randomNr.toString())
 }
