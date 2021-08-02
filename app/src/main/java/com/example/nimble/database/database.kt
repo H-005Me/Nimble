@@ -1,5 +1,6 @@
 package com.example.nimble.database
 
+import com.example.nimble.errorMsg
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -54,7 +55,7 @@ object Database {
     /**
      * returns true if the connection succeeded, returns false otherwise
      */
-    fun isConnected() : Boolean {
+    fun isConnected(): Boolean {
         return connected == 1
     }
 
@@ -62,7 +63,7 @@ object Database {
      * runs a SELECT statement that doesn't change the db
      * returns the resultSet (returns null in case of error)
      */
-    fun runQuery (query: String) : ResultSet? {
+    fun runQuery (query: String): ResultSet? {
         if (!isConnected()) {
             println("ERROR runQuery(): Database is not connected")
             return null
@@ -81,7 +82,7 @@ object Database {
      * runs a non-SELECT statement which changes the db and returns an int (number of rows affected)
      * returns -1 in case of failure
      */
-    fun runUpdate (update: String) : Int {
+    fun runUpdate (update: String): Int {
         if (!isConnected()) {
             println("ERROR runUpdate(): Database is not connected")
             return -1

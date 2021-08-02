@@ -25,7 +25,7 @@ class LoadingActivity : AppCompatActivity() {
             /// tell the user to restart the app and disable any other inputs
             val alert = AlertDialog.Builder(this)
             alert.setTitle("Fatal error")
-            alert.setMessage("Cannot connect to database. Please restart the application, and if the issue persists, notify the developers and try again at a later time")
+            alert.setMessage("Cannot connect to database. Make sure that your device is connected to the internet and restart the application. If the issue persists, notify the developers and try again at a later time")
             alert.setCancelable(false)
             alert.show()
 

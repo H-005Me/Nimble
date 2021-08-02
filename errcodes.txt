@@ -2,4 +2,4 @@ FORMAT:
 	errcode - filepath - functionpath - description
 
 ERROR CODES:
-	
+	1 - Database query failed

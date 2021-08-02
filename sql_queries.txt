@@ -1,12 +1,8 @@
 CREATE TABLE tbl_users (
-                autoid INT IDENTITY(1,1) PRIMARY KEY,
-                email NVARCHAR(255) NOT NULL,
-                password CHAR(64) NOT NULL
-            );
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	email NVARCHAR(255) NOT NULL UNIQUE,
+	salt CHAR(64) NOT NULL,
+	password CHAR(64) NOT NULL
+);
 
-Kotlin: val pass = sha256("Hello World")
-INSERT INTO tbl_users (email, password)
-            VALUES ('myemail@gmail.com', '$pass')
 
-ALTER TABLE tbl_users
-ADD hash1 CHAR(64) NOT NULL

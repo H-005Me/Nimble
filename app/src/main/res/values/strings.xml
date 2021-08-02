@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Nimble</string>
+    <string-array name="restaurants_array">
+        <item>Casa Piratilor</item>
+        <item>Marty</item>
+        <item>La Papion</item>
+        <item>Klausen Burger</item>
+    </string-array>
 </resources>

@@ -21,7 +21,8 @@ if (result3 != null) {
     println("Result3:")
     while (result3.next()) {
         println(result3.getString(1) + ' ' + result3.getString(2) + ' ' + result3.getString(3))
-    }
+	}
 } else {
     println("result3 is NULL")
 }
+

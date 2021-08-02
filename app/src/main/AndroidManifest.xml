@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
         <activity
+            android:name=".mainmenu.SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".loading.LoadingActivity"
             android:exported="true">
             <intent-filter>

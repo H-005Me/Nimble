@@ -8,10 +8,10 @@ package com.example.nimble.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.StrictMode
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.example.nimble.MainActivity
 import com.example.nimble.*
 import com.example.nimble.database.Database
 
@@ -33,17 +33,26 @@ class LoginActivity : AppCompatActivity() {
             val tbLoginEmail = findViewById<View>(R.id.tbLoginEmail) as EditText
             val email = tbLoginEmail.text.toString()
 
+            if (email == "") {
+                alertUser(this, "Login Failed", "E-mail cannot be empty")
+                return@setOnClickListener
+            }
+
+            if (!correctEmail(email)) {
+                alertUser(this, "Login Failed", "E-mail or password is incorrect")
+                return@setOnClickListener
+            }
+
             /// get hash1 for email from db
-            val hash1 = getHash1(email)
+            val salt = getSalt(email)
 
             /// get password from tbLoginPassword & hash it
             val tbLoginPassword = findViewById<View>(R.id.tbLoginPassword) as EditText
-            val password = hashPassword(email, tbLoginPassword.text.toString(), hash1)
+            val password = hashPassword(email, tbLoginPassword.text.toString(), salt)
 
             /// validate login
-            val (loginSuccess, userToken) = validateLogin(email, password)
-            if (loginSuccess) { /// login succeeded
-                /// TODO
+            if (correctLogin(email, password)) { /// if the account exists and the password is correct
+                /// TODO user token and stuff
                 /// go to MainActivity & destroy LoginActivity
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -53,24 +62,44 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    /**
+     * returns true if the email exists
+     */
+    private fun correctEmail (email: String): Boolean {
+        val res = Database.runQuery("""
+            SELECT COUNT(*) FROM tbl_users WHERE email = '$email';
+        """.trimIndent())
+        res!!.next()
+
+        return res.getString(1) == "1"
+    }
+
+    /**
+     * returns true if the account can be logged into
+     */
+    private fun correctLogin (email: String, password: String): Boolean {
+        /// check if there is a row with the given email and password
+        val res = Database.runQuery("""
+            SELECT COUNT(*) FROM tbl_users WHERE email = '$email' AND password = '$password';
+        """.trimIndent())
+        res!!.next()
+
+        return res.getString(1) == "1"
+    }
+
+    /**
+     * get salt from db (shouldn't be necessary)
+     */
+    private fun getSalt (email: String): String {
+        val res = Database.runQuery("""
+            SELECT salt FROM tbl_users WHERE email = '$email';
+        """.trimIndent())
+        res!!.next()
+
+        return res.getString(1)
+    }
 }
 
-/**
- * returns (loginSuccess, userToken) - if loginSuccess == false, userToken is ""
- */
-fun validateLogin (email: String, password: String): Pair<Boolean, String> {
-    /// TODO check if email exists
-    /// TODO check if password is correct
 
-    /// TODO if both exist, get userToken associated with that email & return (true, userId)
-    return Pair(false, "")
-}
 
-/**
- * TODO
- * get hash1 from db
- */
-fun getHash1 (email: String): String {
-    val hash = ""
-    return hash
-}

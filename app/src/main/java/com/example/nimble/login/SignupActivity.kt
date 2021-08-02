@@ -11,14 +11,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.example.nimble.MainActivity
 import com.example.nimble.*
+import com.example.nimble.database.Database
 
 class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        /// set btSignupCancel to go to LoginActivity & detroy SignupActivity
+        /// set btSignupCancel to go to LoginActivity & destroy SignupActivity
         val btSignupCancel = findViewById<Button>(R.id.btSignupCancel)
         btSignupCancel.setOnClickListener {
             finish()
@@ -65,19 +67,19 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            /// create hash1
-            val hash1 = makeHash1(email, currentTime, randomNr)
+            /// create salt
+            val salt = makeSalt(email, currentTime, randomNr)
 
             /// hash password
-            password = hashPassword(email, password, hash1)
+            password = hashPassword(email, password, salt)
 
             /// signup success
             /// TODO send verification code (might need a new activity)
 
             /// TODO if verification code is correct
 
-            /// TODO add user in database
-            addUserInDb(email, password, hash1)
+            /// add user in database
+            addUserInDb(email, password, salt)
 
             /// go to MainActivity & destroy LoginActivity & SignupActivity
             val intent = Intent(this, MainActivity::class.java)
@@ -89,21 +91,24 @@ class SignupActivity : AppCompatActivity() {
             //alertUser(this, "Incorrect code", "The verification code you inputted is incorrect")
         }
     }
-}
 
-/**
- * TODO
- * returns true if the email does not exist in the db
- * returns false otherwise
- */
-fun checkEmail (email: String): Boolean {
-    return true
-}
+    /**
+     * returns true if the email does not exist in the db
+     * returns false otherwise
+     */
+    private fun checkEmail (email: String): Boolean {
+        /// get number of rows where email is correct
+        val res = Database.runQuery("""
+            SELECT COUNT(*) FROM tbl_users WHERE email = '$email'; 
+        """.trimIndent())
 
-/**
- * TODO
- * adds user in the db
- */
-fun addUserInDb (email: String, password: String, hash1: String) {
+        res!!.next()
+        return res.getString(1) == "0"
+    }
 
+    private fun addUserInDb (email: String, password: String, salt: String) {
+        Database.runUpdate("""
+            INSERT INTO tbl_users (email, salt, password) VALUES ('$email', '$salt', '$password');
+        """.trimIndent())
+    }
 }

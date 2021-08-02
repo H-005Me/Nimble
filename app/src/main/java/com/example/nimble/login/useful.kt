@@ -34,13 +34,13 @@ fun sha256 (str: String): String {
 /**
  * returns the hashed password
  */
-fun hashPassword (email: String, password: String, hash1: String): String {
-    return sha256(email + password + hash1)
+fun hashPassword (email: String, password: String, salt: String): String {
+    return sha256(email + password + salt)
 }
 
 /**
- * returns hash1 (which is used in hashing the password & is stored in the db)
+ * returns salt (which is used in hashing the password & is stored in the db)
  */
-fun makeHash1 (email: String, time: Long, randomNr: Int): String {
+fun makeSalt (email: String, time: Long, randomNr: Int): String {
     return sha256(time.toString() + email + randomNr.toString())
 }
