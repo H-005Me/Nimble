@@ -4,98 +4,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F1F1"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/txMiddle2"
-        android:layout_width="1dp"
-        android:layout_height="50dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="400dp"
+        android:background="@drawable/background_logo"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txMiddle" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btSignup"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:text="Sign up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txMiddle2"
-        app:layout_constraintTop_toBottomOf="@+id/txMiddle" />
+        <Button
+            android:id="@+id/btSignup2"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="50dp"
+            android:background="#00FFFFFF"
+            android:text="Log in"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:textAllCaps="false"
+            tools:textSize="30sp" />
 
-    <Button
-        android:id="@+id/btFacebook"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:text="Facebook"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txMiddle"
-        app:layout_constraintTop_toBottomOf="@+id/tbLoginPassword" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="75dp"
+            android:layout_marginBottom="75dp"
+            android:src="@drawable/logo_yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/tbLoginEmail"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="E-Mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btSignup"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="50dp"
+            android:background="#00FFFFFF"
+            android:text="Sign up"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:textAllCaps="false"
+            tools:textSize="30sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/tbLoginPassword"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="250dp"
+        android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColorHint="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbLoginEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/tbLoginEmail"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btGoogle"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:text="Google"
-        app:layout_constraintEnd_toStartOf="@+id/txMiddle"
+    <EditText
+        android:id="@+id/tbLoginEmail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="E-Mail"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <Button
         android:id="@+id/btLoginSubmit"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_login"
         android:text="Login"
-        app:layout_constraintEnd_toStartOf="@+id/txMiddle2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txMiddle" />
-
-    <Button
-        android:id="@+id/btQR"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:text="QR"
-        app:layout_constraintBottom_toTopOf="@+id/txContact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txContact"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:text="Contact Support:\nnimble.meals.contact@gmail.com"
-        android:gravity="center"
+        android:textAllCaps="false"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/txMiddle"
-        android:layout_width="1dp"
-        android:layout_height="75dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <Button
+        android:id="@+id/btForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:text="Forgot password?"
+
+        android:textAllCaps="false"
+        android:textColor="@color/yellow_strong"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/tbLoginPassword"
         app:layout_constraintTop_toBottomOf="@+id/tbLoginPassword" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
