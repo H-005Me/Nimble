@@ -4,77 +4,121 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F1F1"
     tools:context=".SignupActivity">
 
-    <TextView
-        android:id="@+id/txMiddle4"
-        android:layout_width="1dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbSignupConfPassword" />
-
-    <TextView
-        android:id="@+id/txContact2"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:gravity="center"
-        android:text="Contact Support:\nnimble.meals.contact@gmail.com"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="400dp"
+        android:background="@drawable/background_logo"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Button
-        android:id="@+id/btSignupCancel"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="4dp"
-        android:text="Cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txMiddle4"
-        app:layout_constraintTop_toTopOf="@+id/txMiddle4" />
+        <Button
+            android:id="@+id/btSignup3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:background="#00FFFFFF"
+            android:text="Sign up"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="75dp"
+            android:layout_marginBottom="75dp"
+            android:src="@drawable/logo_yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btSignupCancel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="48dp"
+            android:background="#00FFFFFF"
+            android:text="Log in"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btSignupSubmit"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:text="Submit"
-        app:layout_constraintEnd_toStartOf="@+id/txMiddle4"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_login"
+        android:text="Sign up"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txMiddle4" />
+        tools:textAllCaps="false" />
 
     <EditText
         android:id="@+id/tbSignupConfPassword"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
-        android:hint="Confirm Password"
+        android:hint="Confirma parola"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tbSignupPassword"
+        app:layout_constraintStart_toStartOf="@+id/tbSignupPassword"
         app:layout_constraintTop_toBottomOf="@+id/tbSignupPassword" />
 
     <EditText
         android:id="@+id/tbSignupPassword"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Parola"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tbSignupEmail"
+        app:layout_constraintStart_toStartOf="@+id/tbSignupEmail"
         app:layout_constraintTop_toBottomOf="@+id/tbSignupEmail" />
 
     <EditText
         android:id="@+id/tbSignupEmail"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

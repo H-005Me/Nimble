@@ -16,21 +16,23 @@
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
             android:id="@+id/btSignup2"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
             android:background="#00FFFFFF"
             android:text="Log in"
+            android:textAllCaps="false"
             android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:textAllCaps="false"
-            tools:textSize="30sp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -49,29 +51,28 @@
         <Button
             android:id="@+id/btSignup"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
             android:background="#00FFFFFF"
             android:text="Sign up"
+            android:textAllCaps="false"
             android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:textAllCaps="false"
-            tools:textSize="30sp" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/tbLoginPassword"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginBottom="260dp"
         android:backgroundTint="#000000"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Parola"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
         android:textSize="20dp"
@@ -87,7 +88,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -120,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
-        android:text="Forgot password?"
+        android:text="Ai uitat parola?"
 
         android:textAllCaps="false"
         android:textColor="@color/yellow_strong"

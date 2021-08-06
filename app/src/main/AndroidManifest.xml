@@ -27,6 +27,10 @@
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".login.SignupActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
