@@ -12,9 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
-        <activity
-            android:name=".mainmenu.SearchActivity"
-            android:exported="true" />
+        
         <activity
             android:name=".loading.LoadingActivity"
             android:exported="true">
@@ -27,7 +25,7 @@
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".login.SignupActivity" />
-
+        <activity android:name=".mainmenu.SearchActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
