@@ -25,7 +25,7 @@
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".login.SignupActivity" />
-        <activity android:name=".mainmenu.SearchActivity"/>
+        <activity android:name="com.example.nimble.mainmenu.SearchActiviy"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

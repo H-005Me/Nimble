@@ -1,4 +1,4 @@
-package com.example.mainmenu
+package com.example.nimble
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ListView
+
+
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mainmenu.RestaurantsClass
+
+import com.example.nimble.mainmenu.SearchActiviy
 import example.javatpoint.com.kotlincustomlistview.MyListAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val searchBar= findViewById<Button>(R.id.searchButton)
         searchBar.setOnClickListener()
         {
-            val intent= Intent(this,SearchActiviy::class.java)
+            val intent= Intent(this, SearchActiviy::class.java)
             startActivity(intent)
         }
         var myListAdapter= MyListAdapter(this,names)
