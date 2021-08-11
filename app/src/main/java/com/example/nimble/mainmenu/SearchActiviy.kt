@@ -5,7 +5,14 @@ import android.os.Bundle
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mainmenu.RestaurantsClass
 import com.example.nimble.R
+import com.example.nimble.RestaurantPages.CasaPiratilorPage
+import com.example.nimble.RestaurantPages.KlausenBurgerPage
+import android.widget.TextView
+
+
+
 
 
 class SearchActiviy : AppCompatActivity() {
@@ -14,28 +21,31 @@ class SearchActiviy : AppCompatActivity() {
         setContentView(R.layout.activity_search)
         var search=findViewById<SearchView>(R.id.searchView)
         val listView=findViewById<ListView>(R.id.listView)
-        var names= arrayOf("Android","Java","Kotlin","C++","It doesn't work")
+        var names= arrayOf("Casa Piratilor","Marty ","La Papion","Klausen Burger","Cafe","Restaurant 1")
+        var numbersMap = mutableMapOf("one" to 1, "two" to 2, "three" to 3)
+        var index:Int=0
+        while (index<names.size)
+        {
+            numbersMap.put(names[index],index)
+            index++
+        }
         val adapter:ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
         listView.adapter=adapter
         listView.setOnItemClickListener{parent, view, position, id ->
+            val restaurantClicked = (view as TextView).text.toString()
+            var inpos = numbersMap[restaurantClicked]
+            if(inpos==0)
+            {
+                val intent= Intent(this, CasaPiratilorPage::class.java)
+                startActivity(intent)
+            }
+            else if(inpos==3)
+            {
+                val intent=Intent(this, KlausenBurgerPage::class.java)
+                startActivity(intent)
+            }
 
-            //Toast.makeText(this@MainActivity, "You have Clicked " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show()
 
-            if (position==0){
-                Toast.makeText(this, "Item One",   Toast.LENGTH_SHORT).show()
-            }
-            if (position==1){
-                Toast.makeText(this, "Item Two",   Toast.LENGTH_SHORT).show()
-            }
-            if (position==2){
-                Toast.makeText(this, "Item Three", Toast.LENGTH_SHORT).show()
-            }
-            if (position==3){
-                Toast.makeText(this, "Item Four",  Toast.LENGTH_SHORT).show()
-            }
-            if (position==4){
-                Toast.makeText(this, "Item Five",  Toast.LENGTH_SHORT).show()
-            }
         }
         search.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

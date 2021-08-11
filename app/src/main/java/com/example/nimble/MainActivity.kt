@@ -8,22 +8,46 @@ import android.widget.Button
 import android.widget.ListView
 
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mainmenu.RestaurantsClass
+import com.example.nimble.RestaurantPages.CasaPiratilorPage
+import com.example.nimble.RestaurantPages.KlausenBurgerPage
 
 import com.example.nimble.mainmenu.SearchActiviy
 import example.javatpoint.com.kotlincustomlistview.MyListAdapter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var names=arrayOf<String>("Casa Piratilor","Marty","La Papion","Klausen Burger","Central")
+    var distances=arrayOf<Double>(4.4,3.3,5.5,5.3,8.2)
     // mai vin fotografiile
     //Reviews,logo,reviews,
     //new 1 line
-    private var RestaurantsList = ArrayList<RestaurantsClass>()
+     var RestaurantsList = mutableListOf<RestaurantsClass>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // valorile le iau din baza de date
+        var i=0
+        var j=1
+        while(i<names.size) {
+            j=i+1
+            while(j<names.size)
+            {
+                if (distances[i] > distances[j])
+                {
+                    var aux=distances[i]
+                    var aux1=names[j]
+                distances[i] = distances[j]
+                names[i] = names[j]
+                    distances[j]=aux
+                    names[j]=aux1
+                    ++j
+                }
+
+            j++
+            }
+            i++
+        }
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
         var listView1= findViewById<ListView>(R.id.offerts)
         var listView2 = findViewById<ListView>(R.id.category)
@@ -33,11 +57,11 @@ class MainActivity : AppCompatActivity() {
             val intent= Intent(this, SearchActiviy::class.java)
             startActivity(intent)
         }
-        var myListAdapter= MyListAdapter(this,names)
+        var myListAdapter= MyListAdapter(this,names,distances,true)
         listView.adapter=myListAdapter
-         myListAdapter= MyListAdapter(this,names)
+         myListAdapter= MyListAdapter(this,names,distances,true)
         listView2.adapter=myListAdapter
-         myListAdapter= MyListAdapter(this,names)
+        myListAdapter= MyListAdapter(this,names,distances,true)
         listView1.adapter=myListAdapter
         val closeRestaurants = findViewById<Button>(R.id.closeButton)
         var offers=findViewById<Button>(R.id.offersButton)
@@ -80,20 +104,40 @@ class MainActivity : AppCompatActivity() {
             listView.smoothScrollToPosition(0)
         }
         val recommendedRest=findViewById<ListView>(R.id.recRestaurants)
-        myListAdapter= MyListAdapter(this,names)
-        recommendedRest.adapter=myListAdapter
+        listView.setOnItemClickListener{parent, view, position, id ->
+            if(position==0)
+            {
+                val intent= Intent(this, CasaPiratilorPage::class.java)
+                startActivity(intent)
+            }
+            else if(position==1)
+            {
+                val inent=Intent(this, KlausenBurgerPage::class.java)
+                startActivity(intent)
+            }
 
+
+        }
+
+
+       myListAdapter= MyListAdapter(this,names,distances,true)
+
+        recommendedRest.adapter=myListAdapter
+        recommendedRest.setRotation(90F)
+
+        //recommendedRest.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
     private fun prepareRestaurantsData() {
-        var restaurants = RestaurantsClass("Casa Piratilor",4.5,1500,4.5)
+
+        var restaurants = RestaurantsClass("Casa Piratilor",4.5,1500,4.5,null,null)
         RestaurantsList.add(restaurants)
 
 
-        restaurants=RestaurantsClass("Marty",4.5,1500,4.5)
+        restaurants=RestaurantsClass("Marty",4.5,1500,4.5,null,null)
         RestaurantsList.add(restaurants)
-        restaurants=RestaurantsClass("Klausen Burger",4.5,1500,4.5)
+        restaurants=RestaurantsClass("Klausen Burger",4.5,1500,4.5,null,null)
         RestaurantsList.add(restaurants)
-        restaurants=RestaurantsClass("La Papion",4.5,1500,4.5)
+        restaurants=RestaurantsClass("La Papion",4.5,1500,4.5,null,null)
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
     }
