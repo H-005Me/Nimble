@@ -4,141 +4,167 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ListView
+import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
 
 
-import com.example.mainmenu.RestaurantsClass
-import com.example.nimble.RestaurantPages.CasaPiratilorPage
-import com.example.nimble.RestaurantPages.KlausenBurgerPage
+import com.example.nimble.entities.RestaurantsClass
+import com.example.nimble.RestaurantPages.GeneralRestaurant
+
 
 import com.example.nimble.mainmenu.SearchActiviy
 import example.javatpoint.com.kotlincustomlistview.MyListAdapter
-import java.util.*
+import kotlin.collections.ArrayList
+import com.example.nimble.mainmenu.GridAdapter
+import example.javatpoint.com.kotlincustomlistview.OffertsAdapter
+
 
 class MainActivity : AppCompatActivity() {
-    var names=arrayOf<String>("Casa Piratilor","Marty","La Papion","Klausen Burger","Central")
-    var distances=arrayOf<Double>(4.4,3.3,5.5,5.3,8.2)
+    var names = arrayOf<String>("Casa Piratilor", "Marty", "La Papion", "Klausen Burger", "Central")
+    var distances = arrayOf<Double>(4.4, 3.3, 5.5, 5.3, 8.2)
     // mai vin fotografiile
     //Reviews,logo,reviews,
     //new 1 line
-     var RestaurantsList = mutableListOf<RestaurantsClass>()
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
+    var RestaurantsList = ArrayList<RestaurantsClass>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // valorile le iau din baza de date
-        var i=0
-        var j=1
-        while(i<names.size) {
-            j=i+1
-            while(j<names.size)
-            {
-                if (distances[i] > distances[j])
-                {
-                    var aux=distances[i]
-                    var aux1=names[j]
-                distances[i] = distances[j]
-                names[i] = names[j]
-                    distances[j]=aux
-                    names[j]=aux1
-                    ++j
-                }
+        prepareRestaurantsData()
+        var index = 0
+        var numbersMap = mutableMapOf("one" to 9000)
 
-            j++
-            }
-            i++
+
+
+        RestaurantsList.sortBy { d1 -> d1.getDistance() }
+        while (index < RestaurantsList.size) {
+            numbersMap.put(RestaurantsList[index].getTitle(), index)
+            index++
         }
+        index = 0
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
-        var listView1= findViewById<ListView>(R.id.offerts)
-        var listView2 = findViewById<ListView>(R.id.category)
-        val searchBar= findViewById<Button>(R.id.searchButton)
+        var offetsList = findViewById<ListView>(R.id.offerts)
+        val categoryList = findViewById<GridView>(R.id.category)
+        val searchBar = findViewById<Button>(R.id.searchButton)
         searchBar.setOnClickListener()
         {
-            val intent= Intent(this, SearchActiviy::class.java)
+            val intent = Intent(this, SearchActiviy::class.java)
             startActivity(intent)
         }
-        var myListAdapter= MyListAdapter(this,names,distances,true)
-        listView.adapter=myListAdapter
-         myListAdapter= MyListAdapter(this,names,distances,true)
-        listView2.adapter=myListAdapter
-        myListAdapter= MyListAdapter(this,names,distances,true)
-        listView1.adapter=myListAdapter
-        val closeRestaurants = findViewById<Button>(R.id.closeButton)
-        var offers=findViewById<Button>(R.id.offersButton)
-        var categories = findViewById<Button>(R.id.categoriesButton)
-        listView.isEnabled=true
-        listView1.isEnabled=false
-        listView2.isEnabled=false
+        /**
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
+        recyclerView.setAdapter(adapter);
+         **/
 
-        listView.visibility= View.VISIBLE
-        listView1.visibility= View.GONE
-        listView2.visibility= View.GONE
+
+
+
+
+
+        var myListAdapter = MyListAdapter(this, RestaurantsList)
+        listView.adapter = myListAdapter
+        var myListAdapter1 = OffertsAdapter(this, RestaurantsList)
+        offetsList.adapter = myListAdapter1
+        var myGridAdapter = GridAdapter(this, RestaurantsList)
+        categoryList.adapter = myGridAdapter
+        val closeRestaurants = findViewById<Button>(R.id.closeButton)
+        var offers = findViewById<Button>(R.id.offersButton)
+        var categories = findViewById<Button>(R.id.categoriesButton)
+        listView.isEnabled = true
+        offetsList.isEnabled = false
+        categoryList.isEnabled = false
+
+        listView.visibility = View.VISIBLE
+        offetsList.visibility = View.GONE
+        categoryList.visibility = View.GONE
         offers.setOnClickListener()
         {
-            listView.isEnabled=false
-            listView2.isEnabled=false
-            listView1.isEnabled=true
-            listView.visibility= View.GONE
-            listView1.visibility= View.VISIBLE
-            listView2.visibility= View.GONE
-            listView1.smoothScrollToPosition(0)
+            listView.isEnabled = false
+            categoryList.isEnabled = false
+            offetsList.isEnabled = true
+            listView.visibility = View.GONE
+            offetsList.visibility = View.VISIBLE
+            categoryList.visibility = View.GONE
+            offetsList.smoothScrollToPosition(0)
         }
         categories.setOnClickListener()
         {
-            listView.isEnabled=false
-            listView1.isEnabled=false
-            listView2.isEnabled=true
-            listView.visibility= View.GONE
-            listView1.visibility= View.GONE
-            listView2.visibility= View.VISIBLE
-            listView2.smoothScrollToPosition(0)
+            listView.isEnabled = false
+            offetsList.isEnabled = false
+            categoryList.isEnabled = true
+            listView.visibility = View.GONE
+            offetsList.visibility = View.GONE
+            categoryList.visibility = View.VISIBLE
+            categoryList.smoothScrollToPosition(0)
         }
         closeRestaurants.setOnClickListener()
         {
-            listView.isEnabled=true
-            listView.visibility= View.VISIBLE
-            listView1.visibility= View.GONE
-            listView2.visibility= View.GONE
-            listView1.isEnabled=false
-            listView2.isEnabled=false
+            listView.isEnabled = true
+            listView.visibility = View.VISIBLE
+            offetsList.visibility = View.GONE
+            categoryList.visibility = View.GONE
+            offetsList.isEnabled = false
+            categoryList.isEnabled = false
             listView.smoothScrollToPosition(0)
         }
-        val recommendedRest=findViewById<ListView>(R.id.recRestaurants)
-        listView.setOnItemClickListener{parent, view, position, id ->
-            if(position==0)
-            {
-                val intent= Intent(this, CasaPiratilorPage::class.java)
-                startActivity(intent)
-            }
-            else if(position==1)
-            {
-                val inent=Intent(this, KlausenBurgerPage::class.java)
-                startActivity(intent)
-            }
 
-
+        listView.setOnItemClickListener { parent, view, position, id ->
+//            Toast.makeText(applicationContext, "$view", Toast.LENGTH_SHORT).show()
+            var intent=Intent(this, GeneralRestaurant::class.java)
+            startActivity(intent)
         }
 
 
-       myListAdapter= MyListAdapter(this,names,distances,true)
 
-        recommendedRest.adapter=myListAdapter
-        recommendedRest.setRotation(90F)
+
 
         //recommendedRest.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
     private fun prepareRestaurantsData() {
 
-        var restaurants = RestaurantsClass("Casa Piratilor",4.5,1500,4.5,null,null)
+        var restaurants = RestaurantsClass(
+            "Casa Piratilor",
+            4.0,
+            1500,
+            4.5,
+            R.drawable.ic_launcher_background,
+            R.drawable.background_logo
+        )
         RestaurantsList.add(restaurants)
 
-
-        restaurants=RestaurantsClass("Marty",4.5,1500,4.5,null,null)
+        restaurants = RestaurantsClass(
+            "Marty",
+            4.3,
+            1500,
+            4.5,
+            R.drawable.ic_launcher_background,
+            R.drawable.background_logo
+        )
         RestaurantsList.add(restaurants)
-        restaurants=RestaurantsClass("Klausen Burger",4.5,1500,4.5,null,null)
+        restaurants = RestaurantsClass(
+            "Klausen Burger",
+            3.9,
+            1500,
+            4.5,
+            R.drawable.ic_launcher_background,
+            R.drawable.background_logo
+        )
         RestaurantsList.add(restaurants)
-        restaurants=RestaurantsClass("La Papion",4.5,1500,4.5,null,null)
+        restaurants = RestaurantsClass(
+            "La Papion",
+            1.4,
+            1500,
+            4.5,
+            R.drawable.ic_launcher_background,
+            R.drawable.background_logo
+        )
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
     }
 }
+

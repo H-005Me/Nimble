@@ -37,6 +37,7 @@
         <activity android:name=".login.SignupActivity" />
         <activity android:name=".mainmenu.SearchActiviy" />
         <activity android:name=".RestaurantPages.CasaPiratilorPage" />
+        <activity android:name="com.example.nimble.RestaurantPages.GeneralRestaurant"/>
 
         <meta-data
             android:name="preloaded_fonts"

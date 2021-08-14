@@ -3,9 +3,7 @@ package com.example.nimble.mainmenu
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
-import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mainmenu.RestaurantsClass
 import com.example.nimble.R
 import com.example.nimble.RestaurantPages.CasaPiratilorPage
 import com.example.nimble.RestaurantPages.KlausenBurgerPage
