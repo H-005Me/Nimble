@@ -1,4 +1,4 @@
-package example.javatpoint.com.kotlincustomlistview
+package com.example.nimble.adapters
 
 import android.app.Activity
 import android.view.View

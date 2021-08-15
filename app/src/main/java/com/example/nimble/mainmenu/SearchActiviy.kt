@@ -5,10 +5,6 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nimble.R
-import com.example.nimble.RestaurantPages.CasaPiratilorPage
-import com.example.nimble.RestaurantPages.KlausenBurgerPage
-import android.widget.TextView
-import com.example.nimble.MainActivity
 import com.example.nimble.RestaurantPages.GeneralRestaurant
 
 class SearchActiviy : AppCompatActivity() {
@@ -37,7 +33,7 @@ class SearchActiviy : AppCompatActivity() {
         listView.setOnItemClickListener{parent, view, position, id ->
 
             val intent= Intent(this, GeneralRestaurant::class.java)
-            intent.putExtra("TheList",restaurantsList[position])
+            intent.putExtra("LIST",restaurantsList[position])
             startActivity(intent)
 
         }

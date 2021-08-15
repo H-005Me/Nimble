@@ -1,4 +1,4 @@
-package com.example.nimble.mainmenu
+package com.example.nimble.adapters
 
 import android.app.Activity
 import android.view.View

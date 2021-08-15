@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".mainmenu.MainMenu">
 
     <Button
         android:id="@+id/searchButton"
@@ -112,8 +112,8 @@
             <GridView
                 android:id="@+id/category"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="2"/>
+                android:layout_height="238dp"
+                android:numColumns="2" />
 
             <ListView
                 android:id="@+id/offerts"
