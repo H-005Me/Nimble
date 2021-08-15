@@ -1,14 +1,18 @@
 package com.example.nimble.entities
 
-import android.graphics.drawable.Drawable
+import android.view.Menu
+import android.view.View
+import java.io.Serializable
 
-class RestaurantsClass(
+class RestaurantsClass (
     title: String?, distance: Double?, review:Int?,
     grade:Double?,
     icon:Int?,
-    background: Int?
-) //(var distance:Double, var name:String, var reviews:Int, var grade:Double)
+    background: Int?,
+    categories: Array<MenuClass>
+) :Serializable
 {
+    private var categories:Array<MenuClass>
     private var title: String
     private var distance: Double
     private var review = 0
@@ -22,8 +26,12 @@ class RestaurantsClass(
         this.grade = grade!!
         this.icon = icon!!
         this.background=background!!
+        this.categories=categories!!
     }
-
+    fun getCategories():Array<MenuClass>
+    {
+        return this.categories
+    }
 
     fun getTitle(): String {
         return title

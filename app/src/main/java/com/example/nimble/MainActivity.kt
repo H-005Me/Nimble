@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.RestaurantPages.GeneralRestaurant
+import com.example.nimble.entities.MenuClass
+import com.example.nimble.entities.ProductClass
 
 
 import com.example.nimble.mainmenu.SearchActiviy
@@ -18,7 +20,7 @@ import kotlin.collections.ArrayList
 import com.example.nimble.mainmenu.GridAdapter
 import example.javatpoint.com.kotlincustomlistview.OffertsAdapter
 
-
+var RestaurantsList = ArrayList<RestaurantsClass>()
 class MainActivity : AppCompatActivity() {
     var names = arrayOf<String>("Casa Piratilor", "Marty", "La Papion", "Klausen Burger", "Central")
     var distances = arrayOf<Double>(4.4, 3.3, 5.5, 5.3, 8.2)
@@ -51,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         searchBar.setOnClickListener()
         {
             val intent = Intent(this, SearchActiviy::class.java)
+
+            intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
         }
         /**
@@ -133,8 +137,11 @@ class MainActivity : AppCompatActivity() {
             1500,
             4.5,
             R.drawable.ic_launcher_background,
-            R.drawable.background_logo
-        )
+            R.drawable.background_logo,
+           arrayOf(MenuClass("Mancare normala",arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))),MenuClass("Mancare normala",
+               arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))
+           )
+        ))
         RestaurantsList.add(restaurants)
 
         restaurants = RestaurantsClass(
@@ -143,7 +150,12 @@ class MainActivity : AppCompatActivity() {
             1500,
             4.5,
             R.drawable.ic_launcher_background,
-            R.drawable.background_logo
+            R.drawable.background_logo,
+            arrayOf(MenuClass("Mancare normala",arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))),MenuClass("Mancare normala",
+                arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))
+            )
+            )
+
         )
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
@@ -152,7 +164,11 @@ class MainActivity : AppCompatActivity() {
             1500,
             4.5,
             R.drawable.ic_launcher_background,
-            R.drawable.background_logo
+            R.drawable.background_logo,
+            arrayOf(MenuClass("Mancare normala",arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))),MenuClass("Mancare normala",
+                arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))
+            )
+            )
         )
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
@@ -161,10 +177,20 @@ class MainActivity : AppCompatActivity() {
             1500,
             4.5,
             R.drawable.ic_launcher_background,
-            R.drawable.background_logo
+            R.drawable.background_logo,
+            arrayOf(MenuClass("Mancare normala",arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))),MenuClass("Mancare normala",
+                arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))
+            )
+            )
         )
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
+    }
+    fun getNamesPositino(name:String): Int {
+        for (item in RestaurantsList.indices)
+            if (RestaurantsList[item].getTitle() == name)
+                return item
+        return -1
     }
 }
 

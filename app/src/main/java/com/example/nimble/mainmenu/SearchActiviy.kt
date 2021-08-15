@@ -1,5 +1,5 @@
 package com.example.nimble.mainmenu
-
+import com.example.nimble.entities.RestaurantsClass
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
@@ -8,10 +8,8 @@ import com.example.nimble.R
 import com.example.nimble.RestaurantPages.CasaPiratilorPage
 import com.example.nimble.RestaurantPages.KlausenBurgerPage
 import android.widget.TextView
-
-
-
-
+import com.example.nimble.MainActivity
+import com.example.nimble.RestaurantPages.GeneralRestaurant
 
 class SearchActiviy : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +17,14 @@ class SearchActiviy : AppCompatActivity() {
         setContentView(R.layout.activity_search)
         var search=findViewById<SearchView>(R.id.searchView)
         val listView=findViewById<ListView>(R.id.listView)
-        var names= arrayOf("Casa Piratilor","Marty ","La Papion","Klausen Burger","Cafe","Restaurant 1")
+        val restaurantsList = intent.getSerializableExtra("LIST") as ArrayList<RestaurantsClass>
+
+       // var names= arrayOf("Casa Piratilor","Marty ","La Papion","Klausen Burger","Cafe","Restaurant 1")
+//        var list= MainActivity.getList
+        var names: MutableList<String> = ArrayList()
+        for (item in restaurantsList)
+           names.add(item.getTitle())
+
         var numbersMap = mutableMapOf("one" to 1, "two" to 2, "three" to 3)
         var index:Int=0
         while (index<names.size)
@@ -30,19 +35,10 @@ class SearchActiviy : AppCompatActivity() {
         val adapter:ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_list_item_1,names)
         listView.adapter=adapter
         listView.setOnItemClickListener{parent, view, position, id ->
-            val restaurantClicked = (view as TextView).text.toString()
-            var inpos = numbersMap[restaurantClicked]
-            if(inpos==0)
-            {
-                val intent= Intent(this, CasaPiratilorPage::class.java)
-                startActivity(intent)
-            }
-            else if(inpos==3)
-            {
-                val intent=Intent(this, KlausenBurgerPage::class.java)
-                startActivity(intent)
-            }
 
+            val intent= Intent(this, GeneralRestaurant::class.java)
+            intent.putExtra("TheList",restaurantsList[position])
+            startActivity(intent)
 
         }
         search.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {
