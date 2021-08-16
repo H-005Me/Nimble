@@ -11,7 +11,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import com.example.nimble.MainActivity
+import com.example.nimble.mainmenu.MainMenu
 import com.example.nimble.*
 import com.example.nimble.database.Database
 
@@ -82,7 +82,7 @@ class SignupActivity : AppCompatActivity() {
             addUserInDb(email, password, salt)
 
             /// go to MainActivity & destroy LoginActivity & SignupActivity
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainMenu::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
 

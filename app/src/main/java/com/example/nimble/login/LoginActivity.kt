@@ -11,9 +11,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import com.example.nimble.MainActivity
 import com.example.nimble.*
 import com.example.nimble.database.Database
+import com.example.nimble.mainmenu.MainMenu
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
             if (correctLogin(email, password)) { /// if the account exists and the password is correct
                 /// TODO user token and stuff
                 /// go to MainActivity & destroy LoginActivity
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, MainMenu::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             } else { /// login failed

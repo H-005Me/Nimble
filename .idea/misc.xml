@@ -3,6 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_casa_piratilor.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_general_restaurant.xml" value="0.18" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_general_restaurants2.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_klausen_burger_page.xml" value="0.22" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_restaurant_page.xml" value="0.5" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_restaurants.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/content_general_restaurants.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/custom_list.xml" value="0.5" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/custom_offerts.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/horizontal_list.xml" value="0.3900414937759336" />
+        <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable-v24/background_logo.xml" value="0.2814814814814815" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/btn_login.xml" value="0.2814814814814815" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_loading.xml" value="0.33" />
