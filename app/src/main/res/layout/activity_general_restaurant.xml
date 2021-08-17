@@ -29,30 +29,42 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="7dp">
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="16dp">
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="106dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:layout_below="@+id/textView2"
-                android:layout_alignBottom="@+id/textView2"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="-58dp"
+                android:id="@+id/titleRestaurant"
+                android:layout_width="312dp"
+                android:layout_height="89dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="58dp"
                 android:text="TextView" />
 
             <GridView
-                android:layout_width="match_parent"
-                android:layout_height="143dp"
-                android:layout_below="@+id/textView3"
-                android:layout_marginTop="62dp"
-                android:numColumns="2"/>
+                android:id="@+id/tagsGrid"
+                android:layout_width="390dp"
+                android:layout_height="104dp"
+                android:layout_below="@+id/titleRestaurant"
+                android:layout_alignStart="@+id/titleRestaurant"
+                android:layout_alignEnd="@+id/titleRestaurant"
+                android:layout_alignBottom="@+id/titleRestaurant"
+                android:layout_marginStart="-39dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="-40dp"
+                android:layout_marginBottom="-112dp"
+                android:numColumns="3" />
+
+            <GridView
+                android:id="@+id/optionsMenu"
+                android:layout_width="333dp"
+                android:layout_height="91dp"
+                android:layout_below="@+id/tagsGrid"
+                android:layout_alignStart="@+id/tagsGrid"
+                android:layout_alignEnd="@+id/tagsGrid"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginEnd="-36dp"
+                android:numColumns="2"></GridView>
 
         </RelativeLayout>
 

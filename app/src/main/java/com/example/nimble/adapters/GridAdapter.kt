@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.R
+import com.example.nimble.entities.RestaurantsClass
 
 
 class GridAdapter(private val context: Activity, private val theList: ArrayList<RestaurantsClass>

@@ -50,10 +50,10 @@
             app:layout_constraintTop_toTopOf="@+id/textView"
             app:layout_constraintVertical_bias="0.13">
 
-            <ListView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendedlist"
+                android:layout_width="402dp"
+                android:layout_height="208dp"
                 android:scrollbars="horizontal" />
 
         </LinearLayout>
@@ -97,6 +97,7 @@
         app:layout_constraintVertical_bias="0.534" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="355dp"
         android:layout_height="320dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,15 +119,51 @@
             <ListView
                 android:id="@+id/offerts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="238dp" />
 
             <ListView
                 android:id="@+id/CloseRestaurants"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="238dp">
 
             </ListView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/homebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offersButton"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <Button
+        android:id="@+id/mapsbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/closeButton"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <Button
+        android:id="@+id/profilebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoriesButton"
+        app:layout_constraintVertical_bias="0.98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
