@@ -13,18 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
         <activity
-            android:name=".RestaurantPages.ReviewsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".RestaurantPages.ImagesActivity"
-            android:exported="true" />
-        <activity
-            android:name=".RestaurantPages.RestaurantMenuActivity"
-            android:exported="true" />
-        <activity
-            android:name=".RestaurantPages.ReservationActivity"
-            android:exported="true" />
-        <activity
             android:name=".profile.ProfileActivity"
             android:exported="true" />
         <activity

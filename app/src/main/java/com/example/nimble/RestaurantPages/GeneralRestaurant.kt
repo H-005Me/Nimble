@@ -1,12 +1,10 @@
 package com.example.nimble.RestaurantPages
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.nimble.R
 import com.example.nimble.adapters.GridAdapterRestaurants
 import com.example.nimble.adapters.TagsAdapter
@@ -29,20 +27,7 @@ class GeneralRestaurant : AppCompatActivity() {
         var myGridAdapter = GridAdapterRestaurants(this, optionsList)
         menulist.adapter = myGridAdapter
         title.text=theList.getTitle()
-        menulist.setOnItemClickListener { parent, view, position, id ->
-            var intent=Intent(this,GeneralRestaurant::class.java)
-            if (position == 0)
-                intent = Intent(this,RestaurantMenuActivity::class.java)
-            else if(position==1)
-                intent = Intent(this,ReservationActivity::class.java)
-            else if(position==2)
-                intent = Intent(this,ImagesActivity::class.java)
-            else if(position==3)
-                intent = Intent(this,ReviewsActivity::class.java)
-            intent.putExtra("LIST",theList)
-            startActivity(intent)
-        }
+
 
     }
-
 }
