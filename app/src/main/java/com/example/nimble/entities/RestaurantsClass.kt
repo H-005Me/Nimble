@@ -28,9 +28,16 @@ class RestaurantsClass (
         this.background=background!!
         this.categories=categories!!
     }
-    fun getCategories():Array<MenuClass>
+    fun getCategories():ArrayList<String>
     {
-        return this.categories
+        var aList=ArrayList<String>()
+        var index=0
+        while(index<categories.size)
+        {
+            aList.add(categories[index].getName())
+            index++
+        }
+        return aList
     }
 
     fun getTitle(): String {
