@@ -21,6 +21,7 @@ import kotlin.collections.ArrayList
 import com.example.nimble.adapters.GridAdapter
 import com.example.nimble.adapters.OffertsAdapter
 import com.example.nimble.adapters.ProductsAdapter
+import com.example.nimble.entities.CategoriesClass
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
@@ -50,7 +51,6 @@ class MainMenu : AppCompatActivity(),ProductsAdapter.onItemClickListener{
         searchBar.setOnClickListener()
         {
             val intent = Intent(this, SearchActiviy::class.java)
-
             intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
         }
@@ -59,7 +59,25 @@ class MainMenu : AppCompatActivity(),ProductsAdapter.onItemClickListener{
         listView.adapter = myListAdapter
         var myListAdapter1 = OffertsAdapter(this, RestaurantsList)
         offetsList.adapter = myListAdapter1
-        var myGridAdapter = GridAdapter(this, RestaurantsList)
+        var categoriesList = ArrayList<CategoriesClass>()
+        for (index in RestaurantsList.indices) {
+            var newcategoriesList = RestaurantsList[index].getCategories()
+            for (new_index1 in newcategoriesList.indices) {
+                var isThere = false
+                for (new_index in categoriesList.indices)
+                    if (newcategoriesList[new_index1] == categoriesList[new_index].getName()) {
+                        isThere = true
+                        categoriesList[new_index].addIndices(index)
+                    }
+                if (isThere == false) {
+                    categoriesList.add(CategoriesClass(newcategoriesList[new_index1], 0))
+                    categoriesList[categoriesList.size - 1].addIndices(index)
+                }
+            }
+        }
+        for (each in categoriesList.indices)
+            categoriesList[each].setIndices(removeDuplicates(categoriesList[each].getTheIndices()))
+        var myGridAdapter = GridAdapter(this, categoriesList)
         categoryList.adapter = myGridAdapter
         val closeRestaurants = findViewById<Button>(R.id.closeButton)
         var offers = findViewById<Button>(R.id.offersButton)
@@ -103,13 +121,22 @@ class MainMenu : AppCompatActivity(),ProductsAdapter.onItemClickListener{
         }
 
         var recommendedRestaurants = findViewById<RecyclerView>(R.id.recommendedlist)
-        var myRecAdapter = ProductsAdapter(RestaurantsList,this)
-        recommendedRestaurants.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL ,false)
+        var myRecAdapter = ProductsAdapter(RestaurantsList, this)
+        recommendedRestaurants.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRestaurants.adapter = myRecAdapter
         listView.setOnItemClickListener { parent, view, position, id ->
 //            Toast.makeText(applicationContext, "$view", Toast.LENGTH_SHORT).show()
-            var intent=Intent(this, GeneralRestaurant::class.java)
-            intent.putExtra("LIST",RestaurantsList[position])
+            var intent = Intent(this, GeneralRestaurant::class.java)
+            intent.putExtra("LIST", RestaurantsList[position])
+            intent.putExtra("CATEGORIES", categoriesList)
+            startActivity(intent)
+        }
+
+        categoryList.setOnItemClickListener { parent, view, position, id ->
+            var intent = Intent(this, GeneralCategory::class.java)
+            intent.putExtra("LIST", RestaurantsList)
+            intent.putExtra("INDICES", categoriesList[position].getTheIndices())
             startActivity(intent)
         }
     }
@@ -121,10 +148,16 @@ class MainMenu : AppCompatActivity(),ProductsAdapter.onItemClickListener{
             4.5,
             R.drawable.ic_launcher_background,
             R.drawable.background_logo,
-           arrayOf(MenuClass("Mancare normala",arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))),MenuClass("Mancare normala",
-               arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))
-           )
-        ))
+            arrayOf(
+                MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                )
+            )
+        )
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "Marty",
@@ -133,9 +166,14 @@ class MainMenu : AppCompatActivity(),ProductsAdapter.onItemClickListener{
             4.5,
             R.drawable.ic_launcher_background,
             R.drawable.background_logo,
-            arrayOf(MenuClass("Mancare normala",arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))),MenuClass("Mancare normala",
-                arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))
-            )
+            arrayOf(
+                MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                )
             )
         )
         RestaurantsList.add(restaurants)
@@ -159,18 +197,29 @@ class MainMenu : AppCompatActivity(),ProductsAdapter.onItemClickListener{
             4.5,
             R.drawable.ic_launcher_background,
             R.drawable.background_logo,
-            arrayOf(MenuClass("Mancare normala",arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))),MenuClass("Mancare normala",
-                arrayOf(ProductClass("sushi", 25.0,250.0,R.drawable.ic_launcher_background))
-            )
+            arrayOf(
+                MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                )
             )
         )
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
     }
-    override fun onItemClick(position : Int) {
-        var intent=Intent(this, GeneralRestaurant::class.java)
-        intent.putExtra("LIST",RestaurantsList[position])
+
+    override fun onItemClick(position: Int) {
+        var intent = Intent(this, GeneralRestaurant::class.java)
+        intent.putExtra("LIST", RestaurantsList[position])
         startActivity(intent)
+    }
+
+    fun <T> removeDuplicates(list: ArrayList<T>?): ArrayList<T> {
+        val set: Set<T> = LinkedHashSet(list)
+        return ArrayList(set)
     }
 }
 

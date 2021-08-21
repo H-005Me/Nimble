@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
         <activity
+            android:name=".mainmenu.GeneralCategory"
+            android:exported="true" />
+        <activity
             android:name=".profile.ProfileActivity"
             android:exported="true" />
         <activity
@@ -37,6 +40,10 @@
         <activity android:name=".login.SignupActivity" />
         <activity android:name=".mainmenu.SearchActiviy" />
         <activity android:name=".RestaurantPages.GeneralRestaurant" />
+        <activity android:name=".RestaurantPages.ReservationActivity" />
+        <activity android:name=".RestaurantPages.ImagesActivity" />
+        <activity android:name=".RestaurantPages.ReviewsActivity" />
+        <activity android:name=".RestaurantPages.RestaurantMenuActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
