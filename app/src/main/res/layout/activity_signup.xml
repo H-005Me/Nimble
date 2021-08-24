@@ -29,7 +29,7 @@
             android:background="#00FFFFFF"
             android:text="Sign up"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/yellow_strong"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -73,10 +73,10 @@
         android:background="@drawable/btn_login"
         android:text="Sign up"
         android:textSize="20sp"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:textAllCaps="false" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/tbSignupConfPassword"
@@ -87,6 +87,10 @@
         android:hint="Confirma parola"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="12dp"
+        android:drawableTint="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tbSignupPassword"
         app:layout_constraintStart_toStartOf="@+id/tbSignupPassword"
         app:layout_constraintTop_toBottomOf="@+id/tbSignupPassword" />
@@ -101,7 +105,11 @@
         android:inputType="textPassword"
         android:textColorHighlight="@color/black"
         android:textColorHint="@color/black"
+        android:drawableStart="@drawable/ic_password"
+        android:drawableTint="@android:color/black"
+        android:drawablePadding="12dp"
         app:layout_constraintEnd_toEndOf="@+id/tbSignupEmail"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tbSignupEmail"
         app:layout_constraintTop_toBottomOf="@+id/tbSignupEmail" />
 
@@ -117,6 +125,9 @@
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/black"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:drawableTint="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />

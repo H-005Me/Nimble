@@ -29,7 +29,7 @@
             android:background="#00FFFFFF"
             android:text="Log in"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/yellow_strong"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -56,32 +56,12 @@
             android:background="#00FFFFFF"
             android:text="Sign up"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <EditText
-        android:id="@+id/tbLoginPassword"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="260dp"
-        android:backgroundTint="#000000"
-        android:ems="10"
-        android:hint="Parola"
-        android:inputType="textPassword"
-        android:textColorHint="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbLoginEmail"
-        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/tbLoginEmail"
@@ -94,12 +74,35 @@
         android:ems="10"
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/black"
+        android:textColorHint="@android:color/black"
+        android:textColor="@android:color/black"
         android:textSize="20dp"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:drawableTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+    <EditText
+        android:id="@+id/tbLoginPassword"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="Parola"
+        android:inputType="textPassword"
+        android:textColorHint="@color/black"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="12dp"
+        android:drawableTint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tbLoginEmail"
+        app:layout_constraintStart_toStartOf="@+id/tbLoginEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tbLoginEmail" />
+
 
     <Button
         android:id="@+id/btLoginSubmit"
