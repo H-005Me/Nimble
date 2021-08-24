@@ -7,7 +7,6 @@ import android.widget.ListView
 import com.example.nimble.R
 import com.example.nimble.RestaurantPages.GeneralRestaurant
 import com.example.nimble.adapters.MyListAdapter
-import com.example.nimble.entities.CategoriesClass
 import com.example.nimble.entities.RestaurantsClass
 
 class GeneralCategory : AppCompatActivity() {
@@ -20,7 +19,7 @@ class GeneralCategory : AppCompatActivity() {
         for (each in theIndices) {
             theNewList.add(theList[each])
         }
-        var theListView = findViewById<ListView>(R.id.categoyL)
+        var theListView = findViewById<ListView>(R.id.categoryL)
         var new_Adapter = MyListAdapter(this, theNewList)
         theListView.adapter = new_Adapter
         theListView.setOnItemClickListener { parent, view, position, id ->

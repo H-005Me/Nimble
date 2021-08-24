@@ -7,7 +7,7 @@
     tools:context=".mainmenu.GeneralCategory">
 
     <ListView
-        android:id="@+id/categoyL"
+        android:id="@+id/categoryL"
         android:layout_width="412dp"
         android:layout_height="609dp"
         app:layout_constraintBottom_toBottomOf="parent"

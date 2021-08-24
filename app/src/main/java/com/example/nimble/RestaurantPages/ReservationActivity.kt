@@ -1,7 +1,13 @@
 package com.example.nimble.RestaurantPages
 
+import android.Manifest
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.content.pm.PackageManager
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +18,16 @@ import androidx.annotation.RequiresApi
 import com.example.nimble.R
 import java.util.*
 import kotlin.collections.ArrayList
+import android.graphics.drawable.ColorDrawable
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.view.View
+
+import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+
 
 class ReservationActivity : AppCompatActivity() {
 
@@ -65,7 +81,10 @@ class ReservationActivity : AppCompatActivity() {
             dateTv.setText("$day $month $year")
         }
         dateTv.setText("$day $month $year")
-
+        val chooseTableButton = findViewById<Button>(R.id.choosingTable)
+        chooseTableButton.setOnClickListener {
+            ShowPopup()
+        }
         pickHourBtn.setOnClickListener {
             val cal = Calendar.getInstance()
             val timeSetLister =
@@ -97,5 +116,26 @@ class ReservationActivity : AppCompatActivity() {
         }
     }
 
+    private fun ShowPopup() {
+        val myDialog: Dialog = Dialog(this)
+        myDialog.setContentView(R.layout.tables_popup)
+        val closeButton = myDialog.findViewById<Button>(R.id.close_button)
+        closeButton.setOnClickListener {
+            myDialog.dismiss()
+        }
+
+        myDialog.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myDialog.show()
+    }
 
 }
+
+private fun Any.requestLocationUpdates(
+    gpsProvider: String,
+    i: Int,
+    fl: Float,
+    reservationActivity: ReservationActivity
+) {
+    TODO("IDK what it does but it works like this ")
+}
+
