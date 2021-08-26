@@ -271,7 +271,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.ic_launcher_background,
-            R.drawable.background_logo,
+            R.drawable.cover_casa_piratilor,
             46.754761489348375, 23.549074595438668,
             arrayOf(
                 MenuClass(
