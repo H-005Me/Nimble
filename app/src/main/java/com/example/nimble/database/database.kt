@@ -96,4 +96,28 @@ object Database {
             return -1
         }
     }
+
+    /**
+     * DEBUG prints all the elements in the specified table
+     */
+    fun debugPrintTable (table: String) {
+        /// get nr of columns in table
+        var nrColStr = runQuery("""
+            SELECT Count(*) FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME = '$table'
+        """.trimIndent())
+        nrColStr!!.next()
+        val nrCol = nrColStr.getString(1).toInt()
+
+        /// get values in table
+        val res = runQuery("""
+            SELECT * FROM $table
+        """.trimIndent())
+
+        /// print values
+        while (res!!.next()) {
+            for (i: Int in 1..nrCol)
+                print(res.getString(i) + ' ')
+            println()
+        }
+    }
 }

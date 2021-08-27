@@ -29,17 +29,19 @@ class SignupActivity : AppCompatActivity() {
         /// set btSignupSubmit to validate signup
         val btSignupSubmit = findViewById<Button>(R.id.btSignupSubmit)
         btSignupSubmit.setOnClickListener {
+            val signupfailed = "Sign up Failed"
+
             /// get email from tbSignupEmail
             val tbSignupEmail = findViewById<View>(R.id.tbSignupEmail) as EditText
             val email = tbSignupEmail.text.toString()
 
             if (email == "") {
-                alertUser(this, "Sign up Failed", "E-mail cannot be empty")
+                alertUser(this, signupfailed, "E-mail cannot be empty")
                 return@setOnClickListener
             }
 
             if (!checkEmail(email)) {
-                alertUser(this, "Sign up Failed", "E-mail already in use. Try logging in or using a different e-mail")
+                alertUser(this, signupfailed, "E-mail already in use. Try logging in or using a different e-mail")
                 return@setOnClickListener
             }
 
@@ -54,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
             var password = tbSignupPassword.text.toString()
 
             if (password.length < 6) {
-                alertUser(this, "Sign up Failed", "Password must have at least 6 characters")
+                alertUser(this, signupfailed, "Password must have at least 6 characters")
                 return@setOnClickListener
             }
 
@@ -63,7 +65,44 @@ class SignupActivity : AppCompatActivity() {
             val confpassword = tbSignupConfPassword.text.toString()
 
             if (password != confpassword) { /// passwords do not match
-                alertUser(this, "Sign up Failed", "The password and confirmation password do not match")
+                alertUser(this, signupfailed, "The password and confirmation password do not match")
+                return@setOnClickListener
+            }
+
+            /// get first name
+            val tbFirstName = findViewById<View>(R.id.tbFirstName) as EditText
+            val firstName = tbFirstName.text.toString()
+
+            if (firstName.isEmpty()) {
+                alertUser(this, signupfailed, "First name cannot be empty")
+                return@setOnClickListener
+            }
+            if (firstName.length > 64) {
+                alertUser(this, signupfailed, "First name cannot have more than 64 characters")
+            }
+
+            /// get last name
+            val tbLastName = findViewById<View>(R.id.tbLastName) as EditText
+            val lastName = tbLastName.text.toString()
+
+            if (lastName.isEmpty()) {
+                alertUser(this, signupfailed, "First name cannot be empty")
+                return@setOnClickListener
+            }
+            if (lastName.length > 64) {
+                alertUser(this, signupfailed, "Last name cannot have more than 64 characters")
+            }
+
+            /// get phone number
+            val tbPhone = findViewById<View>(R.id.tbPhone) as EditText
+            val phone = tbPhone.text.toString()
+
+            if (phone.isEmpty()) {
+                alertUser(this, signupfailed, "The phone number cannot be empty")
+                return@setOnClickListener
+            }
+            if (phone.length > 32) {
+                alertUser(this, signupfailed, "The phone number cannot have more than 32 characters")
                 return@setOnClickListener
             }
 
@@ -79,7 +118,7 @@ class SignupActivity : AppCompatActivity() {
             /// TODO if verification code is correct
 
             /// add user in database
-            addUserInDb(email, password, salt)
+            addUserInDb(email, password, salt, firstName, lastName, phone)
 
             /// go to MainActivity & destroy LoginActivity & SignupActivity
             val intent = Intent(this, MainMenu::class.java)
@@ -106,9 +145,9 @@ class SignupActivity : AppCompatActivity() {
         return res.getString(1) == "0"
     }
 
-    private fun addUserInDb (email: String, password: String, salt: String) {
+    private fun addUserInDb (email: String, password: String, salt: String, firstName: String, lastName: String, phone: String) {
         Database.runUpdate("""
-            INSERT INTO tbl_users (email, salt, password) VALUES ('$email', '$salt', '$password');
+            INSERT INTO tbl_users (email, salt, password, firstName, lastName, phone) VALUES ('$email', '$salt', '$password', '$firstName', '$lastName', '$phone');
         """.trimIndent())
     }
 }
