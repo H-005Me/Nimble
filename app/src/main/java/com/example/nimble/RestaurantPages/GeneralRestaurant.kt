@@ -28,7 +28,7 @@ class GeneralRestaurant : AppCompatActivity() {
             var new_intent = Intent(this, GeneralRestaurant::class.java)
 
         }
-        var optionsList = arrayOf("Meniu", "Rezerva", "Imagini", "Recenzii")
+        var optionsList = arrayOf("Meniu", "Rezerva", "Imagini", "Recenzii", "Oferte")
         var myGridAdapter = GridAdapterRestaurants(this, optionsList)
         menulist.adapter = myGridAdapter
         title.text = theList.getTitle()
@@ -41,6 +41,8 @@ class GeneralRestaurant : AppCompatActivity() {
             else if (position == 2)
                 intent = Intent(this, ImagesActivity::class.java)
             else if (position == 3)
+                intent = Intent(this, ReviewsActivity::class.java)
+            else if (position == 4)
                 intent = Intent(this, ReviewsActivity::class.java)
             intent.putExtra("LIST", theList)
             startActivity(intent)

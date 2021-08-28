@@ -131,7 +131,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         setContentView(R.layout.activity_main)
         // valorile le iau din baza de date
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
-        var offetsList = findViewById<ListView>(R.id.offerts)
+        var offertsList = findViewById<ListView>(R.id.offerts)
         val categoryList = findViewById<GridView>(R.id.category)
         val searchBar = findViewById<Button>(R.id.searchButton)
         val mainButton = findViewById<Button>(R.id.homebutton)
@@ -147,10 +147,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         } else {
             respectedGPS = false
         }
-
-        RestaurantsList.sortBy { it.getDistance() }
-
-
         mainButton.setOnClickListener {
 
             var rest = RestaurantsList[0].getCurrentLatitude()
@@ -186,7 +182,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
         var myListAdapter1 = OffertsAdapter(this, RestaurantsList)
-        offetsList.adapter = myListAdapter1
+        offertsList.adapter = myListAdapter1
         var categoriesList = ArrayList<CategoriesClass>()
         for (index in RestaurantsList.indices) {
             var newcategoriesList = RestaurantsList[index].getCategories()
@@ -248,29 +244,29 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             listView.isEnabled = false
             listView.visibility = View.GONE
         }
-        offetsList.isEnabled = false
+        offertsList.isEnabled = false
         categoryList.isEnabled = false
-        offetsList.visibility = View.GONE
+        offertsList.visibility = View.GONE
         categoryList.visibility = View.GONE
         offers.setOnClickListener()
         {
             listView.isEnabled = false
             categoryList.isEnabled = false
-            offetsList.isEnabled = true
+            offertsList.isEnabled = true
             listView.visibility = View.GONE
-            offetsList.visibility = View.VISIBLE
+            offertsList.visibility = View.VISIBLE
             categoryList.visibility = View.GONE
-            offetsList.smoothScrollToPosition(0)
+            offertsList.smoothScrollToPosition(0)
             getRes.isEnabled = false
             getRes.visibility = View.GONE
         }
         categories.setOnClickListener()
         {
             listView.isEnabled = false
-            offetsList.isEnabled = false
+            offertsList.isEnabled = false
             categoryList.isEnabled = true
             listView.visibility = View.GONE
-            offetsList.visibility = View.GONE
+            offertsList.visibility = View.GONE
             categoryList.visibility = View.VISIBLE
             categoryList.smoothScrollToPosition(0)
             getRes.isEnabled = false
@@ -289,9 +285,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 getRes.isEnabled = true
                 getRes.visibility = View.VISIBLE
             }
-            offetsList.visibility = View.GONE
+            offertsList.visibility = View.GONE
             categoryList.visibility = View.GONE
-            offetsList.isEnabled = false
+            offertsList.isEnabled = false
             categoryList.isEnabled = false
             listView.smoothScrollToPosition(0)
         }
@@ -301,9 +297,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         recommendedRestaurants.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRestaurants.adapter = myRecAdapter
-
         listView.setOnItemClickListener { parent, view, position, id ->
-            RestaurantsList.sortBy { it.getDistance() }
             var toShow = RestaurantsList[position].getCurrentLatitude()
             var toShow1 = RestaurantsList[position].getCurrentLongitude()
             var toShow2 = RestaurantsList[position].getDistance()
@@ -318,6 +312,13 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var intent = Intent(this, GeneralCategory::class.java)
             intent.putExtra("LIST", RestaurantsList)
             intent.putExtra("INDICES", categoriesList[position].getTheIndices())
+            startActivity(intent)
+        }
+
+        offertsList.setOnItemClickListener { parent, view, position, id ->
+            var intent = Intent(this, GeneralRestaurant::class.java)
+            intent.putExtra("LIST", RestaurantsList[position])
+            intent.putExtra("CATEGORIES", categoriesList)
             startActivity(intent)
         }
     }

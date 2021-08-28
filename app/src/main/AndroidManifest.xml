@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
         <activity
+            android:name=".RestaurantPages.OffertsActivity"
+            android:exported="true" />
+        <activity
             android:name=".mainmenu.GeneralCategory"
             android:exported="true" />
         <activity
