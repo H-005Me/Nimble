@@ -152,7 +152,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var rest = RestaurantsList[0].getCurrentLatitude()
             var rest1 = RestaurantsList[0].getCurrentLongitude()
             var rest2 = RestaurantsList[0].getDistance()
-            Toast.makeText(this, "$rest2", Toast.LENGTH_SHORT).show()
+
         }
 
 //        while (i<900000)
@@ -214,8 +214,11 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 ) ==
                         PackageManager.PERMISSION_GRANTED)
             ) {
+
                 respectedGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 if (respectedGPS == true) {
+                    getLocation()
+                    prepareRestaurantsData()
                     listView.isEnabled = true
                     listView.visibility = View.VISIBLE
                     getRes.isEnabled = false
@@ -428,6 +431,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 respectedGPS = true
             } else {
                 respectedGPS = false
+                var someList = findViewById<ListView>(R.id.CloseRestaurants)
+                someList.isEnabled = false
+                someList.visibility = View.VISIBLE
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
 
             }

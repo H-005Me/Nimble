@@ -40,14 +40,6 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
-        <Button
-            android:id="@+id/getRestaurants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Click ME"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
@@ -57,7 +49,7 @@
             android:fontFamily="@font/montserrat"
             android:text="Salut"
             android:textColor="@color/black"
-            android:textSize="32dp"
+            android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -254,5 +246,16 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/getRestaurants"
+        android:layout_width="165dp"
+        android:layout_height="89dp"
+        android:text="click me"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
