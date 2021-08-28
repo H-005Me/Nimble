@@ -32,6 +32,9 @@ import com.example.nimble.adapters.ProductsAdapter
 import com.example.nimble.entities.CategoriesClass
 import android.app.Activity
 import android.util.Log
+import com.example.nimble.database.Database
+import java.util.*
+import kotlin.collections.LinkedHashSet
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
@@ -59,6 +62,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 RestaurantsList[i].reDistance()
                 ++i
             }
+            RestaurantsList.sortBy { it.getDistance() }
+
         }
 
         override fun onLocationChanged(location: Location) {
@@ -73,6 +78,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 RestaurantsList[i].reDistance()
                 ++i
             }
+            RestaurantsList.sortBy { it.getDistance() }
         }
 
         override fun onProviderDisabled(provider: String) {
@@ -91,7 +97,31 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     companion object {
         var latitude = 0.0
         var longitude = 0.0
+    }
 
+    private fun getLocation() {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED)
+        ) {
+
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                locationPermissionCode
+            )
+
+        } else {
+            val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                5000,
+                5f,
+                MyLocationListener()
+            )
+        }
     }
 
 
@@ -106,16 +136,19 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         val searchBar = findViewById<Button>(R.id.searchButton)
         val mainButton = findViewById<Button>(R.id.homebutton)
         var getRes = findViewById<Button>(R.id.getRestaurants)
-        prepareRestaurantsData()
+
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             getLocation()
+            prepareRestaurantsData()
             respectedGPS = true
+
         } else {
             respectedGPS = false
         }
 
+        RestaurantsList.sortBy { it.getDistance() }
 
 
         mainButton.setOnClickListener {
@@ -136,7 +169,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
 
         var index = 0
-        RestaurantsList.sortByDescending { it.getDistance() }
+
         while (index < RestaurantsList.size) {
             numbersMap.put(RestaurantsList[index].getTitle(), index)
             index++
@@ -268,7 +301,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         recommendedRestaurants.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRestaurants.adapter = myRecAdapter
+
         listView.setOnItemClickListener { parent, view, position, id ->
+            RestaurantsList.sortBy { it.getDistance() }
             var toShow = RestaurantsList[position].getCurrentLatitude()
             var toShow1 = RestaurantsList[position].getCurrentLongitude()
             var toShow2 = RestaurantsList[position].getDistance()
@@ -378,31 +413,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         return ArrayList(set)
     }
 
-    private fun getLocation() {
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if ((ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED)
-        ) {
-
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                locationPermissionCode
-            )
-
-        } else {
-            val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-            locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                5000,
-                5f,
-                MyLocationListener()
-            )
-        }
-
-    }
 
 
     override fun onRequestPermissionsResult(
