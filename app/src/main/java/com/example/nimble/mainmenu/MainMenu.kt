@@ -31,6 +31,7 @@ import com.example.nimble.adapters.OffertsAdapter
 import com.example.nimble.adapters.ProductsAdapter
 import com.example.nimble.entities.CategoriesClass
 import android.app.Activity
+import android.util.Log
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
@@ -41,32 +42,37 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     var respectedGPS = true
     private val locationPermissionCode = 2
 
-    companion object {
-
-        var latitude = 46.55745152393476
-        var longitude = 23.808696679513552
-    }
-
-    val mListener = LocationListener {
-        longitude = it.longitude
-        latitude = it.latitude
-        fun onProviderDisabled() {
-            System.out.println("DEBUG 3");
-        }
-    }
     var myLocation: Location? = null
 
     inner class MyLocationListener : LocationListener {
         constructor() {
             myLocation = Location("me")
-            myLocation!!.longitude = 0.0
-            myLocation!!.latitude = 0.0
+//            myLocation!!.longitude = longitude
+//            myLocation!!.latitude = latitude
+            longitude = myLocation!!.longitude
+            latitude = myLocation!!.latitude
+            var i = 0
+            while (i < RestaurantsList.size) {
+
+                RestaurantsList[i].setCurrentLatitude(latitude)
+                RestaurantsList[i].setCurrentLongitude(longitude)
+                RestaurantsList[i].reDistance()
+                ++i
+            }
         }
 
         override fun onLocationChanged(location: Location) {
             myLocation = location
             latitude = myLocation!!.latitude
             longitude = myLocation!!.longitude
+            var i = 0
+            while (i < RestaurantsList.size) {
+
+                RestaurantsList[i].setCurrentLatitude(latitude)
+                RestaurantsList[i].setCurrentLongitude(longitude)
+                RestaurantsList[i].reDistance()
+                ++i
+            }
         }
 
         override fun onProviderDisabled(provider: String) {
@@ -82,6 +88,13 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
     }
 
+    companion object {
+        var latitude = 0.0
+        var longitude = 0.0
+
+    }
+
+
     var RestaurantsList = ArrayList<RestaurantsClass>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,29 +106,37 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         val searchBar = findViewById<Button>(R.id.searchButton)
         val mainButton = findViewById<Button>(R.id.homebutton)
         var getRes = findViewById<Button>(R.id.getRestaurants)
-
+        prepareRestaurantsData()
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             getLocation()
             respectedGPS = true
         } else {
             respectedGPS = false
-
         }
 
-        prepareRestaurantsData()
+
 
         mainButton.setOnClickListener {
-            Toast.makeText(this, "$latitude $longitude", Toast.LENGTH_LONG).show()
+
+            var rest = RestaurantsList[0].getCurrentLatitude()
+            var rest1 = RestaurantsList[0].getCurrentLongitude()
+            var rest2 = RestaurantsList[0].getDistance()
+            Toast.makeText(this, "$rest2", Toast.LENGTH_SHORT).show()
         }
-        for (i in RestaurantsList.indices)
-            RestaurantsList[i].reDistance()
+
+//        while (i<900000)
+//        {
+//            Toast.makeText(this, "$", Toast.LENGTH_LONG).show()
+//            i++
+//        }
 
         var numbersMap = mutableMapOf("one" to 9000)
 
 
         var index = 0
-        RestaurantsList.sortBy { d1 -> d1.getDistance() }
+        RestaurantsList.sortByDescending { it.getDistance() }
         while (index < RestaurantsList.size) {
             numbersMap.put(RestaurantsList[index].getTitle(), index)
             index++
@@ -196,7 +217,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         offetsList.isEnabled = false
         categoryList.isEnabled = false
-
         offetsList.visibility = View.GONE
         categoryList.visibility = View.GONE
         offers.setOnClickListener()
@@ -249,7 +269,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRestaurants.adapter = myRecAdapter
         listView.setOnItemClickListener { parent, view, position, id ->
-//            Toast.makeText(applicationContext, "$view", Toast.LENGTH_SHORT).show()
+            var toShow = RestaurantsList[position].getCurrentLatitude()
+            var toShow1 = RestaurantsList[position].getCurrentLongitude()
+            var toShow2 = RestaurantsList[position].getDistance()
+            Toast.makeText(this, "$toShow2", Toast.LENGTH_SHORT).show()
             var intent = Intent(this, GeneralRestaurant::class.java)
             intent.putExtra("LIST", RestaurantsList[position])
             intent.putExtra("CATEGORIES", categoriesList)

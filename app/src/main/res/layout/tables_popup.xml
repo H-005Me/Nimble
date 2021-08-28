@@ -5,65 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/table_2"
-        android:layout_width="97dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="94dp"
-        android:layout_marginEnd="262dp"
-        android:layout_marginBottom="574dp"
-        android:text="2"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <GridView
+        android:id="@+id/tables_list_1"
+        android:layout_width="357dp"
+        android:layout_height="539dp"
+        android:layout_marginBottom="28dp"
+        android:numColumns="3"
+        app:layout_constraintBottom_toTopOf="@+id/close_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/table_3"
-        android:layout_width="133dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="166dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="487dp"
-        android:text="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/table_4"
-        android:layout_width="255dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="155dp"
-        android:layout_marginEnd="279dp"
-        android:layout_marginBottom="371dp"
-        android:text="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table_2"
-        app:layout_constraintVertical_bias="0.469" />
-
-    <Button
-        android:id="@+id/table_1"
-        android:layout_width="67dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="74dp"
-        android:text="1"
-        app:layout_constraintBottom_toTopOf="@+id/table_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/close_button"
@@ -72,7 +24,5 @@
         android:text="close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table_4"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,20 +27,20 @@ class RestaurantsClass(
     private var background: Int
     private var latitude: Double
     private var longitude: Double
-    private var currentLatitude = 0.0
-    private var currentLongitude = 0.0
+    private var currentLatitude: Double
+    private var currentLongitude: Double
 
     init {
         this.title = title!!
         this.latitude = latitude!!
         this.longitude = longitude!!
-        this.currentLatitude = MainMenu.Companion.latitude
-        this.currentLongitude = MainMenu.Companion.longitude
+        this.currentLatitude = 0.0
+        this.currentLongitude = 0.0
         this.distance = BigDecimal(
             distance1(
                 currentLatitude,
-                latitude,
                 currentLongitude,
+                latitude,
                 longitude
             )
         ).setScale(1, RoundingMode.HALF_EVEN).toDouble()
@@ -143,12 +143,12 @@ class RestaurantsClass(
         return this.currentLongitude
     }
 
-    fun setCurrentLatitude(latitude: Double) {
-        this.currentLatitude = latitude
+    fun setCurrentLatitude(new_lat: Double) {
+        this.currentLatitude = new_lat
     }
 
-    fun setCurrentLongitude(longitude: Double) {
-        this.currentLongitude = longitude
+    fun setCurrentLongitude(new_long: Double) {
+        this.currentLongitude = new_long
     }
 
 }

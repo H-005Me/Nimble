@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_general_category.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_general_restaurant.xml" value="0.20520833333333333" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_reservation.xml" value="0.28125" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_restaurant_menu.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_reviews.xml" value="0.20520833333333333" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/custom_list.xml" value="0.20425724637681159" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/custom_table.xml" value="0.22" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/expandablelistadapter_layout_child.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/expandablelistadapter_layout_group.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/expendable_card_view.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/tables_popup.xml" value="0.24791666666666667" />
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_casa_piratilor.xml" value="0.1" />
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_general_restaurant.xml" value="0.18" />
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_general_restaurants2.xml" value="0.1" />
@@ -21,33 +33,10 @@
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/options_horizontal_list.xml" value="0.33" />
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable-v24/background_logo.xml" value="0.2814814814814815" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/background_bottom.xml" value="0.31574074074074077" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/background_bottom_gray.xml" value="0.3574074074074074" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/background_top.xml" value="0.31574074074074077" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/banner_shape.xml" value="0.31574074074074077" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/btn_login.xml" value="0.2814814814814815" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/btn_search.xml" value="0.32314814814814813" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/btn_searchbar.xml" value="0.31574074074074077" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/ic_email.xml" value="0.30205128205128207" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/ic_launcher_background.xml" value="0.23842592592592593" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/ic_maps.xml" value="0.3574074074074074" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/ic_password.xml" value="0.31574074074074077" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/drawable/ic_search.xml" value="0.24114583333333334" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_general_restaurant.xml" value="0.18085106382978725" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_images.xml" value="0.371875" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_loading.xml" value="0.33" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_restaurant_menu.xml" value="0.371875" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_search.xml" value="0.22" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_signup.xml" value="0.33" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/content_general_restaurants.xml" value="0.371875" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/custom_grid.xml" value="0.328804347826087" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/custom_list.xml" value="0.371875" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/custom_offerts.xml" value="0.371875" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/custom_tag.xml" value="0.371875" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/layout/horizontal_list.xml" value="0.3197463768115942" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/Nimble/app/src/main/res/menu/nav_menu.xml" value="0.3" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_loading.xml" value="0.31476449275362317" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.31476449275362317" />
