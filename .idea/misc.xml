@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Nimble/app/src/main/res/drawable/btn_searchbar.xml" value="0.2671875" />
         <entry key="..\:/Nimble/app/src/main/res/layout/activity_general_category.xml" value="0.25052083333333336" />
         <entry key="..\:/Nimble/app/src/main/res/layout/activity_general_restaurant.xml" value="0.20520833333333333" />
         <entry key="..\:/Nimble/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
