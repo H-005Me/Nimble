@@ -5,11 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import android.util.Log
 import com.example.nimble.R
 import com.example.nimble.database.Database
 import com.example.nimble.login.LoginActivity
 
 class LoadingActivity : AppCompatActivity() {
+    private val LOGTAG = "LoadingActivity" /// for logging
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
@@ -20,7 +23,7 @@ class LoadingActivity : AppCompatActivity() {
 
         /// connect to db
         if (!setupDb()) { /// db connection failed
-            println("ERROR LoadingActivity.onCreate(): Database connection failed")
+            Log.e(LOGTAG, "onCreate() - Database connection failed")
 
             /// tell the user to restart the app and disable any other inputs
             val alert = AlertDialog.Builder(this)
@@ -32,6 +35,8 @@ class LoadingActivity : AppCompatActivity() {
             return
         }
 
+        Database.debugPrintTable("tbl_users")
+
         /// change to LoginActivity
         startActivity(Intent(this, LoginActivity::class.java))
     }
@@ -41,19 +46,19 @@ class LoadingActivity : AppCompatActivity() {
      */
     private fun setupDb () : Boolean {
         if (Database.connected == 1) {
-            println("setupDb(): Database already connected")
+            Log.i(LOGTAG, "setupDb() - Database already connected")
             return true
         }
 
         for (i: Int in 1..3) { /// try 3 times
-            println("Try $i")
+            Log.d(LOGTAG, "setupDb() - Try $i")
             Database.connect()
             if (Database.connected == 1) /// if connection is successful
                 return true
         }
 
         /// db failed to connect
-        println("ERROR setupDb(): Database failed to connect")
+        Log.e(LOGTAG, "setupDb() - Database failed to connect")
         return false
     }
 }
