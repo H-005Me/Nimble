@@ -6,67 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".RestaurantPages.GeneralRestaurant">
 
-    <ImageView
-        android:id="@+id/backgroundImage"
-        android:layout_width="412dp"
-        android:layout_height="248dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="427dp"
-        android:layout_height="506dp"
-        android:layout_marginTop="-10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backgroundImage">
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="16dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/titleRestaurant"
-                android:layout_width="312dp"
-                android:layout_height="89dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="58dp"
-                android:text="TextView" />
+            <ImageView
+                android:id="@+id/backgroundImage"
+                android:layout_width="412dp"
+                android:layout_height="248dp"
+                app:srcCompat="@mipmap/ic_launcher" />
 
-            <GridView
-                android:id="@+id/tagsGrid"
-                android:layout_width="390dp"
-                android:layout_height="104dp"
-                android:layout_below="@+id/titleRestaurant"
-                android:layout_alignStart="@+id/titleRestaurant"
-                android:layout_alignEnd="@+id/titleRestaurant"
-                android:layout_alignBottom="@+id/titleRestaurant"
-                android:layout_marginStart="-39dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="-40dp"
-                android:layout_marginBottom="-112dp"
-                android:numColumns="3" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="427dp"
+                android:layout_height="506dp"
+                android:layout_marginTop="-10dp">
 
-            <GridView
-                android:id="@+id/optionsMenu"
-                android:layout_width="333dp"
-                android:layout_height="91dp"
-                android:layout_below="@+id/tagsGrid"
-                android:layout_alignStart="@+id/tagsGrid"
-                android:layout_alignEnd="@+id/tagsGrid"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="110dp"
-                android:layout_marginEnd="-36dp"
-                android:numColumns="2"></GridView>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-16dp"
+                    tools:layout_editor_absoluteY="16dp">
 
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/titleRestaurant"
+                        android:layout_width="312dp"
+                        android:layout_height="89dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="58dp"
+                        android:text="TextView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <GridView
+                        android:id="@+id/tagsGrid"
+                        android:layout_width="390dp"
+                        android:layout_height="104dp"
+                        android:layout_below="@+id/titleRestaurant"
+                        android:layout_alignStart="@+id/titleRestaurant"
+                        android:layout_alignEnd="@+id/titleRestaurant"
+                        android:layout_alignBottom="@+id/titleRestaurant"
+                        android:layout_marginStart="-39dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="-40dp"
+                        android:layout_marginBottom="-112dp"
+                        android:numColumns="3" />
+
+                    <GridView
+                        android:id="@+id/optionsMenu"
+                        android:layout_width="445dp"
+                        android:layout_height="188dp"
+                        android:layout_below="@+id/tagsGrid"
+                        android:layout_alignStart="@+id/tagsGrid"
+                        android:layout_alignEnd="@+id/tagsGrid"
+                        android:layout_marginStart="-19dp"
+                        android:layout_marginTop="110dp"
+                        android:layout_marginEnd="-36dp"
+                        android:numColumns="2"></GridView>
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

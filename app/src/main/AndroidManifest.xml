@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nimble">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -12,6 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
+        <activity
+            android:name=".RestaurantPages.OffertsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".mainmenu.GeneralCategory"
+            android:exported="true" />
         <activity
             android:name=".profile.ProfileActivity"
             android:exported="true" />
@@ -37,6 +45,10 @@
         <activity android:name=".login.SignupActivity" />
         <activity android:name=".mainmenu.SearchActiviy" />
         <activity android:name=".RestaurantPages.GeneralRestaurant" />
+        <activity android:name=".RestaurantPages.ReservationActivity" />
+        <activity android:name=".RestaurantPages.ImagesActivity" />
+        <activity android:name=".RestaurantPages.ReviewsActivity" />
+        <activity android:name=".RestaurantPages.RestaurantMenuActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

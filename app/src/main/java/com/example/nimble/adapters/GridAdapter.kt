@@ -7,12 +7,13 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.nimble.R
-import com.example.nimble.entities.RestaurantsClass
+import com.example.nimble.entities.CategoriesClass
 
 
-class GridAdapter(private val context: Activity, private val theList: ArrayList<RestaurantsClass>
-    /**private val description: Array<String>, private val imgid: Array<Int>**/)
-    : BaseAdapter() {
+class GridAdapter(
+    private val context: Activity, private val theList: ArrayList<CategoriesClass>
+    /**private val description: Array<String>, private val imgid: Array<Int>**/
+) : BaseAdapter() {
     override fun getCount(): Int {
         return theList.size
     }
@@ -22,7 +23,7 @@ class GridAdapter(private val context: Activity, private val theList: ArrayList<
     }
 
     override fun getItem(position: Int): Any {
-       return theList[position]
+        return theList[position]
     }
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
@@ -34,7 +35,7 @@ class GridAdapter(private val context: Activity, private val theList: ArrayList<
 
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
 
-        titleText.text = theList[position].getTitle()
+        titleText.text = theList[position].getName()
 
         //distanceText.text = distance[position].toString()
 //        imageView.setImageResource(imgid[position])

@@ -22,7 +22,7 @@ object Database {
                            "user=" + db_user + ';' +
                            "password=" + db_password + ';' +
                            "integratedSecurity=false;" +
-                           "loginTimeout=30;";
+                           "loginTimeout=30;"
 
     private lateinit var connection: Connection
 

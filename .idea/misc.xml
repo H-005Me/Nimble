@@ -3,6 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_general_category.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_general_restaurant.xml" value="0.20520833333333333" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_offerts.xml" value="0.18704710144927536" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_profile.xml" value="0.17028985507246377" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_reservation.xml" value="0.28125" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_restaurant_menu.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/activity_reviews.xml" value="0.20520833333333333" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/custom_list.xml" value="0.20425724637681159" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/custom_table.xml" value="0.22" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/expandablelistadapter_layout_child.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/expandablelistadapter_layout_group.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/expendable_card_view.xml" value="0.25052083333333336" />
+        <entry key="..\:/Nimble/app/src/main/res/layout/tables_popup.xml" value="0.24791666666666667" />
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_casa_piratilor.xml" value="0.1" />
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_general_restaurant.xml" value="0.18" />
         <entry key="..\:/Users/YO5OHO-2/AndroidStudioProjects/Nimble/app/src/main/res/layout/activity_general_restaurants2.xml" value="0.1" />

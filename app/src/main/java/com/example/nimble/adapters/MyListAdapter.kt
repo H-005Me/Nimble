@@ -33,6 +33,7 @@ class MyListAdapter(private val context: Activity,  private val theList:ArrayLis
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
 
         titleText.text = theList[position].getTitle()
+
         distance.text= theList[position].getDistance().toString()
         //imageView.setImageDrawable(theList[position].getIcon().toDrawable())
 
