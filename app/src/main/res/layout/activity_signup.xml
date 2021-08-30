@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1F1F1"
-    tools:context=".SignupActivity">
+    tools:context="login.SignupActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -29,7 +29,7 @@
             android:background="#00FFFFFF"
             android:text="Sign up"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/yellow_strong"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -73,10 +73,10 @@
         android:background="@drawable/btn_login"
         android:text="Sign up"
         android:textSize="20sp"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:textAllCaps="false" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/tbSignupConfPassword"
@@ -86,7 +86,11 @@
         android:ems="10"
         android:hint="Confirma parola"
         android:inputType="textPassword"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/darker_gray"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="12dp"
+        android:drawableTint="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tbSignupPassword"
         app:layout_constraintStart_toStartOf="@+id/tbSignupPassword"
         app:layout_constraintTop_toBottomOf="@+id/tbSignupPassword" />
@@ -100,8 +104,12 @@
         android:hint="Parola"
         android:inputType="textPassword"
         android:textColorHighlight="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/darker_gray"
+        android:drawableStart="@drawable/ic_password"
+        android:drawableTint="@android:color/black"
+        android:drawablePadding="12dp"
         app:layout_constraintEnd_toEndOf="@+id/tbSignupEmail"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tbSignupEmail"
         app:layout_constraintTop_toBottomOf="@+id/tbSignupEmail" />
 
@@ -113,12 +121,52 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:backgroundTint="@color/black"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:drawableTint="@android:color/black"
         android:ems="10"
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+    <EditText
+        android:id="@+id/tbPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Telefon"
+        android:inputType="phone"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbSignupConfPassword" />
+
+    <EditText
+        android:id="@+id/tbFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Prenume"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbPhone" />
+
+    <EditText
+        android:id="@+id/tbLastName"
+        android:layout_width="198dp"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:hint="Nume de familie"
+        android:inputType="textPersonName"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tbFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tbSignupConfPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
