@@ -9,6 +9,7 @@ import android.util.Log
 import com.example.nimble.R
 import com.example.nimble.database.Database
 import com.example.nimble.login.LoginActivity
+import com.example.nimble.mainmenu.MainMenu
 
 class LoadingActivity : AppCompatActivity() {
     private val LOGTAG = "LoadingActivity" /// for logging
@@ -37,8 +38,10 @@ class LoadingActivity : AppCompatActivity() {
 
         Database.debugPrintTable("tbl_users")
 
-        /// change to LoginActivity
-        startActivity(Intent(this, LoginActivity::class.java))
+        /// go to LoginActivity & destroy LoadingActivity
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     /**
