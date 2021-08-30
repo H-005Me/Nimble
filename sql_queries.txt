@@ -1,8 +1,28 @@
 CREATE TABLE tbl_users (
-	id INT IDENTITY(1,1) PRIMARY KEY,
-	email NVARCHAR(255) NOT NULL UNIQUE,
-	salt CHAR(64) NOT NULL,
-	password CHAR(64) NOT NULL
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    email NVARCHAR(255) NOT NULL UNIQUE,
+    salt CHAR(64) NOT NULL,
+    password CHAR(64) NOT NULL,
+    firstName NVARCHAR(64),
+    lastName NVARCHAR(64),
+    phone VARCHAR(32)
 );
 
+CREATE TABLE tbl_tokens (
+    userId INT NOT NULL,
+    token CHAR(64) NOT NULL,
+    date SMALLDATETIME NOT NULL
+);
 
+CREATE TABLE tbl_restaurants (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,
+    lat DECIMAL(9,6) NOT NULL,
+    long DECIMAL(9,6) NOT NULL,
+    reviews_no INT NOT NULL,
+    rating DECIMAL(2,1),
+    logo VARCHAR(2048),
+    city NVARCHAR(86) NOT NULL,
+    address NVARCHAR(255) NOT NULL,
+    categories NVARCHAR(1024)
+);

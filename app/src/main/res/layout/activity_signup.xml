@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1F1F1"
-    tools:context=".SignupActivity">
+    tools:context="login.SignupActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -132,5 +132,41 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+    <EditText
+        android:id="@+id/tbPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Telefon"
+        android:inputType="phone"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbSignupConfPassword" />
+
+    <EditText
+        android:id="@+id/tbFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Prenume"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbPhone" />
+
+    <EditText
+        android:id="@+id/tbLastName"
+        android:layout_width="198dp"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:hint="Nume de familie"
+        android:inputType="textPersonName"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tbFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tbSignupConfPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
