@@ -31,8 +31,10 @@ import com.example.nimble.adapters.OffertsAdapter
 import com.example.nimble.adapters.ProductsAdapter
 import com.example.nimble.entities.CategoriesClass
 import android.app.Activity
+import android.os.SystemClock
 import android.util.Log
 import com.example.nimble.database.Database
+import com.example.nimble.profile.ProfileActivity
 import java.util.*
 import kotlin.collections.LinkedHashSet
 
@@ -123,20 +125,22 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             )
         }
     }
-
+    private var mLastClickTime = 0
 
     var RestaurantsList = ArrayList<RestaurantsClass>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // valorile le iau din baza de date
+
+
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
         var offertsList = findViewById<ListView>(R.id.offerts)
         val categoryList = findViewById<GridView>(R.id.category)
         val searchBar = findViewById<Button>(R.id.searchButton)
         val mainButton = findViewById<Button>(R.id.homebutton)
         var getRes = findViewById<Button>(R.id.getRestaurants)
-
+        val profileButton = findViewById<Button>(R.id.profilebutton)
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -152,7 +156,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var rest = RestaurantsList[0].getCurrentLatitude()
             var rest1 = RestaurantsList[0].getCurrentLongitude()
             var rest2 = RestaurantsList[0].getDistance()
-
         }
 
 //        while (i<900000)
@@ -174,9 +177,14 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         searchBar.setOnClickListener()
         {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime().toInt()
             val intent = Intent(this, SearchActiviy::class.java)
             intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
+
         }
 
         var myListAdapter = MyListAdapter(this, RestaurantsList)
@@ -202,7 +210,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
 
         getRes.setOnClickListener {
-
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime().toInt()
             var REQUEST = 111
             ActivityCompat.requestPermissions(
                 this,
@@ -253,6 +264,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         categoryList.visibility = View.GONE
         offers.setOnClickListener()
         {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime().toInt()
             listView.isEnabled = false
             categoryList.isEnabled = false
             offertsList.isEnabled = true
@@ -265,6 +280,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         categories.setOnClickListener()
         {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime().toInt()
             listView.isEnabled = false
             offertsList.isEnabled = false
             categoryList.isEnabled = true
@@ -277,6 +296,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         closeRestaurants.setOnClickListener()
         {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime().toInt()
             if (respectedGPS == true) {
                 listView.isEnabled = true
                 listView.visibility = View.VISIBLE
@@ -301,27 +324,30 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRestaurants.adapter = myRecAdapter
         listView.setOnItemClickListener { parent, view, position, id ->
-            var toShow = RestaurantsList[position].getCurrentLatitude()
-            var toShow1 = RestaurantsList[position].getCurrentLongitude()
-            var toShow2 = RestaurantsList[position].getDistance()
-            Toast.makeText(this, "$toShow2", Toast.LENGTH_SHORT).show()
+
             var intent = Intent(this, GeneralRestaurant::class.java)
             intent.putExtra("LIST", RestaurantsList[position])
             intent.putExtra("CATEGORIES", categoriesList)
             startActivity(intent)
         }
-
         categoryList.setOnItemClickListener { parent, view, position, id ->
             var intent = Intent(this, GeneralCategory::class.java)
             intent.putExtra("LIST", RestaurantsList)
             intent.putExtra("INDICES", categoriesList[position].getTheIndices())
             startActivity(intent)
         }
-
         offertsList.setOnItemClickListener { parent, view, position, id ->
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnItemClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime().toInt()
             var intent = Intent(this, GeneralRestaurant::class.java)
             intent.putExtra("LIST", RestaurantsList[position])
             intent.putExtra("CATEGORIES", categoriesList)
+            startActivity(intent)
+        }
+        profileButton.setOnClickListener {
+            var intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }
@@ -346,6 +372,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             )
         )
         RestaurantsList.add(restaurants)
+
         restaurants = RestaurantsClass(
             "Marty",
 
@@ -404,6 +431,49 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
+
+        val res = Database.runQuery(
+            """
+            SELECT name,reviews,rating,logo,lat,long,categories FROM tbl_restaurants;
+        """.trimIndent()
+        )
+        if (res != null)
+            while (res!!.next()) {
+                var name: String = res!!.getString("name")
+                var reviews: Int = res!!.getInt("reviews")
+                var rating = res.getDouble("rating")
+                var logo = res.getInt("logo")
+                var lat = res.getDouble("lat")
+                var long = res.getDouble("long")
+                var categories = res.getArray("categories")
+                restaurants = RestaurantsClass(
+                    name, reviews, rating, logo, R.drawable.background_logo, lat, long, arrayOf(
+                        MenuClass(
+                            "Normala",
+                            arrayOf(
+                                ProductClass(
+                                    "sushi",
+                                    25.0,
+                                    250.0,
+                                    R.drawable.ic_launcher_background
+                                )
+                            )
+                        ), MenuClass(
+                            "Normala",
+                            arrayOf(
+                                ProductClass(
+                                    "sushi",
+                                    25.0,
+                                    250.0,
+                                    R.drawable.ic_launcher_background
+                                )
+                            )
+                        )
+                    )
+                )
+                RestaurantsList.add(restaurants)
+            }
+
     }
 
     override fun onItemClick(position: Int) {
