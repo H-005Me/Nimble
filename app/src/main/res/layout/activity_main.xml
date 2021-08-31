@@ -84,7 +84,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat"
             android:text="Recomandate"
@@ -129,13 +129,14 @@
         <Button
             android:id="@+id/closeButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="#00FFFFFF"
             android:fontFamily="@font/roboto"
             android:text="În apropiere"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toStartOf="@+id/categoriesButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -143,13 +144,14 @@
         <Button
             android:id="@+id/offersButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="#00FFFFFF"
             android:fontFamily="@font/roboto"
             android:text="Ofertele zilei"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/categoriesButton"
             app:layout_constraintTop_toTopOf="parent" />
@@ -164,11 +166,25 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/getRestaurants"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/ic_reload"
+            android:backgroundTint="@color/yellow_strong"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
@@ -214,7 +230,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_maps"
-            android:backgroundTint="@color/light_gray"
+            android:backgroundTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/homebutton"
             app:layout_constraintStart_toStartOf="parent"
@@ -238,7 +254,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_profile"
-            android:backgroundTint="@color/light_gray"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/homebutton"
@@ -246,16 +262,5 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/getRestaurants"
-        android:layout_width="165dp"
-        android:layout_height="89dp"
-        android:text="click me"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
