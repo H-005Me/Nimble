@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="203dp">
+
+        <TextView
+            android:id="@+id/ordersrestaurantname"
+            android:layout_width="352dp"
+            android:layout_height="79dp"
+            android:text="Nume Restaurant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19" />
+
+        <TextView
+            android:id="@+id/ordersDate"
+            android:layout_width="145dp"
+            android:layout_height="51dp"
+            android:ems="10"
+            android:inputType="date"
+            android:text="YYYY/MM/DD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.109"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ordersrestaurantname"
+            app:layout_constraintVertical_bias="0.489" />
+
+        <TextView
+            android:id="@+id/ordersHour"
+            android:layout_width="97dp"
+            android:layout_height="51dp"
+            android:text="HH/MM"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.112"
+            app:layout_constraintStart_toEndOf="@+id/ordersDate"
+            app:layout_constraintTop_toBottomOf="@+id/ordersrestaurantname"
+            app:layout_constraintVertical_bias="0.489" />
+
+        <TextView
+            android:id="@+id/ordersStatus"
+            android:layout_width="71dp"
+            android:layout_height="54dp"
+            android:text="Expired"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ordersHour"
+            app:layout_constraintTop_toBottomOf="@+id/ordersrestaurantname" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

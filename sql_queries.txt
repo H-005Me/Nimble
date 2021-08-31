@@ -26,3 +26,15 @@ CREATE TABLE tbl_restaurants (
     address NVARCHAR(255) NOT NULL,
     categories NVARCHAR(1024)
 );
+CREATE TABLE tbl_orders (
+    user_id INT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,
+    year INT NOT NULL,
+    month INT NOT NULL,
+    day INT NOT NULL,
+    hour INT NOT NULL,
+    minutes INT NOT NULL,
+    tableselected INT NOT NULL,
+    status INT NOT NULL,
+    expired INT NOT NULL
+);

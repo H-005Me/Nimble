@@ -33,7 +33,7 @@ class ProfileActivity : AppCompatActivity() {
             if (position == 0)
                 intent = Intent(this, RestaurantMenuActivity::class.java)
             else if (position == 1)
-                intent = Intent(this, ReservationActivity::class.java)
+                intent = Intent(this, SeeReservationsActity::class.java)
             else if (position == 2)
                 intent = Intent(this, ImagesActivity::class.java)
             else if (position == 3)

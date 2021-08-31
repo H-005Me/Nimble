@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
         <activity
+            android:name=".profile.SeeReservationsActity"
+            android:exported="true" />
+        <activity
             android:name=".RestaurantPages.OffertsActivity"
             android:exported="true" />
         <activity

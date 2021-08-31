@@ -18,6 +18,8 @@ import android.graphics.drawable.ColorDrawable
 
 import android.widget.TextView
 import com.example.nimble.adapters.TableAdapter
+import com.example.nimble.database.Database
+import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
 import com.example.nimble.mainmenu.MainMenu
 import org.w3c.dom.Text
@@ -51,6 +53,7 @@ class ReservationActivity : AppCompatActivity() {
         var dateIsPicked: Boolean = true
         var hourIsPicked: Boolean = false
         var tableIsPicked: Boolean = false
+        var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         pickHourBtn.isEnabled = dateIsPicked
         chooseTableButton.isEnabled = hourIsPicked
         confirmReservation.isEnabled = tableIsPicked
@@ -152,6 +155,16 @@ class ReservationActivity : AppCompatActivity() {
         confirmReservation.isEnabled = tableIsPicked
         confirmReservation.setOnClickListener {
             Toast.makeText(this, "Your reservation has been completed", Toast.LENGTH_SHORT).show()
+            var name = theList.getTitle()
+            var firstV = "1"
+            var statusV = "0"
+            Database.runUpdate(
+                """
+            INSERT INTO tbl_orders(user_id,name,year,month,day,hour,minutes,table,status,expired) values('$firstV','$name','$year','$month','$day','$hour','$minuteF','$statusV','$statusV');
+        """.trimIndent()
+            )
+
+
         }
     }
 
