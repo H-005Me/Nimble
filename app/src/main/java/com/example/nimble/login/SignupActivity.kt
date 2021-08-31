@@ -29,19 +29,18 @@ class SignupActivity : AppCompatActivity() {
         /// set btSignupSubmit to validate signup
         val btSignupSubmit = findViewById<Button>(R.id.btSignupSubmit)
         btSignupSubmit.setOnClickListener {
-            val signupfailed = "Sign up Failed"
 
             /// get email from tbSignupEmail
             val tbSignupEmail = findViewById<View>(R.id.tbSignupEmail) as EditText
             val email = tbSignupEmail.text.toString()
 
             if (email == "") {
-                alertUser(this, signupfailed, "E-mail cannot be empty")
+                makeSToast(this, "E-mail cannot be empty")
                 return@setOnClickListener
             }
 
             if (!checkEmail(email)) {
-                alertUser(this, signupfailed, "E-mail already in use. Try logging in or using a different e-mail")
+                makeSToast(this, "E-mail already in use. Try logging in or using a different e-mail")
                 return@setOnClickListener
             }
 
@@ -56,7 +55,7 @@ class SignupActivity : AppCompatActivity() {
             var password = tbSignupPassword.text.toString()
 
             if (password.length < 6) {
-                alertUser(this, signupfailed, "Password must have at least 6 characters")
+                makeSToast(this, "Password must have at least 6 characters")
                 return@setOnClickListener
             }
 
@@ -65,7 +64,7 @@ class SignupActivity : AppCompatActivity() {
             val confpassword = tbSignupConfPassword.text.toString()
 
             if (password != confpassword) { /// passwords do not match
-                alertUser(this, signupfailed, "The password and confirmation password do not match")
+                makeSToast(this, "The password and confirmation password do not match")
                 return@setOnClickListener
             }
 
@@ -74,11 +73,11 @@ class SignupActivity : AppCompatActivity() {
             val firstName = tbFirstName.text.toString()
 
             if (firstName.isEmpty()) {
-                alertUser(this, signupfailed, "First name cannot be empty")
+                makeSToast(this, "First name cannot be empty")
                 return@setOnClickListener
             }
             if (firstName.length > 64) {
-                alertUser(this, signupfailed, "First name cannot have more than 64 characters")
+                makeSToast(this, "First name cannot have more than 64 characters")
             }
 
             /// get last name
@@ -86,11 +85,11 @@ class SignupActivity : AppCompatActivity() {
             val lastName = tbLastName.text.toString()
 
             if (lastName.isEmpty()) {
-                alertUser(this, signupfailed, "First name cannot be empty")
+                makeSToast(this, "First name cannot be empty")
                 return@setOnClickListener
             }
             if (lastName.length > 64) {
-                alertUser(this, signupfailed, "Last name cannot have more than 64 characters")
+                makeSToast(this, "Last name cannot have more than 64 characters")
             }
 
             /// get phone number
@@ -98,11 +97,11 @@ class SignupActivity : AppCompatActivity() {
             val phone = tbPhone.text.toString()
 
             if (phone.isEmpty()) {
-                alertUser(this, signupfailed, "The phone number cannot be empty")
+                makeSToast(this, "The phone number cannot be empty")
                 return@setOnClickListener
             }
             if (phone.length > 32) {
-                alertUser(this, signupfailed, "The phone number cannot have more than 32 characters")
+                makeSToast(this, "The phone number cannot have more than 32 characters")
                 return@setOnClickListener
             }
 

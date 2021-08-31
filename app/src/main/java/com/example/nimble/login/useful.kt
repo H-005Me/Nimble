@@ -1,5 +1,6 @@
 package com.example.nimble
 
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import java.security.MessageDigest
@@ -15,13 +16,34 @@ fun errorMsg (activity: AppCompatActivity, errcode: Int, errmsg: String) {
 }
 
 /**
- * Usually you call it like this: alertUser(this, title, message) where title is the title of the alert and message is the message of the allert
+ * Usually you call it like this: alertUser(this, title, message) where title is the title of the alert and message is the message of the alert
  */
 fun alertUser (activity: AppCompatActivity, title: String, msg: String) {
     val alert = AlertDialog.Builder(activity)
     alert.setTitle(title)
     alert.setMessage(msg)
     alert.show()
+}
+
+/**
+ * Usually you call it like this: makeToast(this, message, Toast.LENGTH_SHORT)
+ */
+fun makeToast (activity: AppCompatActivity, msg: String, length: Int) {
+    Toast.makeText(activity, msg, length).show()
+}
+
+/**
+ * make short toast
+ */
+fun makeSToast (activity: AppCompatActivity, msg: String) {
+    makeToast(activity, msg, Toast.LENGTH_SHORT)
+}
+
+/**
+ * make long toast
+ */
+fun makeLToast (activity: AppCompatActivity, msg: String) {
+    makeToast(activity, msg, Toast.LENGTH_LONG)
 }
 
 /**
