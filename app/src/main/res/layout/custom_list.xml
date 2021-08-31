@@ -35,7 +35,7 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textStyle="bold"
                 android:visibility="visible"
-                tools:textColor="@color/black"
+                android:textColor="@color/black"
                 tools:visibility="visible" />
 
             <TextView
@@ -47,14 +47,14 @@
                 android:layout_marginTop="5dp"
                 android:text="description"
                 android:textSize="16sp"
-                tools:textColor="@color/black" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                tools:textColor="@color/black" />
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

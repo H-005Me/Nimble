@@ -37,6 +37,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
                     android:text="title"
+                    android:textColor="@color/black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
 
