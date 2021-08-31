@@ -434,20 +434,25 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         val res = Database.runQuery(
             """
-            SELECT name,reviews,rating,logo,lat,long,categories FROM tbl_restaurants;
+            SELECT name,reviews_no,rating,lat,long FROM tbl_restaurants;
         """.trimIndent()
         )
-        if (res != null)
+
             while (res!!.next()) {
-                var name: String = res!!.getString("name")
-                var reviews: Int = res!!.getInt("reviews")
-                var rating = res.getDouble("rating")
-                var logo = res.getInt("logo")
-                var lat = res.getDouble("lat")
-                var long = res.getDouble("long")
-                var categories = res.getArray("categories")
+                val name: String = res!!.getString(1)
+                val reviews: Int = res!!.getInt(2)
+                val rating = res.getDouble(3)
+                var lat = res.getDouble(4)
+                var long = res.getDouble(5)
                 restaurants = RestaurantsClass(
-                    name, reviews, rating, logo, R.drawable.background_logo, lat, long, arrayOf(
+                    name,
+                    reviews,
+                    rating,
+                    R.drawable.ic_launcher_background,
+                    R.drawable.background_logo,
+                    lat,
+                    long,
+                    arrayOf(
                         MenuClass(
                             "Normala",
                             arrayOf(
@@ -471,6 +476,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                         )
                     )
                 )
+                Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
                 RestaurantsList.add(restaurants)
             }
 
