@@ -34,12 +34,12 @@ class LoginActivity : AppCompatActivity() {
             val email = tbLoginEmail.text.toString()
 
             if (email == "") {
-                alertUser(this, "Login Failed", "E-mail cannot be empty")
+                makeSToast(this, "E-mail cannot be empty")
                 return@setOnClickListener
             }
 
             if (!correctEmail(email)) {
-                alertUser(this, "Login Failed", "E-mail or password is incorrect")
+                makeSToast(this, "E-mail or password is incorrect")
                 return@setOnClickListener
             }
 
@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             } else { /// login failed
-                alertUser(this, "Login Failed", "E-mail or password is incorrect")
+                makeSToast(this, "E-mail or password is incorrect")
             }
         }
     }
