@@ -476,7 +476,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                         )
                     )
                 )
-                Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
                 RestaurantsList.add(restaurants)
             }
 
