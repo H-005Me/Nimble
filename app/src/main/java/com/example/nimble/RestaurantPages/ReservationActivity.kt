@@ -156,14 +156,14 @@ class ReservationActivity : AppCompatActivity() {
         confirmReservation.setOnClickListener {
             Toast.makeText(this, "Your reservation has been completed", Toast.LENGTH_SHORT).show()
             var name = theList.getTitle()
-            var firstV = "1"
-            var statusV = "0"
+            var firstV = 1
+            var statusV = 0
+
             Database.runUpdate(
                 """
-            INSERT INTO tbl_orders(user_id,name,year,month,day,hour,minutes,table,status,expired) values('$firstV','$name','$year','$month','$day','$hour','$minuteF','$statusV','$statusV');
+            INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status, expired) VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' , '$statusV' );
         """.trimIndent()
             )
-
 
         }
     }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.graphics.drawable.toDrawable
 import com.example.nimble.entities.RestaurantsClass
 
 import com.example.nimble.R
@@ -29,11 +30,12 @@ class MyListAdapter(private val context: Activity,  private val theList:ArrayLis
         val titleText = rowView?.findViewById(R.id.title) as TextView
         val imageView = rowView.findViewById(R.id.icon) as ImageView
         val subtitleText = rowView.findViewById(R.id.description) as TextView
-        val distance= rowView.findViewById(R.id.distance) as TextView
+        val distance = rowView.findViewById(R.id.distance) as TextView
+        val background = rowView.findViewById<LinearLayout>(R.id.eachItem)
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
-
+        background.setBackgroundResource(theList[position].getBackground())
         titleText.text = theList[position].getTitle()
-
+        imageView.setBackgroundResource(theList[position].getIcon())
         distance.text= theList[position].getDistance().toString()
         //imageView.setImageDrawable(theList[position].getIcon().toDrawable())
 

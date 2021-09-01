@@ -16,6 +16,7 @@ class SeeReservationsActity : AppCompatActivity() {
         //primeste datele de la o baza de date
         //afiseaza comenzile
         //numele restaurantului,data,ora,minutul,masa,completata sau in asteptare
+
         val res = Database.runQuery(
             """
             SELECT user_id,name,year,month,day,hour,minutes,tableselected,status,expired FROM tbl_orders;
