@@ -35,6 +35,7 @@ import android.os.SystemClock
 import android.util.Log
 import com.example.nimble.database.Database
 import com.example.nimble.profile.ProfileActivity
+import java.lang.Exception
 import java.security.Provider
 import java.util.*
 import kotlin.collections.LinkedHashSet
@@ -143,19 +144,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-        val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-        latitude = loc!!.latitude
-        longitude = loc.longitude
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            getLocation()
-            longitude = loc.longitude
-            latitude = loc.latitude
-            prepareRestaurantsData()
-            respectedGPS = true
 
-        } else {
-            respectedGPS = false
-        }
 
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
         var offertsList = findViewById<ListView>(R.id.offerts)
@@ -166,6 +155,36 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         val profileButton = findViewById<Button>(R.id.profilebutton)
         var recommendedRestaurants = findViewById<RecyclerView>(R.id.recommendedlist)
 
+
+        try {
+
+
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true
+
+            ) {
+                val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+                latitude = loc!!.latitude
+                longitude = loc.longitude
+                getLocation()
+                longitude = loc.longitude
+                latitude = loc.latitude
+                prepareRestaurantsData()
+                respectedGPS = true
+
+            } else {
+                respectedGPS = false
+            }
+        } catch (ex: Exception) {
+            prepareRestaurantsData()
+            listView.isEnabled = false
+            offertsList.isEnabled = false
+            categoryList.isEnabled = false
+            listView.visibility = View.GONE
+            offertsList.visibility = View.GONE
+            categoryList.visibility = View.GONE
+            respectedGPS = false
+
+        }
         mainButton.isEnabled = true
 
         mainButton.setOnClickListener {
@@ -212,7 +231,17 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 }
             }
         }
-
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+            )
+        }
 
         getRes.setOnClickListener {
 
@@ -227,20 +256,21 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 ) ==
                         PackageManager.PERMISSION_GRANTED)
             ) {
-
-                respectedGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 if (respectedGPS == true) {
-                    getLocation()
-                    prepareRestaurantsData()
-                    listView.isEnabled = true
-                    listView.visibility = View.VISIBLE
-                    getRes.isEnabled = false
-                    getRes.visibility = View.GONE
+                    try {
+                        getLocation()
+                        val loc =
+                            locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+                        latitude = loc!!.latitude
+                        longitude = loc.longitude
+                        prepareRestaurantsData()
+
+                    } catch (ex: Exception) {
+                        Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-
             }
         }
         for (each in categoriesList.indices)
