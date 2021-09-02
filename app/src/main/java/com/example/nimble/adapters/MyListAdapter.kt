@@ -35,7 +35,7 @@ class MyListAdapter(private val context: Activity,  private val theList:ArrayLis
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
         background.setBackgroundResource(theList[position].getBackground())
         titleText.text = theList[position].getTitle()
-        imageView.setBackgroundResource(theList[position].getIcon())
+        imageView.setImageResource(theList[position].getIcon())
         distance.text= theList[position].getDistance().toString()
         //imageView.setImageDrawable(theList[position].getIcon().toDrawable())
 

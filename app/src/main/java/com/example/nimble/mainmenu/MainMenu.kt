@@ -35,6 +35,7 @@ import android.os.SystemClock
 import android.util.Log
 import com.example.nimble.database.Database
 import com.example.nimble.profile.ProfileActivity
+import java.security.Provider
 import java.util.*
 import kotlin.collections.LinkedHashSet
 
@@ -47,16 +48,46 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     var respectedGPS = true
     private val locationPermissionCode = 2
 
-    var myLocation: Location? = null
+    var latitude = 0.0
+    var longitude = 0.0
 
+    var myLocation: Location? = null
+    fun getLocation(): Location? {
+
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+        }
+        locationManager.requestLocationUpdates(
+            LocationManager.GPS_PROVIDER,
+            5000,
+            5f,
+            MyLocationListener()
+        )
+        return myLocation
+    }
     inner class MyLocationListener : LocationListener {
         constructor() {
             myLocation = Location("me")
-//            myLocation!!.longitude = longitude
-//            myLocation!!.latitude = latitude
             longitude = myLocation!!.longitude
             latitude = myLocation!!.latitude
             var i = 0
+            Log.i("latitude", "$latitude")
+            Log.i("longitude", "$longitude")
             while (i < RestaurantsList.size) {
 
                 RestaurantsList[i].setCurrentLatitude(latitude)
@@ -88,51 +119,43 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
 
         override fun onProviderEnabled(provider: String) {
+            myLocation = Location(provider)
+            longitude = myLocation!!.longitude
+            latitude = myLocation!!.latitude
+            var i = 0
+            Log.i("latitude", "$latitude")
+            Log.i("longitude", "$longitude")
+            while (i < RestaurantsList.size) {
 
+                RestaurantsList[i].setCurrentLatitude(latitude)
+                RestaurantsList[i].setCurrentLongitude(longitude)
+                RestaurantsList[i].reDistance()
+                ++i
+            }
+            RestaurantsList.sortBy { it.getDistance() }
         }
 
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-
         }
     }
-
-    companion object {
-        var latitude = 0.0
-        var longitude = 0.0
-    }
-
-    private fun getLocation() {
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if ((ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED)
-        ) {
-
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                locationPermissionCode
-            )
-
-        } else {
-            val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-            locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                5000,
-                5f,
-                MyLocationListener()
-            )
-        }
-    }
-    private var mLastClickTime = 0
-
     var RestaurantsList = ArrayList<RestaurantsClass>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // valorile le iau din baza de date
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+        latitude = loc!!.latitude
+        longitude = loc.longitude
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            getLocation()
+            longitude = loc.longitude
+            latitude = loc.latitude
+            prepareRestaurantsData()
+            respectedGPS = true
 
+        } else {
+            respectedGPS = false
+        }
 
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
         var offertsList = findViewById<ListView>(R.id.offerts)
@@ -141,34 +164,19 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         val mainButton = findViewById<Button>(R.id.homebutton)
         var getRes = findViewById<Button>(R.id.getRestaurants)
         val profileButton = findViewById<Button>(R.id.profilebutton)
-        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        var recommendedRestaurants = findViewById<RecyclerView>(R.id.recommendedlist)
 
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            getLocation()
-            prepareRestaurantsData()
-            respectedGPS = true
+        mainButton.isEnabled = true
 
-        } else {
-            respectedGPS = false
-        }
         mainButton.setOnClickListener {
 
             var rest = RestaurantsList[0].getCurrentLatitude()
             var rest1 = RestaurantsList[0].getCurrentLongitude()
             var rest2 = RestaurantsList[0].getDistance()
+            Toast.makeText(this, "$latitude $longitude", Toast.LENGTH_SHORT).show()
         }
-
-//        while (i<900000)
-//        {
-//            Toast.makeText(this, "$", Toast.LENGTH_LONG).show()
-//            i++
-//        }
-
         var numbersMap = mutableMapOf("one" to 9000)
-
-
         var index = 0
-
         while (index < RestaurantsList.size) {
             numbersMap.put(RestaurantsList[index].getTitle(), index)
             index++
@@ -177,10 +185,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         searchBar.setOnClickListener()
         {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                return@setOnClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime().toInt()
+
             val intent = Intent(this, SearchActiviy::class.java)
             intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
@@ -210,10 +215,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
 
         getRes.setOnClickListener {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                return@setOnClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime().toInt()
+
             var REQUEST = 111
             ActivityCompat.requestPermissions(
                 this,
@@ -264,10 +266,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         categoryList.visibility = View.GONE
         offers.setOnClickListener()
         {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                return@setOnClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime().toInt()
             listView.isEnabled = false
             categoryList.isEnabled = false
             offertsList.isEnabled = true
@@ -280,10 +278,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         categories.setOnClickListener()
         {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                return@setOnClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime().toInt()
+
             listView.isEnabled = false
             offertsList.isEnabled = false
             categoryList.isEnabled = true
@@ -296,10 +291,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         closeRestaurants.setOnClickListener()
         {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                return@setOnClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime().toInt()
+
             if (respectedGPS == true) {
                 listView.isEnabled = true
                 listView.visibility = View.VISIBLE
@@ -318,13 +310,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             listView.smoothScrollToPosition(0)
         }
 
-        var recommendedRestaurants = findViewById<RecyclerView>(R.id.recommendedlist)
+        RestaurantsList.sortBy { it.getDistance() }
         var myRecAdapter = ProductsAdapter(RestaurantsList, this)
         recommendedRestaurants.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRestaurants.adapter = myRecAdapter
         listView.setOnItemClickListener { parent, view, position, id ->
-
             var intent = Intent(this, GeneralRestaurant::class.java)
             intent.putExtra("LIST", RestaurantsList[position])
             intent.putExtra("CATEGORIES", categoriesList)
@@ -337,10 +328,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             startActivity(intent)
         }
         offertsList.setOnItemClickListener { parent, view, position, id ->
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                return@setOnItemClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime().toInt()
+
             var intent = Intent(this, GeneralRestaurant::class.java)
             intent.putExtra("LIST", RestaurantsList[position])
             intent.putExtra("CATEGORIES", categoriesList)
@@ -352,13 +340,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
     }
     private fun prepareRestaurantsData() {
-        getLocation()
         var restaurants = RestaurantsClass(
             "Casa Piratilor",
 
             1500,
             4.5,
-            R.drawable.ic_launcher_background,
+            R.drawable.logo_casa_piratilor,
             R.drawable.cover_casa_piratilor,
             46.754761489348375, 23.549074595438668,
             arrayOf(
@@ -378,7 +365,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
             1500,
             4.5,
-            R.drawable.ic_launcher_background,
+            R.drawable.logo_marty,
             R.drawable.background_logo,
             46.77303059272974, 23.589206542353935,
             arrayOf(
@@ -397,7 +384,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
             1500,
             4.5,
-            R.drawable.ic_launcher_background,
+            R.drawable.logo_klaus,
             R.drawable.background_logo,
             46.77303059272974, 23.589206542353935,
             arrayOf(
@@ -416,7 +403,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
             1500,
             4.5,
-            R.drawable.ic_launcher_background,
+            R.drawable.logo_papion,
             R.drawable.background_logo,
             46.57051053103731, 23.785073506109164,
             arrayOf(
@@ -476,9 +463,19 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                         )
                     )
                 )
+
                 RestaurantsList.add(restaurants)
             }
 
+        var i = 0
+        while (i < RestaurantsList.size) {
+
+            RestaurantsList[i].setCurrentLatitude(latitude)
+            RestaurantsList[i].setCurrentLongitude(longitude)
+            RestaurantsList[i].reDistance()
+            ++i
+        }
+        RestaurantsList.sortBy { it.getDistance() }
     }
 
     override fun onItemClick(position: Int) {
@@ -491,7 +488,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         val set: Set<T> = LinkedHashSet(list)
         return ArrayList(set)
     }
-
 
 
     override fun onRequestPermissionsResult(
