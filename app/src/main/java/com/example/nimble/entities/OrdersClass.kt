@@ -1,5 +1,7 @@
 package com.example.nimble.entities
 
+import java.io.Serializable
+
 
 class OrdersClass(
     name: String,
@@ -9,8 +11,8 @@ class OrdersClass(
     hour: Int,
     minute: Int,
     table: Int,
-    isCompleted: Boolean
-) {
+    isCompleted: Int
+) : Serializable {
     private var name: String
     private var year: Int
     private var month: Int
@@ -18,7 +20,7 @@ class OrdersClass(
     private var hour: Int
     private var minute: Int
     private var table: Int
-    private var isCompleted: Boolean
+    private var isCompleted: Int
 
     init {
         this.name = name
@@ -59,11 +61,11 @@ class OrdersClass(
         return this.table
     }
 
-    fun getStatus(): Boolean {
+    fun getStatus(): Int {
         return this.isCompleted
     }
 
-    fun setStatus(new_status: Boolean) {
+    fun setStatus(new_status: Int) {
         this.isCompleted = new_status
     }
 }

@@ -192,7 +192,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var rest = RestaurantsList[0].getCurrentLatitude()
             var rest1 = RestaurantsList[0].getCurrentLongitude()
             var rest2 = RestaurantsList[0].getDistance()
-            Toast.makeText(this, "$latitude $longitude", Toast.LENGTH_SHORT).show()
+
         }
         var numbersMap = mutableMapOf("one" to 9000)
         var index = 0

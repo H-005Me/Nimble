@@ -158,10 +158,13 @@ class ReservationActivity : AppCompatActivity() {
             var name = theList.getTitle()
             var firstV = 1
             var statusV = 0
-
+            var var3 = chooseTableButton.text
+            var new_table = 3
             Database.runUpdate(
                 """
-            INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status, expired) VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' , '$statusV' );
+            INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status,
+            expired)
+            VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' ,'$new_table', '$statusV','$statusV' );
         """.trimIndent()
             )
 
