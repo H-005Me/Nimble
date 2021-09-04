@@ -41,12 +41,24 @@ class OrdersClass(
         return this.year
     }
 
+    fun setYear(new_year: Int) {
+        this.year = new_year
+    }
+
     fun getMonth(): Int {
         return this.month
     }
 
+    fun setMouth(new_month: Int) {
+        this.month = new_month
+    }
+
     fun getDay(): Int {
         return this.day
+    }
+
+    fun setDay(new_day: Int) {
+        this.day = new_day
     }
 
     fun getHour(): Int {
@@ -55,6 +67,14 @@ class OrdersClass(
 
     fun getMinute(): Int {
         return this.minute
+    }
+
+    fun setHour(new_hour: Int) {
+        this.hour = new_hour
+    }
+
+    fun setMinutes(new_minute: Int) {
+        this.minute = new_minute
     }
 
     fun getTable(): Int {
