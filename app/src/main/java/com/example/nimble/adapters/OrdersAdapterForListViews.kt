@@ -32,6 +32,7 @@ class OrdersAdapterForListViews(
         val date = rowView.findViewById<TextView>(R.id.ordersDate)
         val hour = rowView.findViewById<TextView>(R.id.ordersHour)
         val status = rowView.findViewById<TextView>(R.id.ordersStatus)
+//        val eachItem=rowView.findViewById<RelativeLayout>(R.id.eachorder)
         titleText.text = theList[position].getName()
         var month = theList[position].getMonth()
         var year = theList[position].getYear()
@@ -41,10 +42,16 @@ class OrdersAdapterForListViews(
         var isAvailable = theList[position].getStatus()
         date.text = "$year/$month/$day"
         hour.text = "$hourvar:$minutes"
-        if (isAvailable == 0)
+        if (isAvailable == 0) {
             status.text = "Available"
-        else
+//            eachItem.setBackgroundResource(R.color.light_gray)
+        } else if (isAvailable == 2) {
             status.text = "Expired"
+//            eachItem.setBackgroundResource(R.color.red_crimson)
+        } else if (isAvailable == 1) {
+            status.text = "Completed"
+//            eachItem.setBackgroundResource(R.color.lime)
+        }
         //distanceText.text = distance[position].toString()
 //        imageView.setImageResource(imgid[position])
 //            subtitleText.text = description[position]

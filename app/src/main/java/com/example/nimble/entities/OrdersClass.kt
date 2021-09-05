@@ -49,7 +49,7 @@ class OrdersClass(
         return this.month
     }
 
-    fun setMouth(new_month: Int) {
+    fun setMonth(new_month: Int) {
         this.month = new_month
     }
 
@@ -79,6 +79,10 @@ class OrdersClass(
 
     fun getTable(): Int {
         return this.table
+    }
+
+    fun setTable(new_table: Int) {
+        this.table = table
     }
 
     fun getStatus(): Int {

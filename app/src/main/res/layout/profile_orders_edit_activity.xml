@@ -7,7 +7,7 @@
     tools:context=".profile.EditOrdersActivity">
 
     <Button
-        android:id="@+id/editbutton"
+        android:id="@+id/savebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit"
@@ -25,7 +25,7 @@
         android:layout_marginEnd="17dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editbutton"
+        app:layout_constraintEnd_toStartOf="@+id/savebutton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

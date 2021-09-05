@@ -1,5 +1,6 @@
 package com.example.nimble.profile
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -8,36 +9,39 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TimePicker
+import android.widget.Toast
 import com.example.nimble.R
 import com.example.nimble.entities.OrdersClass
-import com.example.nimble.entities.RestaurantsClass
-import com.google.android.material.button.MaterialButtonToggleGroup
+import com.example.nimble.makeToast
 import java.util.*
 
 class EditOrdersActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_orders_edit_activity)
         var backButton = findViewById<Button>(R.id.backbutton)
         var cancelButton = findViewById<Button>(R.id.cancelbutton)
-        var editButton = findViewById<Button>(R.id.editbutton)
+        var saveButton = findViewById<Button>(R.id.savebutton)
         var theList = intent.getSerializableExtra("LIST") as OrdersClass
         var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
         var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
         var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
         //firstly declared are the elements of the layout
-        var theNew_List = theList
-        var day = theNew_List.getDay()
-        var month = theNew_List.getMonth()
-        var year = theNew_List.getYear()
-        var hour = theNew_List.getHour()
-        var minutes = theNew_List.getMinute()
-        var tables = theNew_List.getTable()
+        var thehour = 0
+        var theminute = 0
+        var aux1 = theList
+        var aux2 = theList
+        var day = aux1.getDay()
+        var month = aux1.getMonth()
+        var year = aux1.getYear()
+        var hour = aux1.getHour()
+        var minutes = aux1.getMinute()
+        var tables = aux1.getTable()
         //no modifications
-        pickDateBtn.text = "$day/$month/$year"
-        pickHourBtn.text = "$hour/$minutes"
-        pickTableBtn.text = "$tables"
-        editButton.isEnabled = false
+        setText(year, month, day, hour, minutes, tables)
+        saveButton.text = "Save"
+        saveButton.isEnabled = false
         cancelButton.isEnabled = false
         cancelButton.visibility = View.GONE
         //it modifies when changes are made
@@ -45,21 +49,31 @@ class EditOrdersActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             finish()
         }
-        //the edit button gets the text SAVE so it kinda becomes a save button
-        editButton.setOnClickListener {
-            cancelButton.isEnabled = true
-            cancelButton.visibility = View.VISIBLE
-            editButton.text = "SAVE"
+        //sends data to the database
+        //TODO("confirmation message")
+        saveButton.setOnClickListener {
+            cancelButton.isEnabled = false
+            cancelButton.visibility = View.GONE
+            saveButton.isEnabled = false
+            theList.setMinutes(minutes)
+            theList.setHour(hour)
+            theList.setDay(day)
+            theList.setMonth(month)
+        }
+        pickDateBtn.setOnClickListener {
+            Toast.makeText(this, aux2.getHour().toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, aux2.getMinute().toString(), Toast.LENGTH_SHORT).show()
         }
 
+//        Toast.makeText(this, theList.getHour(), Toast.LENGTH_SHORT).show()
         pickHourBtn.setOnClickListener {
             val cal = Calendar.getInstance()
             val timeSetLister =
                 TimePickerDialog.OnTimeSetListener { view: TimePicker, hourOfDay: Int, minute: Int ->
                     cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
                     cal.set(Calendar.MINUTE, minute)
-                    theNew_List.setHour(hourOfDay)
-                    theNew_List.setMinutes(minute)
+                    hour = hourOfDay
+                    theminute = minute
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         pickHourBtn.text = SimpleDateFormat("HH:mm").format(cal.time)
                     }
@@ -73,7 +87,41 @@ class EditOrdersActivity : AppCompatActivity() {
                 cal.get(Calendar.MINUTE),
                 true
             ).show()
+            //when you make a change the cancel button needs to work,just like the save button
+            cancelButton.isEnabled = true
+            cancelButton.visibility = View.VISIBLE
+            saveButton.isEnabled = true
+        }
+        pickTableBtn.setOnClickListener {
 
         }
+
+
+        //data resets to the original
+        cancelButton.setOnClickListener {
+            year = theList.getYear()
+            month = theList.getMonth()
+            day = theList.getDay()
+            hour = theList.getHour()
+            minutes = theList.getMinute()
+            tables = theList.getTable()
+            setText(year, month, day, hour, minutes, tables)
+            cancelButton.isEnabled = false
+            cancelButton.visibility = View.GONE
+            saveButton.isEnabled = false
+        }
     }
+
+    fun setText(year: Int, month: Int, day: Int, hour: Int, minutes: Int, tables: Int) {
+        var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
+        var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
+        var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
+        pickDateBtn.text = "$day/$month/$year"
+        if (hour <= 9)
+            pickHourBtn.text = "0$hour:$minutes"
+        else
+            pickHourBtn.text = "$hour:$minutes"
+        pickTableBtn.text = "$tables"
+    }
+
 }

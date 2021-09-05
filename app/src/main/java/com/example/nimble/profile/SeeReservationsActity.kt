@@ -1,18 +1,25 @@
 package com.example.nimble.profile
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
 import com.example.nimble.adapters.OrdersAdapterForListViews
 import com.example.nimble.database.Database
 import com.example.nimble.entities.OrdersClass
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 class SeeReservationsActity : AppCompatActivity() {
     var ordersList = ArrayList<OrdersClass>()
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_see_reservation_activity)
@@ -41,6 +48,48 @@ class SeeReservationsActity : AppCompatActivity() {
                 ordersList.add(OrdersClass(name, year, month, day, hour, minutes, table, status))
                 db_works = true
             }
+        val c = Calendar.getInstance()
+
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val hour = c.get(Calendar.HOUR_OF_DAY)
+        val minute = c.get(Calendar.MINUTE)
+        //
+        //
+        /***
+         * 0->still in progress
+         * 1->completed
+         * 2->expired
+         * ***/
+
+        for (x in ordersList.indices) {
+
+            if (ordersList[x].getYear() < year && ordersList[x].getStatus() == 0)
+                ordersList[x].setStatus(2)
+            else if (ordersList[x].getYear() == year && ordersList[x].getStatus() == 0) {
+                if (ordersList[x].getMonth() < month)
+                    ordersList[x].setStatus(2)
+                else if (ordersList[x].getMonth() == month)
+                    if (ordersList[x].getDay() < day)
+                        ordersList[x].setStatus(2)
+                    else if (ordersList[x].getDay() == day)
+                        if (ordersList[x].getHour() < hour)
+                            ordersList[x].setStatus(2)
+                        else if (ordersList[x].getHour() == hour)
+                            if (ordersList[x].getMinute() + 1 <= minute)
+                                ordersList[x].setStatus(2)
+            }
+
+
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            ordersList.sortWith(compareBy<OrdersClass> { it.getStatus() }.thenBy { it.getYear() }
+                .thenBy { it.getMonth() }.thenBy { it.getDay() }.thenBy { it.getHour() }
+                .thenBy { it.getMinute() })
+        }
         val orders_adapter = OrdersAdapterForListViews(this, ordersList)
         orderShower.adapter = orders_adapter
         orderShower.setOnItemClickListener { parent, view, position, id ->
