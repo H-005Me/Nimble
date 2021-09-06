@@ -1,6 +1,7 @@
 package com.example.nimble.profile
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -8,12 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import com.example.nimble.R
 import com.example.nimble.entities.OrdersClass
 import com.example.nimble.makeToast
 import java.util.*
+import android.content.DialogInterface
+import androidx.appcompat.app.AlertDialog
+
 
 class EditOrdersActivity : AppCompatActivity() {
 
@@ -52,17 +57,62 @@ class EditOrdersActivity : AppCompatActivity() {
         //sends data to the database
         //TODO("confirmation message")
         saveButton.setOnClickListener {
-            cancelButton.isEnabled = false
-            cancelButton.visibility = View.GONE
-            saveButton.isEnabled = false
-            theList.setMinutes(minutes)
-            theList.setHour(hour)
-            theList.setDay(day)
-            theList.setMonth(month)
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+            builder.setTitle("Confirm")
+            builder.setMessage("Are you sure? This will rewrite the reservation in the database")
+            builder.setPositiveButton(
+                "YES",
+                DialogInterface.OnClickListener { dialog, which -> // Do nothing but close the dialog
+                    cancelButton.isEnabled = false
+                    cancelButton.visibility = View.GONE
+                    saveButton.isEnabled = false
+                    theList.setMinutes(minutes)
+                    theList.setHour(hour)
+                    theList.setDay(day)
+                    theList.setMonth(month)
+                    dialog.dismiss()
+                })
+
+            builder.setNegativeButton(
+                "NO",
+                DialogInterface.OnClickListener { dialog, which -> // Do nothing
+                    dialog.dismiss()
+                })
+
+            val alert: android.app.AlertDialog? = builder.create()
+            alert!!.show()
+
         }
         pickDateBtn.setOnClickListener {
-            Toast.makeText(this, aux2.getHour().toString(), Toast.LENGTH_SHORT).show()
-            Toast.makeText(this, aux2.getMinute().toString(), Toast.LENGTH_SHORT).show()
+            saveButton.isEnabled = true
+            cancelButton.isEnabled = true
+            cancelButton.visibility = View.VISIBLE
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val dpd =
+                    DatePickerDialog(
+                        this,
+                        DatePickerDialog.OnDateSetListener { view: DatePicker, yearPicked: Int, monthPicked: Int, dayOfMonth: Int ->
+                            year = yearPicked
+                            month = monthPicked
+                            day = dayOfMonth
+                            pickDateBtn.text = "$day $month $year"
+                        },
+                        year,
+                        month,
+                        day
+
+                    )
+                dpd.datePicker.minDate = System.currentTimeMillis() - 1000
+
+                dpd.show()
+                pickDateBtn.text = "$day $month $year"
+
+
+            } else {
+
+            }
+            pickDateBtn.text = "$day $month $year"
+
         }
 
 //        Toast.makeText(this, theList.getHour(), Toast.LENGTH_SHORT).show()
