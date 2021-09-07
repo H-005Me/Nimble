@@ -1,115 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".RestaurantPages.ReservationActivity">
 
-    <Button
-        android:id="@+id/dateButton"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="411dp"
+        android:layout_height="579dp">
+
+        <Button
+            android:id="@+id/dateButton"
+            android:layout_width="135dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="48dp"
+            android:text="Pick a date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="109dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="146dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="156dp"
+            android:layout_marginBottom="23dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/hourButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+
+        <Button
+            android:id="@+id/hourButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="137dp"
+            android:layout_marginEnd="155dp"
+            android:text="Pick an hour"
+            app:layout_constraintBottom_toTopOf="@+id/hourText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+        <TextView
+            android:id="@+id/hourText"
+            android:layout_width="86dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="162dp"
+            android:layout_marginEnd="163dp"
+            android:text="Enter a hour"
+            app:layout_constraintBottom_toTopOf="@+id/tablePickButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hourButton" />
+
+        <Button
+            android:id="@+id/choosingTable"
+            android:layout_width="105dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="137dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="168dp"
+            android:layout_marginBottom="22dp"
+            android:text="Pick"
+            app:layout_constraintBottom_toTopOf="@+id/confirmedReservationButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tablePickButton" />
+
+        <TextView
+            android:id="@+id/tablePickButton"
+            android:layout_width="103dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="137dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="170dp"
+            android:text="Pick a table"
+            app:layout_constraintBottom_toTopOf="@+id/choosingTable"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hourText" />
+
+        <Button
+            android:id="@+id/confirmedReservationButton"
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="97dp"
+            android:layout_marginEnd="133dp"
+            android:layout_marginBottom="14dp"
+            android:text="Confirm reservation"
+            app:layout_constraintBottom_toTopOf="@+id/reservationInformer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/choosingTable" />
+
+        <TextView
+            android:id="@+id/reservationInformer"
+            android:layout_width="196dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="97dp"
+            android:layout_marginEnd="117dp"
+            android:layout_marginBottom="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmedReservationButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/remarkstext"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pick a date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
+        android:minHeight="48dp"
+        android:text="Remark" />
 
-    <TextView
-        android:id="@+id/dateText"
-        android:layout_width="98dp"
-        android:layout_height="48dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
-
-    <Button
-        android:id="@+id/hourButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pick an hour"
-        app:layout_constraintBottom_toTopOf="@+id/hourText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateText"
-        app:layout_constraintVertical_bias="0.16" />
-
-    <TextView
-        android:id="@+id/hourText"
-        android:layout_width="86dp"
-        android:layout_height="39dp"
-        android:text="Enter a hour"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateText"
-        app:layout_constraintVertical_bias="0.14" />
-
-    <Button
-        android:id="@+id/resDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="See reservation data"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hourText"
-        app:layout_constraintVertical_bias="0.024" />
-
-    <Button
-        android:id="@+id/choosingTable"
-        android:layout_width="105dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="154dp"
-        android:layout_marginEnd="170dp"
-        android:text="Pick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resDetails"
-        app:layout_constraintVertical_bias="0.237" />
-
-    <TextView
-        android:id="@+id/tablePickButton"
-        android:layout_width="103dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="38dp"
-        android:text="Pick a table"
-        app:layout_constraintBottom_toTopOf="@+id/choosingTable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resDetails"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/confirmedReservationButton"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:text="Confirm reservation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choosingTable" />
-
-    <TextView
-        android:id="@+id/reservationInformer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmedReservationButton" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

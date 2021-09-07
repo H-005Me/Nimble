@@ -29,7 +29,7 @@ class SeeReservationsActity : AppCompatActivity() {
         var orderShower = findViewById<ListView>(R.id.orderslist)
         val res = Database.runQuery(
             """
-            SELECT user_id,name,year,month,day,hour,minutes,tableselected,status,expired FROM tbl_orders;
+            SELECT user_id,name,year,month,day,hour,minutes,tableselected,status,expired,remarks FROM tbl_orders;
         """.trimIndent()
         )
         var db_works = false
@@ -45,7 +45,11 @@ class SeeReservationsActity : AppCompatActivity() {
                 val table = res.getInt(8)
                 val status = res.getInt(9)
                 val expired = res.getInt(10)
-                ordersList.add(OrdersClass(name, year, month, day, hour, minutes, table, status))
+                val remarks = res.getString(11)
+                var itworks = OrdersClass(name, year, month, day, hour, minutes, table, status)
+                itworks.setRemarks(remarks)
+                ordersList.add(itworks)
+
                 db_works = true
             }
         val c = Calendar.getInstance()

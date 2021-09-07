@@ -21,7 +21,7 @@ class OrdersClass(
     private var minute: Int
     private var table: Int
     private var isCompleted: Int
-
+    private var remarks: String
     init {
         this.name = name
         this.year = year
@@ -31,10 +31,19 @@ class OrdersClass(
         this.minute = minute
         this.table = table
         this.isCompleted = isCompleted
+        this.remarks = ""
     }
 
     fun getName(): String {
         return this.name
+    }
+
+    fun setRemarks(new_remarks: String) {
+        this.remarks = new_remarks
+    }
+
+    fun getRemarks(): String {
+        return this.remarks
     }
 
     fun getYear(): Int {

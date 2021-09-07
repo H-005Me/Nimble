@@ -38,6 +38,9 @@ class LoadingActivity : AppCompatActivity() {
 
         Database.debugPrintTable("tbl_users")
 //        Database.runUpdate("""
+//            DROP TABLE tbl_orders
+//        """.trimIndent())
+//                Database.runUpdate("""
 //            CREATE TABLE tbl_orders (
 //                user_id INT NOT NULL,
 //                command_id INT IDENTITY(1,1) PRIMARY KEY,
@@ -49,7 +52,8 @@ class LoadingActivity : AppCompatActivity() {
 //                minutes INT NOT NULL,
 //                tableselected INT NOT NULL,
 //                status INT NOT NULL,
-//                expired INT NOT NULL
+//                expired INT NOT NULL,
+//                remarks NVARCHAR(1555) NOT NULL
 //            );
 //
 //        """.trimIndent()

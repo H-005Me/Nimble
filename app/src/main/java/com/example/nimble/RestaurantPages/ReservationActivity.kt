@@ -47,13 +47,19 @@ class ReservationActivity : AppCompatActivity() {
         val hourRes = findViewById<TextView>(R.id.hourText)
         val hourPicker = findViewById<TextView>(R.id.tablePickButton)
         var chooseTableButton = findViewById<Button>(R.id.choosingTable)
-        val resData = findViewById<Button>(R.id.resDetails)
         var confirmReservation = findViewById<Button>(R.id.confirmedReservationButton)
         var confirmationInformer = findViewById<TextView>(R.id.reservationInformer)
+        var remarksEditor = findViewById<EditText>(R.id.remarkstext)
         var dateIsPicked: Boolean = true
         var hourIsPicked: Boolean = false
         var tableIsPicked: Boolean = false
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
+        var the_remark = ""
+        if (remarksEditor.text.toString() == "Remark") {
+            the_remark = "Nothing"
+        } else {
+            the_remark = remarksEditor.text.toString()
+        }
         pickHourBtn.isEnabled = dateIsPicked
         chooseTableButton.isEnabled = hourIsPicked
         confirmReservation.isEnabled = tableIsPicked
@@ -65,6 +71,10 @@ class ReservationActivity : AppCompatActivity() {
             day = c.get(Calendar.DAY_OF_MONTH)
         confirmationInformer.text =
             "You can edit the reservation or cancel it through the Profile->My reservations "
+        confirmationInformer.setOnClickListener {
+
+            Toast.makeText(this, the_remark, Toast.LENGTH_SHORT).show()
+        }
         //TODO("It needs to get an array of activity so that in each day you can see the most popular hours,and based on reservation the color
         // of the hours and days changes")
         pickDateBtn.setOnClickListener {
@@ -76,7 +86,9 @@ class ReservationActivity : AppCompatActivity() {
                             year = yearPicked
                             month = monthPicked
                             day = dayOfMonth
+                            month += 1
                             dateTv.text = "$day $month $year"
+                            month -= 1
                         },
                         year,
                         month,
@@ -86,15 +98,20 @@ class ReservationActivity : AppCompatActivity() {
                 dpd.datePicker.minDate = System.currentTimeMillis() - 1000
 
                 dpd.show()
+                month = month + 1
                 dateTv.text = "$day $month $year"
-
+                month = month - 1
 
             } else {
 
             }
+            month++
             dateTv.text = "$day $month $year"
+            month--
         }
+        month++
         dateTv.text = "$day $month $year"
+        month--
         hourRes.text = "Enter an hour"
         if (hour != -1)
             chooseTableButton.isEnabled = true
@@ -144,31 +161,32 @@ class ReservationActivity : AppCompatActivity() {
             chooseTableButton.isEnabled = false
         else
             chooseTableButton.isEnabled = true
-        resData.setOnClickListener {
-            Toast.makeText(
-                this,
-                "$year $month $day $hour $minuteF",
-                Toast.LENGTH_LONG
-            ).show()
-            Toast.makeText(this, "$tableIsPicked", Toast.LENGTH_SHORT).show()
-        }
+
         confirmReservation.isEnabled = tableIsPicked
         confirmReservation.setOnClickListener {
             Toast.makeText(this, "Your reservation has been completed", Toast.LENGTH_SHORT).show()
             var name = theList.getTitle()
             var firstV = 1
             var statusV = 0
+            month++
             var var3 = chooseTableButton.text
             var new_table = 3
+            var the_remark = remarksEditor.text.toString()
+            Toast.makeText(this, "$the_remark", Toast.LENGTH_SHORT).show()
             Database.runUpdate(
                 """
             INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status,
-            expired)
-            VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' ,'$new_table', '$statusV','$statusV' );
+            expired,remarks)
+            VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' ,'$new_table', '$statusV','$statusV','$the_remark' );
         """.trimIndent()
             )
-
+            month--
+            finish()
         }
+
+        //
+
+
     }
 
     private fun ShowPopup() {

@@ -8,15 +8,14 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
 import com.example.nimble.R
 import com.example.nimble.entities.OrdersClass
 import com.example.nimble.makeToast
 import java.util.*
 import android.content.DialogInterface
+import android.text.Editable
+import android.view.WindowManager
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 
 
@@ -32,30 +31,34 @@ class EditOrdersActivity : AppCompatActivity() {
         var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
         var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
         var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
+        var editRemarkTxt = findViewById<EditText>(R.id.remarkeditor)
         //firstly declared are the elements of the layout
         var thehour = 0
         var theminute = 0
         var aux1 = theList
         var aux2 = theList
         var day = aux1.getDay()
-        var month = aux1.getMonth()
+        var month = aux1.getMonth() - 1
         var year = aux1.getYear()
         var hour = aux1.getHour()
         var minutes = aux1.getMinute()
         var tables = aux1.getTable()
+        var remark = aux1.getRemarks()
         //no modifications
-        setText(year, month, day, hour, minutes, tables)
+        setText(year, month + 1, day, hour, minutes, tables, remark)
         saveButton.text = "Save"
         saveButton.isEnabled = false
         cancelButton.isEnabled = false
         cancelButton.visibility = View.GONE
         //it modifies when changes are made
         //exit activity
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         backButton.setOnClickListener {
             finish()
         }
         //sends data to the database
         //TODO("confirmation message")
+        Toast.makeText(this, "$remark", Toast.LENGTH_SHORT).show()
         saveButton.setOnClickListener {
             val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
             builder.setTitle("Confirm")
@@ -70,6 +73,9 @@ class EditOrdersActivity : AppCompatActivity() {
                     theList.setHour(hour)
                     theList.setDay(day)
                     theList.setMonth(month)
+
+                    theList.setRemarks(editRemarkTxt.text.toString())
+                    Toast.makeText(this, theList.getRemarks(), Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                 })
 
@@ -95,7 +101,9 @@ class EditOrdersActivity : AppCompatActivity() {
                             year = yearPicked
                             month = monthPicked
                             day = dayOfMonth
-                            pickDateBtn.text = "$day $month $year"
+                            month += 1
+                            pickDateBtn.text = "$day/$month/$year"
+                            month -= 1
                         },
                         year,
                         month,
@@ -105,13 +113,11 @@ class EditOrdersActivity : AppCompatActivity() {
                 dpd.datePicker.minDate = System.currentTimeMillis() - 1000
 
                 dpd.show()
-                pickDateBtn.text = "$day $month $year"
 
 
             } else {
 
             }
-            pickDateBtn.text = "$day $month $year"
 
         }
 
@@ -143,7 +149,7 @@ class EditOrdersActivity : AppCompatActivity() {
             saveButton.isEnabled = true
         }
         pickTableBtn.setOnClickListener {
-
+            Toast.makeText(this, remark, Toast.LENGTH_SHORT).show()
         }
 
 
@@ -155,23 +161,35 @@ class EditOrdersActivity : AppCompatActivity() {
             hour = theList.getHour()
             minutes = theList.getMinute()
             tables = theList.getTable()
-            setText(year, month, day, hour, minutes, tables)
+            remark = theList.getRemarks()
+            setText(year, month, day, hour, minutes, tables, remark)
             cancelButton.isEnabled = false
             cancelButton.visibility = View.GONE
             saveButton.isEnabled = false
+
         }
     }
 
-    fun setText(year: Int, month: Int, day: Int, hour: Int, minutes: Int, tables: Int) {
+    fun setText(
+        year: Int,
+        month: Int,
+        day: Int,
+        hour: Int,
+        minutes: Int,
+        tables: Int,
+        remarks: String
+    ) {
         var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
         var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
         var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
+        var editRemarkTxt = findViewById<EditText>(R.id.remarkeditor)
         pickDateBtn.text = "$day/$month/$year"
         if (hour <= 9)
             pickHourBtn.text = "0$hour:$minutes"
         else
             pickHourBtn.text = "$hour:$minutes"
         pickTableBtn.text = "$tables"
+        editRemarkTxt.setText(remarks)
     }
 
 }
