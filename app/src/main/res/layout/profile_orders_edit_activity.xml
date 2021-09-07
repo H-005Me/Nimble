@@ -96,7 +96,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/remarkeditor"
+                android:id="@+id/remarkstext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 

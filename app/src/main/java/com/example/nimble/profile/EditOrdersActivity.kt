@@ -1,6 +1,5 @@
 package com.example.nimble.profile
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.text.SimpleDateFormat
@@ -10,13 +9,10 @@ import android.os.Bundle
 import android.view.View
 import com.example.nimble.R
 import com.example.nimble.entities.OrdersClass
-import com.example.nimble.makeToast
 import java.util.*
 import android.content.DialogInterface
-import android.text.Editable
 import android.view.WindowManager
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import com.example.nimble.database.Database
 
 
@@ -32,7 +28,7 @@ class EditOrdersActivity : AppCompatActivity() {
         var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
         var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
         var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
-        var editRemarkTxt = findViewById<EditText>(R.id.remarkeditor)
+        var editRemarkTxt = findViewById<EditText>(R.id.remarkstext)
         //firstly declared are the elements of the layout
         var thehour = 0
         var theminute = 0
@@ -190,7 +186,7 @@ class EditOrdersActivity : AppCompatActivity() {
         var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
         var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
         var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
-        var editRemarkTxt = findViewById<EditText>(R.id.remarkeditor)
+        var editRemarkTxt = findViewById<EditText>(R.id.remarkstext)
         pickDateBtn.text = "$day/$month/$year"
         if (hour <= 9)
             pickHourBtn.text = "0$hour:$minutes"

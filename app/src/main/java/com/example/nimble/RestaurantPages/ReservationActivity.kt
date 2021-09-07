@@ -15,6 +15,7 @@ import com.example.nimble.R
 import java.util.*
 import kotlin.collections.ArrayList
 import android.graphics.drawable.ColorDrawable
+import android.view.WindowManager
 
 import android.widget.TextView
 import com.example.nimble.adapters.TableAdapter
@@ -50,11 +51,13 @@ class ReservationActivity : AppCompatActivity() {
         var confirmReservation = findViewById<Button>(R.id.confirmedReservationButton)
         var confirmationInformer = findViewById<TextView>(R.id.reservationInformer)
         var remarksEditor = findViewById<EditText>(R.id.remarkstext)
+        var backButton = findViewById<Button>(R.id.backbutton_reservation)
         var dateIsPicked: Boolean = true
         var hourIsPicked: Boolean = false
         var tableIsPicked: Boolean = false
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         var the_remark = ""
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         if (remarksEditor.text.toString() == "Remark") {
             the_remark = "Nothing"
         } else {
@@ -185,7 +188,9 @@ class ReservationActivity : AppCompatActivity() {
         }
 
         //
-
+        backButton.setOnClickListener {
+            finish()
+        }
 
     }
 
