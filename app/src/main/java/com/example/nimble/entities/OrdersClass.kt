@@ -22,9 +22,11 @@ class OrdersClass(
     private var table: Int
     private var isCompleted: Int
     private var remarks: String
+    private var id: Int
     init {
         this.name = name
         this.year = year
+        this.id = 0
         this.month = month
         this.day = day
         this.hour = hour
@@ -32,6 +34,14 @@ class OrdersClass(
         this.table = table
         this.isCompleted = isCompleted
         this.remarks = ""
+    }
+
+    fun getId(): Int {
+        return this.id
+    }
+
+    fun setId(new_id: Int) {
+        this.id = new_id
     }
 
     fun getName(): String {

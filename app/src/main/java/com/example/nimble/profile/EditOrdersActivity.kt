@@ -17,6 +17,7 @@ import android.text.Editable
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.nimble.database.Database
 
 
 class EditOrdersActivity : AppCompatActivity() {
@@ -44,6 +45,7 @@ class EditOrdersActivity : AppCompatActivity() {
         var minutes = aux1.getMinute()
         var tables = aux1.getTable()
         var remark = aux1.getRemarks()
+        var restaurantname = aux1.getName()
         //no modifications
         setText(year, month + 1, day, hour, minutes, tables, remark)
         saveButton.text = "Save"
@@ -55,6 +57,7 @@ class EditOrdersActivity : AppCompatActivity() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         backButton.setOnClickListener {
             finish()
+//            SeeReservationsActity().recreate()
         }
         //sends data to the database
         //TODO("confirmation message")
@@ -73,9 +76,14 @@ class EditOrdersActivity : AppCompatActivity() {
                     theList.setHour(hour)
                     theList.setDay(day)
                     theList.setMonth(month)
-
                     theList.setRemarks(editRemarkTxt.text.toString())
-                    Toast.makeText(this, theList.getRemarks(), Toast.LENGTH_SHORT).show()
+                    month++
+                    Database.runUpdate(
+                        """
+                        UPDATE tbl_orders SET minutes = '$minutes', hour = '$hour', day='$day', month='$month' WHERE name = '$restaurantname';
+                    """.trimIndent()
+                    )
+                    month--
                     dialog.dismiss()
                 })
 
