@@ -35,6 +35,7 @@ import android.os.SystemClock
 import android.util.Log
 import com.example.nimble.database.Database
 import com.example.nimble.profile.ProfileActivity
+import com.example.qr_good_app.MainActivity
 import java.lang.Exception
 import java.security.Provider
 import java.util.*
@@ -154,7 +155,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         var getRes = findViewById<Button>(R.id.getRestaurants)
         val profileButton = findViewById<Button>(R.id.profilebutton)
         var recommendedRestaurants = findViewById<RecyclerView>(R.id.recommendedlist)
-
+        var BtnScanner = findViewById<Button>(R.id.btnscanner)
 
         try {
 
@@ -210,7 +211,11 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             startActivity(intent)
 
         }
+        BtnScanner.setOnClickListener {
+            var intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
 
+        }
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
         var myListAdapter1 = OffertsAdapter(this, RestaurantsList)
