@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.TabHost
 import android.widget.Toast
 import com.example.nimble.R
+import com.example.nimble.RestaurantPages.GeneralRestaurant
+import com.example.nimble.entities.RestaurantsClass
+import com.example.nimble.mainmenu.RestaurantsList
 
 
 import com.google.zxing.integration.android.IntentIntegrator
@@ -43,8 +46,17 @@ class MainActivity : AppCompatActivity() {
             if (result.contents == null) {
                 Toast.makeText(this, "Canceled", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "The scanned value is:" + result.contents, Toast.LENGTH_LONG)
-                    .show()
+                val theString = result.contents.toString()
+                Toast.makeText(this, "$theString", Toast.LENGTH_SHORT).show()
+                var theList = intent.getSerializableExtra("LIST") as ArrayList<RestaurantsClass>
+                var i = 0
+                for (x in theList.indices)
+                    if (theString == theList[x].getTitle())
+                        i = x
+
+                intent = Intent(this, GeneralRestaurant::class.java)
+                intent.putExtra("LIST", theList[i])
+                startActivity(intent)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
