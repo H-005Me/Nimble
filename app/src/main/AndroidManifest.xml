@@ -17,6 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity android:name="com.example.qr_good_app.MainActivity">
             <intent-filter>
@@ -25,7 +28,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
         <activity
@@ -66,7 +70,7 @@
         <activity android:name=".RestaurantPages.ImagesActivity" />
         <activity android:name=".RestaurantPages.ReviewsActivity" />
         <activity android:name=".RestaurantPages.RestaurantMenuActivity" />
-
+        <activity android:name=".maps_activity.MapsActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

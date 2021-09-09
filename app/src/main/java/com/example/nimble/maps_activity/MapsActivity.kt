@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  */
 
-package com.example.wander
+package com.example.nimble.maps_activity
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -33,7 +33,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import java.util.*
 
 // displaying the user's location.
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
