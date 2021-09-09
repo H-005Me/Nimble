@@ -36,6 +36,7 @@ import android.util.Log
 import com.example.nimble.database.Database
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.MainActivity
+import com.example.nimble.maps_activity.MapsActivity
 import java.lang.Exception
 import java.security.Provider
 import java.util.*
@@ -146,7 +147,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         setContentView(R.layout.activity_main)
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
-
+        val mapsButton = findViewById<Button>(R.id.mapsbutton)
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
         var offertsList = findViewById<ListView>(R.id.offerts)
         val categoryList = findViewById<GridView>(R.id.category)
@@ -213,8 +214,13 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         BtnScanner.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
 
+        }
+        mapsButton.setOnClickListener {
+            var intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
         }
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
