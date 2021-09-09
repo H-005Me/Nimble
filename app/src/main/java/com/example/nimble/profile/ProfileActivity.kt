@@ -48,7 +48,9 @@ class ProfileActivity : AppCompatActivity() {
         homeButton.setOnClickListener {
             var intent = Intent(this, MainMenu::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
+            finish()
         }
 
     }

@@ -57,7 +57,6 @@ class EditOrdersActivity : AppCompatActivity() {
         }
         //sends data to the database
         //TODO("confirmation message")
-        Toast.makeText(this, "$remark", Toast.LENGTH_SHORT).show()
         saveButton.setOnClickListener {
             val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
             builder.setTitle("Confirm")

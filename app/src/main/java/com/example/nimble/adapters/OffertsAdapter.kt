@@ -26,8 +26,8 @@ class OffertsAdapter(private val context: Activity,  private val theList:ArrayLi
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.custom_offerts, null, true)
 
-        val imageView = rowView.findViewById(R.id.imageView5) as ImageView
-
+        val imageView = rowView.findViewById(R.id.offertsicon) as ImageView
+        imageView.setImageResource(theList[position].getIcon())
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
 
         //imageView.setImageDrawable(theList[position].getIcon().toDrawable())

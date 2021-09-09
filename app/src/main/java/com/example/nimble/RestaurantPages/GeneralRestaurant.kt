@@ -17,7 +17,7 @@ class GeneralRestaurant : AppCompatActivity() {
         setContentView(R.layout.activity_general_restaurant)
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         val icon = findViewById<ImageView>(R.id.backgroundImage)
-
+        icon.setImageResource(theList.getBackground())
         val title = findViewById<TextView>(R.id.titleRestaurant)
         val menulist = findViewById<GridView>(R.id.optionsMenu)
         val tagsGrid = findViewById<GridView>(R.id.tagsGrid)
