@@ -3,3 +3,16 @@
 
 # local properties
 local.properties
+
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/jarRepositories.xml
+
+# Android Studio 3 in .gitignore file.
+.idea/caches
+.idea/modules.xml
