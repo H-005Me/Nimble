@@ -110,7 +110,9 @@
                 android:id="@+id/recommendedlist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="horizontal" />
+                android:scrollbars="horizontal"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10.0sp"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -205,12 +207,16 @@
             <ListView
                 android:id="@+id/offerts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10.0sp"/>
 
             <ListView
                 android:id="@+id/CloseRestaurants"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10.0sp">
 
             </ListView>
         </LinearLayout>
