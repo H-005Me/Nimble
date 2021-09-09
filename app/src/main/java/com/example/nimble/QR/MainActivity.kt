@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.TabHost
 import android.widget.Toast
 import com.example.nimble.R
-import com.example.nimble.databinding.ActivityMainBinding
+
 
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
@@ -15,13 +15,12 @@ import com.google.zxing.integration.android.IntentResult
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr)
         var BtnScanner = findViewById<Button>(R.id.btnScanner)
-        BtnScanner.setOnClickListener{ initScanner() }
+        initScanner()
     }
 
    /// override fun onCreate(savedInstanceState: Bundle?) {
