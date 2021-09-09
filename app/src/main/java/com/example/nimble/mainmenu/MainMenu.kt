@@ -213,6 +213,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         BtnScanner.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
 
         }
