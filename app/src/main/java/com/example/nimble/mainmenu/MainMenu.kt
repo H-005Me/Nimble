@@ -387,7 +387,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_casa_piratilor,
-            R.drawable.cover_casa_piratilor,
+            R.drawable.bg_casa_piratiilor,
             46.754761489348375, 23.549074595438668,
             arrayOf(
                 MenuClass(
