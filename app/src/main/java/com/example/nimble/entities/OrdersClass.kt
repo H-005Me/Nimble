@@ -111,4 +111,6 @@ class OrdersClass(
     fun setStatus(new_status: Int) {
         this.isCompleted = new_status
     }
+
+
 }

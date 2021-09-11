@@ -26,6 +26,9 @@ class SeeReservationsActity : AppCompatActivity() {
         //primeste datele de la o baza de date
         //afiseaza comenzile
         //numele restaurantului,data,ora,minutul,masa,completata sau in asteptare
+        //
+        //aici trebuie sa fie un user_id
+        //
         var orderShower = findViewById<ListView>(R.id.orderslist)
         val res = Database.runQuery(
             """
@@ -48,7 +51,9 @@ class SeeReservationsActity : AppCompatActivity() {
                 val remarks = res.getString(11)
                 val orderdid = res.getInt(12)
                 var itworks = OrdersClass(name, year, month, day, hour, minutes, table, status)
+
                 itworks.setRemarks(remarks)
+                itworks.setId(orderdid)
                 ordersList.add(itworks)
 
                 db_works = true

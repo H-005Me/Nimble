@@ -73,9 +73,10 @@ class EditOrdersActivity : AppCompatActivity() {
                     theList.setMonth(month)
                     theList.setRemarks(editRemarkTxt.text.toString())
                     month++
+                    var id = theList.getId()
                     Database.runUpdate(
                         """
-                        UPDATE tbl_orders SET minutes = '$minutes', hour = '$hour', day='$day', month='$month' WHERE name = '$restaurantname';
+                        UPDATE tbl_orders SET minutes = '$minutes', hour = '$hour', day='$day', month='$month' WHERE command_id = '$id';
                     """.trimIndent()
                     )
                     month--
