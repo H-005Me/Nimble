@@ -41,7 +41,8 @@
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="7dp"
             android:layout_toEndOf="@+id/thePhoto2"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

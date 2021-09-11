@@ -29,6 +29,8 @@ class RestaurantsClass(
     private var longitude: Double
     private var currentLatitude: Double
     private var currentLongitude: Double
+    private var street: String
+    private var pageBackground: Int
 
     init {
         this.title = title!!
@@ -49,7 +51,8 @@ class RestaurantsClass(
         this.icon = icon!!
         this.background = background!!
         this.categories = categories
-
+        this.street = "None"
+        this.pageBackground = this.background
     }
 
     fun reDistance() {
@@ -151,4 +154,19 @@ class RestaurantsClass(
         this.currentLongitude = new_long
     }
 
+    fun setStreet(new_street: String) {
+        this.street = new_street
+    }
+
+    fun getStreet(): String {
+        return this.street
+    }
+
+    fun setPageBackground(new_page_background: Int) {
+        this.pageBackground = new_page_background
+    }
+
+    fun getPageBackground(): Int {
+        return this.pageBackground
+    }
 }

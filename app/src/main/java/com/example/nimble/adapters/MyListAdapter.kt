@@ -29,14 +29,15 @@ class MyListAdapter(private val context: Activity,  private val theList:ArrayLis
         var rowView = inflater.inflate(R.layout.custom_list, null, true)
         val titleText = rowView?.findViewById(R.id.title) as TextView
         val imageView = rowView.findViewById(R.id.icon) as ImageView
-        val subtitleText = rowView.findViewById(R.id.description) as TextView
+        val descriptions = rowView.findViewById(R.id.description) as TextView
         val distance = rowView.findViewById(R.id.distance) as TextView
         val background = rowView.findViewById<LinearLayout>(R.id.eachItem)
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
         background.setBackgroundResource(theList[position].getBackground())
         titleText.text = theList[position].getTitle()
         imageView.setImageResource(theList[position].getIcon())
-        distance.text= theList[position].getDistance().toString()
+        distance.text = theList[position].getDistance().toString()
+        descriptions.text = theList[position].getStreet()
         //imageView.setImageDrawable(theList[position].getIcon().toDrawable())
 
         //distanceText.text = distance[position].toString()

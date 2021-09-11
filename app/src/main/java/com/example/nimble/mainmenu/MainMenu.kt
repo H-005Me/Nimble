@@ -33,6 +33,7 @@ import com.example.nimble.entities.CategoriesClass
 import android.app.Activity
 import android.os.SystemClock
 import android.util.Log
+import android.view.Menu
 import com.example.nimble.database.Database
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.MainActivity
@@ -381,6 +382,14 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
     }
     private fun prepareRestaurantsData() {
+        var bgPageOfRestaurantsArray = arrayListOf<Int>(
+            R.drawable.bg_casa_piratilor,
+            R.drawable.bg_marty,
+            R.drawable.bg_klaus,
+            R.drawable.bg_papion,
+            R.drawable.bg_pizza_hut,
+            R.drawable.bg_kfc
+        )
         var restaurants = RestaurantsClass(
             "Casa Piratilor",
 
@@ -399,6 +408,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
+        restaurants.setPageBackground(bgPageOfRestaurantsArray[0])
+
+        restaurants.setStreet("Strada Răvașului 16, Cluj-Napoca")
         RestaurantsList.add(restaurants)
 
         restaurants = RestaurantsClass(
@@ -407,8 +419,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_marty,
-            R.drawable.background_logo,
-            46.77303059272974, 23.589206542353935,
+            R.drawable.bg_marty,
+            46.771753344308706, 23.58713642701307,
             arrayOf(
                 MenuClass(
                     "Normala",
@@ -419,6 +431,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
+
+        restaurants.setPageBackground(bgPageOfRestaurantsArray[1])
+
+        restaurants.setStreet("Piața Muzeului Nr 2, Cluj-Napoca")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "Klausen Burger",
@@ -426,7 +442,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_klaus,
-            R.drawable.background_logo,
+            R.drawable.bg_klaus,
             46.77303059272974, 23.589206542353935,
             arrayOf(
                 MenuClass(
@@ -438,6 +454,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
+        restaurants.setStreet("Strada Regele Ferdinand 22, Cluj-Napoca")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "La Papion",
@@ -445,7 +462,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_papion,
-            R.drawable.background_logo,
+            R.drawable.bg_papion,
             46.57051053103731, 23.785073506109164,
             arrayOf(
                 MenuClass(
@@ -457,6 +474,66 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
+        restaurants.setPageBackground(R.drawable.bg_papion)
+
+        restaurants.setStreet("Piața 1 Decembrie 1918 1, Turda")
+        RestaurantsList.add(restaurants)
+        restaurants = RestaurantsClass(
+            "Pizza Hut", 150, 4.9,
+            R.drawable.logo_pizza_hut,
+            R.drawable.bg_pizza_hut,
+            46.77219094166171, 23.62581808448148,
+            arrayOf(
+                MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Picanta",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Pizza",
+                    arrayOf(
+                        ProductClass(
+                            "Margherita",
+                            25.5,
+                            750.0,
+                            R.drawable.ic_launcher_background
+                        )
+                    )
+                )
+            )
+        )
+        restaurants.setStreet("Strada Alexandru Vaida Voevod 55, Cluj-Napoca")
+        restaurants.setPageBackground(R.drawable.bg_pizza_hut)
+
+        RestaurantsList.add(restaurants)
+
+        restaurants = RestaurantsClass(
+            "KFC", 150, 4.9,
+            R.drawable.logo_kfc,
+            R.drawable.bg_kfc,
+            46.77236134944, 23.626857336072423,
+            arrayOf(
+                MenuClass(
+                    "Normala",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ),
+                MenuClass(
+                    "Picanta",
+                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ),
+                MenuClass(
+                    "Fast Food",
+                    arrayOf(ProductClass("Burger", 25.5, 150.0, R.drawable.ic_launcher_background))
+                ),
+                MenuClass(
+                    "Racoritoare",
+                    arrayOf(ProductClass("Coca Cola", 5.00, 0.5, R.drawable.ic_launcher_background))
+                )
+            )
+        )
+        restaurants.setStreet("Str. Alexandru Vaida-Voievod nr. 53-55, în Iulius Mall etaj 1, Cluj-Napoca")
+        restaurants.setPageBackground(R.drawable.bg_kfc)
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
 
@@ -466,22 +543,24 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         """.trimIndent()
         )
 
-            while (res!!.next()) {
-                val name: String = res!!.getString(1)
-                val reviews: Int = res!!.getInt(2)
-                val rating = res.getDouble(3)
-                var lat = res.getDouble(4)
-                var long = res.getDouble(5)
-                restaurants = RestaurantsClass(
-                    name,
-                    reviews,
-                    rating,
-                    R.drawable.ic_launcher_background,
-                    R.drawable.background_logo,
-                    lat,
-                    long,
-                    arrayOf(
-                        MenuClass(
+        while (res!!.next()) {
+            val name: String = res!!.getString(1)
+            val reviews: Int = res!!.getInt(2)
+            val rating = res.getDouble(3)
+            var lat = res.getDouble(4)
+            var long = res.getDouble(5)
+            Log.i("lat", lat.toString())
+            Log.i("long", long.toString())
+            restaurants = RestaurantsClass(
+                name,
+                reviews,
+                rating,
+                R.drawable.ic_launcher_background,
+                R.drawable.background_logo,
+                lat,
+                long,
+                arrayOf(
+                    MenuClass(
                             "Normala",
                             arrayOf(
                                 ProductClass(
@@ -506,7 +585,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
 
                 RestaurantsList.add(restaurants)
-            }
+        }
 
         var i = 0
         while (i < RestaurantsList.size) {
@@ -516,6 +595,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             RestaurantsList[i].reDistance()
             ++i
         }
+        for (x in RestaurantsList.indices)
+            RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x])
         RestaurantsList.sortBy { it.getDistance() }
     }
 

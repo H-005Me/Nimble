@@ -37,10 +37,11 @@
                     android:layout_width="0dp"
                     android:layout_height="75dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginEnd="15dp"
                     android:numColumns="3"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/titleRestaurant" />
 
@@ -64,13 +65,24 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
+                    android:text="Mai jos"
                     android:textColor="@color/black"
                     android:textSize="34sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/descriptionofrestaurant"
+                    android:layout_width="342dp"
+                    android:layout_height="45dp"
+                    android:text="Este un array in PrepareRestaurants cu resurse,acela schimba poza de fundal"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/tagsGrid"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleRestaurant" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

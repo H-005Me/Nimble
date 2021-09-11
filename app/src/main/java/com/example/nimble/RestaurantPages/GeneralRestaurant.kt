@@ -21,7 +21,8 @@ class GeneralRestaurant : AppCompatActivity() {
         val title = findViewById<TextView>(R.id.titleRestaurant)
         val menulist = findViewById<GridView>(R.id.optionsMenu)
         val tagsGrid = findViewById<GridView>(R.id.tagsGrid)
-
+        val description = findViewById<TextView>(R.id.descriptionofrestaurant)
+        description.text = theList.getStreet()
         var myAdapter = TagsAdapter(this, theList.getCategories())
         tagsGrid.adapter = myAdapter
         tagsGrid.setOnItemClickListener { parent, view, position, id ->
@@ -32,6 +33,7 @@ class GeneralRestaurant : AppCompatActivity() {
         var myGridAdapter = GridAdapterRestaurants(this, optionsList)
         menulist.adapter = myGridAdapter
         title.text = theList.getTitle()
+
         menulist.setOnItemClickListener { parent, view, position, id ->
             var intent = Intent()
             if (position == 0)
