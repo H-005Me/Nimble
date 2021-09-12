@@ -74,7 +74,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+            )
         }
         locationManager.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
@@ -149,6 +152,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         val mapsButton = findViewById<Button>(R.id.mapsbutton)
+        mapsButton.isEnabled = false
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
         var offertsList = findViewById<ListView>(R.id.offerts)
         val categoryList = findViewById<GridView>(R.id.category)
@@ -163,7 +167,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
 
             if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true
-
             ) {
                 val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
                 latitude = loc!!.latitude
@@ -176,6 +179,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
             } else {
                 respectedGPS = false
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+                )
             }
         } catch (ex: Exception) {
             prepareRestaurantsData()
@@ -257,7 +264,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         getRes.setOnClickListener {
 
-            var REQUEST = 111
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
@@ -271,6 +277,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 if (respectedGPS == true) {
                     try {
                         getLocation()
+
                         val loc =
                             locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
                         latitude = loc!!.latitude
@@ -279,6 +286,15 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
                     } catch (ex: Exception) {
                         Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                            1
+                        )
+                        val loc =
+                            locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+                        latitude = loc!!.latitude
+                        longitude = loc.longitude
                     }
                 } else {
                     Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
