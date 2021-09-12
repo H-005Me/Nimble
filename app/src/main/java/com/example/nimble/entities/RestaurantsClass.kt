@@ -31,6 +31,7 @@ class RestaurantsClass(
     private var currentLongitude: Double
     private var street: String
     private var pageBackground: Int
+    private var offertsArray: ArrayList<OffertsClass>
 
     init {
         this.title = title!!
@@ -53,6 +54,7 @@ class RestaurantsClass(
         this.categories = categories
         this.street = "None"
         this.pageBackground = this.background
+        this.offertsArray = ArrayList<OffertsClass>()
     }
 
     fun reDistance() {
@@ -168,5 +170,9 @@ class RestaurantsClass(
 
     fun getPageBackground(): Int {
         return this.pageBackground
+    }
+
+    fun deleteOffer(index: Int) {
+        this.offertsArray.removeAt(index)
     }
 }

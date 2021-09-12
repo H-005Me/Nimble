@@ -16,7 +16,7 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 
 
-class MainActivity : AppCompatActivity() {
+class QrActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         initScanner()
     }
 
-   /// override fun onCreate(savedInstanceState: Bundle?) {
+    /// override fun onCreate(savedInstanceState: Bundle?) {
       ///  super.onCreate(savedInstanceState)
      ////   binding = ActivityMainBinding.inflate(layoutInflater)
     ///    setContentView(binding.root)

@@ -1,7 +1,6 @@
 package com.example.nimble.mainmenu
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -16,12 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
 import android.location.LocationListener
-import android.support.annotation.NonNull
 
-import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.RestaurantPages.GeneralRestaurant
-import com.example.nimble.entities.MenuClass
-import com.example.nimble.entities.ProductClass
 
 
 import com.example.nimble.adapters.MyListAdapter
@@ -29,23 +24,19 @@ import kotlin.collections.ArrayList
 import com.example.nimble.adapters.GridAdapter
 import com.example.nimble.adapters.OffertsAdapter
 import com.example.nimble.adapters.ProductsAdapter
-import com.example.nimble.entities.CategoriesClass
-import android.app.Activity
-import android.os.SystemClock
 import android.util.Log
-import android.view.Menu
 import com.example.nimble.database.Database
+import com.example.nimble.entities.*
 import com.example.nimble.profile.ProfileActivity
-import com.example.qr_good_app.MainActivity
+import com.example.qr_good_app.QrActivity
 import com.example.nimble.maps_activity.MapsActivity
+import com.example.nimble.user.user
 import java.lang.Exception
-import java.security.Provider
-import java.util.*
 import kotlin.collections.LinkedHashSet
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
-
+var OffertsList = ArrayList<OffertsClass>()
 class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var locationManager: LocationManager
@@ -152,8 +143,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         val mapsButton = findViewById<Button>(R.id.mapsbutton)
-        mapsButton.isEnabled = false
+
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
+
         var offertsList = findViewById<ListView>(R.id.offerts)
         val categoryList = findViewById<GridView>(R.id.category)
         val searchBar = findViewById<Button>(R.id.searchButton)
@@ -195,15 +187,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             respectedGPS = false
 
         }
+        //disabled for the moment
+        mapsButton.isEnabled = false
+        ///
         mainButton.isEnabled = true
-
-        mainButton.setOnClickListener {
-
-            var rest = RestaurantsList[0].getCurrentLatitude()
-            var rest1 = RestaurantsList[0].getCurrentLongitude()
-            var rest2 = RestaurantsList[0].getDistance()
-
-        }
         var numbersMap = mutableMapOf("one" to 9000)
         var index = 0
         while (index < RestaurantsList.size) {
@@ -221,7 +208,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         }
         BtnScanner.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
+            var intent = Intent(this, QrActivity::class.java)
             intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
 
@@ -232,6 +219,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
+        setUpOffers()
+
         var myListAdapter1 = OffertsAdapter(this, RestaurantsList)
         offertsList.adapter = myListAdapter1
         var categoriesList = ArrayList<CategoriesClass>()
@@ -301,6 +290,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 }
             }
         }
+
         for (each in categoriesList.indices)
             categoriesList[each].setIndices(removeDuplicates(categoriesList[each].getTheIndices()))
         var myGridAdapter = GridAdapter(this, categoriesList)
@@ -614,6 +604,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         for (x in RestaurantsList.indices)
             RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x])
         RestaurantsList.sortBy { it.getDistance() }
+    }
+
+    private fun setUpOffers() {
+//        var res=Database.runUpdate("""
+//            SELECT COUNT(*)
+//        """.trimIndent())
     }
 
     override fun onItemClick(position: Int) {

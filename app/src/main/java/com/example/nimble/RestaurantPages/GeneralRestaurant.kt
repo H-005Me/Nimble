@@ -3,6 +3,7 @@ package com.example.nimble.RestaurantPages
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,6 +11,9 @@ import com.example.nimble.R
 import com.example.nimble.adapters.GridAdapterRestaurants
 import com.example.nimble.adapters.TagsAdapter
 import com.example.nimble.entities.RestaurantsClass
+import com.example.nimble.mainmenu.MainMenu
+import com.example.nimble.profile.ProfileActivity
+import com.example.qr_good_app.QrActivity
 
 class GeneralRestaurant : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +26,10 @@ class GeneralRestaurant : AppCompatActivity() {
         val menulist = findViewById<GridView>(R.id.optionsMenu)
         val tagsGrid = findViewById<GridView>(R.id.tagsGrid)
         val description = findViewById<TextView>(R.id.descriptionofrestaurant)
+        val homeButton = findViewById<Button>(R.id.homebutton)
+        val mapsButton = findViewById<Button>(R.id.mapsbutton)
+        val profileButton = findViewById<Button>(R.id.profilebutton)
+
         description.text = theList.getStreet()
         var myAdapter = TagsAdapter(this, theList.getCategories())
         tagsGrid.adapter = myAdapter
@@ -49,7 +57,17 @@ class GeneralRestaurant : AppCompatActivity() {
             intent.putExtra("LIST", theList)
             startActivity(intent)
         }
-
-
+        homeButton.setOnClickListener {
+            intent = Intent(this, MainMenu::class.java)
+            startActivity(intent)
+        }
+        mapsButton.setOnClickListener {
+            intent = Intent(this, QrActivity::class.java)
+            startActivity(intent)
+        }
+        profileButton.setOnClickListener {
+            intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

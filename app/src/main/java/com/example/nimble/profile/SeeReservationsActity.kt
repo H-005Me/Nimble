@@ -12,6 +12,7 @@ import com.example.nimble.R
 import com.example.nimble.adapters.OrdersAdapterForListViews
 import com.example.nimble.database.Database
 import com.example.nimble.entities.OrdersClass
+import com.example.nimble.user.user
 import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
@@ -54,7 +55,8 @@ class SeeReservationsActity : AppCompatActivity() {
 
                 itworks.setRemarks(remarks)
                 itworks.setId(orderdid)
-                ordersList.add(itworks)
+                if (userid == user.getId())
+                    ordersList.add(itworks)
 
                 db_works = true
             }

@@ -11,9 +11,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.nimble.*
 import com.example.nimble.database.Database
 import com.example.nimble.mainmenu.MainMenu
+import com.example.nimble.user.user
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 /// go to MainActivity & destroy LoginActivity
                 val intent = Intent(this, MainMenu::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                intent.putExtra("id", "itworks")
+                user.setEmail(email)
                 startActivity(intent)
             } else { /// login failed
                 makeSToast(this, "E-mail or password is incorrect")
