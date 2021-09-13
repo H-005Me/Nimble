@@ -60,14 +60,17 @@ class GeneralRestaurant : AppCompatActivity() {
         homeButton.setOnClickListener {
             intent = Intent(this, MainMenu::class.java)
             startActivity(intent)
+            finish()
         }
         mapsButton.setOnClickListener {
             intent = Intent(this, QrActivity::class.java)
             startActivity(intent)
+            finish()
         }
         profileButton.setOnClickListener {
             intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

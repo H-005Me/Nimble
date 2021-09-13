@@ -45,6 +45,7 @@ class QrActivity : AppCompatActivity() {
         if (result != null) {
             if (result.contents == null) {
                 Toast.makeText(this, "Canceled", Toast.LENGTH_LONG).show()
+                finish()
             } else {
                 val theString = result.contents.toString()
                 Toast.makeText(this, "$theString", Toast.LENGTH_SHORT).show()
@@ -57,6 +58,7 @@ class QrActivity : AppCompatActivity() {
                 intent = Intent(this, GeneralRestaurant::class.java)
                 intent.putExtra("LIST", theList[i])
                 startActivity(intent)
+                finish()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

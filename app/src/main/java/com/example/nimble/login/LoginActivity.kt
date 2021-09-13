@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 /// go to MainActivity & destroy LoginActivity
                 val intent = Intent(this, MainMenu::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                //modifies user object,can't change name:
                 user.setEmail(email)
                 startActivity(intent)
             } else { /// login failed

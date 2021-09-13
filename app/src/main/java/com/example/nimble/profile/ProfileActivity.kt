@@ -15,6 +15,7 @@ import com.example.nimble.RestaurantPages.ReviewsActivity
 import com.example.nimble.adapters.GridAdapterRestaurants
 import com.example.nimble.loading.LoadingActivity
 import com.example.nimble.mainmenu.MainMenu
+import com.example.nimble.user.user
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -40,8 +41,7 @@ class ProfileActivity : AppCompatActivity() {
                 intent = Intent(this, LoadingActivity::class.java)
             startActivity(intent)
         }
-
-
+        profileName.text = user.getUserName()
 
 
 

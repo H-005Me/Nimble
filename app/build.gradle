@@ -62,6 +62,3 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
     implementation 'androidx.appcompat:appcompat:1.0.2'
 }
-android {
-    buildToolsVersion '28.0.3' // Older versions may give compile errors
-}

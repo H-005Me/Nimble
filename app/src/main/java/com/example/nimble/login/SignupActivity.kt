@@ -14,6 +14,7 @@ import android.widget.EditText
 import com.example.nimble.mainmenu.MainMenu
 import com.example.nimble.*
 import com.example.nimble.database.Database
+import com.example.nimble.user.user
 
 class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -122,6 +123,10 @@ class SignupActivity : AppCompatActivity() {
             /// go to MainActivity & destroy LoginActivity & SignupActivity
             val intent = Intent(this, MainMenu::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            //changes the user objects
+            user.setEmail(email)
+            user.setUsername(lastName)
+            //
             startActivity(intent)
 
             /// TODO else (verification code is incorrect)

@@ -1,7 +1,9 @@
 package com.example.nimble.user
 
+import android.widget.Toast
 import com.example.nimble.R
 import com.example.nimble.database.Database
+import com.example.nimble.login.LoginActivity
 
 object user {
     private var username = "Guest"
@@ -12,14 +14,17 @@ object user {
         if (Database.isConnected() && email != "Email@thereIsntAny") {
             val res = Database.runQuery(
                 """
-                SELECT COUNT(*) FROM tbl_users WHERE email = '$email'
+                SELECT id,lastName FROM tbl_users WHERE email = '$email'
             """.trimIndent()
             )
             res!!.next()
             if (res != null) {
 
                 val userid = res!!.getInt(1)
+                val userName = res.getString(2)
                 this.id = userid
+                this.username = userName
+//                this.username=name+lastName
             }
         }
     }
