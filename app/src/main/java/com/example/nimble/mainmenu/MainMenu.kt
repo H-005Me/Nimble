@@ -416,7 +416,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         restaurants.setPageBackground(bgPageOfRestaurantsArray[0])
 
-        restaurants.setStreet("Strada Răvașului 16, Cluj-Napoca")
+        restaurants.setStreet("Strada Răvașului")
         RestaurantsList.add(restaurants)
 
         restaurants = RestaurantsClass(
@@ -440,7 +440,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         restaurants.setPageBackground(bgPageOfRestaurantsArray[1])
 
-        restaurants.setStreet("Piața Muzeului Nr 2, Cluj-Napoca")
+        restaurants.setStreet("Piața Muzeului")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "Klausen Burger",
@@ -460,7 +460,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
-        restaurants.setStreet("Strada Regele Ferdinand 22, Cluj-Napoca")
+        restaurants.setStreet("Strada Regele Ferdinand")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "La Papion",
@@ -482,7 +482,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         restaurants.setPageBackground(R.drawable.bg_papion)
 
-        restaurants.setStreet("Piața 1 Decembrie 1918 1, Turda")
+        restaurants.setStreet("Piața 1 Decembrie, Turda")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "Pizza Hut", 150, 4.9,
@@ -509,7 +509,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
-        restaurants.setStreet("Strada Alexandru Vaida Voevod 55, Cluj-Napoca")
+        restaurants.setStreet("Str. Alexandru Vaida-Voievod")
         restaurants.setPageBackground(R.drawable.bg_pizza_hut)
 
         RestaurantsList.add(restaurants)
@@ -538,7 +538,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
-        restaurants.setStreet("Str. Alexandru Vaida-Voievod nr. 53-55, în Iulius Mall etaj 1, Cluj-Napoca")
+        restaurants.setStreet("Str. Alexandru Vaida-Voievod")
         restaurants.setPageBackground(R.drawable.bg_kfc)
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList

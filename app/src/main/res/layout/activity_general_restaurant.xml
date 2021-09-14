@@ -23,8 +23,7 @@
             <ImageView
                 android:id="@+id/backgroundImage"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                app:srcCompat="@drawable/cover_casa_piratilor" />
+                android:layout_height="220dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -47,7 +46,7 @@
 
                 <GridView
                     android:id="@+id/optionsMenu"
-                    android:layout_width="match_parent"
+                    android:layout_width="364dp"
                     android:layout_height="188dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
@@ -60,7 +59,7 @@
                 <TextView
                     android:id="@+id/titleRestaurant"
                     android:layout_width="match_parent"
-                    android:layout_height="89dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"

@@ -57,7 +57,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="7dp"
             android:text="Cauți un restaurant?"
             android:textColor="@color/darker_gray"
             android:textSize="18sp"
@@ -67,11 +67,10 @@
 
         <Button
             android:id="@+id/btnscanner"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/ic_code_scanner"
-            android:backgroundTint="@color/darker_gray"
             app:layout_constraintBottom_toBottomOf="@+id/searchButton"
             app:layout_constraintEnd_toEndOf="@+id/searchButton"
             app:layout_constraintTop_toTopOf="@+id/searchButton"
@@ -124,7 +123,7 @@
                 android:layout_height="match_parent"
                 android:scrollbars="horizontal"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="10.0sp"/>
+                android:dividerHeight="15.0sp"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -190,7 +189,6 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/ic_reload"
-            android:backgroundTint="@color/yellow_strong"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -219,14 +217,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="10.0sp" />
+                android:dividerHeight="15.0sp" />
 
             <ListView
                 android:id="@+id/CloseRestaurants"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="10.0sp">
+                android:dividerHeight="15.0sp">
 
             </ListView>
         </LinearLayout>
@@ -246,7 +244,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_maps"
-            android:backgroundTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/homebutton"
             app:layout_constraintStart_toStartOf="parent"
@@ -270,7 +267,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_profile"
-            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/homebutton"
