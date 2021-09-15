@@ -36,7 +36,7 @@ class GridAdapter(
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
 
         titleText.text = theList[position].getName()
-
+        imageView.setImageResource(theList[position].getPhoto())
         //distanceText.text = distance[position].toString()
 //        imageView.setImageResource(imgid[position])
 //            subtitleText.text = description[position]

@@ -221,7 +221,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         listView.adapter = myListAdapter
         setUpOffers()
 
-        var myListAdapter1 = OffertsAdapter(this, RestaurantsList)
+        var myListAdapter1 = OffertsAdapter(this, OffertsList)
         offertsList.adapter = myListAdapter1
         var categoriesList = ArrayList<CategoriesClass>()
         for (index in RestaurantsList.indices) {
@@ -238,6 +238,22 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                     categoriesList[categoriesList.size - 1].addIndices(index)
                 }
             }
+        }
+        //fiecare categorie are nume si un  icon; acestea sunt
+        var arrayOfCategoriesNames =
+            arrayListOf<String>("Normala", "Picanta", "Pizza", "Fast Food", "Racoritoare")
+        var arrayOfCategoriesIcons = arrayListOf<Int>(
+            R.drawable.bg_casa_piratilor,
+            R.drawable.bg_kfc,
+            R.drawable.category_pizza,
+            R.drawable.bg_kfc,
+            R.drawable.bg_papion
+        )
+        //to change the categories photos
+        for (x in categoriesList.indices) {
+            for (y in arrayOfCategoriesNames.indices)
+                if (categoriesList[x].getName() == arrayOfCategoriesNames[y])
+                    categoriesList[x].setPhoto(arrayOfCategoriesIcons[y])
         }
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -378,7 +394,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         offertsList.setOnItemClickListener { parent, view, position, id ->
 
             var intent = Intent(this, GeneralRestaurant::class.java)
-            intent.putExtra("LIST", RestaurantsList[position])
+            var theRestaurant = RestaurantsList[0]
+            for (x in RestaurantsList.indices) {
+                if (OffertsList[position].getName() == RestaurantsList[x].getTitle())
+                    theRestaurant = RestaurantsList[x]
+            }
+            intent.putExtra("LIST", theRestaurant)
             intent.putExtra("CATEGORIES", categoriesList)
             startActivity(intent)
         }
@@ -607,9 +628,49 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     }
 
     private fun setUpOffers() {
-//        var res=Database.runUpdate("""
-//            SELECT COUNT(*)
-//        """.trimIndent())
+        OffertsList.add(
+            OffertsClass(
+                1,
+                "Pizza Hut",
+                R.drawable.offerts_pizza_hut_0,
+                1,
+                150.5,
+                2021,
+                10,
+                25,
+                5,
+                30
+            )
+        )
+        OffertsList.add(
+            OffertsClass(
+                1,
+                "KFC",
+                R.drawable.offerts_kfc_0,
+                1,
+                550.0,
+                2021,
+                10,
+                25,
+                5,
+                30
+            )
+        )
+        OffertsList.add(
+            OffertsClass(
+                1,
+                "Marty",
+                R.drawable.offerts_marty_0,
+                1,
+                150.0,
+                2021,
+                10,
+                25,
+                5,
+                30
+            )
+        )
+
     }
 
     override fun onItemClick(position: Int) {

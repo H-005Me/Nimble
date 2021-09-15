@@ -7,6 +7,7 @@ import com.example.nimble.login.LoginActivity
 
 object user {
     private var username = "Guest"
+    private var fullName = ""
     private var profilePicture = R.drawable.ic_profile
     private var id = -1
     private var email = "Email@thereIsntAny"
@@ -14,7 +15,7 @@ object user {
         if (Database.isConnected() && email != "Email@thereIsntAny") {
             val res = Database.runQuery(
                 """
-                SELECT id,lastName FROM tbl_users WHERE email = '$email'
+                SELECT id,lastName,firstName FROM tbl_users WHERE email = '$email'
             """.trimIndent()
             )
             res!!.next()
@@ -22,8 +23,10 @@ object user {
 
                 val userid = res!!.getInt(1)
                 val userName = res.getString(2)
+                val firstName = res.getString(3)
                 this.id = userid
                 this.username = userName
+                this.fullName = "$userName $firstName"
 //                this.username=name+lastName
             }
         }
@@ -52,6 +55,10 @@ object user {
     fun setEmail(new_email: String) {
         this.email = new_email
         this.getUser()
+    }
+
+    fun getFullName(): String {
+        return this.fullName
     }
 
 }

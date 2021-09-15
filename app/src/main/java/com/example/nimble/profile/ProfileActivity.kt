@@ -41,8 +41,8 @@ class ProfileActivity : AppCompatActivity() {
                 intent = Intent(this, LoadingActivity::class.java)
             startActivity(intent)
         }
-        profileName.text = user.getUserName()
-
+        profileName.text = user.getFullName()
+        profilePic.setImageResource(user.getProfilePicture())
 
 
         homeButton.setOnClickListener {

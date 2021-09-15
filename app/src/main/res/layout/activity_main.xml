@@ -8,227 +8,251 @@
     android:elevation="20dp"
     tools:context=".mainmenu.MainMenu">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="0dp"
-        android:layout_height="175dp"
-        android:background="@drawable/background_logo"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/searchButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_searchbar"
-            android:drawableStart="@drawable/ic_search"
-            android:drawableTint="@color/darker_gray"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center_vertical"
-            android:paddingStart="12dp"
-            android:text="Caută..."
-            android:textAllCaps="false"
-            android:textColor="@color/darker_gray"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Salut"
-            android:textColor="@color/black"
-            android:textSize="32sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:text="Cauți un restaurant?"
-            android:textColor="@color/darker_gray"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/searchButton"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <Button
-            android:id="@+id/btnscanner"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/ic_code_scanner"
-            app:layout_constraintBottom_toBottomOf="@+id/searchButton"
-            app:layout_constraintEnd_toEndOf="@+id/searchButton"
-            app:layout_constraintTop_toTopOf="@+id/searchButton"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="0dp"
-        android:layout_height="175dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/banner_shape"
-        android:elevation="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Recomandate"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recommendedlist"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="15.0sp"/>
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/background_bottom"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
-
-        <Button
-            android:id="@+id/closeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="#00FFFFFF"
-            android:fontFamily="@font/roboto"
-            android:text="În apropiere"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toStartOf="@+id/categoriesButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/offersButton"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="#00FFFFFF"
-            android:fontFamily="@font/roboto"
-            android:text="Ofertele zilei"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/categoriesButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/categoriesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00FFFFFF"
-            android:fontFamily="@font/roboto"
-            android:text="Categorii"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/getRestaurants"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/ic_reload"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="340dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoriesButton">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <GridView
-                android:id="@+id/category"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="2"
-                tools:ignore="DuplicateSpeakableTextCheck" />
+                android:layout_height="175dp"
+                android:background="@drawable/background_logo">
 
-            <ListView
-                android:id="@+id/offerts"
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/btn_searchbar"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawableTint="@color/darker_gray"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:text="Caută..."
+                    android:textAllCaps="false"
+                    android:textColor="@color/darker_gray"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Salut"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="Cauți un restaurant?"
+                    android:textColor="@color/darker_gray"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/searchButton"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <Button
+                    android:id="@+id/btnscanner"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/ic_code_scanner"
+                    android:backgroundTint="@color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/searchButton"
+                    app:layout_constraintEnd_toEndOf="@+id/searchButton"
+                    app:layout_constraintTop_toTopOf="@+id/searchButton"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="398dp"
+                android:layout_height="175dp"
+                android:background="@drawable/banner_shape"
+                android:elevation="20dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Recomandate"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recommendedlist"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="10.0sp"
+                        android:scrollbars="horizontal" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="15.0sp" />
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_bottom">
 
-            <ListView
-                android:id="@+id/CloseRestaurants"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="15.0sp">
+                <Button
+                    android:id="@+id/closeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:background="#00FFFFFF"
+                    android:fontFamily="@font/roboto"
+                    android:text="În apropiere"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+                    app:layout_constraintEnd_toStartOf="@+id/categoriesButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </ListView>
+                <Button
+                    android:id="@+id/offersButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:background="#00FFFFFF"
+                    android:fontFamily="@font/roboto"
+                    android:text="Ofertele zilei"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/categoriesButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/categoriesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:fontFamily="@font/roboto"
+                    android:text="Categorii"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/getRestaurants"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/ic_reload"
+                    android:backgroundTint="@color/yellow_strong"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.45"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout7"
+                    android:layout_width="396dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="19dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/closeButton">
+
+                    <LinearLayout
+                        android:id="@+id/isScrollable"
+                        android:layout_width="374dp"
+                        android:layout_height="1000dp"
+                        android:layout_marginEnd="22dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <GridView
+                            android:id="@+id/category"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:numColumns="2"
+                            tools:ignore="DuplicateSpeakableTextCheck" />
+
+                        <ListView
+                            android:id="@+id/offerts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@android:color/transparent"
+                            android:dividerHeight="10.0sp" />
+
+                        <ListView
+                            android:id="@+id/CloseRestaurants"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@android:color/transparent"
+                            android:dividerHeight="10.0sp">
+
+                        </ListView>
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -244,6 +268,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_maps"
+            android:backgroundTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/homebutton"
             app:layout_constraintStart_toStartOf="parent"
@@ -267,6 +292,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_profile"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/homebutton"

@@ -8,6 +8,7 @@ import java.util.*
 class OffertsClass(
     id: Int,
     RestaurantName: String,
+    background: Int,
     status: Int,
     price: Double,
     year: Int,
@@ -27,10 +28,9 @@ class OffertsClass(
     private var id: Int
     private val c = Calendar.getInstance()
     private var status: Int
-
     init {
         this.RestaurantName = RestaurantName
-        this.background = R.drawable.bg_marty
+        this.background = background
         this.price = price
         this.year = year
         this.month = month
