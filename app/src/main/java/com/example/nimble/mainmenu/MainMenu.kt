@@ -389,6 +389,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var intent = Intent(this, GeneralCategory::class.java)
             intent.putExtra("LIST", RestaurantsList)
             intent.putExtra("INDICES", categoriesList[position].getTheIndices())
+            intent.putExtra("NAME", categoriesList[position].getName())
             startActivity(intent)
         }
         offertsList.setOnItemClickListener { parent, view, position, id ->
