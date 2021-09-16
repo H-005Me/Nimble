@@ -38,3 +38,12 @@ CREATE TABLE tbl_orders (
     status INT NOT NULL,
     expired INT NOT NULL
 );
+
+CREATE TABLE tbl_food (
+    food_id INT IDENTITY(1,1) PRIMARY KEY,
+    restaurant_id INT NOT NULL,
+    name NVARCHAR(50) NOT NULL,
+    type NVARCHAR(50) NOT NULL,
+    ingredients NVARCHAR(300),
+    price DECIMAL(5,2) NOT NULL
+);
