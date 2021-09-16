@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/thePhoto"
-            android:layout_width="146dp"
-            android:layout_height="123dp"
+            android:layout_width="135dp"
+            android:layout_height="125dp"
             android:layout_weight="1"
             app:srcCompat="@mipmap/ic_launcher_round" />
     </LinearLayout>

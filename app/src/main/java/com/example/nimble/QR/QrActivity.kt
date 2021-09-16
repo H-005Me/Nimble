@@ -16,7 +16,7 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 
 
-class MainActivity : AppCompatActivity() {
+class QrActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         initScanner()
     }
 
-   /// override fun onCreate(savedInstanceState: Bundle?) {
+    /// override fun onCreate(savedInstanceState: Bundle?) {
       ///  super.onCreate(savedInstanceState)
      ////   binding = ActivityMainBinding.inflate(layoutInflater)
     ///    setContentView(binding.root)
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         if (result != null) {
             if (result.contents == null) {
                 Toast.makeText(this, "Canceled", Toast.LENGTH_LONG).show()
+                finish()
             } else {
                 val theString = result.contents.toString()
                 Toast.makeText(this, "$theString", Toast.LENGTH_SHORT).show()
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                 intent = Intent(this, GeneralRestaurant::class.java)
                 intent.putExtra("LIST", theList[i])
                 startActivity(intent)
+                finish()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

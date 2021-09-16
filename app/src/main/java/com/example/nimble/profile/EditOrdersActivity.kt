@@ -29,6 +29,7 @@ class EditOrdersActivity : AppCompatActivity() {
         var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
         var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
         var editRemarkTxt = findViewById<EditText>(R.id.remarkstext)
+        val deleteReservation = findViewById<Button>(R.id.reservationDeleteBtn)
         //firstly declared are the elements of the layout
         var thehour = 0
         var theminute = 0
@@ -170,6 +171,34 @@ class EditOrdersActivity : AppCompatActivity() {
             cancelButton.isEnabled = false
             cancelButton.visibility = View.GONE
             saveButton.isEnabled = false
+
+        }
+        deleteReservation.setOnClickListener {
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+            builder.setTitle("Confirm")
+            builder.setMessage("Are you sure? This will delete the reservation in the database,if the reservation is cancelled 15 minutes before the reservation a tax will be perceived")
+            builder.setPositiveButton(
+                "YES",
+                DialogInterface.OnClickListener { dialog, which -> // Do nothing but close the dialog
+
+                    var id = theList.getId()
+                    Database.runUpdate(
+                        """
+                        DELETE FROM tbl_orders WHERE command_id='$id';
+                    """.trimIndent()
+                    )
+                    finish()
+                    dialog.dismiss()
+                })
+
+            builder.setNegativeButton(
+                "NO",
+                DialogInterface.OnClickListener { dialog, which -> // Do nothing
+                    dialog.dismiss()
+                })
+
+            val alert: android.app.AlertDialog? = builder.create()
+            alert!!.show()
 
         }
     }

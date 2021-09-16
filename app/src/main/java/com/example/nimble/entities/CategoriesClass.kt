@@ -31,4 +31,9 @@ class CategoriesClass(name: String, photo: Int) : Serializable {
     fun setIndices(removeDuplicates: ArrayList<Int>) {
         this.arrayOfIndices = removeDuplicates
     }
+
+    fun setPhoto(new_photo: Int) {
+        this.photo = new_photo
+
+    }
 }

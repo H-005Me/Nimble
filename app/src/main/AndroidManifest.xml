@@ -21,7 +21,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.example.qr_good_app.MainActivity">
+        <activity android:name="com.example.qr_good_app.QrActivity">
             <intent-filter>
 
                 <category android:name="android.intent.category.LAUNCHER" />

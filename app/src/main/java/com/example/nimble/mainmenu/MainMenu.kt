@@ -1,7 +1,6 @@
 package com.example.nimble.mainmenu
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -16,12 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
 import android.location.LocationListener
-import android.support.annotation.NonNull
 
-import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.RestaurantPages.GeneralRestaurant
-import com.example.nimble.entities.MenuClass
-import com.example.nimble.entities.ProductClass
 
 
 import com.example.nimble.adapters.MyListAdapter
@@ -29,23 +24,19 @@ import kotlin.collections.ArrayList
 import com.example.nimble.adapters.GridAdapter
 import com.example.nimble.adapters.OffertsAdapter
 import com.example.nimble.adapters.ProductsAdapter
-import com.example.nimble.entities.CategoriesClass
-import android.app.Activity
-import android.os.SystemClock
 import android.util.Log
-import android.view.Menu
 import com.example.nimble.database.Database
+import com.example.nimble.entities.*
 import com.example.nimble.profile.ProfileActivity
-import com.example.qr_good_app.MainActivity
+import com.example.qr_good_app.QrActivity
 import com.example.nimble.maps_activity.MapsActivity
+import com.example.nimble.user.user
 import java.lang.Exception
-import java.security.Provider
-import java.util.*
 import kotlin.collections.LinkedHashSet
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
-
+var OffertsList = ArrayList<OffertsClass>()
 class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var locationManager: LocationManager
@@ -74,7 +65,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+            )
         }
         locationManager.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
@@ -149,7 +143,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         val mapsButton = findViewById<Button>(R.id.mapsbutton)
+
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
+
         var offertsList = findViewById<ListView>(R.id.offerts)
         val categoryList = findViewById<GridView>(R.id.category)
         val searchBar = findViewById<Button>(R.id.searchButton)
@@ -163,7 +159,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
 
             if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true
-
             ) {
                 val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
                 latitude = loc!!.latitude
@@ -176,6 +171,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
             } else {
                 respectedGPS = false
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+                )
             }
         } catch (ex: Exception) {
             prepareRestaurantsData()
@@ -188,15 +187,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             respectedGPS = false
 
         }
+        //disabled for the moment
+        mapsButton.isEnabled = false
+        ///
         mainButton.isEnabled = true
-
-        mainButton.setOnClickListener {
-
-            var rest = RestaurantsList[0].getCurrentLatitude()
-            var rest1 = RestaurantsList[0].getCurrentLongitude()
-            var rest2 = RestaurantsList[0].getDistance()
-
-        }
         var numbersMap = mutableMapOf("one" to 9000)
         var index = 0
         while (index < RestaurantsList.size) {
@@ -214,7 +208,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         }
         BtnScanner.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
+            var intent = Intent(this, QrActivity::class.java)
             intent.putExtra("LIST", RestaurantsList)
             startActivity(intent)
 
@@ -225,7 +219,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
-        var myListAdapter1 = OffertsAdapter(this, RestaurantsList)
+        setUpOffers()
+
+        var myListAdapter1 = OffertsAdapter(this, OffertsList)
         offertsList.adapter = myListAdapter1
         var categoriesList = ArrayList<CategoriesClass>()
         for (index in RestaurantsList.indices) {
@@ -243,6 +239,22 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 }
             }
         }
+        //fiecare categorie are nume si un  icon; acestea sunt
+        var arrayOfCategoriesNames =
+            arrayListOf<String>("Normala", "Picanta", "Pizza", "Fast Food", "Racoritoare")
+        var arrayOfCategoriesIcons = arrayListOf<Int>(
+            R.drawable.bg_casa_piratilor,
+            R.drawable.bg_kfc,
+            R.drawable.category_pizza,
+            R.drawable.bg_kfc,
+            R.drawable.bg_papion
+        )
+        //to change the categories photos
+        for (x in categoriesList.indices) {
+            for (y in arrayOfCategoriesNames.indices)
+                if (categoriesList[x].getName() == arrayOfCategoriesNames[y])
+                    categoriesList[x].setPhoto(arrayOfCategoriesIcons[y])
+        }
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -257,7 +269,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         getRes.setOnClickListener {
 
-            var REQUEST = 111
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
@@ -271,6 +282,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 if (respectedGPS == true) {
                     try {
                         getLocation()
+
                         val loc =
                             locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
                         latitude = loc!!.latitude
@@ -279,12 +291,22 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
                     } catch (ex: Exception) {
                         Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                            1
+                        )
+                        val loc =
+                            locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+                        latitude = loc!!.latitude
+                        longitude = loc.longitude
                     }
                 } else {
                     Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+
         for (each in categoriesList.indices)
             categoriesList[each].setIndices(removeDuplicates(categoriesList[each].getTheIndices()))
         var myGridAdapter = GridAdapter(this, categoriesList)
@@ -367,12 +389,18 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var intent = Intent(this, GeneralCategory::class.java)
             intent.putExtra("LIST", RestaurantsList)
             intent.putExtra("INDICES", categoriesList[position].getTheIndices())
+            intent.putExtra("NAME", categoriesList[position].getName())
             startActivity(intent)
         }
         offertsList.setOnItemClickListener { parent, view, position, id ->
 
             var intent = Intent(this, GeneralRestaurant::class.java)
-            intent.putExtra("LIST", RestaurantsList[position])
+            var theRestaurant = RestaurantsList[0]
+            for (x in RestaurantsList.indices) {
+                if (OffertsList[position].getName() == RestaurantsList[x].getTitle())
+                    theRestaurant = RestaurantsList[x]
+            }
+            intent.putExtra("LIST", theRestaurant)
             intent.putExtra("CATEGORIES", categoriesList)
             startActivity(intent)
         }
@@ -410,7 +438,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         restaurants.setPageBackground(bgPageOfRestaurantsArray[0])
 
-        restaurants.setStreet("Strada Răvașului 16, Cluj-Napoca")
+        restaurants.setStreet("Strada Răvașului")
         RestaurantsList.add(restaurants)
 
         restaurants = RestaurantsClass(
@@ -434,7 +462,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         restaurants.setPageBackground(bgPageOfRestaurantsArray[1])
 
-        restaurants.setStreet("Piața Muzeului Nr 2, Cluj-Napoca")
+        restaurants.setStreet("Piața Muzeului")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "Klausen Burger",
@@ -454,7 +482,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
-        restaurants.setStreet("Strada Regele Ferdinand 22, Cluj-Napoca")
+        restaurants.setStreet("Strada Regele Ferdinand")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "La Papion",
@@ -476,7 +504,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         restaurants.setPageBackground(R.drawable.bg_papion)
 
-        restaurants.setStreet("Piața 1 Decembrie 1918 1, Turda")
+        restaurants.setStreet("Piața 1 Decembrie, Turda")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "Pizza Hut", 150, 4.9,
@@ -503,7 +531,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
-        restaurants.setStreet("Strada Alexandru Vaida Voevod 55, Cluj-Napoca")
+        restaurants.setStreet("Str. Alexandru Vaida-Voievod")
         restaurants.setPageBackground(R.drawable.bg_pizza_hut)
 
         RestaurantsList.add(restaurants)
@@ -532,7 +560,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 )
             )
         )
-        restaurants.setStreet("Str. Alexandru Vaida-Voievod nr. 53-55, în Iulius Mall etaj 1, Cluj-Napoca")
+        restaurants.setStreet("Str. Alexandru Vaida-Voievod")
         restaurants.setPageBackground(R.drawable.bg_kfc)
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
@@ -598,6 +626,52 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         for (x in RestaurantsList.indices)
             RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x])
         RestaurantsList.sortBy { it.getDistance() }
+    }
+
+    private fun setUpOffers() {
+        OffertsList.add(
+            OffertsClass(
+                1,
+                "Pizza Hut",
+                R.drawable.offerts_pizza_hut_0,
+                1,
+                150.5,
+                2021,
+                10,
+                25,
+                5,
+                30
+            )
+        )
+        OffertsList.add(
+            OffertsClass(
+                1,
+                "KFC",
+                R.drawable.offerts_kfc_0,
+                1,
+                550.0,
+                2021,
+                10,
+                25,
+                5,
+                30
+            )
+        )
+        OffertsList.add(
+            OffertsClass(
+                1,
+                "Marty",
+                R.drawable.offerts_marty_0,
+                1,
+                150.0,
+                2021,
+                10,
+                25,
+                5,
+                30
+            )
+        )
+
     }
 
     override fun onItemClick(position: Int) {

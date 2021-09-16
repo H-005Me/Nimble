@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import android.widget.TextView
 import com.example.nimble.R
 import com.example.nimble.RestaurantPages.GeneralRestaurant
 import com.example.nimble.adapters.MyListAdapter
@@ -16,12 +17,15 @@ class GeneralCategory : AppCompatActivity() {
         var theList = intent.getSerializableExtra("LIST") as ArrayList<RestaurantsClass>
         var theIndices = intent.getSerializableExtra("INDICES") as ArrayList<Int>
         var theNewList = ArrayList<RestaurantsClass>()
+        var theName = intent.getSerializableExtra("NAME") as String
         for (each in theIndices) {
             theNewList.add(theList[each])
         }
         var theListView = findViewById<ListView>(R.id.categoryL)
+        var theNameView = findViewById<TextView>(R.id.categoryName)
         var new_Adapter = MyListAdapter(this, theNewList)
         theListView.adapter = new_Adapter
+        theNameView.text = theName
         theListView.setOnItemClickListener { parent, view, position, id ->
 
 //            Toast.makeText(applicationContext, "$view", Toast.LENGTH_SHORT).show()

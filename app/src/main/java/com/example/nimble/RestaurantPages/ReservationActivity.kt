@@ -23,6 +23,7 @@ import com.example.nimble.database.Database
 import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
 import com.example.nimble.mainmenu.MainMenu
+import com.example.nimble.user.user
 import org.w3c.dom.Text
 
 
@@ -169,7 +170,7 @@ class ReservationActivity : AppCompatActivity() {
         confirmReservation.setOnClickListener {
             Toast.makeText(this, "Your reservation has been completed", Toast.LENGTH_SHORT).show()
             var name = theList.getTitle()
-            var firstV = 1
+            var firstV = user.getId()
             var statusV = 0
             month++
             var var3 = chooseTableButton.text
