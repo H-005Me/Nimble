@@ -166,7 +166,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 getLocation()
                 longitude = loc.longitude
                 latitude = loc.latitude
+                RestaurantsList.clear()
+                OffertsList.clear()
                 prepareRestaurantsData()
+                setUpOffers()
                 respectedGPS = true
 
             } else {
@@ -219,7 +222,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
-        setUpOffers()
 
         var myListAdapter1 = OffertsAdapter(this, OffertsList)
         offertsList.adapter = myListAdapter1

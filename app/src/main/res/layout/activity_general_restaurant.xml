@@ -8,9 +8,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,14 +26,14 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="542dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="-20dp"
                 android:background="@drawable/background_bottom">
 
                 <GridView
                     android:id="@+id/tagsGrid"
-                    android:layout_width="0dp"
-                    android:layout_height="75dp"
+                    android:layout_width="380dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="60dp"
                     android:layout_marginEnd="15dp"
@@ -46,15 +45,17 @@
 
                 <GridView
                     android:id="@+id/optionsMenu"
-                    android:layout_width="364dp"
-                    android:layout_height="188dp"
+                    android:layout_width="350dp"
+                    android:layout_height="172dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:numColumns="2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.47"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tagsGrid"></GridView>
+                    app:layout_constraintTop_toBottomOf="@+id/tagsGrid"
+                    app:layout_constraintVertical_bias="0.071"></GridView>
 
                 <TextView
                     android:id="@+id/titleRestaurant"
@@ -82,6 +83,27 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/titleRestaurant" />
+
+                <TextView
+                    android:id="@+id/locatlizareTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Localizare:"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.22"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/optionsMenu"
+                    app:layout_constraintVertical_bias="0.13" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="391dp"
+                    android:layout_height="277dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/locatlizareTextView"
+                    app:srcCompat="@mipmap/ic_launcher" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

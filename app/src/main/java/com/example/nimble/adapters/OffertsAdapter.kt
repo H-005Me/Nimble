@@ -34,6 +34,7 @@ class OffertsAdapter(private val context: Activity, private val theList: ArrayLi
 //        imageView.setImageResource(theList[position].getIcon())
         offertsName.setText(theList[position].getName())
         offert.setBackgroundResource(theList[position].getBackground())
+        notifyDataSetChanged()
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
 
         //imageView.setImageDrawable(theList[position].getIcon().toDrawable())

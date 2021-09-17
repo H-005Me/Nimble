@@ -67,6 +67,8 @@ class ReservationActivity : AppCompatActivity() {
         pickHourBtn.isEnabled = dateIsPicked
         chooseTableButton.isEnabled = hourIsPicked
         confirmReservation.isEnabled = tableIsPicked
+        //button imageView in a gallery
+
         if (year == 0)
             year = c.get(Calendar.YEAR)
         if (month == 0)

@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nimble.R
 import com.example.nimble.RestaurantPages.ImagesActivity
-import com.example.nimble.RestaurantPages.ReservationActivity
 import com.example.nimble.RestaurantPages.RestaurantMenuActivity
-import com.example.nimble.RestaurantPages.ReviewsActivity
 import com.example.nimble.adapters.GridAdapterRestaurants
 import com.example.nimble.loading.LoadingActivity
 import com.example.nimble.mainmenu.MainMenu
@@ -26,8 +24,19 @@ class ProfileActivity : AppCompatActivity() {
         val profilePic = findViewById<ImageView>(R.id.userimage)
         val profileName = findViewById<TextView>(R.id.username)
         val userList = findViewById<ListView>(R.id.userlist)
+
+        // aici se fac schimbarile
         var optionsList = arrayOf("Comenzile mele", "Rezervarile mele", "Profilul meu", "Log out")
-        var myGridAdapter = GridAdapterRestaurants(this, optionsList)
+        var resourcesList = arrayListOf<Int>(
+            R.drawable.ic_my_command,
+            R.drawable.ic_my_reservations,
+            R.drawable.ic_profile_circled,
+            R.drawable.ic_log_out
+        )
+        // restul e automat
+
+
+        var myGridAdapter = GridAdapterRestaurants(this, optionsList, resourcesList)
         userList.adapter = myGridAdapter
         userList.setOnItemClickListener { parent, view, position, id ->
             var intent = Intent()

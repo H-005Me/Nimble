@@ -8,9 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.nimble.R
 
-class GridAdapterRestaurants(private val context: Activity, private val theList: Array<String>
-    /**private val description: Array<String>, private val imgid: Array<Int>**/)
-    : BaseAdapter() {
+class GridAdapterRestaurants(
+    private val context: Activity,
+    private val theList: Array<String>,
+    private val theResourceList: ArrayList<Int>
+) : BaseAdapter() {
     override fun getCount(): Int {
         return theList.size
     }
@@ -33,7 +35,7 @@ class GridAdapterRestaurants(private val context: Activity, private val theList:
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
 
         titleText.text = theList[position]
-
+        imageView.setImageResource(theResourceList[position])
         //distanceText.text = distance[position].toString()
 //        imageView.setImageResource(imgid[position])
 //            subtitleText.text = description[position]
