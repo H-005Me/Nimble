@@ -81,7 +81,7 @@
                 android:fontFamily="@font/montserrat"
                 android:text="description"
                 android:textColor="@color/white"
-                android:textSize="17sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.2"

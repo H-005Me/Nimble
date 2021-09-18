@@ -30,7 +30,6 @@ import com.example.nimble.entities.*
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.QrActivity
 import com.example.nimble.maps_activity.MapsActivity
-import com.example.nimble.user.user
 import java.lang.Exception
 import kotlin.collections.LinkedHashSet
 
@@ -243,13 +242,16 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         //fiecare categorie are nume si un  icon; acestea sunt
         var arrayOfCategoriesNames =
-            arrayListOf<String>("Normala", "Picanta", "Pizza", "Fast Food", "Racoritoare")
+            arrayListOf<String>("Burger", "Desert", "Peste", "Pizza", "Cartofi", "Salata", "Saorma", "Supa")
         var arrayOfCategoriesIcons = arrayListOf<Int>(
-            R.drawable.bg_casa_piratilor,
-            R.drawable.bg_kfc,
-            R.drawable.category_pizza,
-            R.drawable.bg_kfc,
-            R.drawable.bg_papion
+            R.drawable.bg_categ_burger,
+            R.drawable.bg_categ_dessert,
+            R.drawable.bg_categ_fish,
+            R.drawable.bg_categ_pizza,
+            R.drawable.bg_categ_potatos,
+            R.drawable.bg_categ_salads,
+            R.drawable.bg_categ_shawarma,
+            R.drawable.bg_categ_soup
         )
         //to change the categories photos
         for (x in categoriesList.indices) {
@@ -413,12 +415,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     }
     private fun prepareRestaurantsData() {
         var bgPageOfRestaurantsArray = arrayListOf<Int>(
-            R.drawable.bg_casa_piratilor,
-            R.drawable.bg_marty,
-            R.drawable.bg_klaus,
-            R.drawable.bg_papion,
-            R.drawable.bg_pizza_hut,
-            R.drawable.bg_kfc
+            R.drawable.bg_simple_casa_piratilor,
+            R.drawable.bg_simple_marty,
+            R.drawable.bg_simple_klaus,
+            R.drawable.bg_simple_papion,
+            R.drawable.bg_simple_pizza_hut,
+            R.drawable.bg_simple_kfc
         )
         var restaurants = RestaurantsClass(
             "Casa Piratilor",
@@ -426,15 +428,21 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_casa_piratilor,
-            R.drawable.bg_casa_piratilor,
+            R.drawable.bg_simple_casa_piratilor,
             46.754761489348375, 23.549074595438668,
             arrayOf(
                 MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Cartofi",
+                    arrayOf(ProductClass("Cartofi prajiti", 25.0, 250.0, R.drawable.ic_launcher_background))
                 ), MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Cartofi",
+                    arrayOf(ProductClass("Cartofi dulci", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Supa",
+                    arrayOf(ProductClass("Supa de pui", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Desert",
+                    arrayOf(ProductClass("Inghetata", 25.0, 250.0, R.drawable.ic_launcher_background))
                 )
             )
         )
@@ -449,15 +457,21 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_marty,
-            R.drawable.bg_marty,
+            R.drawable.bg_simple_marty,
             46.771753344308706, 23.58713642701307,
             arrayOf(
                 MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Pizza",
+                    arrayOf(ProductClass("Salami", 25.0, 250.0, R.drawable.ic_launcher_background))
                 ), MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Pizza",
+                    arrayOf(ProductClass("Capriciosa", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Desert",
+                    arrayOf(ProductClass("Tiramisu", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Peste",
+                    arrayOf(ProductClass("File de somon", 25.0, 250.0, R.drawable.ic_launcher_background))
                 )
             )
         )
@@ -472,15 +486,15 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_klaus,
-            R.drawable.bg_klaus,
+            R.drawable.bg_simple_klaus,
             46.77303059272974, 23.589206542353935,
             arrayOf(
                 MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Burger",
+                    arrayOf(ProductClass("Double Cheese Burger", 25.0, 250.0, R.drawable.ic_launcher_background))
                 ), MenuClass(
-                    "Picanta",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Cartofi",
+                    arrayOf(ProductClass("Cartofi preajiti", 25.0, 250.0, R.drawable.ic_launcher_background))
                 )
             )
         )
@@ -492,78 +506,68 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             1500,
             4.5,
             R.drawable.logo_papion,
-            R.drawable.bg_papion,
+            R.drawable.bg_simple_papion,
             46.57051053103731, 23.785073506109164,
             arrayOf(
                 MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Desert",
+                    arrayOf(ProductClass("Briosa", 25.0, 250.0, R.drawable.ic_launcher_background))
                 ), MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Saorma",
+                    arrayOf(ProductClass("Saorma de pui", 25.0, 250.0, R.drawable.ic_launcher_background))
                 )
             )
         )
-        restaurants.setPageBackground(R.drawable.bg_papion)
+        restaurants.setPageBackground(R.drawable.bg_simple_papion)
 
         restaurants.setStreet("Piața 1 Decembrie, Turda")
         RestaurantsList.add(restaurants)
         restaurants = RestaurantsClass(
             "Pizza Hut", 150, 4.9,
             R.drawable.logo_pizza_hut,
-            R.drawable.bg_pizza_hut,
+            R.drawable.bg_simple_pizza_hut,
             46.77219094166171, 23.62581808448148,
             arrayOf(
                 MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
-                ), MenuClass(
-                    "Picanta",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
-                ), MenuClass(
                     "Pizza",
-                    arrayOf(
-                        ProductClass(
-                            "Margherita",
-                            25.5,
-                            750.0,
-                            R.drawable.ic_launcher_background
-                        )
-                    )
+                    arrayOf(ProductClass("Margherita", 25.0, 250.0, R.drawable.ic_launcher_background))
+                ), MenuClass(
+                    "Peste",
+                    arrayOf(ProductClass("Dorada", 25.0, 250.0, R.drawable.ic_launcher_background))
                 )
             )
         )
         restaurants.setStreet("Str. Alexandru Vaida-Voievod")
-        restaurants.setPageBackground(R.drawable.bg_pizza_hut)
+        restaurants.setPageBackground(R.drawable.bg_simple_pizza_hut)
 
         RestaurantsList.add(restaurants)
 
         restaurants = RestaurantsClass(
             "KFC", 150, 4.9,
             R.drawable.logo_kfc,
-            R.drawable.bg_kfc,
+            R.drawable.bg_simple_kfc,
             46.77236134944, 23.626857336072423,
             arrayOf(
                 MenuClass(
-                    "Normala",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Cartofi",
+                    arrayOf(ProductClass("Cartofi prajiti", 25.0, 250.0, R.drawable.ic_launcher_background))
                 ),
                 MenuClass(
-                    "Picanta",
-                    arrayOf(ProductClass("sushi", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    "Burger",
+                    arrayOf(ProductClass("Zinger", 25.0, 250.0, R.drawable.ic_launcher_background))
                 ),
                 MenuClass(
-                    "Fast Food",
-                    arrayOf(ProductClass("Burger", 25.5, 150.0, R.drawable.ic_launcher_background))
+                    "Salata",
+                    arrayOf(ProductClass("Salata cu pui", 25.5, 150.0, R.drawable.ic_launcher_background))
                 ),
                 MenuClass(
-                    "Racoritoare",
-                    arrayOf(ProductClass("Coca Cola", 5.00, 0.5, R.drawable.ic_launcher_background))
+                    "Saorma",
+                    arrayOf(ProductClass("Twister de pui", 5.00, 0.5, R.drawable.ic_launcher_background))
                 )
             )
         )
         restaurants.setStreet("Str. Alexandru Vaida-Voievod")
-        restaurants.setPageBackground(R.drawable.bg_kfc)
+        restaurants.setPageBackground(R.drawable.bg_simple_kfc)
         RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
 
@@ -591,20 +595,20 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 long,
                 arrayOf(
                     MenuClass(
-                            "Normala",
+                            "Supa",
                             arrayOf(
                                 ProductClass(
-                                    "sushi",
+                                    "Ciorba de Burta",
                                     25.0,
                                     250.0,
                                     R.drawable.ic_launcher_background
                                 )
                             )
                         ), MenuClass(
-                            "Normala",
+                            "Peste",
                             arrayOf(
                                 ProductClass(
-                                    "sushi",
+                                    "Ton",
                                     25.0,
                                     250.0,
                                     R.drawable.ic_launcher_background
@@ -635,7 +639,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             OffertsClass(
                 1,
                 "Pizza Hut",
-                R.drawable.offerts_pizza_hut_0,
+                R.drawable.bg_offer_pizza_hut,
                 1,
                 150.5,
                 2021,
@@ -649,7 +653,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             OffertsClass(
                 1,
                 "KFC",
-                R.drawable.offerts_kfc_0,
+                R.drawable.bg_offer_kfc,
                 1,
                 550.0,
                 2021,
@@ -663,7 +667,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             OffertsClass(
                 1,
                 "Marty",
-                R.drawable.offerts_marty_0,
+                R.drawable.bg_offer_marty,
                 1,
                 150.0,
                 2021,

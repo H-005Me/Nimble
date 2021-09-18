@@ -30,7 +30,7 @@ class ProfileActivity : AppCompatActivity() {
         var resourcesList = arrayListOf<Int>(
             R.drawable.ic_my_command,
             R.drawable.ic_my_reservations,
-            R.drawable.ic_profile_circled,
+            R.drawable.ic_profile,
             R.drawable.ic_log_out
         )
         // restul e automat

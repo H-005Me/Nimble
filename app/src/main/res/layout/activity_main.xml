@@ -45,7 +45,7 @@
                         android:id="@+id/closeButton"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:background="#00FFFFFF"
+                        android:background="@android:color/transparent"
                         android:fontFamily="@font/roboto"
                         android:text="În apropiere"
                         android:textAllCaps="false"
@@ -125,6 +125,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="fill_parent"
                                 android:numColumns="2"
+                                android:paddingHorizontal="10dp"
+                                android:verticalSpacing="15dp"
+                                android:horizontalSpacing="15dp"
                                 tools:ignore="DuplicateSpeakableTextCheck" />
 
                             <ListView
@@ -132,15 +135,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:divider="@android:color/transparent"
-                                android:dividerHeight="10.0sp" />
+                                android:dividerHeight="15dp" />
 
                             <ListView
                                 android:id="@+id/CloseRestaurants"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:divider="@android:color/transparent"
-                                android:dividerHeight="10.0sp">
-
+                                android:dividerHeight="15.0dp">
                             </ListView>
 
                         </LinearLayout>
