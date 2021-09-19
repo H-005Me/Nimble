@@ -5,33 +5,27 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
-import android.location.LocationListener
-
 import com.example.nimble.RestaurantPages.GeneralRestaurant
-
-
-import com.example.nimble.adapters.MyListAdapter
-import kotlin.collections.ArrayList
 import com.example.nimble.adapters.GridAdapter
+import com.example.nimble.adapters.MyListAdapter
 import com.example.nimble.adapters.OffertsAdapter
 import com.example.nimble.adapters.ProductsAdapter
-import android.util.Log
 import com.example.nimble.database.Database
 import com.example.nimble.entities.*
+import com.example.nimble.maps_activity.MapsActivity
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.QrActivity
-import com.example.nimble.maps_activity.MapsActivity
-import java.lang.Exception
-import kotlin.collections.LinkedHashSet
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
@@ -39,102 +33,10 @@ var OffertsList = ArrayList<OffertsClass>()
 class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var locationManager: LocationManager
-    var respectedGPS = true
-    private val locationPermissionCode = 2
-
+    var respectedGPS = false
+    var arrayOfCategoriesNames = arrayListOf<String>()
     var latitude = 0.0
     var longitude = 0.0
-
-    var myLocation: Location? = null
-    fun getLocation(): Location? {
-
-        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
-            )
-        }
-        locationManager.requestLocationUpdates(
-            LocationManager.GPS_PROVIDER,
-            5000,
-            5f,
-            MyLocationListener()
-        )
-        return myLocation
-    }
-    inner class MyLocationListener : LocationListener {
-        constructor() {
-            myLocation = Location("me")
-            longitude = myLocation!!.longitude
-            latitude = myLocation!!.latitude
-            var i = 0
-            Log.i("latitude", "$latitude")
-            Log.i("longitude", "$longitude")
-            while (i < RestaurantsList.size) {
-
-                RestaurantsList[i].setCurrentLatitude(latitude)
-                RestaurantsList[i].setCurrentLongitude(longitude)
-                RestaurantsList[i].reDistance()
-                ++i
-            }
-            RestaurantsList.sortBy { it.getDistance() }
-
-        }
-
-        override fun onLocationChanged(location: Location) {
-            myLocation = location
-            latitude = myLocation!!.latitude
-            longitude = myLocation!!.longitude
-            var i = 0
-            while (i < RestaurantsList.size) {
-
-                RestaurantsList[i].setCurrentLatitude(latitude)
-                RestaurantsList[i].setCurrentLongitude(longitude)
-                RestaurantsList[i].reDistance()
-                ++i
-            }
-            RestaurantsList.sortBy { it.getDistance() }
-        }
-
-        override fun onProviderDisabled(provider: String) {
-
-        }
-
-        override fun onProviderEnabled(provider: String) {
-            myLocation = Location(provider)
-            longitude = myLocation!!.longitude
-            latitude = myLocation!!.latitude
-            var i = 0
-            Log.i("latitude", "$latitude")
-            Log.i("longitude", "$longitude")
-            while (i < RestaurantsList.size) {
-
-                RestaurantsList[i].setCurrentLatitude(latitude)
-                RestaurantsList[i].setCurrentLongitude(longitude)
-                RestaurantsList[i].reDistance()
-                ++i
-            }
-            RestaurantsList.sortBy { it.getDistance() }
-        }
-
-        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-        }
-    }
     var RestaurantsList = ArrayList<RestaurantsClass>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,9 +44,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         val mapsButton = findViewById<Button>(R.id.mapsbutton)
-
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
-
         var offertsList = findViewById<ListView>(R.id.offerts)
         val categoryList = findViewById<GridView>(R.id.category)
         val searchBar = findViewById<Button>(R.id.searchButton)
@@ -153,46 +53,17 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         val profileButton = findViewById<Button>(R.id.profilebutton)
         var recommendedRestaurants = findViewById<RecyclerView>(R.id.recommendedlist)
         var BtnScanner = findViewById<Button>(R.id.btnscanner)
+        val closeRestaurants = findViewById<Button>(R.id.closeButton)
+        var offers = findViewById<Button>(R.id.offersButton)
+        var categories = findViewById<Button>(R.id.categoriesButton)
 
-        try {
+        checkLocation()
 
-
-            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true
-            ) {
-                val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-                latitude = loc!!.latitude
-                longitude = loc.longitude
-                getLocation()
-                longitude = loc.longitude
-                latitude = loc.latitude
-                RestaurantsList.clear()
-                OffertsList.clear()
-                prepareRestaurantsData()
-                setUpOffers()
-                respectedGPS = true
-
-            } else {
-                respectedGPS = false
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
-                )
-            }
-        } catch (ex: Exception) {
-            prepareRestaurantsData()
-            listView.isEnabled = false
-            offertsList.isEnabled = false
-            categoryList.isEnabled = false
-            listView.visibility = View.GONE
-            offertsList.visibility = View.GONE
-            categoryList.visibility = View.GONE
-            respectedGPS = false
-
-        }
         //disabled for the moment
         mapsButton.isEnabled = false
         ///
         mainButton.isEnabled = true
+
         var numbersMap = mutableMapOf("one" to 9000)
         var index = 0
         while (index < RestaurantsList.size) {
@@ -200,9 +71,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             index++
         }
         index = 0
-
-        searchBar.setOnClickListener()
-        {
+        //click listeneres
+        searchBar.setOnClickListener() {
 
             val intent = Intent(this, SearchActiviy::class.java)
             intent.putExtra("LIST", RestaurantsList)
@@ -219,30 +89,83 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
+
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
-
         var myListAdapter1 = OffertsAdapter(this, OffertsList)
         offertsList.adapter = myListAdapter1
         var categoriesList = ArrayList<CategoriesClass>()
-        for (index in RestaurantsList.indices) {
-            var newcategoriesList = RestaurantsList[index].getCategories()
-            for (new_index1 in newcategoriesList.indices) {
-                var isThere = false
-                for (new_index in categoriesList.indices)
-                    if (newcategoriesList[new_index1] == categoriesList[new_index].getName()) {
-                        isThere = true
-                        categoriesList[new_index].addIndices(index)
-                    }
-                if (isThere == false) {
-                    categoriesList.add(CategoriesClass(newcategoriesList[new_index1], 0))
-                    categoriesList[categoriesList.size - 1].addIndices(index)
+//        for (index in RestaurantsList.indices) {
+//            var newcategoriesList = RestaurantsList[index].getCategories()
+//            for (new_index1 in newcategoriesList.indices) {
+//                var isThere = false
+//                for (new_index in categoriesList.indices)
+//                    if (newcategoriesList[new_index1] == categoriesList[new_index].getName()) {
+//                        isThere = true
+//                        categoriesList[new_index].addIndices(index)
+//                    }
+//                if (isThere == false) {
+//                    categoriesList.add(CategoriesClass(newcategoriesList[new_index1], 0))
+//                    categoriesList[categoriesList.size - 1].addIndices(index)
+//                }
+//            }
+//        }
+        identifyCategories(categoriesList)
+        getRes.setOnClickListener {
+            checkLocation()
+            if (respectedGPS == true) {
+                listView.isEnabled = true
+                listView.visibility = View.VISIBLE
+                getRes.isEnabled = false
+                getRes.visibility = View.GONE
+                identifyCategories(categoriesList)
+                var myGridAdapter = GridAdapter(this, categoriesList)
+                categoryList.adapter = myGridAdapter
+                for (each in categoriesList.indices)
+                    categoriesList[each].setIndices(removeDuplicates(categoriesList[each].getTheIndices()))
+                var arrayOfCategoriesNames =
+                    arrayListOf<String>(
+                        "Burger",
+                        "Desert",
+                        "Peste",
+                        "Pizza",
+                        "Cartofi",
+                        "Salata",
+                        "Saorma",
+                        "Supa"
+                    )
+                var arrayOfCategoriesIcons = arrayListOf<Int>(
+                    R.drawable.bg_categ_burger,
+                    R.drawable.bg_categ_dessert,
+                    R.drawable.bg_categ_fish,
+                    R.drawable.bg_categ_pizza,
+                    R.drawable.bg_categ_potatos,
+                    R.drawable.bg_categ_salads,
+                    R.drawable.bg_categ_shawarma,
+                    R.drawable.bg_categ_soup
+                )
+                //to change the categories photos
+                for (x in categoriesList.indices) {
+                    for (y in arrayOfCategoriesNames.indices)
+                        if (categoriesList[x].getName() == arrayOfCategoriesNames[y])
+                            categoriesList[x].setPhoto(arrayOfCategoriesIcons[y])
                 }
+                var myRecAdapter = ProductsAdapter(RestaurantsList, this)
+                recommendedRestaurants.adapter = myRecAdapter
             }
         }
         //fiecare categorie are nume si un  icon; acestea sunt
         var arrayOfCategoriesNames =
-            arrayListOf<String>("Burger", "Desert", "Peste", "Pizza", "Cartofi", "Salata", "Saorma", "Supa")
+            arrayListOf<String>(
+                "Burger",
+                "Desert",
+                "Peste",
+                "Pizza",
+                "Cartofi",
+                "Salata",
+                "Saorma",
+                "Supa"
+            )
         var arrayOfCategoriesIcons = arrayListOf<Int>(
             R.drawable.bg_categ_burger,
             R.drawable.bg_categ_dessert,
@@ -259,65 +182,11 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 if (categoriesList[x].getName() == arrayOfCategoriesNames[y])
                     categoriesList[x].setPhoto(arrayOfCategoriesIcons[y])
         }
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
-            )
-        }
-
-        getRes.setOnClickListener {
-
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
-            )
-            if ((ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) ==
-                        PackageManager.PERMISSION_GRANTED)
-            ) {
-                if (respectedGPS == true) {
-                    try {
-                        getLocation()
-
-                        val loc =
-                            locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-                        latitude = loc!!.latitude
-                        longitude = loc.longitude
-                        prepareRestaurantsData()
-
-                    } catch (ex: Exception) {
-                        Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
-                        ActivityCompat.requestPermissions(
-                            this,
-                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                            1
-                        )
-                        val loc =
-                            locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-                        latitude = loc!!.latitude
-                        longitude = loc.longitude
-                    }
-                } else {
-                    Toast.makeText(this, "Please turn on GPS", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
         for (each in categoriesList.indices)
             categoriesList[each].setIndices(removeDuplicates(categoriesList[each].getTheIndices()))
         var myGridAdapter = GridAdapter(this, categoriesList)
         categoryList.adapter = myGridAdapter
-        val closeRestaurants = findViewById<Button>(R.id.closeButton)
-        var offers = findViewById<Button>(R.id.offersButton)
-        var categories = findViewById<Button>(R.id.categoriesButton)
+
         if (respectedGPS == true) {
             listView.isEnabled = true
             listView.visibility = View.VISIBLE
@@ -346,7 +215,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         categories.setOnClickListener()
         {
-
+            myGridAdapter = GridAdapter(this, categoriesList)
+            categoryList.adapter = myGridAdapter
             listView.isEnabled = false
             offertsList.isEnabled = false
             categoryList.isEnabled = true
@@ -633,7 +503,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x])
         RestaurantsList.sortBy { it.getDistance() }
     }
-
     private fun setUpOffers() {
         OffertsList.add(
             OffertsClass(
@@ -691,29 +560,111 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         return ArrayList(set)
     }
 
+    fun checkLocation() {
+        try {
+            if (Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+                    latitude = loc!!.latitude
+                    longitude = loc.longitude
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == locationPermissionCode) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
-                respectedGPS = true
+                    RestaurantsList.clear()
+                    OffertsList.clear()
+                    prepareRestaurantsData()
+                    setUpOffers()
+                    respectedGPS = true
+                } else {
+                    Toast.makeText(this, "gps disabled", Toast.LENGTH_SHORT).show()
+                    respectedGPS = false
+                }
+
+
             } else {
-                respectedGPS = false
-                var someList = findViewById<ListView>(R.id.CloseRestaurants)
-                someList.isEnabled = false
-                someList.visibility = View.VISIBLE
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this, "wtf", Toast.LENGTH_SHORT).show()
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ),
+                    101
+                );
             }
+
+        } catch (ex: Exception) {
+            Toast.makeText(this, "$ex", Toast.LENGTH_SHORT).show()
+            val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+            if (loc != null) {
+                latitude = loc.latitude
+                longitude = loc.longitude
+            }
+            RestaurantsList.clear()
+            OffertsList.clear()
+            prepareRestaurantsData()
+            setUpOffers()
+            respectedGPS = true
         }
     }
 
+    fun identifyCategories(categoriesList: ArrayList<CategoriesClass>) {
+        for (index in RestaurantsList.indices) {
+            var newcategoriesList = RestaurantsList[index].getCategories()
+            for (new_index1 in newcategoriesList.indices) {
+                var isThere = false
+                for (new_index in categoriesList.indices)
+                    if (newcategoriesList[new_index1] == categoriesList[new_index].getName()) {
+                        isThere = true
+                        categoriesList[new_index].addIndices(index)
+                    }
+                if (isThere == false) {
+                    categoriesList.add(CategoriesClass(newcategoriesList[new_index1], 0))
+                    categoriesList[categoriesList.size - 1].addIndices(index)
+                }
+            }
+        }
+    }
 }
+
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        if (requestCode == locationPermissionCode) {
+//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+//                respectedGPS = true
+//            } else {
+//                respectedGPS = false
+//                var someList = findViewById<ListView>(R.id.CloseRestaurants)
+//                someList.isEnabled = false
+//                someList.visibility = View.VISIBLE
+//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+//
+//            }
+//        }
+//    }
+//    private fun isPermissionGranted() : Boolean {
+//        return ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+//    }
+//    private fun isGpsEnabled():Boolean{
+//
+//    }
+
+
+
 
 
 
