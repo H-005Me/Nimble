@@ -28,10 +28,10 @@ class ProfileActivity : AppCompatActivity() {
         // aici se fac schimbarile
         var optionsList = arrayOf("Comenzile mele", "Rezervarile mele", "Profilul meu", "Log out")
         var resourcesList = arrayListOf<Int>(
-            R.drawable.ic_my_command,
-            R.drawable.ic_my_reservations,
-            R.drawable.ic_profile,
-            R.drawable.ic_log_out
+            R.drawable.ic_menu_yellow,
+            R.drawable.ic_calendar_yellow,
+            R.drawable.ic_profile_yellow,
+            R.drawable.ic_logout_yellow
         )
         // restul e automat
 

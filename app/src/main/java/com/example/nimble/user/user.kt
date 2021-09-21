@@ -8,7 +8,7 @@ import com.example.nimble.login.LoginActivity
 object user {
     private var username = "Guest"
     private var fullName = ""
-    private var profilePicture = R.drawable.ic_profile_circled_white
+    private var profilePicture = R.drawable.ic_profile_circle
     private var id = -1
     private var email = "Email@thereIsntAny"
     fun getUser() {

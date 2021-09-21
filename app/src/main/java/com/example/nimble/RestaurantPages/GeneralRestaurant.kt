@@ -40,9 +40,10 @@ class GeneralRestaurant : AppCompatActivity() {
         var optionsList = arrayOf("Meniu", "Rezerva", "Imagini", "Recenzii", "Oferte")
         var resourcesList = arrayListOf<Int>(
             R.drawable.ic_menu,
-            R.drawable.ic_reserve,
-            R.drawable.ic_images,
-            R.drawable.ic_reviews,
+            R.drawable.ic_calendar,
+            R.drawable.ic_image,
+            R.drawable.ic_star,
+            R.drawable.ic_offer,
             R.drawable.ic_home
         )
         var myGridAdapter = GridAdapterRestaurants(this, optionsList, resourcesList)
