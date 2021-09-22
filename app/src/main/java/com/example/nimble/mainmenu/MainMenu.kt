@@ -3,7 +3,6 @@ package com.example.nimble.mainmenu
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
@@ -285,20 +284,20 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     }
     private fun prepareRestaurantsData() {
         var bgPageOfRestaurantsArray = arrayListOf<Int>(
-            R.drawable.bg_simple_casa_piratilor,
-            R.drawable.bg_simple_marty,
-            R.drawable.bg_simple_klaus,
-            R.drawable.bg_simple_papion,
-            R.drawable.bg_simple_pizza_hut,
-            R.drawable.bg_simple_kfc
+            R.drawable.bg_cover_casa_piratilor,
+            R.drawable.bg_cover_marty,
+            R.drawable.bg_cover_klaus,
+            R.drawable.bg_cover_papion,
+            R.drawable.bg_cover_pizza_hut,
+            R.drawable.bg_cover_kfc
         )
         var locationMapArray = arrayListOf<Int>(
-            R.drawable.location_casa_piratilor,
-            R.drawable.location_marty,
-            R.drawable.location_klaus,
-            R.drawable.logo_papion,
-            R.drawable.logo_pizza_hut,
-            R.drawable.logo_kfc
+            R.drawable.bg_maps_casa_piratilor,
+            R.drawable.bg_maps_marty,
+            R.drawable.bg_maps_klaus,
+            R.drawable.bg_maps_papion,
+            R.drawable.bg_maps_pizza_hut,
+            R.drawable.bg_maps_kfc
         )
         //the current order:
         //casa Piratilor
@@ -319,7 +318,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             arrayOf(
                 MenuClass(
                     "Cartofi",
-                    arrayOf(ProductClass("Cartofi prajiti", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    arrayOf(ProductClass("Cartofi prajiti", 25.0, 250.0, R.drawable.ic_launcher_background)),
                 ), MenuClass(
                     "Cartofi",
                     arrayOf(ProductClass("Cartofi dulci", 25.0, 250.0, R.drawable.ic_launcher_background))
