@@ -3,6 +3,7 @@ package com.example.nimble.mainmenu
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import com.example.nimble.R
@@ -18,9 +19,14 @@ class GeneralCategory : AppCompatActivity() {
         var theIndices = intent.getSerializableExtra("INDICES") as ArrayList<Int>
         var theNewList = ArrayList<RestaurantsClass>()
         var theName = intent.getSerializableExtra("NAME") as String
+        var backButton = findViewById<Button>(R.id.backButtonGeneralCategory)
         for (each in theIndices) {
             theNewList.add(theList[each])
         }
+        backButton.setOnClickListener {
+            finish()
+        }
+
         var theListView = findViewById<ListView>(R.id.categoryL)
         var theNameView = findViewById<TextView>(R.id.categoryName)
         var new_Adapter = MyListAdapter(this, theNewList)

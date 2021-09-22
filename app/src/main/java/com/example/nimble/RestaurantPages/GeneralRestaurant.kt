@@ -21,7 +21,7 @@ class GeneralRestaurant : AppCompatActivity() {
         setContentView(R.layout.activity_general_restaurant)
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         val icon = findViewById<ImageView>(R.id.backgroundImage)
-        icon.setImageResource(theList.getBackground())
+        icon.setImageResource(theList.getPageBackground())
         val title = findViewById<TextView>(R.id.titleRestaurant)
         val menulist = findViewById<GridView>(R.id.optionsMenu)
         val tagsGrid = findViewById<GridView>(R.id.tagsGrid)
@@ -30,15 +30,19 @@ class GeneralRestaurant : AppCompatActivity() {
         val mapsButton = findViewById<Button>(R.id.mapsbutton)
         val profileButton = findViewById<Button>(R.id.profilebutton)
         val locationMap = findViewById<ImageView>(R.id.locationPhoto)
+        val backButton = findViewById<Button>(R.id.backButtonGeneralRestaurant)
         locationMap.setImageResource(theList.getLocationMap())
         description.text = theList.getStreet()
+
         var myAdapter = TagsAdapter(this, theList.getCategories())
         tagsGrid.adapter = myAdapter
         tagsGrid.setOnItemClickListener { parent, view, position, id ->
             var new_intent = Intent(this, GeneralRestaurant::class.java)
 
         }
-
+        backButton.setOnClickListener {
+            finish()
+        }
         var optionsList = arrayOf("Meniu", "Rezerva", "Imagini", "Recenzii", "Oferte")
         var resourcesList = arrayListOf<Int>(
             R.drawable.ic_menu,

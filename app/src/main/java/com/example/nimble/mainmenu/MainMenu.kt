@@ -307,6 +307,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         //papion
         //pizza hut
         //kfc
+
         var restaurants = RestaurantsClass(
             "Casa Piratilor",
 
