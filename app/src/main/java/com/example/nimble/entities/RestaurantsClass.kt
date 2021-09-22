@@ -32,6 +32,7 @@ class RestaurantsClass(
     private var street: String
     private var pageBackground: Int
     private var offertsArray: ArrayList<OffertsClass>
+    private var locationMap: Int
 
     init {
         this.title = title!!
@@ -55,6 +56,15 @@ class RestaurantsClass(
         this.street = "None"
         this.pageBackground = this.background
         this.offertsArray = ArrayList<OffertsClass>()
+        this.locationMap = 0
+    }
+
+    fun setLocationMap(new_map_location: Int) {
+        this.locationMap = new_map_location
+    }
+
+    fun getLocationMap(): Int {
+        return this.locationMap
     }
 
     fun reDistance() {

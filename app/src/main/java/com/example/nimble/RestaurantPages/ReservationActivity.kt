@@ -197,7 +197,7 @@ class ReservationActivity : AppCompatActivity() {
 
     }
 
-    private fun ShowPopup() {
+    fun ShowPopup() {
         val myDialog: Dialog = Dialog(this)
         myDialog.setContentView(R.layout.tables_popup)
         val closeButton = myDialog.findViewById<Button>(R.id.close_button)

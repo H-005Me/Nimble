@@ -292,6 +292,21 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             R.drawable.bg_simple_pizza_hut,
             R.drawable.bg_simple_kfc
         )
+        var locationMapArray = arrayListOf<Int>(
+            R.drawable.location_casa_piratilor,
+            R.drawable.location_marty,
+            R.drawable.location_klaus,
+            R.drawable.logo_papion,
+            R.drawable.logo_pizza_hut,
+            R.drawable.logo_kfc
+        )
+        //the current order:
+        //casa Piratilor
+        //marty
+        //klaus
+        //papion
+        //pizza hut
+        //kfc
         var restaurants = RestaurantsClass(
             "Casa Piratilor",
 
@@ -499,8 +514,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             RestaurantsList[i].reDistance()
             ++i
         }
-        for (x in RestaurantsList.indices)
+        for (x in RestaurantsList.indices) {
             RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x])
+            RestaurantsList[x].setLocationMap(locationMapArray[x])
+        }
         RestaurantsList.sortBy { it.getDistance() }
     }
     private fun setUpOffers() {

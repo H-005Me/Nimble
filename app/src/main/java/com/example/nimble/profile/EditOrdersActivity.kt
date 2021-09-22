@@ -1,6 +1,7 @@
 package com.example.nimble.profile
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -11,13 +12,20 @@ import com.example.nimble.R
 import com.example.nimble.entities.OrdersClass
 import java.util.*
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.WindowManager
 import android.widget.*
+import com.example.nimble.RestaurantPages.ReservationActivity
+import com.example.nimble.adapters.TableAdapter
 import com.example.nimble.database.Database
+import com.example.nimble.entities.TablesClass
+import kotlin.collections.ArrayList
 
 
 class EditOrdersActivity : AppCompatActivity() {
-
+    var TablesList = ArrayList<TablesClass>()
+    var tablesNumber = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_orders_edit_activity)
@@ -77,7 +85,7 @@ class EditOrdersActivity : AppCompatActivity() {
                     var id = theList.getId()
                     Database.runUpdate(
                         """
-                        UPDATE tbl_orders SET minutes = '$minutes', hour = '$hour', day='$day', month='$month' WHERE command_id = '$id';
+                        UPDATE tbl_orders SET minutes = '$minutes', hour = '$hour', day='$day', month='$month',tableselected='$tables' WHERE command_id = '$id';
                     """.trimIndent()
                     )
                     month--
@@ -125,8 +133,6 @@ class EditOrdersActivity : AppCompatActivity() {
             }
 
         }
-
-//        Toast.makeText(this, theList.getHour(), Toast.LENGTH_SHORT).show()
         pickHourBtn.setOnClickListener {
             val cal = Calendar.getInstance()
             val timeSetLister =
@@ -153,8 +159,13 @@ class EditOrdersActivity : AppCompatActivity() {
             cancelButton.visibility = View.VISIBLE
             saveButton.isEnabled = true
         }
+        getTables()
         pickTableBtn.setOnClickListener {
-            Toast.makeText(this, remark, Toast.LENGTH_SHORT).show()
+            saveButton.isEnabled = true
+            new_showPopUp()
+            var new_string = pickTableBtn.text.toString()
+            tables = new_string.toUInt().toInt()
+
         }
 
 
@@ -203,6 +214,43 @@ class EditOrdersActivity : AppCompatActivity() {
         }
     }
 
+    private fun new_showPopUp() {
+        val myDialog: Dialog = Dialog(this)
+        myDialog.setContentView(R.layout.tables_popup)
+        val closeButton = myDialog.findViewById<Button>(R.id.close_button)
+        val tablesGridList = myDialog.findViewById<GridView>(R.id.tables_list_1)
+        var adapter = TableAdapter(this, TablesList)
+        tablesGridList.adapter = adapter
+        tablesGridList.setOnItemClickListener { parent, view, position, id ->
+            if (TablesList[position].getStatus() == true)
+                TablesList[position].setStatus(false)
+            else
+                TablesList[position].setStatus(true)
+            adapter = TableAdapter(this, TablesList)
+            tablesGridList.adapter = adapter
+            tablesNumber = arrayListOf("")
+            for (i in TablesList.indices)
+                if (TablesList[i].getStatus() == true)
+                    tablesNumber.add(TablesList[i].getId().toString())
+
+        }
+
+        closeButton.setOnClickListener {
+
+            val chooseTableButton = findViewById<Button>(R.id.new_tablebutton)
+            var text = tablesNumber.toString()
+            if (text.length > 2)
+                text = text.substring(2, text.length - 1)
+            else
+                text = "Pick"
+            chooseTableButton.text = text
+            myDialog.dismiss()
+        }
+
+        myDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myDialog.show()
+    }
+
     fun setText(
         year: Int,
         month: Int,
@@ -223,6 +271,22 @@ class EditOrdersActivity : AppCompatActivity() {
             pickHourBtn.text = "$hour:$minutes"
         pickTableBtn.text = "$tables"
         editRemarkTxt.setText(remarks)
+    }
+
+    fun getTables() {
+        //TODO("aici se iau din baza de date")
+        var table = TablesClass(2, 1, false)
+        TablesList.add(table)
+        table = TablesClass(2, 2, false)
+        TablesList.add(table)
+        table = TablesClass(2, 3, false)
+        TablesList.add(table)
+        table = TablesClass(2, 4, false)
+        TablesList.add(table)
+        table = TablesClass(2, 5, false)
+        TablesList.add(table)
+        table = TablesClass(2, 6, false)
+        TablesList.add(table)
     }
 
 }

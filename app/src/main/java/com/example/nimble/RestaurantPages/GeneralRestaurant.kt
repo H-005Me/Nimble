@@ -29,7 +29,8 @@ class GeneralRestaurant : AppCompatActivity() {
         val homeButton = findViewById<Button>(R.id.homebutton)
         val mapsButton = findViewById<Button>(R.id.mapsbutton)
         val profileButton = findViewById<Button>(R.id.profilebutton)
-
+        val locationMap = findViewById<ImageView>(R.id.locationPhoto)
+        locationMap.setImageResource(theList.getLocationMap())
         description.text = theList.getStreet()
         var myAdapter = TagsAdapter(this, theList.getCategories())
         tagsGrid.adapter = myAdapter
@@ -37,6 +38,7 @@ class GeneralRestaurant : AppCompatActivity() {
             var new_intent = Intent(this, GeneralRestaurant::class.java)
 
         }
+
         var optionsList = arrayOf("Meniu", "Rezerva", "Imagini", "Recenzii", "Oferte")
         var resourcesList = arrayListOf<Int>(
             R.drawable.ic_menu,
