@@ -60,7 +60,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         checkLocation()
 
         //disabled for the moment
-        mapsButton.isEnabled = false
+        mapsButton.isEnabled = true
         ///
         mainButton.isEnabled = true
 
