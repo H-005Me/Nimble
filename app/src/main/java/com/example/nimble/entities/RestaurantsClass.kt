@@ -33,7 +33,7 @@ class RestaurantsClass(
     private var pageBackground: Int
     private var offertsArray: ArrayList<OffertsClass>
     private var locationMap: Int
-
+    private var priceRange: Int
     init {
         this.title = title!!
         this.latitude = latitude!!
@@ -57,6 +57,15 @@ class RestaurantsClass(
         this.pageBackground = this.background
         this.offertsArray = ArrayList<OffertsClass>()
         this.locationMap = 0
+        this.priceRange = 0
+    }
+
+    fun getPriceRange(): Int {
+        return this.priceRange
+    }
+
+    fun setPriceRange(new_price_range: Int) {
+        this.priceRange = new_price_range
     }
 
     fun setLocationMap(new_map_location: Int) {

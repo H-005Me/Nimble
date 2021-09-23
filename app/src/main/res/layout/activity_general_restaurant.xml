@@ -36,14 +36,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="510dp"
             android:layout_marginTop="-20dp"
             android:background="@drawable/background_bottom">
 
             <GridView
                 android:id="@+id/tagsGrid"
-                android:layout_width="0dp"
-                android:layout_height="68dp"
+                android:layout_width="372dp"
+                android:layout_height="46dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
@@ -57,14 +57,14 @@
 
             <GridView
                 android:id="@+id/optionsMenu"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_width="377dp"
+                android:layout_height="79dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="15dp"
                 android:numColumns="2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.47"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tagsGrid" />
 
@@ -95,17 +95,28 @@
                 app:layout_constraintStart_toStartOf="@+id/titleRestaurant"
                 app:layout_constraintTop_toBottomOf="@+id/titleRestaurant" />
 
+            <Button
+                android:id="@+id/toReserveBtn"
+                android:layout_width="155dp"
+                android:layout_height="54dp"
+                android:text="Rezerva"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.441"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/optionsMenu" />
+
             <ImageView
                 android:id="@+id/locationPhoto"
                 android:layout_width="0dp"
-                android:layout_height="250dp"
+                android:layout_height="184dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/optionsMenu"
+                app:layout_constraintTop_toBottomOf="@+id/toReserveBtn"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@mipmap/ic_launcher" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,7 +33,7 @@ class GeneralRestaurant : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.backButtonGeneralRestaurant)
         locationMap.setImageResource(theList.getLocationMap())
         description.text = theList.getStreet()
-
+        val reservationBtn = findViewById<Button>(R.id.toReserveBtn)
         var myAdapter = TagsAdapter(this, theList.getCategories())
         tagsGrid.adapter = myAdapter
         tagsGrid.setOnItemClickListener { parent, view, position, id ->
@@ -43,10 +43,10 @@ class GeneralRestaurant : AppCompatActivity() {
         backButton.setOnClickListener {
             finish()
         }
-        var optionsList = arrayOf("Meniu", "Rezerva", "Imagini", "Recenzii", "Oferte")
+        var optionsList = arrayOf("Meniu", "Imagini", "Recenzii", "Oferte")
         var resourcesList = arrayListOf<Int>(
             R.drawable.ic_menu,
-            R.drawable.ic_calendar,
+
             R.drawable.ic_image,
             R.drawable.ic_star,
             R.drawable.ic_offer,
@@ -61,16 +61,16 @@ class GeneralRestaurant : AppCompatActivity() {
             if (position == 0)
                 intent = Intent(this, RestaurantMenuActivity::class.java)
             else if (position == 1)
-                intent = Intent(this, ReservationActivity::class.java)
-            else if (position == 2)
                 intent = Intent(this, ImagesActivity::class.java)
+            else if (position == 2)
+                intent = Intent(this, ReviewsActivity::class.java)
             else if (position == 3)
                 intent = Intent(this, ReviewsActivity::class.java)
-            else if (position == 4)
-                intent = Intent(this, ReviewsActivity::class.java)
+
             intent.putExtra("LIST", theList)
             startActivity(intent)
         }
+
         homeButton.setOnClickListener {
             intent = Intent(this, MainMenu::class.java)
             startActivity(intent)
@@ -85,6 +85,12 @@ class GeneralRestaurant : AppCompatActivity() {
             intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
             finish()
+        }
+        reservationBtn.setOnClickListener {
+            var intent = Intent()
+            intent = Intent(this, ReservationActivity::class.java)
+            intent.putExtra("LIST", theList)
+            startActivity(intent)
         }
     }
 }
