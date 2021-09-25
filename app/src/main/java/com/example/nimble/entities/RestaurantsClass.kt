@@ -10,6 +10,7 @@ import java.math.RoundingMode
 import kotlin.math.*
 
 class RestaurantsClass(
+    index: Int,
     title: String?, review: Int?,
     grade: Double?,
     icon: Int?,
@@ -18,6 +19,7 @@ class RestaurantsClass(
     longitude: Double?,
     categories: Array<MenuClass>
 ) :Serializable {
+    private var id: Int
     private var categories: Array<MenuClass>
     private var title: String
     private var distance: Double
@@ -35,6 +37,7 @@ class RestaurantsClass(
     private var locationMap: Int
     private var priceRange: Int
     init {
+        this.id = index
         this.title = title!!
         this.latitude = latitude!!
         this.longitude = longitude!!
@@ -58,6 +61,10 @@ class RestaurantsClass(
         this.offertsArray = ArrayList<OffertsClass>()
         this.locationMap = 0
         this.priceRange = 0
+    }
+
+    fun getIndex(): Int {
+        return this.id
     }
 
     fun getPriceRange(): Int {

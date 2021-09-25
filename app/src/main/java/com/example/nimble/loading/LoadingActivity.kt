@@ -36,7 +36,7 @@ class LoadingActivity : AppCompatActivity() {
             return
         }
 
-        Database.debugPrintTable("tbl_restaurants")
+        Database.debugPrintTable("tbl_food")
 
         /// go to LoginActivity & destroy LoadingActivity
         val intent = Intent(this, LoginActivity::class.java)
