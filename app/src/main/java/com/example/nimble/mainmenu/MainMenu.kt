@@ -307,7 +307,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         //pizza hut
         //kfc
 
-        var restaurants = RestaurantsClass(
+        /*var restaurants = RestaurantsClass(
             "Casa Piratilor",
 
             1500,
@@ -453,9 +453,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         restaurants.setStreet("Str. Alexandru Vaida-Voievod")
         restaurants.setPageBackground(R.drawable.bg_simple_kfc)
-        RestaurantsList.add(restaurants)
+        RestaurantsList.add(restaurants)*/
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
 
+        /// TODO If res is empty, there is a null pointer exception
         val res = Database.runQuery(
             """
             SELECT name,reviews_no,rating,lat,long FROM tbl_restaurants;
@@ -470,7 +471,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var long = res.getDouble(5)
             Log.i("lat", lat.toString())
             Log.i("long", long.toString())
-            restaurants = RestaurantsClass(
+            val restaurants = RestaurantsClass(
                 name,
                 reviews,
                 rating,
@@ -490,10 +491,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                                 )
                             )
                         ), MenuClass(
-                            "Peste",
+                            "Burger",
                             arrayOf(
                                 ProductClass(
-                                    "Ton",
+                                    "Cheeseburger",
                                     25.0,
                                     250.0,
                                     R.drawable.ic_launcher_background

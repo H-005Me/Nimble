@@ -36,29 +36,6 @@ class LoadingActivity : AppCompatActivity() {
             return
         }
 
-        Database.debugPrintTable("tbl_users")
-//        Database.runUpdate("""
-//            DROP TABLE tbl_orders
-//        """.trimIndent())
-//                Database.runUpdate("""
-//            CREATE TABLE tbl_orders (
-//                user_id INT NOT NULL,
-//                command_id INT IDENTITY(1,1) PRIMARY KEY,
-//            	name NVARCHAR(255) NOT NULL,
-//                year INT NOT NULL,
-//                month INT NOT NULL,
-//                day INT NOT NULL,
-//                hour INT NOT NULL,
-//                minutes INT NOT NULL,
-//                tableselected INT NOT NULL,
-//                status INT NOT NULL,
-//                expired INT NOT NULL,
-//                remarks NVARCHAR(1555) NOT NULL
-//            );
-//
-//        """.trimIndent()
-//        );
-
         /// go to LoginActivity & destroy LoadingActivity
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
