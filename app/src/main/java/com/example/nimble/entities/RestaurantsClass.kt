@@ -122,6 +122,10 @@ class RestaurantsClass(
     fun getDistance(): Double {
         return distance
     }
+    /// TODO Placeholder for screen recording
+    fun setDistance (dist: Double) {
+        this.distance = dist
+    }
 
     //
     fun distance1(startLat: Double, startLong: Double, destLat: Double, endLong: Double): Double {
