@@ -104,12 +104,19 @@ class RestaurantsClass(
         return background
     }
 
+    fun setBackground (bg: Int) {
+        this.background = bg
+    }
+
     fun setTitle(name: String) {
         title = name!!
     }
 
     fun getIcon(): Int {
         return icon
+    }
+    fun setIcon (icon: Int) {
+        this.icon = icon
     }
 
     fun getDistance(): Double {

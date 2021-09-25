@@ -507,6 +507,14 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 RestaurantsList.add(restaurants)
         }
 
+        /// TODO This is only for the screen recording, change this later
+        RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[0].setIcon(R.drawable.logo_restaurant_1)
+        RestaurantsList[1].setBackground(R.drawable.bg_simple_klaus)
+        RestaurantsList[1].setIcon(R.drawable.logo_restaurant_2)
+        RestaurantsList[2].setBackground(R.drawable.bg_simple_pizza_hut)
+        RestaurantsList[2].setIcon(R.drawable.logo_restaurant_3)
+
         var i = 0
         while (i < RestaurantsList.size) {
 
