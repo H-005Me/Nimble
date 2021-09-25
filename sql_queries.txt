@@ -47,8 +47,3 @@ CREATE TABLE tbl_food (
     ingredients NVARCHAR(300),
     price DECIMAL(5,2) NOT NULL
 );
-
-INSERT INTO tbl_restaurants (name, reviews_no, rating, lat, long, city, address)
-	VALUES ('Restaurant 1', 26, 4.3, 45.000000, 25.000000, 'Cluj-Napoca', 'Str. Restaurantelor, Nr. 3'),
-		   ('Restaurant 2', 48, 4.5, 45.000000, 25.000000, 'Cluj-Napoca', 'Str. Restaurantelor, Nr. 8'),
-		   ('Restaurant 3', 14, 3.9, 45.000000, 25.000000, 'Cluj-Napoca', 'Str. Restaurantelor, Nr. 13')

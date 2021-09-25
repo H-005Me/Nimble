@@ -36,6 +36,8 @@ class LoadingActivity : AppCompatActivity() {
             return
         }
 
+        Database.debugPrintTable("tbl_restaurants")
+
         /// go to LoginActivity & destroy LoadingActivity
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
