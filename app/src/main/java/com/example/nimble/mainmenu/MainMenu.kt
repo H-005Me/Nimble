@@ -459,7 +459,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         /// TODO If res is empty, there is a null pointer exception
         val res = Database.runQuery(
             """
-            SELECT name,reviews_no,rating,lat,long FROM tbl_restaurants;
+            SELECT name,reviews_no,rating,lat,long,address FROM tbl_restaurants;
         """.trimIndent()
         )
 
@@ -469,6 +469,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             val rating = res.getDouble(3)
             var lat = res.getDouble(4)
             var long = res.getDouble(5)
+            var address = res.getString(6)
             Log.i("lat", lat.toString())
             Log.i("long", long.toString())
             val restaurants = RestaurantsClass(
@@ -504,7 +505,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                     )
                 )
 
-                RestaurantsList.add(restaurants)
+            restaurants.setStreet(address)
+            RestaurantsList.add(restaurants)
         }
 
         /// TODO This is only for the screen recording, change this later
