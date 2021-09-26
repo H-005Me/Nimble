@@ -1,5 +1,6 @@
 import android.R
 import android.content.Context
+import android.util.Log
 
 import android.widget.TextView
 
@@ -10,70 +11,61 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import com.example.nimble.RestaurantPages.RestaurantMenuActivity
+import com.example.nimble.adapters.ProductsAdapter
+import com.example.nimble.entities.ProductClass
+import com.example.nimble.entities.RestaurantsClass
+import com.example.nimble.mainmenu.MainMenu
+import org.w3c.dom.Text
 
 
-class FoodAdapter(context: Context) :
-    RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
-    private val layoutInflater: LayoutInflater
+class FoodAdapter(
+    private var dishesList: ArrayList<ProductClass>,
+    private val listener: RestaurantMenuActivity
+) : androidx.recyclerview.widget.RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
+    override fun onBindViewHolder(holder: FoodAdapter.ViewHolder, position: Int) {
+
+//        holder.image.setImageResource(dishesList[position].getIcon())
+        holder.title.text = dishesList[position].getTitle()
+        holder.price.text = dishesList[position].getPriceOfProduct().toString()
+        holder.quantity.text = dishesList[position].getQuantity().toString()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(com.example.nimble.R.layout.custom_food, parent, false)
-        return ViewHolder(view, object : MyClickListener {
-            override fun onAdd(p: Int) {
-                // Implement your functionality for onEdit here
-            }
-
-            override fun onDelete(p: Int) {
-                // Implement your functionality for onDelete here
-            }
-        })
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list: List<*> = lists.elementAt(position)
-        holder.name.setText(list.getName())
-    }
 
-    override fun getItemCount(): Int {
-        return lists.size()
-    }
+    override fun getItemCount() = dishesList.size
 
-    class ViewHolder(itemView: View, listener: MyClickListener) :
-        RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        var listener: MyClickListener
-        var name: TextView
-        var add: Button
-        var delete: Button
-        fun onClick(view: View) {
-            when (view.getId()) {
-                R.id.add -> listener.onAdd(this.layoutPosition)
-                R.id.delete -> listener.onDelete(this.layoutPosition)
-                else -> {
-                }
-            }
-        }
+    inner class ViewHolder(itemView: View) :
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+        var title = itemView.findViewById<TextView>(com.example.nimble.R.id.foodType)
+        var add = itemView.findViewById<Button>(com.example.nimble.R.id.buttonAddToCart)
+        var delete = itemView.findViewById<Button>(com.example.nimble.R.id.buttonRemoveFromCart)
+        var quantity = itemView.findViewById<TextView>(com.example.nimble.R.id.foodQuantity)
+        var price = itemView.findViewById<TextView>(com.example.nimble.R.id.foodPrice)
 
         init {
-            name = itemView.findViewById(R.id.foodType)
-            delete = itemView.findViewById(R.id.buttonRemoveFromCart) as Button
-            add = itemView.findViewById(R.id.buttonAddToCart) as Button
-            this.listener = listener
-            add.setOnClickListener(this)
-            delete.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
+
+        override fun onClick(v: View?) {
+
+        }
+    }
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
     }
 
     interface MyClickListener {
-        fun onAdd(p: Int)
+        fun onEdit(p: Int)
         fun onDelete(p: Int)
-    }
-
-    init {
-        layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        this.lists = lists
     }
 }

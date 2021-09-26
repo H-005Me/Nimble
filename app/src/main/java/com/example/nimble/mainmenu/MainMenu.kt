@@ -62,9 +62,9 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         checkLocation()
         val layout = findViewById<LinearLayout>(R.id.isScrollable)
 // Gets the layout params that will allow you to resize the layout
-        val params = layout.layoutParams
-        params.height = RestaurantsList.size*350
-        Toast.makeText(this, params.height, Toast.LENGTH_SHORT).show()
+//        val params = layout.layoutParams
+//        params.height = RestaurantsList.size*350
+//        Toast.makeText(this, params.height, Toast.LENGTH_SHORT).show()
 
         //disabled for the moment
         mapsButton.isEnabled = true

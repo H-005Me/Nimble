@@ -1,5 +1,6 @@
 package com.example.nimble.RestaurantPages
 
+import FoodAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.nimble.R
@@ -13,6 +14,7 @@ import android.widget.ExpandableListView
 import com.example.nimble.adapters.ExpandableListAdapter
 import com.example.nimble.database.Database
 import com.example.nimble.entities.CategoriesClass
+import com.example.nimble.entities.ProductClass
 import com.example.nimble.entities.RestaurantsClass
 
 
@@ -27,7 +29,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
         /*var expandableListView=findViewById<ExpandableListView>(R.id.expand_activities_button)
         expandableListView.setAdapter(ExpandableListAdapter(this,expandableListView, header, body))*/
         var categoriesArray = ArrayList<String>()
-        var foodArray = ArrayList<ArrayList<String>>()
+        var foodArray = ArrayList<ProductClass>()
         var extras = intent.extras
         var theList = extras!!.get("LIST") as RestaurantsClass
 
@@ -50,12 +52,22 @@ class RestaurantMenuActivity : AppCompatActivity() {
             val ingredients = meals.getString(4)
             val price = meals.getDouble(5)
             var is_found = 0
-            for (x in categoriesArray.indices) {
-
-            }
-
-
             println("$foodId ; $name ; $type ; $ingredients ; $price")
         }
+        var food = ProductClass("sushi", 50.5, 599.9, R.drawable.offerts_marty_0)
+        foodArray.add(food)
+        food = ProductClass("sushi", 50.5, 599.9, R.drawable.offerts_marty_0)
+        foodArray.add(food)
+        food = ProductClass("sushi", 50.5, 599.9, R.drawable.offerts_marty_0)
+        foodArray.add(food)
+        food = ProductClass("sushi", 50.5, 599.9, R.drawable.offerts_marty_0)
+        foodArray.add(food)
+        food = ProductClass("sushi", 50.5, 599.9, R.drawable.offerts_marty_0)
+        foodArray.add(food)
+        var foodList = findViewById<RecyclerView>(R.id.foodList)
+        var adapter = FoodAdapter(foodArray, this)
+        foodList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        foodList.adapter = adapter
     }
 }

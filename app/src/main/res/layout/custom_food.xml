@@ -35,11 +35,11 @@
             android:text="Lei"
             android:textColor="@color/yellow_strong"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView9"
+            app:layout_constraintBottom_toBottomOf="@+id/foodQuantity"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/foodQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
