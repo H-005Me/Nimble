@@ -48,8 +48,10 @@
         android:background="@drawable/background_bottom"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
+        app:layout_constraintVertical_bias="1.0">
 
         <ListView
             android:id="@+id/userlist"
@@ -103,8 +105,7 @@
             android:id="@+id/profilebutton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_profile"
-            android:backgroundTint="@color/darker_gray"
+            android:background="@drawable/ic_account_filled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/homebutton"

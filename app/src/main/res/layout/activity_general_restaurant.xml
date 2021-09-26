@@ -11,7 +11,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:drawableStart="@drawable/ic_arrow_back"
         android:paddingStart="10dp"
@@ -31,19 +31,19 @@
         <ImageView
             android:id="@+id/backgroundImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
             android:scaleType="centerCrop" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="510dp"
+            android:layout_height="fill_parent"
             android:layout_marginTop="-20dp"
             android:background="@drawable/background_bottom">
 
             <GridView
                 android:id="@+id/tagsGrid"
-                android:layout_width="372dp"
-                android:layout_height="46dp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
@@ -57,7 +57,7 @@
 
             <GridView
                 android:id="@+id/optionsMenu"
-                android:layout_width="377dp"
+                android:layout_width="0dp"
                 android:layout_height="79dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="8dp"
@@ -97,9 +97,14 @@
 
             <Button
                 android:id="@+id/toReserveBtn"
-                android:layout_width="155dp"
-                android:layout_height="54dp"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/btn_login"
                 android:text="Rezerva"
+                android:textAllCaps="false"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.441"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,6 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="184dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -128,9 +134,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/yellow_strong"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
 
         <Button
             android:id="@+id/mapsbutton"
