@@ -34,6 +34,9 @@ class RestaurantsClass(
     private var offertsArray: ArrayList<OffertsClass>
     private var locationMap: Int
     private var priceRange: Int
+    private var restaurantType:String
+    private var payMethod:Int
+    private var id:Int
     init {
         this.title = title!!
         this.latitude = latitude!!
@@ -57,7 +60,36 @@ class RestaurantsClass(
         this.pageBackground = this.background
         this.offertsArray = ArrayList<OffertsClass>()
         this.locationMap = 0
+        // aici merge in GeneralRestaurant
         this.priceRange = 0
+        this.restaurantType="Nothing"
+        this.payMethod=0
+        this.id=0
+    }
+    fun setForGeneralRestaurant(new_price_range: Int,new_type:String,new_method: Int){
+        this.priceRange=new_price_range
+        this.restaurantType=new_type
+        this.payMethod=new_method
+    }
+    fun getRestaurantType():String{
+        return this.restaurantType
+    }
+    fun setId(new_id:Int){
+        this.id=new_id
+    }
+    fun getId():Int{
+        return this.id
+    }
+    fun setRestaurantType(new_type:String){
+        this.restaurantType=new_type
+    }
+
+    fun getPayMethod():Int{
+        return this.payMethod
+    }
+    fun setPayMethod(new_method:Int)
+    {
+        this.payMethod=new_method
     }
 
     fun getPriceRange(): Int {
@@ -122,11 +154,6 @@ class RestaurantsClass(
     fun getDistance(): Double {
         return distance
     }
-    /// TODO Placeholder for screen recording
-    fun setDistance (dist: Double) {
-        this.distance = dist
-    }
-
     //
     fun distance1(startLat: Double, startLong: Double, destLat: Double, endLong: Double): Double {
         var haversine: Double

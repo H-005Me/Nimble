@@ -25,6 +25,10 @@ import com.example.nimble.entities.*
 import com.example.nimble.maps_activity.MapsActivity
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.QrActivity
+import android.widget.RelativeLayout
+
+
+
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
@@ -55,8 +59,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         val closeRestaurants = findViewById<Button>(R.id.closeButton)
         var offers = findViewById<Button>(R.id.offersButton)
         var categories = findViewById<Button>(R.id.categoriesButton)
-
         checkLocation()
+        val layout = findViewById<LinearLayout>(R.id.isScrollable)
+// Gets the layout params that will allow you to resize the layout
+//        val params = layout.layoutParams
+//        params.height = RestaurantsList.size*350
+//        Toast.makeText(this, params.height, Toast.LENGTH_SHORT).show()
 
         //disabled for the moment
         mapsButton.isEnabled = true
@@ -307,7 +315,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         //pizza hut
         //kfc
 
-        /*var restaurants = RestaurantsClass(
+        var restaurants = RestaurantsClass(
             "Casa Piratilor",
 
             1500,
@@ -453,13 +461,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         restaurants.setStreet("Str. Alexandru Vaida-Voievod")
         restaurants.setPageBackground(R.drawable.bg_simple_kfc)
-        RestaurantsList.add(restaurants)*/
+        RestaurantsList.add(restaurants)
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
 
-        /// TODO If res is empty, there is a null pointer exception
         val res = Database.runQuery(
             """
-            SELECT name,reviews_no,rating,lat,long,address FROM tbl_restaurants;
+            SELECT name,reviews_no,rating,lat,long,address,id FROM tbl_restaurants;
         """.trimIndent()
         )
 
@@ -470,9 +477,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var lat = res.getDouble(4)
             var long = res.getDouble(5)
             var address = res.getString(6)
+            var id=res.getInt(7)
             Log.i("lat", lat.toString())
             Log.i("long", long.toString())
-            val restaurants = RestaurantsClass(
+            restaurants = RestaurantsClass(
                 name,
                 reviews,
                 rating,
@@ -492,10 +500,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                                 )
                             )
                         ), MenuClass(
-                            "Burger",
+                            "Peste",
                             arrayOf(
                                 ProductClass(
-                                    "Cheeseburger",
+                                    "Ton",
                                     25.0,
                                     250.0,
                                     R.drawable.ic_launcher_background
@@ -504,7 +512,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                         )
                     )
                 )
-
+            restaurants.setId(id)
             restaurants.setStreet(address)
             RestaurantsList.add(restaurants)
         }
@@ -529,9 +537,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             //RestaurantsList[i].reDistance()
             ++i
         }
-        for (x in RestaurantsList.indices) {
+        for (x in locationMapArray.indices) {
             RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x])
             RestaurantsList[x].setLocationMap(locationMapArray[x])
+            RestaurantsList[x].setId(x)
         }
         RestaurantsList.sortBy { it.getDistance() }
     }
@@ -665,39 +674,3 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
     }
 }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == locationPermissionCode) {
-//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
-//                respectedGPS = true
-//            } else {
-//                respectedGPS = false
-//                var someList = findViewById<ListView>(R.id.CloseRestaurants)
-//                someList.isEnabled = false
-//                someList.visibility = View.VISIBLE
-//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
-//
-//            }
-//        }
-//    }
-//    private fun isPermissionGranted() : Boolean {
-//        return ContextCompat.checkSelfPermission(
-//            this,
-//            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-//    }
-//    private fun isGpsEnabled():Boolean{
-//
-//    }
-
-
-
-
-
-
-

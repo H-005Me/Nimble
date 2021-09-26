@@ -12,6 +12,7 @@ local.properties
 .idea/dictionaries
 .idea/libraries
 .idea/jarRepositories.xml
+.idea/deployementTargetDropDown.xml
 
 # Android Studio 3 in .gitignore file.
 .idea/caches
