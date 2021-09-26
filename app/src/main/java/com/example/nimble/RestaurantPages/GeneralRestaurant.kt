@@ -110,9 +110,9 @@ class GeneralRestaurant : AppCompatActivity() {
     }
 
     private fun setGeneralThings(theList: RestaurantsClass) {
-        var theType=theList.getRestaurantType()
-        var thePrice=1
-        var thePayMethod=0
+        var theType = theList.getRestaurantType()
+        var thePrice = 1
+        var thePayMethod = 0
 //        if()
 
     }
