@@ -47,3 +47,17 @@ CREATE TABLE tbl_food (
     ingredients NVARCHAR(300),
     price DECIMAL(5,2) NOT NULL
 );
+
+INSERT INTO tbl_restaurants (name, lat, long, reviews_no, rating, city, address)
+	VALUES ('Tucano Puerto Rico', 46.7699989, 23.5930011, 1119, 4.5, 'Cluj-Napoca', 'Bd. Eroilor 19'),
+		   ('Klausen Burger', 46.7729390, 23.5891479, 5304, 4.4, 'Cluj-Napoca', 'Str. Regele Ferdinand 22'),
+		   ('The Soviet', 46.7712050, 23.5868466, 2479, 4.6, 'Cluj-Napoca', 'Str. Georges Clemenceau 2'),
+		   ('O''Peter''s Irish Pub & Grill', 46.7711747, 23.5878084, 2274, 4.6, 'Cluj-Napoca', 'Str. Vasile Goldis 4'),
+		   ('Storia Cucina Centrale', 46.7699318, 23.5885791, 311, 4.5, 'Cluj-Napoca', 'Piata Unirii 16'),
+		   ('Che Guevara Social Pub', 46.7688897, 23.5894354, 2185, 4.5, 'Cluj-Napoca', 'Piata Unirii 10'),
+		   ('Garlic - bites & tales', 46.7672512, 23.5884376, 539, 4.8, 'Cluj-Napoca', 'Str. Inocentiu Micu Klein 13'),
+		   ('DOT - District of Toast', 46.7667979, 23.5880243, 321, 4.5, 'Cluj-Napoca', 'Str. Potaissa 10'),
+		   ('Casa Piratilor', 46.7546443, 23.5490380, 1666, 3.9, 'Cluj-Napoca', 'Str. Ravasului 16')
+
+
+

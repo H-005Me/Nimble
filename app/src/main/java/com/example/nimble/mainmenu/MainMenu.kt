@@ -315,7 +315,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         //pizza hut
         //kfc
 
-        var restaurants = RestaurantsClass(
+        /*var restaurants = RestaurantsClass(
             "Casa Piratilor",
 
             1500,
@@ -461,7 +461,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
         restaurants.setStreet("Str. Alexandru Vaida-Voievod")
         restaurants.setPageBackground(R.drawable.bg_simple_kfc)
-        RestaurantsList.add(restaurants)
+        RestaurantsList.add(restaurants)*/
         //aici pun un while,iau valori din baza de date,si le pun in RestaurantsList
 
         val res = Database.runQuery(
@@ -471,8 +471,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         )
 
         while (res!!.next()) {
-            val name: String = res!!.getString(1)
-            val reviews: Int = res!!.getInt(2)
+            val name: String = res.getString(1)
+            val reviews: Int = res.getInt(2)
             val rating = res.getDouble(3)
             var lat = res.getDouble(4)
             var long = res.getDouble(5)
@@ -480,45 +480,45 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var id=res.getInt(7)
             Log.i("lat", lat.toString())
             Log.i("long", long.toString())
-            restaurants = RestaurantsClass(
+            var restaurants = RestaurantsClass(
                 name,
                 reviews,
                 rating,
-                R.drawable.ic_launcher_background,
-                R.drawable.background_logo,
+                R.drawable.logo_restaurant_1,
+                R.drawable.bg_simple_casa_piratilor,
                 lat,
                 long,
                 arrayOf(
                     MenuClass(
-                            "Supa",
-                            arrayOf(
-                                ProductClass(
-                                    "Ciorba de Burta",
-                                    25.0,
-                                    250.0,
-                                    R.drawable.ic_launcher_background
-                                )
+                        "Supa",
+                        arrayOf(
+                            ProductClass(
+                                "Ciorba de Burta",
+                                25.0,
+                                250.0,
+                                R.drawable.ic_launcher_background
                             )
-                        ), MenuClass(
-                            "Peste",
-                            arrayOf(
-                                ProductClass(
-                                    "Ton",
-                                    25.0,
-                                    250.0,
-                                    R.drawable.ic_launcher_background
-                                )
+                        )
+                    ), MenuClass(
+                        "Peste",
+                        arrayOf(
+                            ProductClass(
+                                "Ton",
+                                25.0,
+                                250.0,
+                                R.drawable.ic_launcher_background
                             )
                         )
                     )
                 )
+            )
             restaurants.setId(id)
             restaurants.setStreet(address)
             RestaurantsList.add(restaurants)
         }
 
         /// TODO This is only for the screen recording, change this later
-        RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
+        /*RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
         RestaurantsList[0].setIcon(R.drawable.logo_restaurant_1)
         RestaurantsList[0].setDistance(0.237)
         RestaurantsList[1].setBackground(R.drawable.bg_simple_klaus)
@@ -526,15 +526,14 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         RestaurantsList[1].setDistance(0.489)
         RestaurantsList[2].setBackground(R.drawable.bg_simple_pizza_hut)
         RestaurantsList[2].setIcon(R.drawable.logo_restaurant_3)
-        RestaurantsList[2].setDistance(0.605)
+        RestaurantsList[2].setDistance(0.605)*/
 
         var i = 0
         while (i < RestaurantsList.size) {
 
             RestaurantsList[i].setCurrentLatitude(latitude)
             RestaurantsList[i].setCurrentLongitude(longitude)
-            /// TODO This gets the distance of the restaurant
-            //RestaurantsList[i].reDistance()
+            RestaurantsList[i].reDistance()
             ++i
         }
         for (x in locationMapArray.indices) {
