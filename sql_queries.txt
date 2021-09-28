@@ -57,7 +57,8 @@ INSERT INTO tbl_restaurants (name, lat, long, reviews_no, rating, city, address)
 		   ('Che Guevara Social Pub', 46.7688897, 23.5894354, 2185, 4.5, 'Cluj-Napoca', 'Piata Unirii 10'),
 		   ('Garlic - bites & tales', 46.7672512, 23.5884376, 539, 4.8, 'Cluj-Napoca', 'Str. Inocentiu Micu Klein 13'),
 		   ('DOT - District of Toast', 46.7667979, 23.5880243, 321, 4.5, 'Cluj-Napoca', 'Str. Potaissa 10'),
-		   ('Casa Piratilor', 46.7546443, 23.5490380, 1666, 3.9, 'Cluj-Napoca', 'Str. Ravasului 16')
+		   ('Casa Piratilor', 46.7546443, 23.5490380, 1666, 3.9, 'Cluj-Napoca', 'Str. Ravasului 16'),
+		   ('Noodle Pack', 46.7700235, 23.5931717, 206, 4.2, 'Cluj-Napoca', 'Str. Eroilor 21')
 
 
 

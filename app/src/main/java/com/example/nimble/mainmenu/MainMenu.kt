@@ -298,12 +298,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     }
     private fun prepareRestaurantsData() {
         var bgPageOfRestaurantsArray = arrayListOf<Int>(
-            R.drawable.bg_cover_casa_piratilor,
-            R.drawable.bg_cover_marty,
-            R.drawable.bg_cover_klaus,
-            R.drawable.bg_cover_papion,
-            R.drawable.bg_cover_pizza_hut,
-            R.drawable.bg_cover_kfc
+
         )
         var locationMapArray = arrayListOf<Int>(
             R.drawable.bg_maps_casa_piratilor,
@@ -545,15 +540,26 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
 
         /// TODO This is only for the screen recording, change this later
-        /*RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
         RestaurantsList[0].setIcon(R.drawable.logo_restaurant_1)
-        RestaurantsList[0].setDistance(0.237)
         RestaurantsList[1].setBackground(R.drawable.bg_simple_klaus)
         RestaurantsList[1].setIcon(R.drawable.logo_restaurant_2)
-        RestaurantsList[1].setDistance(0.489)
         RestaurantsList[2].setBackground(R.drawable.bg_simple_pizza_hut)
         RestaurantsList[2].setIcon(R.drawable.logo_restaurant_3)
-        RestaurantsList[2].setDistance(0.605)*/
+        RestaurantsList[3].setBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[3].setIcon(R.drawable.logo_restaurant_1)
+        RestaurantsList[4].setBackground(R.drawable.bg_simple_klaus)
+        RestaurantsList[4].setIcon(R.drawable.logo_restaurant_2)
+        RestaurantsList[5].setBackground(R.drawable.bg_simple_pizza_hut)
+        RestaurantsList[5].setIcon(R.drawable.logo_restaurant_3)
+        RestaurantsList[6].setBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[6].setIcon(R.drawable.logo_restaurant_1)
+        RestaurantsList[7].setBackground(R.drawable.bg_simple_klaus)
+        RestaurantsList[7].setIcon(R.drawable.logo_restaurant_2)
+        RestaurantsList[8].setBackground(R.drawable.bg_simple_pizza_hut)
+        RestaurantsList[8].setIcon(R.drawable.logo_restaurant_3)
+        RestaurantsList[9].setBackground(R.drawable.bg_simple_pizza_hut)
+        RestaurantsList[9].setIcon(R.drawable.logo_restaurant_3)
 
         var i = 0
         while (i < RestaurantsList.size) {
@@ -575,7 +581,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             OffertsClass(
                 1,
                 "Pizza Hut",
-                R.drawable.bg_offer_pizza_hut,
+                R.drawable.banner_shape,
                 1,
                 150.5,
                 2021,
@@ -585,35 +591,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 30
             )
         )
-        OffertsList.add(
-            OffertsClass(
-                1,
-                "KFC",
-                R.drawable.bg_offer_kfc,
-                1,
-                550.0,
-                2021,
-                10,
-                25,
-                5,
-                30
-            )
-        )
-        OffertsList.add(
-            OffertsClass(
-                1,
-                "Marty",
-                R.drawable.bg_offer_marty,
-                1,
-                150.0,
-                2021,
-                10,
-                25,
-                5,
-                30
-            )
-        )
-
     }
 
     override fun onItemClick(position: Int) {
