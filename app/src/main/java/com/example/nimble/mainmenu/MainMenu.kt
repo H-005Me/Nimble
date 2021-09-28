@@ -7,6 +7,7 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -510,6 +511,20 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                             ProductClass(
                                 "Ton",
                                 25.0,
+                                250.0,
+                                R.drawable.ic_launcher_background
+                            )
+                        )
+                    ),
+                    MenuClass(
+                        "Burger",
+                        arrayOf(ProductClass("Ton", 25.0, 250.0, R.drawable.ic_launcher_background))
+                    ), MenuClass(
+                        "Pizza",
+                        arrayOf(
+                            ProductClass(
+                                "Margherita",
+                                30.0,
                                 250.0,
                                 R.drawable.ic_launcher_background
                             )
