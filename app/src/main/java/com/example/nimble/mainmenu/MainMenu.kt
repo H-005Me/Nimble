@@ -62,8 +62,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         checkLocation()
         val layout = findViewById<LinearLayout>(R.id.isScrollable)
 // Gets the layout params that will allow you to resize the layout
-//        val params = layout.layoutParams
-//        params.height = RestaurantsList.size*350
+        val params = layout.layoutParams
+        params.height = RestaurantsList.size * 550
 //        Toast.makeText(this, params.height, Toast.LENGTH_SHORT).show()
 
         //disabled for the moment
@@ -210,6 +210,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         categoryList.visibility = View.GONE
         offers.setOnClickListener()
         {
+            val params = layout.layoutParams
+            params.height = OffertsList.size * 700
             listView.isEnabled = false
             categoryList.isEnabled = false
             offertsList.isEnabled = true
@@ -222,6 +224,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         categories.setOnClickListener()
         {
+            val params = layout.layoutParams
+            params.height = categoriesList.size * 350
             myGridAdapter = GridAdapter(this, categoriesList)
             categoryList.adapter = myGridAdapter
             listView.isEnabled = false
@@ -236,7 +240,8 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
         closeRestaurants.setOnClickListener()
         {
-
+            val params = layout.layoutParams
+            params.height = RestaurantsList.size * 550
             if (respectedGPS == true) {
                 listView.isEnabled = true
                 listView.visibility = View.VISIBLE

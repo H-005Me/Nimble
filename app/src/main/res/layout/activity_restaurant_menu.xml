@@ -32,16 +32,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/foodList"
             android:layout_width="0dp"
+
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/confirmOrderButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/typeOfFoodList" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/confirmOrderButton"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="25dp"
