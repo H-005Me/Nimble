@@ -41,13 +41,17 @@ class ProfileActivity : AppCompatActivity() {
         userList.setOnItemClickListener { parent, view, position, id ->
             var intent = Intent()
             if (position == 0)
-                intent = Intent(this, SeeReservationsActity::class.java)
+                intent = Intent(this, SeeReservationsActity::class.java) /// TODO comenzi
             else if (position == 1)
                 intent = Intent(this, SeeReservationsActity::class.java)
             else if (position == 2)
                 intent = Intent(this, ImagesActivity::class.java)
-            else if (position == 3)
+            else if (position == 3) {
                 intent = Intent(this, LoadingActivity::class.java)
+                /// Delete all other activities (shows the loading activity for a split second for some reason
+                /// activites are still deleted in login activity, so this is not that necessary
+                //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
             startActivity(intent)
         }
         profileName.text = user.getFullName()
