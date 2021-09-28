@@ -1,6 +1,5 @@
 package com.example.nimble.RestaurantPages
 
-import FoodAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.nimble.R
@@ -11,11 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 
 import android.view.View
 import android.widget.ExpandableListView
+import android.widget.Toast
 import com.example.nimble.adapters.ExpandableListAdapter
 import com.example.nimble.database.Database
 import com.example.nimble.entities.CategoriesClass
 import com.example.nimble.entities.ProductClass
 import com.example.nimble.entities.RestaurantsClass
+import androidx.recyclerview.widget.DividerItemDecoration
+
+import FoodAdapter
+import android.widget.Button
+import java.security.AccessController.getContext
 
 
 class RestaurantMenuActivity : AppCompatActivity() {
@@ -30,15 +35,17 @@ class RestaurantMenuActivity : AppCompatActivity() {
         expandableListView.setAdapter(ExpandableListAdapter(this,expandableListView, header, body))*/
         var categoriesArray = ArrayList<String>()
         var foodArray = ArrayList<ProductClass>()
-        var extras = intent.extras
-        var theList = extras!!.get("LIST") as RestaurantsClass
-
+        var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         var id = theList.getId() /// current restaurant id
         var meals = Database.runQuery(
             """
             SELECT food_id, name, type, ingredients, price FROM tbl_food WHERE restaurant_id = $id
         """.trimIndent()
         )
+        var confirmBtn = findViewById<Button>(R.id.confirmOrderButton)
+        confirmBtn.setOnClickListener {
+            Toast.makeText(this, "The order has been made", Toast.LENGTH_SHORT).show()
+        }
 //        Database.runUpdate(
 //            """
 //            INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status,
@@ -65,9 +72,13 @@ class RestaurantMenuActivity : AppCompatActivity() {
         food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
         foodArray.add(food)
         var foodList = findViewById<RecyclerView>(R.id.foodList)
+
+
         var adapter = FoodAdapter(foodArray, this)
         foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
         foodList.adapter = adapter
+
     }
 }
