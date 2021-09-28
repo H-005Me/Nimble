@@ -545,15 +545,26 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         }
 
         /// TODO This is only for the screen recording, change this later
-        /*RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
         RestaurantsList[0].setIcon(R.drawable.logo_restaurant_1)
-        RestaurantsList[0].setDistance(0.237)
         RestaurantsList[1].setBackground(R.drawable.bg_simple_klaus)
         RestaurantsList[1].setIcon(R.drawable.logo_restaurant_2)
-        RestaurantsList[1].setDistance(0.489)
         RestaurantsList[2].setBackground(R.drawable.bg_simple_pizza_hut)
         RestaurantsList[2].setIcon(R.drawable.logo_restaurant_3)
-        RestaurantsList[2].setDistance(0.605)*/
+        RestaurantsList[3].setBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[3].setIcon(R.drawable.logo_restaurant_1)
+        RestaurantsList[4].setBackground(R.drawable.bg_simple_klaus)
+        RestaurantsList[4].setIcon(R.drawable.logo_restaurant_2)
+        RestaurantsList[5].setBackground(R.drawable.bg_simple_pizza_hut)
+        RestaurantsList[5].setIcon(R.drawable.logo_restaurant_3)
+        RestaurantsList[6].setBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[6].setIcon(R.drawable.logo_restaurant_1)
+        RestaurantsList[7].setBackground(R.drawable.bg_simple_klaus)
+        RestaurantsList[7].setIcon(R.drawable.logo_restaurant_2)
+        RestaurantsList[8].setBackground(R.drawable.bg_simple_pizza_hut)
+        RestaurantsList[8].setIcon(R.drawable.logo_restaurant_3)
+        RestaurantsList[9].setBackground(R.drawable.bg_simple_pizza_hut)
+        RestaurantsList[9].setIcon(R.drawable.logo_restaurant_3)
 
         var i = 0
         while (i < RestaurantsList.size) {

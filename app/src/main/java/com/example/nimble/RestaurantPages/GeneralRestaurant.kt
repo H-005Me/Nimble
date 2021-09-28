@@ -38,7 +38,6 @@ class GeneralRestaurant : AppCompatActivity() {
         backButton.setOnClickListener {
             finish()
         }
-        Toast.makeText(this, theList.getId().toString(), Toast.LENGTH_SHORT).show()
 //        Database.runUpdate("""
 //            INSERT INTO tbl_tables (restaurant_id,is_reserved,position)
 //            VALUES ('${theList.getId()}','0','la geam');
