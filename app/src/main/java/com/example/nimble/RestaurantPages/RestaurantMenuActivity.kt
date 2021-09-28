@@ -61,15 +61,15 @@ class RestaurantMenuActivity : AppCompatActivity() {
             var is_found = 0
             println("$foodId ; $name ; $type ; $ingredients ; $price")
         }
-        var food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        var food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
         var foodList = findViewById<RecyclerView>(R.id.foodList)
 
