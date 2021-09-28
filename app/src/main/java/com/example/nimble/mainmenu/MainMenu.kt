@@ -306,12 +306,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             R.drawable.bg_maps_kfc
         )
         var locationMapArray = arrayListOf<Int>(
-            R.drawable.bg_maps_casa_piratilor,
-            R.drawable.bg_maps_marty,
-            R.drawable.bg_maps_klaus,
-            R.drawable.bg_maps_papion,
-            R.drawable.bg_maps_pizza_hut,
-            R.drawable.bg_maps_kfc
+//            R.drawable.bg_maps_casa_piratilor,
+//            R.drawable.bg_maps_marty,
+//            R.drawable.bg_maps_klaus,
+//            R.drawable.bg_maps_papion,
+//            R.drawable.bg_maps_pizza_hut,
+//            R.drawable.bg_maps_kfc
         )
         //the current order:
         //casa Piratilor
@@ -535,12 +535,12 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             //klaus papion pizza hut
             restaurants.setId(id)
             restaurants.setStreet(address)
-            if (restaurants.getTitle() == "Casa Piratilor")
-                restaurants.setLocationMap(locationMapArray[0])
-            else if (restaurants.getTitle() == "Marty")
-                restaurants.setLocationMap(locationMapArray[1])
-            else if (restaurants.getTitle() == "Klausen Burger")
-                restaurants.setLocationMap(locationMapArray[2])
+//            if (restaurants.getTitle() == "Casa Piratilor")
+//                restaurants.setLocationMap(locationMapArray[0])
+//            else if (restaurants.getTitle() == "Marty")
+//                restaurants.setLocationMap(locationMapArray[1])
+//            else if (restaurants.getTitle() == "Klausen Burger")
+//                restaurants.setLocationMap(locationMapArray[2])
             RestaurantsList.add(restaurants)
         }
 
