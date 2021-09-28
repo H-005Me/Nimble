@@ -296,6 +296,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             startActivity(intent)
         }
     }
+    /// TODO deal with this
     private fun prepareRestaurantsData() {
         var bgPageOfRestaurantsArray = arrayListOf<Int>(
             R.drawable.bg_maps_casa_piratilor,
@@ -544,27 +545,49 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             RestaurantsList.add(restaurants)
         }
 
-        /// TODO This is only for the screen recording, change this later
-        RestaurantsList[0].setBackground(R.drawable.bg_simple_casa_piratilor)
-        RestaurantsList[0].setIcon(R.drawable.logo_restaurant_1)
-        RestaurantsList[1].setBackground(R.drawable.bg_simple_klaus)
-        RestaurantsList[1].setIcon(R.drawable.logo_restaurant_2)
-        RestaurantsList[2].setBackground(R.drawable.bg_simple_pizza_hut)
-        RestaurantsList[2].setIcon(R.drawable.logo_restaurant_3)
-        RestaurantsList[3].setBackground(R.drawable.bg_simple_casa_piratilor)
-        RestaurantsList[3].setIcon(R.drawable.logo_restaurant_1)
-        RestaurantsList[4].setBackground(R.drawable.bg_simple_klaus)
-        RestaurantsList[4].setIcon(R.drawable.logo_restaurant_2)
-        RestaurantsList[5].setBackground(R.drawable.bg_simple_pizza_hut)
-        RestaurantsList[5].setIcon(R.drawable.logo_restaurant_3)
-        RestaurantsList[6].setBackground(R.drawable.bg_simple_casa_piratilor)
-        RestaurantsList[6].setIcon(R.drawable.logo_restaurant_1)
-        RestaurantsList[7].setBackground(R.drawable.bg_simple_klaus)
-        RestaurantsList[7].setIcon(R.drawable.logo_restaurant_2)
-        RestaurantsList[8].setBackground(R.drawable.bg_simple_pizza_hut)
-        RestaurantsList[8].setIcon(R.drawable.logo_restaurant_3)
-        RestaurantsList[9].setBackground(R.drawable.bg_simple_pizza_hut)
-        RestaurantsList[9].setIcon(R.drawable.logo_restaurant_3)
+        /// TODO This is only for the contest, change this later
+        /**
+         * Tucano
+         * Klausen
+         * The Soviet
+         * O'Peter's
+         * Storia
+         * Che Guevara
+         * Garlic
+         * DOT
+         * Casa Piratilor
+         * Noodle Pack
+         */
+        RestaurantsList[0].setBackground(R.drawable.bg_banner_tucano_puerto_rico)
+        RestaurantsList[0].setIcon(R.drawable.logo_tucano_puerto_rico)
+        //RestaurantsList[0].setLocationMap()
+        RestaurantsList[1].setBackground(R.drawable.bg_banner_klausen_burger)
+        RestaurantsList[1].setIcon(R.drawable.logo_klausen_burger)
+        RestaurantsList[1].setLocationMap(R.drawable.bg_maps_klaus)
+        RestaurantsList[2].setBackground(R.drawable.bg_banner_the_soviet)
+        RestaurantsList[2].setIcon(R.drawable.logo_the_soviet)
+        //RestaurantsList[2].setLocationMap()
+        RestaurantsList[3].setBackground(R.drawable.bg_banner_opeters_pub)
+        RestaurantsList[3].setIcon(R.drawable.logo_opeters_pub)
+        //RestaurantsList[3].setLocationMap()
+        RestaurantsList[4].setBackground(R.drawable.bg_banner_storia)
+        RestaurantsList[4].setIcon(R.drawable.logo_storia)
+        //RestaurantsList[4].setLocationMap()
+        RestaurantsList[5].setBackground(R.drawable.bg_banner_che_guevara)
+        RestaurantsList[5].setIcon(R.drawable.logo_che_guevara)
+        //RestaurantsList[5].setLocationMap()
+        RestaurantsList[6].setBackground(R.drawable.bg_banner_garlic)
+        RestaurantsList[6].setIcon(R.drawable.logo_garlic)
+        //RestaurantsList[6].setLocationMap()
+        RestaurantsList[7].setBackground(R.drawable.bg_banner_dot)
+        RestaurantsList[7].setIcon(R.drawable.logo_dot)
+        //RestaurantsList[7].setLocationMap()
+        RestaurantsList[8].setBackground(R.drawable.bg_banner_casa_piratilor)
+        RestaurantsList[8].setIcon(R.drawable.logo_casa_piratilor)
+        RestaurantsList[8].setLocationMap(R.drawable.bg_maps_casa_piratilor)
+        RestaurantsList[9].setBackground(R.drawable.bg_banner_noodlepack)
+        RestaurantsList[9].setIcon(R.drawable.logo_noodle_pack)
+        //RestaurantsList[9].setLocationMap()
 
         var i = 0
         while (i < RestaurantsList.size) {
