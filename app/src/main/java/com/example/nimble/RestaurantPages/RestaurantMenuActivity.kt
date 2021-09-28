@@ -2,7 +2,6 @@ package com.example.nimble.RestaurantPages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.nimble.R
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +17,13 @@ import com.example.nimble.entities.ProductClass
 import com.example.nimble.entities.RestaurantsClass
 import androidx.recyclerview.widget.DividerItemDecoration
 
-import FoodAdapter
 import android.widget.Button
 import java.security.AccessController.getContext
+import com.example.nimble.Extender.ItemDecoration
+import android.R
+
+import androidx.core.content.ContextCompat
+import FoodAdapter
 
 
 class RestaurantMenuActivity : AppCompatActivity() {
@@ -28,7 +31,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
     val body: MutableList<MutableList<String>> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_restaurant_menu)
+        setContentView(com.example.nimble.R.layout.activity_restaurant_menu)
 
         /// I have 0 idea what this does
         /*var expandableListView=findViewById<ExpandableListView>(R.id.expand_activities_button)
@@ -37,14 +40,19 @@ class RestaurantMenuActivity : AppCompatActivity() {
         var foodArray = ArrayList<ProductClass>()
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         var id = theList.getId() /// current restaurant id
+        var back = findViewById<Button>(com.example.nimble.R.id.backBtnMenu)
         var meals = Database.runQuery(
             """
             SELECT food_id, name, type, ingredients, price FROM tbl_food WHERE restaurant_id = $id
         """.trimIndent()
         )
-        var confirmBtn = findViewById<Button>(R.id.confirmOrderButton)
+        var confirmBtn = findViewById<Button>(com.example.nimble.R.id.confirmOrderButton)
         confirmBtn.setOnClickListener {
             Toast.makeText(this, "The order has been made", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        back.setOnClickListener {
+            finish()
         }
 //        Database.runUpdate(
 //            """
@@ -61,24 +69,32 @@ class RestaurantMenuActivity : AppCompatActivity() {
             var is_found = 0
             println("$foodId ; $name ; $type ; $ingredients ; $price")
         }
-        var food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        var food =
+            ProductClass("burger", 30.0, 500.0, com.example.nimble.R.drawable.offerts_marty_0)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, com.example.nimble.R.drawable.offerts_marty_0)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, com.example.nimble.R.drawable.offerts_marty_0)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, com.example.nimble.R.drawable.offerts_marty_0)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.offerts_marty_0)
+        food = ProductClass("burger", 30.0, 500.0, com.example.nimble.R.drawable.offerts_marty_0)
         foodArray.add(food)
-        var foodList = findViewById<RecyclerView>(R.id.foodList)
+        var foodList = findViewById<RecyclerView>(com.example.nimble.R.id.foodList)
 
 
         var adapter = FoodAdapter(foodArray, this)
         foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         foodList.adapter = adapter
-
+        val dividerItemDecoration =
+            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        dividerItemDecoration.setDrawable(
+            ContextCompat.getDrawable(
+                this,
+                com.example.nimble.R.drawable.recyclerview_divider
+            )!!
+        )
+        foodList.addItemDecoration(dividerItemDecoration)
     }
 }
