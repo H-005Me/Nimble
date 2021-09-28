@@ -532,8 +532,15 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                     )
                 )
             )
+            //klaus papion pizza hut
             restaurants.setId(id)
             restaurants.setStreet(address)
+            if (restaurants.getTitle() == "Casa Piratilor")
+                restaurants.setLocationMap(locationMapArray[0])
+            else if (restaurants.getTitle() == "Marty")
+                restaurants.setLocationMap(locationMapArray[1])
+            else if (restaurants.getTitle() == "Klausen Burger")
+                restaurants.setLocationMap(locationMapArray[2])
             RestaurantsList.add(restaurants)
         }
 
