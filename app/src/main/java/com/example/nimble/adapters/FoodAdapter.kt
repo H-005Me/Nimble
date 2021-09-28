@@ -50,9 +50,22 @@ class FoodAdapter(
         var delete = itemView.findViewById<Button>(com.example.nimble.R.id.buttonRemoveFromCart)
         var quantity = itemView.findViewById<TextView>(com.example.nimble.R.id.foodQuantity)
         var price = itemView.findViewById<TextView>(com.example.nimble.R.id.foodPrice)
+        var howManyItems =
+            itemView.findViewById<TextView>(com.example.nimble.R.id.actualQuantityBtn)
+        var limit = 0;
 
         init {
             itemView.setOnClickListener(this)
+            add.setOnClickListener {
+                limit++
+                howManyItems.text = "$limit items"
+            }
+            delete.setOnClickListener {
+                if (limit > 0) {
+                    --limit
+                    howManyItems.text = "$limit items"
+                }
+            }
         }
 
         override fun onClick(v: View?) {
