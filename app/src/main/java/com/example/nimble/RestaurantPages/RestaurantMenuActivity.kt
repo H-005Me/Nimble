@@ -18,9 +18,10 @@ import com.example.nimble.entities.ProductClass
 import com.example.nimble.entities.RestaurantsClass
 import androidx.recyclerview.widget.DividerItemDecoration
 
-import FoodAdapter
 import android.widget.Button
 import java.security.AccessController.getContext
+import FoodAdapter
+import com.example.nimble.adapters.CategoriesOfMenuAdapter
 
 
 class RestaurantMenuActivity : AppCompatActivity() {
@@ -37,6 +38,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
         var foodArray = ArrayList<ProductClass>()
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         var id = theList.getId() /// current restaurant id
+        var back = findViewById<Button>(R.id.backBtnMenu)
         var meals = Database.runQuery(
             """
             SELECT food_id, name, type, ingredients, price FROM tbl_food WHERE restaurant_id = $id
@@ -45,6 +47,10 @@ class RestaurantMenuActivity : AppCompatActivity() {
         var confirmBtn = findViewById<Button>(R.id.confirmOrderButton)
         confirmBtn.setOnClickListener {
             Toast.makeText(this, "The order has been made", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        back.setOnClickListener {
+            finish()
         }
 //        Database.runUpdate(
 //            """
@@ -61,24 +67,40 @@ class RestaurantMenuActivity : AppCompatActivity() {
             var is_found = 0
             println("$foodId ; $name ; $type ; $ingredients ; $price")
         }
-        var food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
+        var food = ProductClass("Cheese Burger", 20.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Margherita", 30.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Omleta", 15.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Prosciutto", 30.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("burger", 30.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Platou de pui", 130.0, 500.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        var foodList = findViewById<RecyclerView>(R.id.foodList)
 
+        var categories = ArrayList<String>()
+        categories.add("Populare")
+        categories.add("Pizza")
+        categories.add("Burger")
+        categories.add("Salate")
+
+
+        var foodList = findViewById<RecyclerView>(R.id.foodList)
+        var categoryList = findViewById<RecyclerView>(R.id.typeOfFoodList)
 
         var adapter = FoodAdapter(foodArray, this)
         foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         foodList.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(
+            this,
+            LinearLayoutManager.VERTICAL
+        )
+        foodList.addItemDecoration(dividerItemDecoration)
 
+        var adapter1 = CategoriesOfMenuAdapter(categories, this)
+        categoryList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        categoryList.adapter = adapter1
     }
 }
