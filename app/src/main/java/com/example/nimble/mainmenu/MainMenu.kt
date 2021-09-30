@@ -596,7 +596,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
         RestaurantsList[8].setLocationMap(R.drawable.bg_maps_casa_piratilor)
         RestaurantsList[9].setBackground(R.drawable.bg_banner_noodlepack)
         RestaurantsList[9].setIcon(R.drawable.logo_noodle_pack)
-        //RestaurantsList[9].setPageBackground(R.drawable.bg_simple_noodle)
+        RestaurantsList[9].setPageBackground(R.drawable.bg_simple_noodlepack)
         //RestaurantsList[9].setLocationMap()
 
         var i = 0
