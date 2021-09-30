@@ -300,7 +300,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     private fun prepareRestaurantsData() {
         var bgPageOfRestaurantsArray = arrayListOf<Int>(
             R.drawable.bg_maps_casa_piratilor,
-            R.drawable.bg_maps_marty,
+            R.drawable.bg_maps_marty,    
             R.drawable.bg_maps_klaus,
             R.drawable.bg_maps_papion,
             R.drawable.bg_maps_pizza_hut,

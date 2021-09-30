@@ -49,21 +49,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-            <Button
-                android:id="@+id/dateButton"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="Alege data"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/dateText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/montserrat"
                 android:text="nu a fost ales nimic"
                 android:textColor="@color/darker_gray"
                 android:textSize="20sp"
@@ -73,16 +64,55 @@
 
             <Button
                 android:id="@+id/hourButton"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Alege ora"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/montserrat"
+                android:text="Alege ora:"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/dateButton"
                 app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+
+            <Button
+                android:id="@+id/choosingTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/montserrat"
+                android:text="nu a fost ales nimic"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/darker_gray"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/hourText"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/hourText"
+                app:layout_constraintTop_toBottomOf="@+id/hourButton" />
+
+            <Button
+                android:id="@+id/dateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/montserrat"
+                android:text="Alege data:"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/hourText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
                 android:text="nu a fost ales nimic"
                 android:textColor="@color/darker_gray"
                 android:textSize="20sp"
@@ -90,32 +120,32 @@
                 app:layout_constraintStart_toStartOf="@+id/dateText"
                 app:layout_constraintTop_toTopOf="@+id/hourButton" />
 
-            <Button
-                android:id="@+id/choosingTable"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Alege masa"
-                app:layout_constraintStart_toStartOf="@+id/hourButton"
-                app:layout_constraintTop_toBottomOf="@+id/hourButton" />
-
             <TextView
                 android:id="@+id/tablePickButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="nu a fost ales nimic"
-                android:textColor="@color/darker_gray"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/montserrat"
+                android:text="Alege masa:"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
                 android:textSize="20sp"
+                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@+id/choosingTable"
-                app:layout_constraintStart_toStartOf="@+id/hourText"
-                app:layout_constraintTop_toBottomOf="@+id/hourButton" />
+                app:layout_constraintStart_toStartOf="@+id/hourButton"
+                app:layout_constraintTop_toTopOf="@+id/choosingTable" />
 
             <Button
                 android:id="@+id/confirmedReservationButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/btn_login"
-                android:text="Confirm reservation"
+                android:text="Confirmă rezervarea"
+                android:textAllCaps="false"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/reservationInformer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -124,9 +154,8 @@
                 android:id="@+id/reservationInformer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:text="TextView"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
