@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toDrawable
 import com.example.nimble.R
 import com.example.nimble.entities.CategoriesClass
@@ -30,7 +31,7 @@ class TableAdapter(
         val inflater = context.layoutInflater
         var rowView = inflater.inflate(R.layout.custom_table, null, true)
         val tableButton = rowView.findViewById<TextView>(R.id.table_button)
-        val tableLayout = rowView.findViewById<LinearLayout>(R.id.table_layout)
+        val tableLayout = rowView.findViewById<ConstraintLayout>(R.id.table_layout)
         val tableChairs = rowView.findViewById<TextView>(R.id.numar_persoane)
         tableButton.text = theList[position].getId().toString()
 
