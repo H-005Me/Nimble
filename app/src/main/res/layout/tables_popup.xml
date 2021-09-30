@@ -10,6 +10,7 @@
         android:layout_width="357dp"
         android:layout_height="539dp"
         android:layout_marginBottom="28dp"
+        android:background="@drawable/banner_shape"
         android:numColumns="3"
         app:layout_constraintBottom_toTopOf="@+id/close_button"
         app:layout_constraintEnd_toEndOf="parent"
