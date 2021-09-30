@@ -34,6 +34,7 @@
             android:text="Rezervare"
             android:textColor="@color/white"
             android:textSize="34sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/backbutton_reservation"
             app:layout_constraintStart_toEndOf="@+id/backbutton_reservation"
             app:layout_constraintTop_toTopOf="@+id/backbutton_reservation" />
@@ -44,7 +45,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/background_bottom"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
@@ -160,30 +161,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/remarkstext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/remarkstext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:hint="Detalii"
+                android:textColor="@color/black"
+                android:textColorHint="@color/darker_gray"
+                app:layout_constraintBottom_toTopOf="@+id/confirmedReservationButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
-                    android:text="Remark" />
-            </LinearLayout>
-        </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

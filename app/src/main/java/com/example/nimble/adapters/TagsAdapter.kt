@@ -29,7 +29,6 @@ class TagsAdapter(private val context: Activity, private val theList: ArrayList<
         var rowView = inflater.inflate(R.layout.custom_tag, null, true)
 
         val titleText = rowView?.findViewById(R.id.tag) as TextView
-        val imageView = rowView.findViewById(R.id.tag_icon) as ImageView
 
         //val distanceText = rowView.findViewById(R.id.distance) as TextView
 

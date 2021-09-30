@@ -41,8 +41,8 @@ class RestaurantMenuActivity : AppCompatActivity() {
         var back = findViewById<Button>(R.id.backBtnMenu)
         var meals = Database.runQuery(
             """
-            SELECT food_id, name, type, ingredients, price FROM tbl_food WHERE restaurant_id = $id
-        """.trimIndent()
+                SELECT food_id, name, type, ingredients, price FROM tbl_food WHERE restaurant_id = $id
+            """.trimIndent()
         )
         var confirmBtn = findViewById<Button>(R.id.confirmOrderButton)
         confirmBtn.setOnClickListener {
@@ -67,15 +67,15 @@ class RestaurantMenuActivity : AppCompatActivity() {
             var is_found = 0
             println("$foodId ; $name ; $type ; $ingredients ; $price")
         }
-        var food = ProductClass("Cheese Burger", 20.0, 500.0, R.drawable.bg_categ_burger)
+        var food = ProductClass("Burger", 24.5, 50.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("Margherita", 30.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Cheese Burger", 23.5, 50.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("Omleta", 15.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Supa de pui", 26.9, 50.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("Prosciutto", 30.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Piept de pui", 25.7, 50.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
-        food = ProductClass("Platou de pui", 130.0, 500.0, R.drawable.bg_categ_burger)
+        food = ProductClass("Coca-Cola", 7.5, 50.0, R.drawable.bg_categ_burger)
         foodArray.add(food)
 
         var categories = ArrayList<String>()

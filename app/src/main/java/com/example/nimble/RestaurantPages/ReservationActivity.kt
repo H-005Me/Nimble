@@ -75,8 +75,6 @@ class ReservationActivity : AppCompatActivity() {
             month = c.get(Calendar.MONTH)
         if (day == 0)
             day = c.get(Calendar.DAY_OF_MONTH)
-        confirmationInformer.text =
-            "You can edit the reservation or cancel it through the Profile->My reservations "
         confirmationInformer.setOnClickListener {
 
             Toast.makeText(this, the_remark, Toast.LENGTH_SHORT).show()
@@ -241,17 +239,23 @@ class ReservationActivity : AppCompatActivity() {
 
     fun getTables() {
         //TODO("aici se iau din baza de date")
-        var table = TablesClass(2, 1, false)
+        var table = TablesClass(4, 1, false)
         TablesList.add(table)
-        table = TablesClass(2, 2, false)
+        table = TablesClass(6, 2, false)
         TablesList.add(table)
-        table = TablesClass(2, 3, false)
+        table = TablesClass(4, 3, false)
         TablesList.add(table)
-        table = TablesClass(2, 4, false)
+        table = TablesClass(4, 4, false)
         TablesList.add(table)
         table = TablesClass(2, 5, false)
         TablesList.add(table)
-        table = TablesClass(2, 6, false)
+        table = TablesClass(8, 6, false)
+        TablesList.add(table)
+        table = TablesClass(6, 7, false)
+        TablesList.add(table)
+        table = TablesClass(2, 8, false)
+        TablesList.add(table)
+        table = TablesClass(4, 9, false)
         TablesList.add(table)
     }
 }
