@@ -8,6 +8,7 @@ import android.widget.TabHost
 import android.widget.Toast
 import com.example.nimble.R
 import com.example.nimble.RestaurantPages.GeneralRestaurant
+import com.example.nimble.RestaurantPages.RestaurantMenuActivity
 import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.mainmenu.RestaurantsList
 
@@ -55,7 +56,7 @@ class QrActivity : AppCompatActivity() {
                     if (theString == theList[x].getTitle())
                         i = x
 
-                intent = Intent(this, GeneralRestaurant::class.java)
+                intent = Intent(this, RestaurantMenuActivity::class.java)
                 intent.putExtra("LIST", theList[i])
                 startActivity(intent)
                 finish()
