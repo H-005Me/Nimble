@@ -32,7 +32,12 @@ class GeneralRestaurant : AppCompatActivity() {
         locationMap.setImageResource(theList.getLocationMap())
         description.text = theList.getStreet()
         val reservationBtn = findViewById<Button>(R.id.toReserveBtn)
-        var myAdapter = TagsAdapter(this, theList.getCategories())
+        var tags = ArrayList<String>()
+        tags.add(theList.getPriceRange())
+        tags.add(theList.getRestaurantType())
+        tags.add(theList.getPayMethod())
+
+        var myAdapter = TagsAdapter(this, tags)
         tagsGrid.adapter = myAdapter
         setGeneralThings(theList)
         backButton.setOnClickListener {
