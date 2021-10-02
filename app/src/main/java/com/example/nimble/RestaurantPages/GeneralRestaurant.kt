@@ -12,6 +12,7 @@ import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.mainmenu.MainMenu
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.QrActivity
+import com.squareup.picasso.Picasso
 
 class GeneralRestaurant : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,6 @@ class GeneralRestaurant : AppCompatActivity() {
         setContentView(R.layout.activity_general_restaurant)
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         val icon = findViewById<ImageView>(R.id.backgroundImage)
-        icon.setImageResource(theList.getPageBackground())
         val title = findViewById<TextView>(R.id.titleRestaurant)
         val menulist = findViewById<GridView>(R.id.optionsMenu)
         val tagsGrid = findViewById<GridView>(R.id.tagsGrid)
@@ -32,6 +32,18 @@ class GeneralRestaurant : AppCompatActivity() {
         locationMap.setImageResource(theList.getLocationMap())
         description.text = theList.getStreet()
         val reservationBtn = findViewById<Button>(R.id.toReserveBtn)
+
+        /***
+         * Picasso testing
+         */
+//        Toast.makeText(this, Toast.LENGTH_SHORT).show()
+        Picasso.get().load(theList.getPageBackground()).into(icon)
+
+
+        /**
+         *
+         * */
+
         var tags = ArrayList<String>()
         tags.add(theList.getPriceRange())
         tags.add(theList.getRestaurantType())

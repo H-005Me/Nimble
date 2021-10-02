@@ -1,13 +1,8 @@
 package com.example.nimble.entities
 
-import android.view.Menu
-import android.view.View
-import android.widget.Toast
-import com.example.nimble.mainmenu.MainMenu
 import java.io.Serializable
 import java.math.BigDecimal
 import java.math.RoundingMode
-import kotlin.math.*
 
 class RestaurantsClass(
     title: String?, review: Int?,
@@ -30,7 +25,7 @@ class RestaurantsClass(
     private var currentLatitude: Double
     private var currentLongitude: Double
     private var street: String
-    private var pageBackground: Int
+    private var pageBackground: String
     private var offertsArray: ArrayList<OffertsClass>
     private var locationMap: Int
     private var priceRange: String
@@ -57,7 +52,7 @@ class RestaurantsClass(
         this.background = background!!
         this.categories = categories
         this.street = "None"
-        this.pageBackground = this.background
+        this.pageBackground = background.toString()
         this.offertsArray = ArrayList<OffertsClass>()
         this.locationMap = 0
         // aici merge in GeneralRestaurant
@@ -223,11 +218,11 @@ class RestaurantsClass(
         return this.street
     }
 
-    fun setPageBackground(new_page_background: Int) {
+    fun setPageBackground(new_page_background: String) {
         this.pageBackground = new_page_background
     }
 
-    fun getPageBackground(): Int {
+    fun getPageBackground(): String {
         return this.pageBackground
     }
 

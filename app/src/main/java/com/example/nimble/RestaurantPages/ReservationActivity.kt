@@ -176,7 +176,7 @@ class ReservationActivity : AppCompatActivity() {
             var var3 = chooseTableButton.text
             var new_table = 3
             var the_remark = remarksEditor.text.toString()
-            Toast.makeText(this, "$the_remark", Toast.LENGTH_SHORT).show()
+
             Database.runUpdate(
                 """
             INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status,

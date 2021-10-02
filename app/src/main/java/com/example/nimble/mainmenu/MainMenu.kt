@@ -7,7 +7,6 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -26,10 +25,6 @@ import com.example.nimble.entities.*
 import com.example.nimble.maps_activity.MapsActivity
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.QrActivity
-import android.widget.RelativeLayout
-
-
-
 
 
 var RestaurantsList = ArrayList<RestaurantsClass>()
@@ -536,6 +531,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             //klaus papion pizza hut
             restaurants.setId(id)
             //
+            restaurants.setPageBackground("https://imgur.com/a/tQKrnNe")
             restaurants.setStreet(address)
 //            if (restaurants.getTitle() == "Casa Piratilor")
 //                restaurants.setLocationMap(locationMapArray[0])
@@ -561,43 +557,43 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
          */
         RestaurantsList[0].setBackground(R.drawable.bg_banner_tucano_puerto_rico)
         RestaurantsList[0].setIcon(R.drawable.logo_tucano_puerto_rico)
-        RestaurantsList[0].setPageBackground(R.drawable.bg_simple_tucano_puerto_rico)
+        RestaurantsList[0].setPageBackground("https://i.imgur.com/VUbp1s2.jpg")
         //RestaurantsList[0].setLocationMap()
         RestaurantsList[1].setBackground(R.drawable.bg_banner_klausen_burger)
         RestaurantsList[1].setIcon(R.drawable.logo_klausen_burger)
-        RestaurantsList[1].setPageBackground(R.drawable.bg_simple_klausen_burger)
+        RestaurantsList[1].setPageBackground("https://i.imgur.com/GC4rW5D.jpg")
         RestaurantsList[1].setLocationMap(R.drawable.bg_maps_klaus)
         RestaurantsList[2].setBackground(R.drawable.bg_banner_the_soviet)
         RestaurantsList[2].setIcon(R.drawable.logo_the_soviet)
-        RestaurantsList[2].setPageBackground(R.drawable.bg_simple_the_soviet)
+        RestaurantsList[2].setPageBackground("https://i.imgur.com/iiiCHNL.jpg")
         //RestaurantsList[2].setLocationMap()
         RestaurantsList[3].setBackground(R.drawable.bg_banner_opeters_pub)
         RestaurantsList[3].setIcon(R.drawable.logo_opeters_pub)
-        RestaurantsList[3].setPageBackground(R.drawable.bg_simple_opeters_pub)
+        RestaurantsList[3].setPageBackground("https://i.imgur.com/avRaxl1.jpg")
         //RestaurantsList[3].setLocationMap()
         RestaurantsList[4].setBackground(R.drawable.bg_banner_storia)
         RestaurantsList[4].setIcon(R.drawable.logo_storia)
-        RestaurantsList[4].setPageBackground(R.drawable.bg_simple_storia)
+        RestaurantsList[4].setPageBackground("https://i.imgur.com/0fx2dZW.jpg")
         //RestaurantsList[4].setLocationMap()
         RestaurantsList[5].setBackground(R.drawable.bg_banner_che_guevara)
         RestaurantsList[5].setIcon(R.drawable.logo_che_guevara)
-        RestaurantsList[5].setPageBackground(R.drawable.bg_simple_che_guevara)
+        RestaurantsList[5].setPageBackground("https://i.imgur.com/0rye7lf.jpg")
         //RestaurantsList[5].setLocationMap()
         RestaurantsList[6].setBackground(R.drawable.bg_banner_garlic)
         RestaurantsList[6].setIcon(R.drawable.logo_garlic)
-        RestaurantsList[6].setPageBackground(R.drawable.bg_simple_garlic)
+        RestaurantsList[6].setPageBackground("https://i.imgur.com/71j764b.jpg")
         //RestaurantsList[6].setLocationMap()
         RestaurantsList[7].setBackground(R.drawable.bg_banner_dot)
         RestaurantsList[7].setIcon(R.drawable.logo_dot)
-        RestaurantsList[7].setPageBackground(R.drawable.bg_simple_dot)
+        RestaurantsList[7].setPageBackground("https://i.imgur.com/nOEJVNY.jpg")
         //RestaurantsList[7].setLocationMap()
         RestaurantsList[8].setBackground(R.drawable.bg_banner_casa_piratilor)
         RestaurantsList[8].setIcon(R.drawable.logo_casa_piratilor)
-        RestaurantsList[8].setPageBackground(R.drawable.bg_simple_casa_piratilor)
+        RestaurantsList[8].setPageBackground("https://i.imgur.com/D0jh4p2.jpg")
         RestaurantsList[8].setLocationMap(R.drawable.bg_maps_casa_piratilor)
         RestaurantsList[9].setBackground(R.drawable.bg_banner_noodlepack)
         RestaurantsList[9].setIcon(R.drawable.logo_noodle_pack)
-        RestaurantsList[9].setPageBackground(R.drawable.bg_simple_noodlepack)
+        RestaurantsList[9].setPageBackground("https://i.imgur.com/glPlh6Q.jpg")
         //RestaurantsList[9].setLocationMap()
 
         var i = 0
@@ -609,7 +605,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             ++i
         }
         for (x in locationMapArray.indices) {
-            RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x])
+            RestaurantsList[x].setPageBackground(bgPageOfRestaurantsArray[x].toString())
             RestaurantsList[x].setLocationMap(locationMapArray[x])
             RestaurantsList[x].setId(x)
         }
