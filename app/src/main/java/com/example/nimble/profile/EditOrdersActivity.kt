@@ -16,7 +16,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.WindowManager
 import android.widget.*
-import com.example.nimble.RestaurantPages.ReservationActivity
 import com.example.nimble.adapters.TableAdapter
 import com.example.nimble.database.Database
 import com.example.nimble.entities.TablesClass
@@ -216,7 +215,7 @@ class EditOrdersActivity : AppCompatActivity() {
 
     private fun new_showPopUp() {
         val myDialog: Dialog = Dialog(this)
-        myDialog.setContentView(R.layout.tables_popup)
+        myDialog.setContentView(R.layout.pop_up_tables)
         val closeButton = myDialog.findViewById<Button>(R.id.close_button)
         val tablesGridList = myDialog.findViewById<GridView>(R.id.tables_list_1)
         var adapter = TableAdapter(this, TablesList)

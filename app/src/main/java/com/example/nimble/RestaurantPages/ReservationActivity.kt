@@ -1,6 +1,5 @@
 package com.example.nimble.RestaurantPages
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
@@ -22,9 +21,7 @@ import com.example.nimble.adapters.TableAdapter
 import com.example.nimble.database.Database
 import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
-import com.example.nimble.mainmenu.MainMenu
 import com.example.nimble.user.user
-import org.w3c.dom.Text
 
 
 class ReservationActivity : AppCompatActivity() {
@@ -197,7 +194,7 @@ class ReservationActivity : AppCompatActivity() {
 
     fun ShowPopup() {
         val myDialog: Dialog = Dialog(this)
-        myDialog.setContentView(R.layout.tables_popup)
+        myDialog.setContentView(R.layout.pop_up_tables)
         val closeButton = myDialog.findViewById<Button>(R.id.close_button)
         val tablesGridList = myDialog.findViewById<GridView>(R.id.tables_list_1)
         var adapter = TableAdapter(this, TablesList)
