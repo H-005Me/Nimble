@@ -62,11 +62,6 @@ class RestaurantMenuActivity : AppCompatActivity() {
 //        """.trimIndent()
 
         categoriesArray.add("Populare")
-        categoriesArray.add("Pizza")
-        categoriesArray.add("Burger")
-        categoriesArray.add("Salate")
-
-
         var adapter = FoodAdapter(foodArray, this, foodArray)
         foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -97,12 +92,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
             val price = meals.getDouble(5)
             var quantity = meals.getDouble(6)
             var newCategory = 1
-            for (x in categoriesArray.indices) {
-                if (type == categoriesArray[x])
-                    newCategory = 0
-            }
-            if (newCategory == 1)
-                categoriesArray.add(type)
+
             var food =
                 ProductClass(name, price, quantity, R.drawable.ic_launcher_background, type, foodId)
         }
@@ -135,7 +125,16 @@ class RestaurantMenuActivity : AppCompatActivity() {
             ProductClass("Pizza margherita", 24.5, 50.0, R.drawable.bg_categ_burger, "Pizza", index)
         ++index
         foodArray.add(food)
-
+        for (i in foodArray.indices) {
+            var type = foodArray[i].getCategoryOfProduct()
+            var newCategory = 1
+            for (x in categoriesArray.indices) {
+                if (type == categoriesArray[x])
+                    newCategory = 0
+            }
+            if (newCategory == 1)
+                categoriesArray.add(type)
+        }
     }
 
     fun onItemClick(position: Int) {
