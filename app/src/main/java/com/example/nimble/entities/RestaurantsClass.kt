@@ -11,9 +11,9 @@ class RestaurantsClass(
     background: Int?,
     latitude: Double?,
     longitude: Double?,
-    categories: Array<MenuClass>
+    categories: Array<String>
 ) :Serializable {
-    private var categories: Array<MenuClass>
+    private var categories: Array<String>
     private var title: String
     private var distance: Double
     private var review = 0
@@ -116,24 +116,19 @@ class RestaurantsClass(
         ).setScale(1, RoundingMode.HALF_EVEN).toDouble()
     }
 
-    fun getCategories(): ArrayList<String> {
-        var aList = ArrayList<String>()
-        var index = 0
-        while (index < categories.size) {
-            aList.add(categories[index].getName())
-            index++
-        }
-        return aList
+    fun getCategories(): Array<String> {
+        return categories
     }
 
     fun getTitle(): String {
         return title
     }
-    fun getBackground():Int{
+
+    fun getBackground(): Int {
         return background
     }
 
-    fun setBackground (bg: Int) {
+    fun setBackground(bg: Int) {
         this.background = bg
     }
 

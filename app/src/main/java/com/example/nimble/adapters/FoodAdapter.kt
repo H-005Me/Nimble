@@ -22,7 +22,8 @@ import org.w3c.dom.Text
 
 class FoodAdapter(
     private var dishesList: ArrayList<ProductClass>,
-    private val listener: RestaurantMenuActivity
+    private val listener: RestaurantMenuActivity,
+    private var allDishes: ArrayList<ProductClass>
 ) : androidx.recyclerview.widget.RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: FoodAdapter.ViewHolder, position: Int) {
@@ -31,6 +32,8 @@ class FoodAdapter(
         holder.title.text = dishesList[position].getTitle()
         holder.price.text = dishesList[position].getPriceOfProduct().toString()
         holder.quantity.text = dishesList[position].getQuantity().toString()
+        holder.howManyItems.text =
+            "${allDishes[dishesList[position].getId()].getHowManyAdded()} items"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -53,18 +56,19 @@ class FoodAdapter(
         var price = itemView.findViewById<TextView>(com.example.nimble.R.id.foodPrice)
         var howManyItems =
             itemView.findViewById<TextView>(com.example.nimble.R.id.actualQuantityBtn)
-        var limit = 0;
-
         init {
             itemView.setOnClickListener(this)
             add.setOnClickListener {
-                limit++
-                howManyItems.text = "$limit items"
+                allDishes[dishesList[adapterPosition].getId()].riseHowManyAdded()
+                howManyItems.text =
+                    "${allDishes[dishesList[position].getId()].getHowManyAdded()} items"
             }
             delete.setOnClickListener {
-                if (limit > 0) {
-                    --limit
-                    howManyItems.text = "$limit items"
+                if (allDishes[dishesList[position].getId()].getHowManyAdded() > 0) {
+                    allDishes[dishesList[position].getId()].lowerHowManyAdded()
+
+                    howManyItems.text =
+                        "${allDishes[dishesList[position].getId()].getHowManyAdded()} items"
                 }
             }
         }
@@ -82,4 +86,5 @@ class FoodAdapter(
         fun onEdit(p: Int)
         fun onDelete(p: Int)
     }
+
 }

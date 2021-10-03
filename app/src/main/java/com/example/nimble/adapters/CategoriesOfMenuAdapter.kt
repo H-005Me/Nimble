@@ -56,17 +56,15 @@ class CategoriesOfMenuAdapter(
         }
 
         override fun onClick(v: View?) {
-
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
         }
     }
 
     interface onItemClickListener {
         fun onItemClick(position: Int)
-    }
-
-    interface MyClickListener {
-        fun onEdit(p: Int)
-        fun onDelete(p: Int)
     }
 }
 
