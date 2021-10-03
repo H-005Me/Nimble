@@ -468,7 +468,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         val res = Database.runQuery(
             """
-            SELECT name,reviews_no,rating,lat,long,address,id FROM tbl_restaurants;
+            SELECT name,reviews_no,rating,lat,long,address,id,bgpage FROM tbl_restaurants;
         """.trimIndent()
         )
 
@@ -479,7 +479,10 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var lat = res.getDouble(4)
             var long = res.getDouble(5)
             var address = res.getString(6)
-            var id=res.getInt(7)
+            var id = res.getInt(7)
+            var bg = "none"
+            if (res.getString(8) != null)
+                bg = res.getString(8)
             Log.i("lat", lat.toString())
             Log.i("long", long.toString())
             var restaurants = RestaurantsClass(
@@ -528,10 +531,13 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                     )
                 )
             )
+
             //klaus papion pizza hut
             restaurants.setId(id)
             //
-            restaurants.setPageBackground("https://imgur.com/a/tQKrnNe")
+            if (bg != "none")
+                restaurants.setPageBackground(bg)
+
             restaurants.setStreet(address)
 //            if (restaurants.getTitle() == "Casa Piratilor")
 //                restaurants.setLocationMap(locationMapArray[0])

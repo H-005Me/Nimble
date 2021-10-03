@@ -51,8 +51,8 @@ class RestaurantsClass(
         this.icon = icon!!
         this.background = background!!
         this.categories = categories
-        this.street = "None"
-        this.pageBackground = background.toString()
+        this.street = "none"
+        this.pageBackground = "none"
         this.offertsArray = ArrayList<OffertsClass>()
         this.locationMap = 0
         // aici merge in GeneralRestaurant
