@@ -8,23 +8,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-import android.view.View
-import com.example.nimble.adapters.ExpandableListAdapter
 import com.example.nimble.database.Database
-import com.example.nimble.entities.CategoriesClass
 import com.example.nimble.entities.ProductClass
 import com.example.nimble.entities.RestaurantsClass
 import androidx.recyclerview.widget.DividerItemDecoration
 
-import java.security.AccessController.getContext
 import FoodAdapter
+import ShowedFoodAdapter
+
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.*
 import com.example.nimble.adapters.CategoriesOfMenuAdapter
-import com.example.nimble.adapters.TableAdapter
 
 
 class RestaurantMenuActivity : AppCompatActivity() {
@@ -60,7 +56,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
 //        """.trimIndent()
 
         categoriesArray.add("Populare")
-        var adapter = FoodAdapter(foodArray, this, foodArray)
+        var adapter = FoodAdapter(foodArray, foodArray)
         foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         foodList.adapter = adapter
@@ -75,7 +71,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         categoryList.adapter = adapter1
         confirmBtn.setOnClickListener {
-            ShowPopup()
+            ShowPopup(adapter)
 
         }
     }
@@ -148,13 +144,13 @@ class RestaurantMenuActivity : AppCompatActivity() {
             if (foodArray[i].getCategoryOfProduct() == categoriesArray[position])
                 new_foodList.add(foodArray[i])
         }
-        var adapter = FoodAdapter(new_foodList, this, foodArray)
+        var adapter = FoodAdapter(new_foodList, foodArray)
         foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         foodList.adapter = adapter
     }
 
-    fun ShowPopup() {
+    fun ShowPopup(originalAdapter: FoodAdapter) {
         val myDialog: Dialog = Dialog(this)
         myDialog.setContentView(R.layout.pop_up_confirm_order)
         var new_foodList = myDialog.findViewById<RecyclerView>(R.id.ShowAddedDishesRecList)
@@ -170,18 +166,18 @@ class RestaurantMenuActivity : AppCompatActivity() {
             if (foodArray[i].getHowManyAdded() > 0)
                 pickedFoodList.add(foodArray[i])
         }
+        var adapter = ShowedFoodAdapter(pickedFoodList, foodArray)
 
-        var adapter = FoodAdapter(pickedFoodList, this, foodArray)
         new_foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         new_foodList.adapter = adapter
-
         closeButton.setOnClickListener {
             myDialog.dismiss()
             finish()
 
         }
         backButton.setOnClickListener {
+            originalAdapter.notifyDataSetChanged()
             myDialog.dismiss()
         }
 
