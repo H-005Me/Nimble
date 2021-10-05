@@ -110,7 +110,6 @@ class ShowedFoodAdapter(dishesList: ArrayList<ProductClass>, allDishes: ArrayLis
             dishesList.removeAt(position)
             notifyDataSetChanged()
 
-
         }
     }
 

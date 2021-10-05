@@ -21,6 +21,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.*
 import com.example.nimble.adapters.CategoriesOfMenuAdapter
+import com.example.nimble.user.user
 
 
 class RestaurantMenuActivity : AppCompatActivity() {
@@ -43,8 +44,8 @@ class RestaurantMenuActivity : AppCompatActivity() {
         var id = theList.getId() /// current restaurant id
         getFood(id)
         //get the food of each restaurant
-
-
+        Toast.makeText(this, user.getId().toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, theList.getId().toString(), Toast.LENGTH_SHORT).show()
         back.setOnClickListener {
             finish()
         }
@@ -167,14 +168,20 @@ class RestaurantMenuActivity : AppCompatActivity() {
                 pickedFoodList.add(foodArray[i])
         }
         var adapter = ShowedFoodAdapter(pickedFoodList, foodArray)
-
         new_foodList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         new_foodList.adapter = adapter
-        closeButton.setOnClickListener {
-            myDialog.dismiss()
-            finish()
 
+
+
+        closeButton.setOnClickListener {
+            if (pickedFoodList.size == 0)
+            else {
+                Toast.makeText(this, "Order has been made", Toast.LENGTH_SHORT).show()
+
+                myDialog.dismiss()
+                finish()
+            }
         }
         backButton.setOnClickListener {
             originalAdapter.notifyDataSetChanged()
