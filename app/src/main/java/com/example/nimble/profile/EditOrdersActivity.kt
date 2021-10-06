@@ -29,14 +29,14 @@ class EditOrdersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_orders_edit_activity)
         var backButton = findViewById<Button>(R.id.backbutton)
-        var cancelButton = findViewById<Button>(R.id.cancelbutton)
-        var saveButton = findViewById<Button>(R.id.savebutton)
+        var cancelButton = findViewById<Button>(R.id.btCancel)
+        var saveButton = findViewById<Button>(R.id.btSave)
         var theList = intent.getSerializableExtra("LIST") as OrdersClass
         var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
         var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
         var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
         var editRemarkTxt = findViewById<EditText>(R.id.remarkstext)
-        val deleteReservation = findViewById<Button>(R.id.reservationDeleteBtn)
+        val deleteReservation = findViewById<Button>(R.id.btReservationDelete)
         //firstly declared are the elements of the layout
         var thehour = 0
         var theminute = 0
@@ -166,8 +166,6 @@ class EditOrdersActivity : AppCompatActivity() {
             tables = new_string.toUInt().toInt()
 
         }
-
-
         //data resets to the original
         cancelButton.setOnClickListener {
             year = theList.getYear()

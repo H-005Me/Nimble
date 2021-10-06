@@ -14,15 +14,11 @@ class SearchActiviy : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         var search = findViewById<SearchView>(R.id.searchView)
-        val listView = findViewById<ListView>(R.id.listView)
+        val listView = findViewById<ListView>(R.id.lvSearchedRestaurants)
         val restaurantsList = intent.getSerializableExtra("LIST") as ArrayList<RestaurantsClass>
-
-        // var names= arrayOf("Casa Piratilor","Marty ","La Papion","Klausen Burger","Cafe","Restaurant 1")
-        //
         var names: MutableList<String> = ArrayList()
         for (item in restaurantsList)
             names.add(item.getTitle())
-
         var numbersMap = mutableMapOf("one" to 1, "two" to 2, "three" to 3)
         var index: Int = 0
         while (index < names.size) {

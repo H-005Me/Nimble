@@ -17,13 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimble">
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity android:name="com.example.qr_good_app.QrActivity">
             <intent-filter>
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -66,6 +67,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.nimble.restaurant_perspective.MainMenuRestaurantsPerspective">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".login.SignupActivity" />
         <activity android:name=".mainmenu.SearchActiviy" />
         <activity android:name=".RestaurantPages.GeneralRestaurant" />
@@ -74,10 +81,10 @@
         <activity android:name=".RestaurantPages.ReviewsActivity" />
         <activity android:name=".RestaurantPages.RestaurantMenuActivity" />
         <activity android:name=".maps_activity.MapsActivity" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 
 </manifest>

@@ -13,7 +13,7 @@
         android:background="@color/yellow_strong">
 
         <Button
-            android:id="@+id/backbutton_reservation"
+            android:id="@+id/btBackReservation"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="5dp"
@@ -35,9 +35,9 @@
             android:textColor="@color/white"
             android:textSize="34sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/backbutton_reservation"
-            app:layout_constraintStart_toEndOf="@+id/backbutton_reservation"
-            app:layout_constraintTop_toTopOf="@+id/backbutton_reservation" />
+            app:layout_constraintBottom_toBottomOf="@+id/btBackReservation"
+            app:layout_constraintStart_toEndOf="@+id/btBackReservation"
+            app:layout_constraintTop_toTopOf="@+id/btBackReservation" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout10"
@@ -59,12 +59,12 @@
                 android:text="nu a fost ales nimic"
                 android:textColor="@color/darker_gray"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/dateButton"
-                app:layout_constraintStart_toEndOf="@+id/dateButton"
-                app:layout_constraintTop_toTopOf="@+id/dateButton" />
+                app:layout_constraintBottom_toBottomOf="@+id/btDate"
+                app:layout_constraintStart_toEndOf="@+id/btDate"
+                app:layout_constraintTop_toTopOf="@+id/btDate" />
 
             <Button
-                android:id="@+id/hourButton"
+                android:id="@+id/btHour"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:background="@android:color/transparent"
@@ -74,11 +74,11 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/dateButton"
-                app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+                app:layout_constraintStart_toStartOf="@+id/btDate"
+                app:layout_constraintTop_toBottomOf="@+id/btDate" />
 
             <Button
-                android:id="@+id/choosingTable"
+                android:id="@+id/btChooseTable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -91,10 +91,10 @@
                 app:layout_constraintEnd_toEndOf="@+id/hourText"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/hourText"
-                app:layout_constraintTop_toBottomOf="@+id/hourButton" />
+                app:layout_constraintTop_toBottomOf="@+id/btHour" />
 
             <Button
-                android:id="@+id/dateButton"
+                android:id="@+id/btDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -117,9 +117,9 @@
                 android:text="nu a fost ales nimic"
                 android:textColor="@color/darker_gray"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/hourButton"
+                app:layout_constraintBottom_toBottomOf="@+id/btHour"
                 app:layout_constraintStart_toStartOf="@+id/dateText"
-                app:layout_constraintTop_toTopOf="@+id/hourButton" />
+                app:layout_constraintTop_toTopOf="@+id/btHour" />
 
             <TextView
                 android:id="@+id/tablePickButton"
@@ -132,12 +132,12 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/choosingTable"
-                app:layout_constraintStart_toStartOf="@+id/hourButton"
-                app:layout_constraintTop_toTopOf="@+id/choosingTable" />
+                app:layout_constraintBottom_toBottomOf="@+id/btChooseTable"
+                app:layout_constraintStart_toStartOf="@+id/btHour"
+                app:layout_constraintTop_toTopOf="@+id/btChooseTable" />
 
             <Button
-                android:id="@+id/confirmedReservationButton"
+                android:id="@+id/btConfirmedResevation"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
@@ -172,7 +172,7 @@
                 android:hint="Detalii"
                 android:textColor="@color/black"
                 android:textColorHint="@color/darker_gray"
-                app:layout_constraintBottom_toTopOf="@+id/confirmedReservationButton"
+                app:layout_constraintBottom_toTopOf="@+id/btConfirmedResevation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />

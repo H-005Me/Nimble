@@ -41,7 +41,7 @@
             android:background="@drawable/background_bottom">
 
             <GridView
-                android:id="@+id/tagsGrid"
+                android:id="@+id/gvTags"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="15dp"
@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/descriptionofrestaurant" />
 
             <GridView
-                android:id="@+id/optionsMenu"
+                android:id="@+id/gvOptions"
                 android:layout_width="0dp"
                 android:layout_height="79dp"
                 android:layout_marginStart="15dp"
@@ -66,7 +66,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tagsGrid" />
+                app:layout_constraintTop_toBottomOf="@+id/gvTags" />
 
             <TextView
                 android:id="@+id/titleRestaurant"
@@ -96,7 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/titleRestaurant" />
 
             <Button
-                android:id="@+id/toReserveBtn"
+                android:id="@+id/btToReserve"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="40dp"
@@ -108,10 +108,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.441"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/optionsMenu" />
+                app:layout_constraintTop_toBottomOf="@+id/gvOptions" />
 
             <ImageView
-                android:id="@+id/locationPhoto"
+                android:id="@+id/ivLocation"
                 android:layout_width="0dp"
                 android:layout_height="184dp"
                 android:layout_marginStart="15dp"
@@ -121,7 +121,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toReserveBtn"
+                app:layout_constraintTop_toBottomOf="@+id/btToReserve"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@mipmap/ic_launcher" />
 
@@ -140,19 +140,19 @@
         app:layout_constraintTop_toBottomOf="parent">
 
         <Button
-            android:id="@+id/mapsbutton"
+            android:id="@+id/btMaps"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_maps"
             android:backgroundTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/homebutton"
+            app:layout_constraintEnd_toStartOf="@+id/btHome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/homebutton"
+            android:id="@+id/btHome"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_home"
@@ -164,14 +164,14 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/profilebutton"
+            android:id="@+id/btProfile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_profile"
             android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/homebutton"
+            app:layout_constraintStart_toEndOf="@+id/btHome"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

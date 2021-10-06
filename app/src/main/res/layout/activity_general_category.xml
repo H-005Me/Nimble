@@ -16,10 +16,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryName">
+        app:layout_constraintTop_toBottomOf="@+id/tvCategoryName">
 
         <ListView
-            android:id="@+id/categoryL"
+            android:id="@+id/lvCategoryL"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
@@ -34,7 +34,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/categoryName"
+        android:id="@+id/tvCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -43,12 +43,12 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/backButtonGeneralCategory"
-        app:layout_constraintStart_toEndOf="@+id/backButtonGeneralCategory"
-        app:layout_constraintTop_toTopOf="@+id/backButtonGeneralCategory" />
+        app:layout_constraintBottom_toBottomOf="@+id/btBackGeneralCategory"
+        app:layout_constraintStart_toEndOf="@+id/btBackGeneralCategory"
+        app:layout_constraintTop_toTopOf="@+id/btBackGeneralCategory" />
 
     <Button
-        android:id="@+id/backButtonGeneralCategory"
+        android:id="@+id/btBackGeneralCategory"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"

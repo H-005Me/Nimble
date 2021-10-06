@@ -45,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@+id/foodType" />
 
         <Button
-            android:id="@+id/buttonAddToCart"
+            android:id="@+id/btAddToCart"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="@+id/foodType" />
 
         <Button
-            android:id="@+id/buttonRemoveFromCart"
+            android:id="@+id/btRemoveFromCart"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
@@ -66,8 +66,8 @@
             android:text="-"
             android:textAlignment="gravity"
             android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAddToCart"
-            app:layout_constraintTop_toTopOf="@+id/buttonAddToCart" />
+            app:layout_constraintEnd_toStartOf="@+id/btAddToCart"
+            app:layout_constraintTop_toTopOf="@+id/btAddToCart" />
 
         <TextView
             android:id="@+id/textView8"
@@ -88,7 +88,7 @@
             android:text="0 items"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonRemoveFromCart"
+            app:layout_constraintEnd_toStartOf="@+id/btRemoveFromCart"
             app:layout_constraintHorizontal_bias="0.636"
             app:layout_constraintStart_toEndOf="@+id/foodType"
             app:layout_constraintTop_toTopOf="parent"

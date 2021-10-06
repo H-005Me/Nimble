@@ -19,26 +19,22 @@ class GeneralCategory : AppCompatActivity() {
         var theIndices = intent.getSerializableExtra("INDICES") as ArrayList<Int>
         var theNewList = ArrayList<RestaurantsClass>()
         var theName = intent.getSerializableExtra("NAME") as String
-        var backButton = findViewById<Button>(R.id.backButtonGeneralCategory)
+        var backButton = findViewById<Button>(R.id.btBackGeneralCategory)
         for (each in theIndices) {
             theNewList.add(theList[each])
         }
         backButton.setOnClickListener {
             finish()
         }
-
-        var theListView = findViewById<ListView>(R.id.categoryL)
-        var theNameView = findViewById<TextView>(R.id.categoryName)
+        var theListView = findViewById<ListView>(R.id.lvCategoryL)
+        var theNameView = findViewById<TextView>(R.id.tvCategoryName)
         var new_Adapter = MyListAdapter(this, theNewList)
         theListView.adapter = new_Adapter
         theNameView.text = theName
         theListView.setOnItemClickListener { parent, view, position, id ->
-
-//            Toast.makeText(applicationContext, "$view", Toast.LENGTH_SHORT).show()
             var intent = Intent(this, GeneralRestaurant::class.java)
             intent.putExtra("LIST", theNewList[position])
             startActivity(intent)
-
         }
     }
 }

@@ -5,10 +5,7 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
-import com.example.nimble.RestaurantPages.RestaurantMenuActivity
 import com.example.nimble.entities.ProductClass
-import org.w3c.dom.Text
 
 
 open class FoodAdapter(
@@ -40,12 +37,13 @@ open class FoodAdapter(
         androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var title = itemView.findViewById<TextView>(com.example.nimble.R.id.foodType)
-        var add = itemView.findViewById<Button>(com.example.nimble.R.id.buttonAddToCart)
-        var delete = itemView.findViewById<Button>(com.example.nimble.R.id.buttonRemoveFromCart)
+        var add = itemView.findViewById<Button>(com.example.nimble.R.id.btAddToCart)
+        var delete = itemView.findViewById<Button>(com.example.nimble.R.id.btRemoveFromCart)
         var quantity = itemView.findViewById<TextView>(com.example.nimble.R.id.foodQuantity)
         var price = itemView.findViewById<TextView>(com.example.nimble.R.id.foodPrice)
         var howManyItems =
             itemView.findViewById<TextView>(com.example.nimble.R.id.actualQuantityBtn)
+
         init {
             itemView.setOnClickListener(this)
             add.setOnClickListener {

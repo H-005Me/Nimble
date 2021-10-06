@@ -15,6 +15,7 @@ import android.widget.Toast
 import com.example.nimble.*
 import com.example.nimble.database.Database
 import com.example.nimble.mainmenu.MainMenu
+import com.example.nimble.restaurant_perspective.MainMenuRestaurantsPerspective
 import com.example.nimble.user.user
 
 class LoginActivity : AppCompatActivity() {
@@ -27,7 +28,11 @@ class LoginActivity : AppCompatActivity() {
         btSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
-
+        // set btRestaurantPerspective to go to MainMenuRestaurantsPerspective
+        val btRestaurantPerspective = findViewById<Button>(R.id.btRestaurantPerspective)
+        btRestaurantPerspective.setOnClickListener {
+            startActivity(Intent(this, MainMenuRestaurantsPerspective::class.java))
+        }
         /// set btLoginSubmit to validate login
         val btLoginSubmit = findViewById<Button>(R.id.btLoginSubmit)
         btLoginSubmit.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.example.nimble.entities
 
+import com.example.nimble.user.user
 import java.io.Serializable
 
 
@@ -22,7 +23,10 @@ class OrdersClass(
     private var table: Int
     private var isCompleted: Int
     private var remarks: String
+
+    //the id of the order,not of the user
     private var id: Int
+    private var userName: String
     init {
         this.name = name
         this.year = year
@@ -34,6 +38,15 @@ class OrdersClass(
         this.table = table
         this.isCompleted = isCompleted
         this.remarks = ""
+        this.userName = user.getUserName()
+    }
+
+    fun setUserName(new_userName: String) {
+        this.userName = new_userName
+    }
+
+    fun getUserName(): String {
+        return this.userName
     }
 
     fun getId(): Int {

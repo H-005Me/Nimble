@@ -36,10 +36,10 @@ class RestaurantMenuActivity : AppCompatActivity() {
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
 
         //elements
-        var confirmBtn = findViewById<Button>(R.id.confirmOrderButton)
-        var back = findViewById<Button>(R.id.backBtnMenu)
-        var foodList = findViewById<RecyclerView>(R.id.foodList)
-        var categoryList = findViewById<RecyclerView>(R.id.typeOfFoodList)
+        var confirmBtn = findViewById<Button>(R.id.btConfirmOrder)
+        var back = findViewById<Button>(R.id.btBackMenu)
+        var foodList = findViewById<RecyclerView>(R.id.rvFoodList)
+        var categoryList = findViewById<RecyclerView>(R.id.rvTypesOfFoodList)
         //data
         var id = theList.getId() /// current restaurant id
         getFood(id)
@@ -138,7 +138,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
 
     fun onItemClick(position: Int) {
 
-        var foodList = findViewById<RecyclerView>(R.id.foodList)
+        var foodList = findViewById<RecyclerView>(R.id.rvFoodList)
 
         var new_foodList = ArrayList<ProductClass>()
         for (i in foodArray.indices) {

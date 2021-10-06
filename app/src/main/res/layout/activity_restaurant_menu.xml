@@ -8,7 +8,7 @@
     tools:context=".RestaurantPages.RestaurantMenuActivity" >
 
     <Button
-        android:id="@+id/backBtnMenu"
+        android:id="@+id/btBackMenu"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/typeOfFoodList"
+            android:id="@+id/rvTypesOfFoodList"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -40,27 +40,27 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="4dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/foodList"
+            app:layout_constraintBottom_toTopOf="@+id/rvFoodList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/foodList"
+            android:id="@+id/rvFoodList"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
             android:dividerHeight="10.0sp"
             android:elevation="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/confirmOrderButton"
+            app:layout_constraintBottom_toTopOf="@+id/btConfirmOrder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/typeOfFoodList"
+            app:layout_constraintTop_toBottomOf="@+id/rvTypesOfFoodList"
             app:layout_constraintVertical_bias="1.0" />
 
         <Button
-            android:id="@+id/confirmOrderButton"
+            android:id="@+id/btConfirmOrder"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="25dp"
@@ -86,8 +86,8 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/backBtnMenu"
-        app:layout_constraintStart_toEndOf="@+id/backBtnMenu"
-        app:layout_constraintTop_toTopOf="@+id/backBtnMenu" />
+        app:layout_constraintBottom_toBottomOf="@+id/btBackMenu"
+        app:layout_constraintStart_toEndOf="@+id/btBackMenu"
+        app:layout_constraintTop_toTopOf="@+id/btBackMenu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

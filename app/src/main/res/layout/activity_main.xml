@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/searchButton"
+            android:id="@+id/btSearch"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
@@ -60,20 +60,20 @@
             android:text="Cauți un restaurant?"
             android:textColor="@color/darker_gray"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/searchButton"
+            app:layout_constraintBottom_toTopOf="@+id/btSearch"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <Button
-            android:id="@+id/btnscanner"
+            android:id="@+id/btScanner"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="15dp"
             android:background="@drawable/ic_code_scanner"
             android:backgroundTint="@color/darker_gray"
-            app:layout_constraintBottom_toBottomOf="@+id/searchButton"
-            app:layout_constraintEnd_toEndOf="@+id/searchButton"
-            app:layout_constraintTop_toTopOf="@+id/searchButton"
+            app:layout_constraintBottom_toBottomOf="@+id/btSearch"
+            app:layout_constraintEnd_toEndOf="@+id/btSearch"
+            app:layout_constraintTop_toTopOf="@+id/btSearch"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,7 +111,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                     <Button
-                        android:id="@+id/closeButton"
+                        android:id="@+id/btClose"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:background="@android:color/transparent"
@@ -121,12 +121,12 @@
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
-                        app:layout_constraintEnd_toStartOf="@+id/categoriesButton"
+                        app:layout_constraintEnd_toStartOf="@+id/btCategories"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/offersButton"
+                        android:id="@+id/btOfferts"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:background="#00FFFFFF"
@@ -137,11 +137,11 @@
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/categoriesButton"
+                        app:layout_constraintStart_toEndOf="@+id/btCategories"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/categoriesButton"
+                        android:id="@+id/btCategories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
@@ -156,7 +156,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/getRestaurants"
+                        android:id="@+id/btGetRestaurants"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@drawable/ic_reload"
@@ -177,10 +177,10 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/closeButton">
+                        app:layout_constraintTop_toBottomOf="@+id/btClose">
 
                         <LinearLayout
-                            android:id="@+id/isScrollable"
+                            android:id="@+id/llScrollable"
                             android:layout_width="0dp"
                             android:layout_height="1000dp"
                             android:orientation="vertical"
@@ -190,7 +190,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <GridView
-                                android:id="@+id/category"
+                                android:id="@+id/gvCategory"
                                 android:layout_width="match_parent"
                                 android:layout_height="fill_parent"
                                 android:horizontalSpacing="15dp"
@@ -200,7 +200,7 @@
                                 tools:ignore="DuplicateSpeakableTextCheck" />
 
                             <ListView
-                                android:id="@+id/offerts"
+                                android:id="@+id/lvOfferts"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:divider="@android:color/transparent"
@@ -258,7 +258,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recommendedlist"
+                            android:id="@+id/rvRecommended"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:divider="@android:color/transparent"
@@ -283,19 +283,19 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/mapsbutton"
+            android:id="@+id/btMaps"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_maps"
             android:backgroundTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/homebutton"
+            app:layout_constraintEnd_toStartOf="@+id/btHome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/homebutton"
+            android:id="@+id/btHome"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_home_filled"
@@ -306,14 +306,14 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/profilebutton"
+            android:id="@+id/btProfile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_account_outline"
             android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/homebutton"
+            app:layout_constraintStart_toEndOf="@+id/btHome"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

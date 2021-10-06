@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nimble.R
 import com.example.nimble.RestaurantPages.ImagesActivity
-import com.example.nimble.RestaurantPages.RestaurantMenuActivity
 import com.example.nimble.adapters.GridAdapterRestaurants
 import com.example.nimble.loading.LoadingActivity
 import com.example.nimble.mainmenu.MainMenu
@@ -20,7 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-        val homeButton = findViewById<Button>(R.id.homebutton)
+        val homeButton = findViewById<Button>(R.id.btHome)
         val profilePic = findViewById<ImageView>(R.id.userimage)
         val profileName = findViewById<TextView>(R.id.username)
         val userList = findViewById<ListView>(R.id.userlist)

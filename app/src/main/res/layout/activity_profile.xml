@@ -78,19 +78,19 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/mapsbutton"
+            android:id="@+id/btMaps"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_maps"
             android:backgroundTint="@color/light_gray"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/homebutton"
+            app:layout_constraintEnd_toStartOf="@+id/btHome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/homebutton"
+            android:id="@+id/btHome"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_home"
@@ -102,13 +102,13 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/profilebutton"
+            android:id="@+id/btProfile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_account_filled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/homebutton"
+            app:layout_constraintStart_toEndOf="@+id/btHome"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

@@ -25,44 +25,38 @@ import com.example.nimble.entities.*
 import com.example.nimble.maps_activity.MapsActivity
 import com.example.nimble.profile.ProfileActivity
 import com.example.qr_good_app.QrActivity
-
-
-var RestaurantsList = ArrayList<RestaurantsClass>()
-var OffertsList = ArrayList<OffertsClass>()
 class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var locationManager: LocationManager
     var respectedGPS = false
-    var arrayOfCategoriesNames = arrayListOf<String>()
     var latitude = 0.0
     var longitude = 0.0
     var RestaurantsList = ArrayList<RestaurantsClass>()
+    var OffertsList = ArrayList<OffertsClass>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-
-        val mapsButton = findViewById<Button>(R.id.mapsbutton)
+        val mapsButton = findViewById<Button>(R.id.btMaps)
         val listView = findViewById<ListView>(R.id.CloseRestaurants)
-        var offertsList = findViewById<ListView>(R.id.offerts)
-        val categoryList = findViewById<GridView>(R.id.category)
-        val searchBar = findViewById<Button>(R.id.searchButton)
-        val mainButton = findViewById<Button>(R.id.homebutton)
-        var getRes = findViewById<Button>(R.id.getRestaurants)
-        val profileButton = findViewById<Button>(R.id.profilebutton)
-        var recommendedRestaurants = findViewById<RecyclerView>(R.id.recommendedlist)
-        var BtnScanner = findViewById<Button>(R.id.btnscanner)
-        val closeRestaurants = findViewById<Button>(R.id.closeButton)
-        var offers = findViewById<Button>(R.id.offersButton)
-        var categories = findViewById<Button>(R.id.categoriesButton)
+        var offertsList = findViewById<ListView>(R.id.lvOfferts)
+        val categoryList = findViewById<GridView>(R.id.gvCategory)
+        val searchBar = findViewById<Button>(R.id.btSearch)
+        val mainButton = findViewById<Button>(R.id.btHome)
+        var getRes = findViewById<Button>(R.id.btGetRestaurants)
+        val profileButton = findViewById<Button>(R.id.btProfile)
+        var recommendedRestaurants = findViewById<RecyclerView>(R.id.rvRecommended)
+        var BtnScanner = findViewById<Button>(R.id.btScanner)
+        val closeRestaurants = findViewById<Button>(R.id.btClose)
+        var offers = findViewById<Button>(R.id.btOfferts)
+        var categories = findViewById<Button>(R.id.btCategories)
         checkLocation()
-        val layout = findViewById<LinearLayout>(R.id.isScrollable)
+        val layout = findViewById<LinearLayout>(R.id.llScrollable)
 // Gets the layout params that will allow you to resize the layout
         val params = layout.layoutParams
         params.height = RestaurantsList.size * 550
-//        Toast.makeText(this, params.height, Toast.LENGTH_SHORT).show()
 
-        //disabled for the moment
+        //enabled for the moment
         mapsButton.isEnabled = true
         ///
         mainButton.isEnabled = true
@@ -92,27 +86,11 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             var intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
-
         var myListAdapter = MyListAdapter(this, RestaurantsList)
         listView.adapter = myListAdapter
         var myListAdapter1 = OffertsAdapter(this, OffertsList)
         offertsList.adapter = myListAdapter1
         var categoriesList = ArrayList<CategoriesClass>()
-//        for (index in RestaurantsList.indices) {
-//            var newcategoriesList = RestaurantsList[index].getCategories()
-//            for (new_index1 in newcategoriesList.indices) {
-//                var isThere = false
-//                for (new_index in categoriesList.indices)
-//                    if (newcategoriesList[new_index1] == categoriesList[new_index].getName()) {
-//                        isThere = true
-//                        categoriesList[new_index].addIndices(index)
-//                    }
-//                if (isThere == false) {
-//                    categoriesList.add(CategoriesClass(newcategoriesList[new_index1], 0))
-//                    categoriesList[categoriesList.size - 1].addIndices(index)
-//                }
-//            }
-//        }
         identifyCategories(categoriesList)
         getRes.setOnClickListener {
             checkLocation()
@@ -158,17 +136,16 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             }
         }
         //fiecare categorie are nume si un  icon; acestea sunt
-        var arrayOfCategoriesNames =
-            arrayListOf<String>(
-                "Burger",
-                "Desert",
-                "Peste",
-                "Pizza",
-                "Cartofi",
-                "Salata",
-                "Saorma",
-                "Supa"
-            )
+        var arrayOfCategoriesNames = arrayListOf<String>(
+            "Burger",
+            "Desert",
+            "Peste",
+            "Pizza",
+            "Cartofi",
+            "Salata",
+            "Saorma",
+            "Supa"
+        )
         var arrayOfCategoriesIcons = arrayListOf<Int>(
             R.drawable.bg_categ_burger,
             R.drawable.bg_categ_dessert,
@@ -291,7 +268,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             startActivity(intent)
         }
     }
-    /// TODO deal with this
     private fun prepareRestaurantsData() {
         var bgPageOfRestaurantsArray = arrayListOf<Int>(
             R.drawable.bg_maps_casa_piratilor,
@@ -349,12 +325,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
                 restaurants.setPageBackground(bg)
 
             restaurants.setStreet(address)
-//            if (restaurants.getTitle() == "Casa Piratilor")
-//                restaurants.setLocationMap(locationMapArray[0])
-//            else if (restaurants.getTitle() == "Marty")
-//                restaurants.setLocationMap(locationMapArray[1])
-//            else if (restaurants.getTitle() == "Klausen Burger")
-//                restaurants.setLocationMap(locationMapArray[2])
+
             RestaurantsList.add(restaurants)
         }
 
@@ -443,18 +414,15 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             )
         )
     }
-
     override fun onItemClick(position: Int) {
         var intent = Intent(this, GeneralRestaurant::class.java)
         intent.putExtra("LIST", RestaurantsList[position])
         startActivity(intent)
     }
-
     fun <T> removeDuplicates(list: ArrayList<T>?): ArrayList<T> {
         val set: Set<T> = LinkedHashSet(list)
         return ArrayList(set)
     }
-
     fun checkLocation() {
         try {
             if (Build.VERSION.SDK_INT >= 23 &&
@@ -509,7 +477,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
             respectedGPS = true
         }
     }
-
     fun identifyCategories(categoriesList: ArrayList<CategoriesClass>) {
         for (index in RestaurantsList.indices) {
             var newcategoriesList = RestaurantsList[index].getCategories()

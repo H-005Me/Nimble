@@ -4,13 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TabHost
 import android.widget.Toast
 import com.example.nimble.R
-import com.example.nimble.RestaurantPages.GeneralRestaurant
 import com.example.nimble.RestaurantPages.RestaurantMenuActivity
 import com.example.nimble.entities.RestaurantsClass
-import com.example.nimble.mainmenu.RestaurantsList
 
 
 import com.google.zxing.integration.android.IntentIntegrator
@@ -23,7 +20,7 @@ class QrActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr)
-        var BtnScanner = findViewById<Button>(R.id.btnScanner)
+        var BtnScanner = findViewById<Button>(R.id.btScannerQR)
         initScanner()
     }
 

@@ -7,7 +7,6 @@ import android.widget.*
 import com.example.nimble.R
 import com.example.nimble.adapters.GridAdapterRestaurants
 import com.example.nimble.adapters.TagsAdapter
-import com.example.nimble.database.Database
 import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.mainmenu.MainMenu
 import com.example.nimble.profile.ProfileActivity
@@ -21,17 +20,17 @@ class GeneralRestaurant : AppCompatActivity() {
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         val icon = findViewById<ImageView>(R.id.backgroundImage)
         val title = findViewById<TextView>(R.id.titleRestaurant)
-        val menulist = findViewById<GridView>(R.id.optionsMenu)
-        val tagsGrid = findViewById<GridView>(R.id.tagsGrid)
+        val menulist = findViewById<GridView>(R.id.gvOptions)
+        val tagsGrid = findViewById<GridView>(R.id.gvTags)
         val description = findViewById<TextView>(R.id.descriptionofrestaurant)
-        val homeButton = findViewById<Button>(R.id.homebutton)
-        val mapsButton = findViewById<Button>(R.id.mapsbutton)
-        val profileButton = findViewById<Button>(R.id.profilebutton)
-        val locationMap = findViewById<ImageView>(R.id.locationPhoto)
+        val homeButton = findViewById<Button>(R.id.btHome)
+        val mapsButton = findViewById<Button>(R.id.btMaps)
+        val profileButton = findViewById<Button>(R.id.btProfile)
+        val locationMap = findViewById<ImageView>(R.id.ivLocation)
         val backButton = findViewById<Button>(R.id.backButtonGeneralRestaurant)
         locationMap.setImageResource(theList.getLocationMap())
         description.text = theList.getStreet()
-        val reservationBtn = findViewById<Button>(R.id.toReserveBtn)
+        val reservationBtn = findViewById<Button>(R.id.btToReserve)
 
         /***
          * Picasso testing

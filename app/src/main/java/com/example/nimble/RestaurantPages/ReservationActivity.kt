@@ -40,16 +40,16 @@ class ReservationActivity : AppCompatActivity() {
         var hour = -1
         var minuteF = 0
         val c = Calendar.getInstance()
-        val pickDateBtn = findViewById<Button>(R.id.dateButton)
+        val pickDateBtn = findViewById<Button>(R.id.btDate)
         val dateTv = findViewById<TextView>(R.id.dateText)
-        val pickHourBtn = findViewById<Button>(R.id.hourButton)
+        val pickHourBtn = findViewById<Button>(R.id.btHour)
         val hourRes = findViewById<TextView>(R.id.hourText)
         val hourPicker = findViewById<TextView>(R.id.tablePickButton)
-        var chooseTableButton = findViewById<Button>(R.id.choosingTable)
-        var confirmReservation = findViewById<Button>(R.id.confirmedReservationButton)
+        var chooseTableButton = findViewById<Button>(R.id.btChooseTable)
+        var confirmReservation = findViewById<Button>(R.id.btConfirmedResevation)
         var confirmationInformer = findViewById<TextView>(R.id.reservationInformer)
         var remarksEditor = findViewById<EditText>(R.id.remarkstext)
-        var backButton = findViewById<Button>(R.id.backbutton_reservation)
+        var backButton = findViewById<Button>(R.id.btBackReservation)
         var dateIsPicked: Boolean = true
         var hourIsPicked: Boolean = false
         var tableIsPicked: Boolean = false
@@ -215,14 +215,14 @@ class ReservationActivity : AppCompatActivity() {
 
         closeButton.setOnClickListener {
 
-            val chooseTableButton = findViewById<Button>(R.id.choosingTable)
+            val chooseTableButton = findViewById<Button>(R.id.btChooseTable)
             var text = tablesNumber.toString()
             if (text.length > 2)
                 text = text.substring(2, text.length - 1)
             else
                 text = "Pick"
             chooseTableButton.text = text
-            val confirmReservation = findViewById<Button>(R.id.confirmedReservationButton)
+            val confirmReservation = findViewById<Button>(R.id.btConfirmedResevation)
             if (text != "Pick")
                 confirmReservation.isEnabled = true
             else
