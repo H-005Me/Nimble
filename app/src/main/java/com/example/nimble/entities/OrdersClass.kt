@@ -23,6 +23,7 @@ class OrdersClass(
     private var table: Int
     private var isCompleted: Int
     private var remarks: String
+    private var isResponsed: Boolean
 
     //the id of the order,not of the user
     private var id: Int
@@ -39,6 +40,7 @@ class OrdersClass(
         this.isCompleted = isCompleted
         this.remarks = ""
         this.userName = user.getUserName()
+        this.isResponsed = getResponse()
     }
 
     fun setUserName(new_userName: String) {
@@ -125,5 +127,7 @@ class OrdersClass(
         this.isCompleted = new_status
     }
 
-
+    fun getResponse(): Boolean {
+        return this.getStatus() == 4
+    }
 }

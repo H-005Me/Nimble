@@ -71,9 +71,12 @@ class SeeReservationsActity : AppCompatActivity() {
         //
         //
         /***
-         * 0->still in progress
-         * 1->completed
-         * 2->expired
+         *
+         * 0 -> still in progress
+         * 1 -> completed
+         * 2 -> expired
+         * 3 -> declined
+         * 4 -> accepted
          * ***/
 
         for (x in ordersList.indices) {
@@ -92,6 +95,7 @@ class SeeReservationsActity : AppCompatActivity() {
                         else if (ordersList[x].getHour() == hour)
                             if (ordersList[x].getMinute() + 1 <= minute)
                                 ordersList[x].setStatus(2)
+
             }
 
 
@@ -102,6 +106,7 @@ class SeeReservationsActity : AppCompatActivity() {
                 .thenBy { it.getMonth() }.thenBy { it.getDay() }.thenBy { it.getHour() }
                 .thenBy { it.getMinute() })
         }
+        ordersList.sortedBy { it.getResponse() }
         val orders_adapter = OrdersAdapterForListViews(this, ordersList)
         orderShower.adapter = orders_adapter
         orderShower.setOnItemClickListener { parent, view, position, id ->
