@@ -66,7 +66,7 @@
             android:layout_width="62dp"
             android:layout_height="36dp"
             android:layout_marginEnd="13dp"
-            android:text="Button"
+            android:text="POV"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView"

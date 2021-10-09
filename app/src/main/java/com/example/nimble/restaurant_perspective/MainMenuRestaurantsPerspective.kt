@@ -1,5 +1,6 @@
 package com.example.nimble.restaurant_perspective
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -47,7 +48,7 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             """.trimIndent()
             )
             nameOfUser!!.next()
-            val firstName = nameOfUser!!.getString(1)
+            val firstName = nameOfUser.getString(1)
             val lastName = nameOfUser.getString(2)
 
             var itworks = OrdersClass(name, year, month, day, hour, minutes, table, status)
@@ -57,9 +58,45 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             commandArrays.add(itworks)
         }
 
-        var adapter = AdapterOrdersRestaurantPerspective(commandArrays)
+        var adapter = AdapterOrdersRestaurantPerspective(commandArrays, this)
         theRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         theRecyclerView.adapter = adapter
+
+    }
+
+
+    fun showPopUp(command: Int, position: Int) {
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setTitle("Confirm")
+        builder.setMessage("Are you sure?")
+        builder.setPositiveButton(
+            "YES",
+            DialogInterface.OnClickListener { dialog, which -> // Do nothing but close the dialog
+                var id = commandArrays[position].getId()
+                if (command == 1)
+                    Database.runUpdate(
+                        """
+                        UPDATE tbl_orders SET status = '4' WHERE command_id='$id';
+                    """.trimIndent()
+                    )
+                else if (command == 2)
+                    Database.runUpdate(
+                        """
+                        UPDATE tbl_orders SET status = '3' WHERE command_id='$id';
+                    """.trimIndent()
+                    )
+                dialog.dismiss()
+            })
+
+        builder.setNegativeButton(
+            "NO",
+            DialogInterface.OnClickListener { dialog, which -> // Do nothing
+                dialog.dismiss()
+            })
+
+        val alert: android.app.AlertDialog? = builder.create()
+        alert!!.show()
+
     }
 }
