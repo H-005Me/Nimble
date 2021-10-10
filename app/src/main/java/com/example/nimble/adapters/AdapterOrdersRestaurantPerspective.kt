@@ -8,13 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.nimble.R
 import com.example.nimble.database.Database
 import com.example.nimble.entities.OrdersClass
-import com.example.nimble.entities.ProductClass
-import com.example.nimble.restaurant_perspective.MainMenuRestaurantsPerspective
-import org.w3c.dom.Text
-import java.security.AccessController.getContext
 
 open class AdapterOrdersRestaurantPerspective(
     var ordersList: ArrayList<OrdersClass>, var context: Context
@@ -33,8 +30,10 @@ open class AdapterOrdersRestaurantPerspective(
         var theStatus = "Status"
         if (ordersList[position].getStatus() == 4) {
             theStatus = "Accepted"
+            holder.tvStatus.setBackgroundResource(R.color.forest_green)
         } else if (ordersList[position].getStatus() == 3) {
             theStatus = "Declined"
+            holder.tvStatus.setBackgroundResource(R.color.red_crimson)
         } else {
             theStatus = "Waiting"
         }
@@ -68,6 +67,10 @@ open class AdapterOrdersRestaurantPerspective(
         var tvTableRestaurantPerspective =
             itemView.findViewById<TextView>(com.example.nimble.R.id.tvTableRestaurantPerspective)
         var tvStatus = itemView.findViewById<TextView>(com.example.nimble.R.id.tvStatus)
+
+        var clEachOrderRestaurantPerspective =
+            itemView.findViewById<ConstraintLayout>(com.example.nimble.R.id.clEachOrderRestaurantPerspective)
+
         init {
             itemView.setOnClickListener(this)
             btAccept.setOnClickListener {

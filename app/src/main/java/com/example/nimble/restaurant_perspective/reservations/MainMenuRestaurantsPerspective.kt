@@ -1,16 +1,14 @@
-package com.example.nimble.restaurant_perspective
+package com.example.nimble.restaurant_perspective.reservations
 
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
 import com.example.nimble.adapters.AdapterOrdersRestaurantPerspective
 import com.example.nimble.database.Database
 import com.example.nimble.entities.OrdersClass
-import com.example.nimble.user.user
 
 class MainMenuRestaurantsPerspective : AppCompatActivity() {
     var commandArrays = ArrayList<OrdersClass>()

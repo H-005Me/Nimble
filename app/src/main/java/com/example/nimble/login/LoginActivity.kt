@@ -11,11 +11,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import com.example.nimble.*
 import com.example.nimble.database.Database
 import com.example.nimble.mainmenu.MainMenu
-import com.example.nimble.restaurant_perspective.MainMenuRestaurantsPerspective
+import com.example.nimble.restaurant_perspective.reservations.MainMenuRestaurantsPerspective
 import com.example.nimble.user.user
 
 class LoginActivity : AppCompatActivity() {
