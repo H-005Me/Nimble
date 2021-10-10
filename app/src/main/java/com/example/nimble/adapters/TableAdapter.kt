@@ -31,12 +31,14 @@ class TableAdapter(
         val inflater = context.layoutInflater
         var rowView = inflater.inflate(R.layout.custom_table, null, true)
         val tableButton = rowView.findViewById<TextView>(R.id.table_button)
-        val tableLayout = rowView.findViewById<ConstraintLayout>(R.id.table_layout)
+        val tableLayout = rowView.findViewById<ConstraintLayout>(R.id.relativeLayout)
         val tableChairs = rowView.findViewById<TextView>(R.id.numar_persoane)
         tableButton.text = theList[position].getId().toString()
 
-        if (theList[position].getStatus() == true)
-            tableLayout.background = R.drawable.ic_launcher_foreground.toDrawable()
+        if (theList[position].getStatus() == 1)
+            tableLayout.setBackgroundResource(R.drawable.table_blue)
+        if (theList[position].getStatus() == 2)
+            tableLayout.setBackgroundResource(R.drawable.table_red)
         var aux1 = theList[position].getNumberOfPeople().toString()
         tableChairs.text = "Chairs at the table $aux1"
         return rowView

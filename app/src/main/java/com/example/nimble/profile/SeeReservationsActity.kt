@@ -102,11 +102,13 @@ class SeeReservationsActity : AppCompatActivity() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            ordersList.sortWith(compareBy<OrdersClass> { it.getStatus() }.thenBy { it.getYear() }
+            ordersList.sortWith(compareByDescending<OrdersClass> { it.getResponse() }.thenBy { it.getResponse() }
+                .thenBy { it.getYear() }
                 .thenBy { it.getMonth() }.thenBy { it.getDay() }.thenBy { it.getHour() }
                 .thenBy { it.getMinute() })
         }
-        ordersList.sortedBy { it.getResponse() }
+
+        ordersList.sortedByDescending { it.getResponse() }
         val orders_adapter = OrdersAdapterForListViews(this, ordersList)
         orderShower.adapter = orders_adapter
         orderShower.setOnItemClickListener { parent, view, position, id ->

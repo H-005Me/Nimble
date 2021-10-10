@@ -2,10 +2,10 @@ package com.example.nimble.entities
 
 import java.io.Serializable
 
-class TablesClass(numberOfPeople: Int, id: Int, status: Boolean) : Serializable {
+class TablesClass(numberOfPeople: Int, id: Int, status: Int) : Serializable {
     private var id: Int
     private var numberOfPeople: Int
-    private var status: Boolean
+    private var status: Int
 
     init {
         this.id = id!!
@@ -21,11 +21,11 @@ class TablesClass(numberOfPeople: Int, id: Int, status: Boolean) : Serializable 
         return this.numberOfPeople
     }
 
-    fun getStatus(): Boolean {
+    fun getStatus(): Int {
         return this.status
     }
 
-    fun setStatus(isAvailable: Boolean) {
+    fun setStatus(isAvailable: Int) {
         this.status = isAvailable
     }
 }

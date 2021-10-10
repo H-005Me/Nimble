@@ -164,6 +164,7 @@ class ReservationActivity : AppCompatActivity() {
             chooseTableButton.isEnabled = true
 
         confirmReservation.isEnabled = tableIsPicked
+
         confirmReservation.setOnClickListener {
             Toast.makeText(this, "Your reservation has been completed", Toast.LENGTH_SHORT).show()
             var name = theList.getTitle()
@@ -200,15 +201,15 @@ class ReservationActivity : AppCompatActivity() {
         var adapter = TableAdapter(this, TablesList)
         tablesGridList.adapter = adapter
         tablesGridList.setOnItemClickListener { parent, view, position, id ->
-            if (TablesList[position].getStatus() == true)
-                TablesList[position].setStatus(false)
-            else
-                TablesList[position].setStatus(true)
+            if (TablesList[position].getStatus() == 1)
+                TablesList[position].setStatus(0)
+            else if (TablesList[position].getStatus() == 0)
+                TablesList[position].setStatus(1)
             adapter = TableAdapter(this, TablesList)
             tablesGridList.adapter = adapter
             tablesNumber = arrayListOf("")
             for (i in TablesList.indices)
-                if (TablesList[i].getStatus() == true)
+                if (TablesList[i].getStatus() == 1)
                     tablesNumber.add(TablesList[i].getId().toString())
 
         }
@@ -236,23 +237,23 @@ class ReservationActivity : AppCompatActivity() {
 
     fun getTables() {
         //TODO("aici se iau din baza de date")
-        var table = TablesClass(4, 1, false)
+        var table = TablesClass(4, 1, 0)
         TablesList.add(table)
-        table = TablesClass(6, 2, false)
+        table = TablesClass(6, 2, 2)
         TablesList.add(table)
-        table = TablesClass(4, 3, false)
+        table = TablesClass(4, 3, 0)
         TablesList.add(table)
-        table = TablesClass(4, 4, false)
+        table = TablesClass(4, 4, 0)
         TablesList.add(table)
-        table = TablesClass(2, 5, false)
+        table = TablesClass(2, 5, 0)
         TablesList.add(table)
-        table = TablesClass(8, 6, false)
+        table = TablesClass(8, 6, 0)
         TablesList.add(table)
-        table = TablesClass(6, 7, false)
+        table = TablesClass(6, 7, 0)
         TablesList.add(table)
-        table = TablesClass(2, 8, false)
+        table = TablesClass(2, 8, 0)
         TablesList.add(table)
-        table = TablesClass(4, 9, false)
+        table = TablesClass(4, 9, 0)
         TablesList.add(table)
     }
 }

@@ -51,10 +51,13 @@ class OrdersAdapterForListViews(
         } else if (isAvailable == 1) {
             status.text = "Completed"
 //            eachItem.setBackgroundResource(R.color.lime)
-        } else if (isAvailable == 3)
+        } else if (isAvailable == 3) {
             status.text = "Declined"
-        else if (isAvailable == 4)
+
+        } else if (isAvailable == 4) {
             status.text = "Accepted"
+
+        }
         //distanceText.text = distance[position].toString()
 //        imageView.setImageResource(imgid[position])
 //            subtitleText.text = description[position]

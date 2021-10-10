@@ -44,8 +44,7 @@ class RestaurantMenuActivity : AppCompatActivity() {
         var id = theList.getId() /// current restaurant id
         getFood(id)
         //get the food of each restaurant
-        Toast.makeText(this, user.getId().toString(), Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, theList.getId().toString(), Toast.LENGTH_SHORT).show()
+
         back.setOnClickListener {
             finish()
         }
