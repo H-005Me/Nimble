@@ -8,6 +8,18 @@ CREATE TABLE tbl_users (
     phone VARCHAR(32)
 );
 
+ CREATE TABLE tbl_commands(
+            commandId INT IDENTITY(1,1) PRIMARY KEY,
+            userName VARCHAR(255),
+            minute TINYINT,
+            hour TINYINT,
+            day TINYINT,
+            month TINYINT,
+            year int,
+            stringOfIds VARCHAR(5005),
+            stringOfNumberOfEach VARCHAR(5005)
+            );
+
 CREATE TABLE tbl_tokens (
     userId INT NOT NULL,
     token CHAR(64) NOT NULL,
