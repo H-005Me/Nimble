@@ -19,11 +19,25 @@ import ShowedFoodAdapter
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.provider.ContactsContract
 import android.widget.*
 import com.example.nimble.adapters.CategoriesOfMenuAdapter
 import com.example.nimble.user.user
+import java.util.*
+import kotlin.collections.ArrayList
 
-
+/**
+CREATE TABLE tbl_commands(
+commandId INT IDENTITY(1,1) PRIMARY KEY,,
+firstName VARCHAR(255),
+secondName VARCHAR(255),
+minute TINYINT,
+hour TINYINT,
+day TINYINT,
+month TINYINT,
+year int
+);
+ */
 class RestaurantMenuActivity : AppCompatActivity() {
     var categoriesArray = ArrayList<String>()
     var foodArray = ArrayList<ProductClass>()
@@ -176,7 +190,30 @@ class RestaurantMenuActivity : AppCompatActivity() {
         closeButton.setOnClickListener {
             if (pickedFoodList.size == 0)
             else {
+                var idOfAllCommands = " "
+                var howManyOfEachOfAllCommands = ""
+                for (x in pickedFoodList.indices) {
+                    idOfAllCommands += pickedFoodList[x].getId()
+                    idOfAllCommands += ";"
+                    howManyOfEachOfAllCommands += pickedFoodList[x].getHowManyAdded()
+                    howManyOfEachOfAllCommands += ";"
+                }
                 Toast.makeText(this, "Order has been made", Toast.LENGTH_SHORT).show()
+                val date = Calendar.getInstance().time
+                var userName = user.getFullName()
+                var minute = date.minutes
+                var hour = date.hours
+                var day = date.day
+                var month = date.month
+                var year = date.year
+                var id = 0
+
+                Database.runUpdate(
+                    """
+            INSERT INTO tbl_commands (minute,hour,day,month,year,stringOfIds,stringOfNumberOfEach,userName)
+            VALUES ('$minute' , '$hour' , '$day', '$month', '$year', '$idOfAllCommands', '$howManyOfEachOfAllCommands', '$userName');
+        """.trimIndent()
+                )
 
                 myDialog.dismiss()
                 finish()
