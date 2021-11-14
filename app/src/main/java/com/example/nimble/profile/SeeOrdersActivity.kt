@@ -12,10 +12,10 @@ class SeeOrdersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_see_orders)
 
-        val USERNAME = user.getFullName()
+        val username = user.getFullName()
 
         var orders = Database.runQuery("""
-            SELECT commandId, minute, hour, day, month, year, stringOfIds, stringOfNumberOfEach FROM tbl_commands WHERE userName = '$USERNAME'
+            SELECT commandId, minute, hour, day, month, year, stringOfIds, stringOfNumberOfEach FROM tbl_commands WHERE userName = '$username'
         """.trimIndent())
 
         while (orders!!.next()) {
