@@ -18,7 +18,7 @@ class OrdersAdapterForListViews(
     }
 
     override fun getItem(position: Int): Any {
-        return position
+        return theList[position]
     }
 
     override fun getItemId(position: Int): Long {
