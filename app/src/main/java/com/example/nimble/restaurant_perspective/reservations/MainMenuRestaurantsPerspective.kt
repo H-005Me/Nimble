@@ -3,10 +3,15 @@ package com.example.nimble.restaurant_perspective.reservations
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.GridView
+import android.widget.ListView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
+import com.example.nimble.RestaurantPages.ReservationActivity
+import com.example.nimble.RestaurantPages.getTables
 import com.example.nimble.adapters.AdapterOrdersRestaurantPerspective
+import com.example.nimble.adapters.TableAdapter
 import com.example.nimble.database.Database
 import com.example.nimble.entities.OrdersClass
 
@@ -56,11 +61,28 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             commandArrays.add(itworks)
         }
 
-        var adapter = AdapterOrdersRestaurantPerspective(commandArrays, this)
+        var ordersAdapter = AdapterOrdersRestaurantPerspective(commandArrays, this)
         theRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        theRecyclerView.adapter = adapter
+        theRecyclerView.adapter = ordersAdapter
 
+        val tables = getTables()
+        val tableAdapter = TableAdapter(this, tables)
+        val tablesGrid = findViewById<GridView>(R.id.tablesGrid)
+        var nrOfTables = ArrayList<String>()
+
+        tablesGrid.adapter = tableAdapter
+
+        tablesGrid.setOnItemClickListener { parent, view, position, id ->
+            if (tables[position].getStatus() == 1)
+                tables[position].setStatus(0)
+            else if (tables[position].getStatus() == 0)
+                tables[position].setStatus(1)
+
+            for (i in tables.indices)
+                if (tables[i].getStatus() == 1)
+                    nrOfTables.add(tables[i].getId().toString())
+        }
     }
 
 

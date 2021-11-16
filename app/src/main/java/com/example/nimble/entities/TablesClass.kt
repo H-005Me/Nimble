@@ -8,9 +8,9 @@ class TablesClass(numberOfPeople: Int, id: Int, status: Int) : Serializable {
     private var status: Int
 
     init {
-        this.id = id!!
-        this.numberOfPeople = numberOfPeople!!
-        this.status = status!!
+        this.id = id
+        this.numberOfPeople = numberOfPeople
+        this.status = status
     }
 
     fun getId(): Int {

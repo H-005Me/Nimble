@@ -33,7 +33,7 @@ class ReservationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation)
-        getTables()
+        TablesList = getTables()
         var year = 0
         var month = 0
         var day = 0
@@ -235,30 +235,32 @@ class ReservationActivity : AppCompatActivity() {
         myDialog.show()
     }
 
-    fun getTables() {
-        //TODO("aici se iau din baza de date")
-        var table = TablesClass(4, 1, 0)
-        TablesList.add(table)
-        table = TablesClass(6, 2, 2)
-        TablesList.add(table)
-        table = TablesClass(4, 3, 0)
-        TablesList.add(table)
-        table = TablesClass(4, 4, 0)
-        TablesList.add(table)
-        table = TablesClass(2, 5, 0)
-        TablesList.add(table)
-        table = TablesClass(8, 6, 0)
-        TablesList.add(table)
-        table = TablesClass(6, 7, 0)
-        TablesList.add(table)
-        table = TablesClass(2, 8, 0)
-        TablesList.add(table)
-        table = TablesClass(4, 9, 0)
-        TablesList.add(table)
-    }
+
 }
 
+fun getTables () : ArrayList<TablesClass>
+{
+    //TODO("aici se iau din baza de date")
+    var tablesList = ArrayList<TablesClass>()
+    var table = TablesClass(4, 1, 0)
+    tablesList.add(table)
+    table = TablesClass(6, 2, 2)
+    tablesList.add(table)
+    table = TablesClass(4, 3, 0)
+    tablesList.add(table)
+    table = TablesClass(4, 4, 0)
+    tablesList.add(table)
+    table = TablesClass(2, 5, 0)
+    tablesList.add(table)
+    table = TablesClass(8, 6, 0)
+    tablesList.add(table)
+    table = TablesClass(6, 7, 0)
+    tablesList.add(table)
+    table = TablesClass(2, 8, 0)
+    tablesList.add(table)
+    table = TablesClass(4, 9, 0)
+    tablesList.add(table)
 
-
-
+    return tablesList
+}
 

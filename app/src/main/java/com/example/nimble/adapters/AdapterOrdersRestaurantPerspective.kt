@@ -26,6 +26,17 @@ open class AdapterOrdersRestaurantPerspective(
         holder.tvTitle.text = ordersList[position].getUserName()
         holder.tvDate.text =
             "${ordersList[position].getDay()}/${ordersList[position].getMonth()}/${ordersList[position].getYear()}"
+
+        var hourStr = ordersList[position].getHour().toString()
+        var minStr = ordersList[position].getMinute().toString()
+
+        if (hourStr.length == 1)
+            hourStr = "0$hourStr"
+        if (minStr.length == 1)
+            minStr = "0$minStr"
+
+        holder.tvTime.text = "$hourStr:$minStr"
+
         holder.tvTableRestaurantPerspective.text = ordersList[position].getTable().toString()
         var theStatus = "Status"
         if (ordersList[position].getStatus() == 4) {
@@ -67,6 +78,7 @@ open class AdapterOrdersRestaurantPerspective(
         var tvTableRestaurantPerspective =
             itemView.findViewById<TextView>(com.example.nimble.R.id.tvTableRestaurantPerspective)
         var tvStatus = itemView.findViewById<TextView>(com.example.nimble.R.id.tvStatus)
+        var tvTime = itemView.findViewById<TextView>(R.id.tvTimeRestaurantPerspective)
 
         var clEachOrderRestaurantPerspective =
             itemView.findViewById<ConstraintLayout>(com.example.nimble.R.id.clEachOrderRestaurantPerspective)
