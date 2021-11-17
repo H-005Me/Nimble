@@ -22,6 +22,7 @@ import com.example.nimble.adapters.TableAdapter
 import com.example.nimble.database.Database
 import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
+import com.example.nimble.entities.isReservedToStatus
 import com.example.nimble.user.user
 import java.time.temporal.TemporalAdjusters.next
 
@@ -31,11 +32,13 @@ class ReservationActivity : AppCompatActivity() {
     var TablesList = ArrayList<TablesClass>()
     var tablesNumber = ArrayList<String>()
 
+    val restaurantId = 0 /// TODO hardcoded restaurant id = 0
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation)
-        TablesList = getTables(0) /// TODO hardcoded restaurant id 0
+        TablesList = getTables(restaurantId) /// TODO hardcoded restaurant id 0
         var year = 0
         var month = 0
         var day = 0
@@ -174,17 +177,25 @@ class ReservationActivity : AppCompatActivity() {
             var statusV = 0
             month++ /// ex: december - 12
             var var3 = chooseTableButton.text
-            var new_table = 3
+            var new_table = 3 /// TODO change this to actual table ...?
             var the_remark = remarksEditor.text.toString()
 
-            Database.runUpdate(
-                """
-            INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status,
-            expired,remarks)
-            VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' ,'$new_table', '$statusV','$statusV','$the_remark' );
-        """.trimIndent()
+            /// set all selected tables as occupied in the db
+            for (tableNumberStr in tablesNumber) {
+                /// table is occupied TODO table is occupied in an interval of time
+                Log.d("dbg", "A${tableNumberStr}A")
+                Database.runUpdate("""
+                    UPDATE tbl_tables SET is_reserved = 1 WHERE restaurant_id = $restaurantId AND table_id = ${tableNumberStr.toInt()}
+                """.trimIndent())
+            }
+
+            Database.runUpdate("""
+                INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status, expired,remarks)
+                VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' ,'$new_table', '$statusV','$statusV','$the_remark' );
+            """.trimIndent()
             )
             month--
+
             finish()
         }
 
@@ -204,17 +215,20 @@ class ReservationActivity : AppCompatActivity() {
         var adapter = TableAdapter(this, TablesList)
         tablesGridList.adapter = adapter
         tablesGridList.setOnItemClickListener { parent, view, position, id ->
-            if (TablesList[position].getStatus() == 1)
+            /// where the tables are changed
+            if (TablesList[position].getStatus() == 1) {
                 TablesList[position].setStatus(0)
-            else if (TablesList[position].getStatus() == 0)
+            } else if (TablesList[position].getStatus() == 0) {
                 TablesList[position].setStatus(1)
+            }
+
             adapter = TableAdapter(this, TablesList)
             tablesGridList.adapter = adapter
-            tablesNumber = arrayListOf("")
+
+            tablesNumber = ArrayList<String>()
             for (i in TablesList.indices)
                 if (TablesList[i].getStatus() == 1)
                     tablesNumber.add(TablesList[i].getId().toString())
-
         }
 
         closeButton.setOnClickListener {
@@ -260,7 +274,7 @@ fun getTables (restaurantId: Int) : ArrayList<TablesClass>
         val position = tablesFromDb.getString(3)
         val nrOfPeople = tablesFromDb.getInt(4)
 
-        tablesList.add(TablesClass(nrOfPeople, id, if (is_reserved == 0) 0 else 2)) /// status is 0 or 2 ...?
+        tablesList.add(TablesClass(nrOfPeople, id, isReservedToStatus(is_reserved)))
     }
 
     return tablesList

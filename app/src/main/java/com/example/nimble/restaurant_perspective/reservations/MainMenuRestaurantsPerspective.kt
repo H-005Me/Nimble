@@ -81,10 +81,10 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
 
         tablesGrid.adapter = tableAdapter
 
-        tablesGrid.setOnItemClickListener { parent, view, position, id ->
-            /// toggle table status
+        tablesGrid.setOnItemClickListener { parent, view, position, id -> /// when a table is clicked
             val tableId = position+1
 
+            /// toggle table status
             if (tables[position].getStatus() == 0) { /// table changed to occupied
                 tables[position].setStatus(1)
                 /// write in the db
@@ -100,6 +100,10 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
                     UPDATE tbl_tables SET is_reserved = 0 WHERE restaurant_id = $restaurantId AND table_id = $tableId
                 """.trimIndent())
             }
+
+            /// update the colors
+            tableAdapter = TableAdapter(this, tables)
+            tablesGrid.adapter = tableAdapter
         }
     }
 
