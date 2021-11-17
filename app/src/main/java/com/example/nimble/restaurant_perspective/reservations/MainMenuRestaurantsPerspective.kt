@@ -3,8 +3,10 @@ package com.example.nimble.restaurant_perspective.reservations
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.GridView
 import android.widget.ListView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
@@ -14,9 +16,17 @@ import com.example.nimble.adapters.AdapterOrdersRestaurantPerspective
 import com.example.nimble.adapters.TableAdapter
 import com.example.nimble.database.Database
 import com.example.nimble.entities.OrdersClass
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainMenuRestaurantsPerspective : AppCompatActivity() {
     var commandArrays = ArrayList<OrdersClass>()
+    var tables = getTables(0) /// TODO harcoded restaurant id = 0
+    var nrOfTables = ArrayList<String>()
+
+    /// TODO when the server adds a table as occupied, it needs an userid
+    val restaurantId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu_restaurants_perspective)
@@ -66,22 +76,30 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         theRecyclerView.adapter = ordersAdapter
 
-        val tables = getTables()
-        val tableAdapter = TableAdapter(this, tables)
-        val tablesGrid = findViewById<GridView>(R.id.tablesGrid)
-        var nrOfTables = ArrayList<String>()
+        var tableAdapter = TableAdapter(this, tables)
+        var tablesGrid = findViewById<GridView>(R.id.tablesGrid)
 
         tablesGrid.adapter = tableAdapter
 
         tablesGrid.setOnItemClickListener { parent, view, position, id ->
-            if (tables[position].getStatus() == 1)
-                tables[position].setStatus(0)
-            else if (tables[position].getStatus() == 0)
-                tables[position].setStatus(1)
+            /// toggle table status
+            val tableId = position+1
 
-            for (i in tables.indices)
-                if (tables[i].getStatus() == 1)
-                    nrOfTables.add(tables[i].getId().toString())
+            if (tables[position].getStatus() == 0) { /// table changed to occupied
+                tables[position].setStatus(1)
+                /// write in the db
+                Database.runUpdate("""
+                    UPDATE tbl_tables SET is_reserved = 1 WHERE restaurant_id = $restaurantId AND table_id = $tableId 
+                """.trimIndent())
+            }
+
+            else if (tables[position].getStatus() == 1) { /// table changed to free
+                tables[position].setStatus(0)
+                /// write in the db
+                Database.runUpdate("""
+                    UPDATE tbl_tables SET is_reserved = 0 WHERE restaurant_id = $restaurantId AND table_id = $tableId
+                """.trimIndent())
+            }
         }
     }
 

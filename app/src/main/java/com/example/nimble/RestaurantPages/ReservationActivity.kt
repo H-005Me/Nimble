@@ -14,6 +14,7 @@ import com.example.nimble.R
 import java.util.*
 import kotlin.collections.ArrayList
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.WindowManager
 
 import android.widget.TextView
@@ -22,6 +23,7 @@ import com.example.nimble.database.Database
 import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
 import com.example.nimble.user.user
+import java.time.temporal.TemporalAdjusters.next
 
 
 class ReservationActivity : AppCompatActivity() {
@@ -33,7 +35,7 @@ class ReservationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation)
-        TablesList = getTables()
+        TablesList = getTables(0) /// TODO hardcoded restaurant id 0
         var year = 0
         var month = 0
         var day = 0
@@ -170,7 +172,7 @@ class ReservationActivity : AppCompatActivity() {
             var name = theList.getTitle()
             var firstV = user.getId()
             var statusV = 0
-            month++
+            month++ /// ex: december - 12
             var var3 = chooseTableButton.text
             var new_table = 3
             var the_remark = remarksEditor.text.toString()
@@ -193,7 +195,8 @@ class ReservationActivity : AppCompatActivity() {
 
     }
 
-    fun ShowPopup() {
+    fun ShowPopup()
+    {
         val myDialog: Dialog = Dialog(this)
         myDialog.setContentView(R.layout.pop_up_tables)
         val closeButton = myDialog.findViewById<Button>(R.id.close_button)
@@ -238,28 +241,27 @@ class ReservationActivity : AppCompatActivity() {
 
 }
 
-fun getTables () : ArrayList<TablesClass>
+/**
+ * gets all tables from the restaurant with the restaurantId id
+ */
+fun getTables (restaurantId: Int) : ArrayList<TablesClass>
 {
-    //TODO("aici se iau din baza de date")
+    /// TODO These are hardcoded, 9 tables at restaurantId = 0
+
     var tablesList = ArrayList<TablesClass>()
-    var table = TablesClass(4, 1, 0)
-    tablesList.add(table)
-    table = TablesClass(6, 2, 2)
-    tablesList.add(table)
-    table = TablesClass(4, 3, 0)
-    tablesList.add(table)
-    table = TablesClass(4, 4, 0)
-    tablesList.add(table)
-    table = TablesClass(2, 5, 0)
-    tablesList.add(table)
-    table = TablesClass(8, 6, 0)
-    tablesList.add(table)
-    table = TablesClass(6, 7, 0)
-    tablesList.add(table)
-    table = TablesClass(2, 8, 0)
-    tablesList.add(table)
-    table = TablesClass(4, 9, 0)
-    tablesList.add(table)
+
+    var tablesFromDb = Database.runQuery("""
+        SELECT table_id, is_reserved, position, nrOfPeople FROM tbl_tables WHERE restaurant_id = $restaurantId
+    """.trimIndent())
+
+    while (tablesFromDb!!.next()) {
+        val id = tablesFromDb.getInt(1)
+        val is_reserved = tablesFromDb.getInt(2)
+        val position = tablesFromDb.getString(3)
+        val nrOfPeople = tablesFromDb.getInt(4)
+
+        tablesList.add(TablesClass(nrOfPeople, id, if (is_reserved == 0) 0 else 2)) /// status is 0 or 2 ...?
+    }
 
     return tablesList
 }

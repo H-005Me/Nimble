@@ -12,7 +12,7 @@ import kotlin.concurrent.thread
  * use Database.connected to see the status of the Database object
  */
 object Database {
-    private val LOGTAG = "Database" /// for Logging
+    private val LOGTAG = "db" /// for Logging
 
     private val db_link = "phoebe.hosterion.net"
     private val db_port = "1500"
