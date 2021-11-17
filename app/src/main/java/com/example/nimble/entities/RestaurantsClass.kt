@@ -13,6 +13,27 @@ class RestaurantsClass(
     longitude: Double?,
     categories: Array<String>
 ) :Serializable {
+    /**
+     *  each restaurant has a name, review( how many review it has)
+     *  grade(how many starts,can be 4.9)
+     *  its icon
+     *  its distance from your current location to the restaurant
+     *  its background (in mainmenu can be seen)(mini pageBackground)
+     *  its pagebackground(when you click on a restaurant,the background )
+     *  a photo which represents its map(hardcoded)
+     *  its offerts(can be changed idk why this is here)
+     *  price range,restaurant type,price method
+     *  ex: Ieftin, chinezesc, card/cash
+     *  id for the database,taken from the database
+     *  showNameCloseRestaurant is the string from the main menu ex:DOT,SOVIET
+     *  instead of the complete name or just a nickname
+     *
+     *  latitude and longitude start at 0,
+     *  it gets the last known location through the haversine formula
+     *
+     *
+     * */
+
     private var categories: Array<String>
     private var title: String
     private var distance: Double
@@ -32,6 +53,7 @@ class RestaurantsClass(
     private var restaurantType: String
     private var payMethod: String
     private var id: Int
+    private var shownNameCloseRestaurant: String
     init {
         this.title = title!!
         this.latitude = latitude!!
@@ -60,6 +82,7 @@ class RestaurantsClass(
         this.restaurantType = "International"
         this.payMethod = "Card/Cash"
         this.id = 0
+        this.shownNameCloseRestaurant = title
     }
 
     fun setForGeneralRestaurant(new_price_range: String, new_type: String, new_method: String) {
@@ -71,14 +94,25 @@ class RestaurantsClass(
     fun getRestaurantType(): String {
         return this.restaurantType
     }
-    fun setId(new_id:Int){
-        this.id=new_id
+
+    fun setId(new_id: Int) {
+        this.id = new_id
     }
-    fun getId():Int{
+
+    fun getId(): Int {
         return this.id
     }
-    fun setRestaurantType(new_type:String){
-        this.restaurantType=new_type
+
+    fun setRestaurantType(new_type: String) {
+        this.restaurantType = new_type
+    }
+
+    fun getShownNameOfCloseRestaurantShown(): String {
+        return this.shownNameCloseRestaurant
+    }
+
+    fun setShownNameOfCloseRestaurantShown(new_nickname: String) {
+        this.shownNameCloseRestaurant = new_nickname
     }
 
     fun getPayMethod(): String {
