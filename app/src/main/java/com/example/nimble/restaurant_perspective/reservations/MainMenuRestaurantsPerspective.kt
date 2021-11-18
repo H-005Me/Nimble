@@ -49,7 +49,7 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             val day = res.getInt(5)
             val hour = res.getInt(6)
             val minutes = res.getInt(7)
-            val table = res.getInt(8)
+            val reservedTables = res.getString(8)
             val status = res.getInt(9)
             val expired = res.getInt(10)
             val remarks = res.getString(11)
@@ -64,7 +64,7 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             val firstName = nameOfUser.getString(1)
             val lastName = nameOfUser.getString(2)
 
-            var itworks = OrdersClass(name, year, month, day, hour, minutes, table, status)
+            var itworks = OrdersClass(name, year, month, day, hour, minutes, reservedTables, status)
             itworks.setUserName("$lastName $firstName")
             itworks.setRemarks(remarks)
             itworks.setId(orderdid)

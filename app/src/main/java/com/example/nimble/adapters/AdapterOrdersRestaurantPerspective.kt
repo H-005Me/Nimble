@@ -37,7 +37,7 @@ open class AdapterOrdersRestaurantPerspective(
 
         holder.tvTime.text = "$hourStr:$minStr"
 
-        holder.tvTableRestaurantPerspective.text = ordersList[position].getTable().toString()
+        holder.tvTableRestaurantPerspective.text = ordersList[position].getTables() /// TODO this will show 3;6;7 instead of, idk, 3 6 7 maybe?
         var theStatus = "Status"
         if (ordersList[position].getStatus() == 4) {
             theStatus = "Accepted"

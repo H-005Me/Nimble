@@ -21,6 +21,7 @@ import com.example.nimble.database.Database
 import com.example.nimble.entities.TablesClass
 import kotlin.collections.ArrayList
 
+/// TODO Fix getTables(), use function from ReservationActivity (I think)
 
 class EditOrdersActivity : AppCompatActivity() {
     var TablesList = ArrayList<TablesClass>()
@@ -47,7 +48,7 @@ class EditOrdersActivity : AppCompatActivity() {
         var year = aux1.getYear()
         var hour = aux1.getHour()
         var minutes = aux1.getMinute()
-        var tables = aux1.getTable()
+        var tables = aux1.getTables()
         var remark = aux1.getRemarks()
         var restaurantname = aux1.getName()
         //no modifications
@@ -163,7 +164,8 @@ class EditOrdersActivity : AppCompatActivity() {
             saveButton.isEnabled = true
             new_showPopUp()
             var new_string = pickTableBtn.text.toString()
-            tables = new_string.toUInt().toInt()
+            //tables = new_string.toUInt().toInt() (tables is string now)
+            tables = new_string
 
         }
         //data resets to the original
@@ -173,7 +175,7 @@ class EditOrdersActivity : AppCompatActivity() {
             day = theList.getDay()
             hour = theList.getHour()
             minutes = theList.getMinute()
-            tables = theList.getTable()
+            tables = theList.getTables()
             remark = theList.getRemarks()
             setText(year, month, day, hour, minutes, tables, remark)
             cancelButton.isEnabled = false
@@ -254,7 +256,7 @@ class EditOrdersActivity : AppCompatActivity() {
         day: Int,
         hour: Int,
         minutes: Int,
-        tables: Int,
+        tables: String,
         remarks: String
     ) {
         var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
@@ -266,7 +268,7 @@ class EditOrdersActivity : AppCompatActivity() {
             pickHourBtn.text = "0$hour:$minutes"
         else
             pickHourBtn.text = "$hour:$minutes"
-        pickTableBtn.text = "$tables"
+        pickTableBtn.text = tables
         editRemarkTxt.setText(remarks)
     }
 

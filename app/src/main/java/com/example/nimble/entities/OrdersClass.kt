@@ -11,7 +11,7 @@ class OrdersClass(
     day: Int,
     hour: Int,
     minute: Int,
-    table: Int,
+    tables: String,
     isCompleted: Int
 ) : Serializable {
     private var name: String
@@ -20,7 +20,7 @@ class OrdersClass(
     private var day: Int
     private var hour: Int
     private var minute: Int
-    private var table: Int
+    private var tables: String
     private var isCompleted: Int
     private var remarks: String
     private var isResponsed: Int
@@ -36,7 +36,7 @@ class OrdersClass(
         this.day = day
         this.hour = hour
         this.minute = minute
-        this.table = table
+        this.tables = tables
         this.isCompleted = isCompleted
         this.remarks = ""
         this.userName = user.getUserName()
@@ -111,12 +111,12 @@ class OrdersClass(
         this.minute = new_minute
     }
 
-    fun getTable(): Int {
-        return this.table
+    fun getTables(): String {
+        return this.tables
     }
 
-    fun setTable(new_table: Int) {
-        this.table = table
+    fun setTable(new_tables: String) {
+        this.tables = new_tables
     }
 
     fun getStatus(): Int {

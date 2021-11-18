@@ -177,21 +177,21 @@ class ReservationActivity : AppCompatActivity() {
             var statusV = 0
             month++ /// ex: december - 12
             var var3 = chooseTableButton.text
-            var new_table = 3 /// TODO change this to actual table ...?
             var the_remark = remarksEditor.text.toString()
 
             /// set all selected tables as occupied in the db
             for (tableNumberStr in tablesNumber) {
                 /// table is occupied TODO table is occupied in an interval of time
-                Log.d("dbg", "A${tableNumberStr}A")
                 Database.runUpdate("""
                     UPDATE tbl_tables SET is_reserved = 1 WHERE restaurant_id = $restaurantId AND table_id = ${tableNumberStr.toInt()}
                 """.trimIndent())
             }
 
+            /// tablesStr - formatted string to be put in tbl_orders-tableselected column
+            var tablesStr = createTablesStr(tablesNumber) /// tableid0;tableid1;...;tableidn;
             Database.runUpdate("""
                 INSERT INTO tbl_orders (user_id, name, year, month, day, hour, minutes, tableselected, status, expired,remarks)
-                VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' ,'$new_table', '$statusV','$statusV','$the_remark' );
+                VALUES ('$firstV', '$name', '$year', '$month', '$day', '$hour', '$minuteF' ,'$tablesStr', '$statusV','$statusV','$the_remark' );
             """.trimIndent()
             )
             month--
@@ -199,7 +199,6 @@ class ReservationActivity : AppCompatActivity() {
             finish()
         }
 
-        //
         backButton.setOnClickListener {
             finish()
         }
@@ -233,6 +232,7 @@ class ReservationActivity : AppCompatActivity() {
 
         closeButton.setOnClickListener {
 
+            /// TODO Bug - the choose table button doesn't show the first chosen table
             val chooseTableButton = findViewById<Button>(R.id.btChooseTable)
             var text = tablesNumber.toString()
             if (text.length > 2)
@@ -280,3 +280,16 @@ fun getTables (restaurantId: Int) : ArrayList<TablesClass>
     return tablesList
 }
 
+/**
+ * given an array of tables arr = ArrayList<String> where arr[0] = id of first table (string format)
+ * create string to put in db (string format: "tableid0;tableid1;...;tableidn;")
+ */
+fun createTablesStr (tablesList: ArrayList<String>): String
+{
+    var tablesStr = ""
+
+    for (table in tablesList)
+        tablesStr += "$table;" /// insert table in tablesStr
+
+    return tablesStr
+}
