@@ -235,8 +235,8 @@ class ReservationActivity : AppCompatActivity() {
             /// TODO Bug - the choose table button doesn't show the first chosen table
             val chooseTableButton = findViewById<Button>(R.id.btChooseTable)
             var text = tablesNumber.toString()
-            if (text.length > 2)
-                text = text.substring(2, text.length - 1)
+            if (text.length > 1)
+                text = text.substring(1, text.length - 1)
             else
                 text = "Pick"
             chooseTableButton.text = text
