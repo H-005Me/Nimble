@@ -231,8 +231,7 @@ class ReservationActivity : AppCompatActivity() {
         }
 
         closeButton.setOnClickListener {
-
-            /// TODO Bug - the choose table button doesn't show the first chosen table
+            /// TODO Bug - after deselecting all tables, no message is shown
             val chooseTableButton = findViewById<Button>(R.id.btChooseTable)
             var text = tablesNumber.toString()
             if (text.length > 1)
@@ -240,19 +239,15 @@ class ReservationActivity : AppCompatActivity() {
             else
                 text = "Pick"
             chooseTableButton.text = text
+
             val confirmReservation = findViewById<Button>(R.id.btConfirmedResevation)
-            if (text != "Pick")
-                confirmReservation.isEnabled = true
-            else
-                confirmReservation.isEnabled = false
+            confirmReservation.isEnabled = text != "Pick" /// if text != pick then you can complete the reservation TODO rewrite this comment in a better way
             myDialog.dismiss()
         }
 
         myDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
     }
-
-
 }
 
 /**
