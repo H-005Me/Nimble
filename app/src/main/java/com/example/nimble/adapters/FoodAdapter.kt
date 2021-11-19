@@ -20,7 +20,7 @@ open class FoodAdapter(
         holder.price.text = dishesList[position].getPriceOfProduct().toString()
         holder.quantity.text = dishesList[position].getQuantity().toString()
         holder.howManyItems.text =
-            "${allDishes[dishesList[position].getId()].getHowManyAdded()} items"
+            "${allDishes[dishesList[position].getId()].getHowManyAdded()} adaugate"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -71,7 +71,7 @@ open class FoodAdapter(
     open fun onAddClick(position: Int, howManyItems: TextView) {
         allDishes[dishesList[position].getId()].riseHowManyAdded()
         howManyItems.text =
-            "${allDishes[dishesList[position].getId()].getHowManyAdded()} items"
+            "${allDishes[dishesList[position].getId()].getHowManyAdded()} adaugate"
     }
 
     open fun onDeleteClick(position: Int, howManyItems: TextView) {
@@ -79,7 +79,7 @@ open class FoodAdapter(
             allDishes[dishesList[position].getId()].lowerHowManyAdded()
 
             howManyItems.text =
-                "${allDishes[dishesList[position].getId()].getHowManyAdded()} items"
+                "${allDishes[dishesList[position].getId()].getHowManyAdded()} adaugate"
         }
     }
 
@@ -102,7 +102,7 @@ class ShowedFoodAdapter(dishesList: ArrayList<ProductClass>, allDishes: ArrayLis
             allDishes[dishesList[position].getId()].lowerHowManyAdded()
 
             howManyItems.text =
-                "${allDishes[dishesList[position].getId()].getHowManyAdded()} items"
+                "${allDishes[dishesList[position].getId()].getHowManyAdded()} adaugate"
         } else {
             allDishes[dishesList[position].getId()].lowerHowManyAdded()
             dishesList.removeAt(position)

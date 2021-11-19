@@ -85,7 +85,7 @@
             android:id="@+id/actualQuantityBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 items"
+            android:text="0 adaugate"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btRemoveFromCart"
