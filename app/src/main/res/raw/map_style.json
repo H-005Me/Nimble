@@ -78,15 +78,6 @@
     ]
   },
   {
-    "featureType": "poi.attraction",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#dff300"
-      }
-    ]
-  },
-  {
     "featureType": "poi.park",
     "elementType": "geometry.fill",
     "stylers": [
@@ -110,15 +101,6 @@
     "stylers": [
       {
         "color": "#f5f1e6"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#ff4ff6"
       }
     ]
   },

@@ -67,7 +67,7 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/btn_login"
-            android:text="Rezerva masa și comanda"
+            android:text="Vezi comanda"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

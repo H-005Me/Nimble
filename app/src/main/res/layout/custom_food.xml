@@ -27,12 +27,13 @@
         <TextView
             android:id="@+id/foodPrice"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="Lei"
             android:textColor="@color/yellow_strong"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toTopOf="@+id/foodQuantity" />
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/btRemoveFromCart"
+            app:layout_constraintTop_toBottomOf="@+id/btRemoveFromCart" />
 
         <TextView
             android:id="@+id/foodQuantity"
@@ -41,58 +42,61 @@
             android:text="TextView"
             android:textColor="@color/darker_gray"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/foodType"
-            app:layout_constraintTop_toBottomOf="@+id/foodType" />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/foodType"
+            app:layout_constraintStart_toStartOf="@+id/foodType" />
 
         <Button
             android:id="@+id/btAddToCart"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/btn_circle_green"
+            android:background="@android:color/transparent"
             android:text="+"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
             android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/foodType"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/foodType" />
+            app:layout_constraintTop_toTopOf="@+id/foodType"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/btRemoveFromCart"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/btn_circle_red"
+            android:background="@android:color/transparent"
             android:text="-"
             android:textAlignment="gravity"
+            android:textColor="@color/design_default_color_error"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/btAddToCart"
-            app:layout_constraintTop_toTopOf="@+id/btAddToCart" />
+            app:layout_constraintTop_toTopOf="@+id/btAddToCart"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
             android:text=" Lei"
             android:textColor="@color/yellow_strong"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/foodPrice"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/foodPrice" />
+            app:layout_constraintStart_toEndOf="@+id/foodPrice"
+            app:layout_constraintTop_toTopOf="@+id/foodPrice"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/actualQuantityBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="0 adaugate"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btRemoveFromCart"
-            app:layout_constraintHorizontal_bias="0.636"
-            app:layout_constraintStart_toEndOf="@+id/foodType"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.694" />
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/foodType"
+            app:layout_constraintTop_toBottomOf="@+id/foodType" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
