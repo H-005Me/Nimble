@@ -293,7 +293,7 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
                 }
             } catch (e: java.lang.Exception) {
-                Toast.makeText(this, "wtf brooooo", Toast.LENGTH_SHORT).show()
+
             }
         }
     }
@@ -510,7 +510,6 @@ class MainMenu : AppCompatActivity(), ProductsAdapter.onItemClickListener {
 
         } catch (ex: Exception) {
 
-            Toast.makeText(this, "$ex", Toast.LENGTH_SHORT).show()
 
             val loc = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
             if (loc != null) {
