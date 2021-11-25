@@ -218,14 +218,14 @@ class EditOrdersActivity : AppCompatActivity() {
         myDialog.setContentView(R.layout.pop_up_tables)
         val closeButton = myDialog.findViewById<Button>(R.id.close_button)
         val tablesGridList = myDialog.findViewById<GridView>(R.id.tables_list_1)
-        var adapter = TableAdapter(this, TablesList)
+        var adapter = TableAdapter(this, TablesList, TablesList)
         tablesGridList.adapter = adapter
         tablesGridList.setOnItemClickListener { parent, view, position, id ->
             if (TablesList[position].getStatus() == 1)
                 TablesList[position].setStatus(0)
             else if (TablesList[position].getStatus() == 0)
                 TablesList[position].setStatus(1)
-            adapter = TableAdapter(this, TablesList)
+            adapter = TableAdapter(this, TablesList, TablesList)
             tablesGridList.adapter = adapter
             tablesNumber = arrayListOf("")
             for (i in TablesList.indices)
@@ -274,17 +274,17 @@ class EditOrdersActivity : AppCompatActivity() {
 
     fun getTables() {
         //TODO("aici se iau din baza de date")
-        var table = TablesClass(2, 1, 0)
+        var table = TablesClass(2, 1, 0, "Center")
         TablesList.add(table)
-        table = TablesClass(2, 2, 0)
+        table = TablesClass(2, 2, 0, "Center")
         TablesList.add(table)
-        table = TablesClass(2, 3, 0)
+        table = TablesClass(2, 3, 0, "Window")
         TablesList.add(table)
-        table = TablesClass(2, 4, 0)
+        table = TablesClass(2, 4, 0, "Terrace")
         TablesList.add(table)
-        table = TablesClass(2, 5, 0)
+        table = TablesClass(2, 5, 0, "Window")
         TablesList.add(table)
-        table = TablesClass(2, 6, 0)
+        table = TablesClass(2, 6, 0, "Terrace")
         TablesList.add(table)
     }
 
