@@ -24,6 +24,7 @@ import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
 import com.example.nimble.entities.isReservedToStatus
 import com.example.nimble.user.user
+import org.w3c.dom.Text
 import java.time.temporal.TemporalAdjusters.next
 
 
@@ -60,7 +61,7 @@ class ReservationActivity : AppCompatActivity() {
         var tableIsPicked: Boolean = false
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         var the_remark = ""
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         if (remarksEditor.text.toString() == "Remark") {
             the_remark = "Nothing"
         } else {
@@ -164,10 +165,7 @@ class ReservationActivity : AppCompatActivity() {
             }
 
         }
-        if (hour == -1)
-            chooseTableButton.isEnabled = false
-        else
-            chooseTableButton.isEnabled = true
+        chooseTableButton.isEnabled = hour != -1
 
         confirmReservation.isEnabled = tableIsPicked
 
@@ -219,6 +217,7 @@ class ReservationActivity : AppCompatActivity() {
         val centerSeat = myDialog.findViewById<RadioButton>(R.id.btCentru)
         val terraceSeat = myDialog.findViewById<RadioButton>(R.id.btTerasa)
         var allSeats = myDialog.findViewById<RadioButton>(R.id.btAll)
+        var tvNumberOfSeats = myDialog.findViewById<TextView>(R.id.tvNumberOfPeople)
         //they are filtered based on a parameter
         // currently by a string symbolising position of the table
 
@@ -233,9 +232,10 @@ class ReservationActivity : AppCompatActivity() {
         var currentArrayListFiltered = TablesList
         //initially it is the unfiltered(all tables)
         // you need to store this array for the onClickListener
+
         windowSeat.setOnClickListener {
 
-            var newTableList = ArrayList<TablesClass>();
+            var newTableList = ArrayList<TablesClass>()
             newTableList = getFilteredTables(TablesList, "la geam")
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
@@ -244,7 +244,7 @@ class ReservationActivity : AppCompatActivity() {
 
         }
         centerSeat.setOnClickListener {
-            var newTableList = ArrayList<TablesClass>();
+            var newTableList = ArrayList<TablesClass>()
             newTableList = getFilteredTables(TablesList, "centrale")
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
@@ -254,7 +254,7 @@ class ReservationActivity : AppCompatActivity() {
 
         }
         terraceSeat.setOnClickListener {
-            var newTableList = ArrayList<TablesClass>();
+            var newTableList = ArrayList<TablesClass>()
             newTableList = getFilteredTables(TablesList, "terasa")
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
@@ -270,6 +270,10 @@ class ReservationActivity : AppCompatActivity() {
             currentArrayListFiltered = TablesList
         }
 
+        tvNumberOfSeats.setOnClickListener {
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+        }
         tablesGridList.setOnItemClickListener { parent, view, position, id ->
             /// where the tables are changed
             if (TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].getStatus() == 1) {
@@ -302,10 +306,7 @@ class ReservationActivity : AppCompatActivity() {
                 text = "Pick"
             chooseTableButton.text = text
             val confirmReservation = findViewById<Button>(R.id.btConfirmedResevation)
-            if (text != "Pick")
-                confirmReservation.isEnabled = true
-            else
-                confirmReservation.isEnabled = false
+            confirmReservation.isEnabled = text != "Pick"
             myDialog.dismiss()
         }
 
@@ -364,6 +365,7 @@ fun createTablesStr(tablesList: ArrayList<String>): String {
     return tablesStr
 }
 
+// first function is to filter the tables based on position
 fun getFilteredTables(
     theInitialList: ArrayList<TablesClass>,
     theString: String
@@ -376,5 +378,18 @@ fun getFilteredTables(
             newTableList.add(theInitialList[index])
 
     return newTableList
+
+}
+
+//filters the tables based on the number of people
+fun getFilteredForSeatsNumber(
+    number: Int,
+    initialArray: ArrayList<TablesClass>
+): ArrayList<TablesClass> {
+    var newArrayList = ArrayList<TablesClass>()
+    for (x in initialArray.indices)
+        if (initialArray[x].getNumberOfPeople() == number)
+            newArrayList.add(initialArray[x])
+    return newArrayList
 
 }
