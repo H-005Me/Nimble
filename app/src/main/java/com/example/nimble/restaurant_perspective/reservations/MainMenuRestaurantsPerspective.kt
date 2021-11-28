@@ -76,7 +76,7 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         theRecyclerView.adapter = ordersAdapter
 
-        var tableAdapter = TableAdapter(this, tables)
+        var tableAdapter = TableAdapter(this, tables, tables)
         var tablesGrid = findViewById<GridView>(R.id.tablesGrid)
 
         tablesGrid.adapter = tableAdapter
@@ -102,7 +102,7 @@ class MainMenuRestaurantsPerspective : AppCompatActivity() {
             }
 
             /// update the colors
-            tableAdapter = TableAdapter(this, tables)
+            tableAdapter = TableAdapter(this, tables, tables)
             tablesGrid.adapter = tableAdapter
         }
     }

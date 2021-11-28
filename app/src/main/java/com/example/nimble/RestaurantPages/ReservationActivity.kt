@@ -148,6 +148,7 @@ class ReservationActivity : AppCompatActivity() {
             chooseTableButton.isEnabled = true
 
         chooseTableButton.setOnClickListener {
+
             ShowPopup()
             if (tablesNumber.size > 2) {
                 var text = tablesNumber.toString()
@@ -207,21 +208,81 @@ class ReservationActivity : AppCompatActivity() {
 
     fun ShowPopup()
     {
+
         val myDialog: Dialog = Dialog(this)
         myDialog.setContentView(R.layout.pop_up_tables)
         val closeButton = myDialog.findViewById<Button>(R.id.close_button)
         val tablesGridList = myDialog.findViewById<GridView>(R.id.tables_list_1)
-        var adapter = TableAdapter(this, TablesList)
+        //buttons to filter the tables
+        //TODO Improvement-get the filters from the table information obtain in the database(with recyclerviews)
+        val windowSeat = myDialog.findViewById<RadioButton>(R.id.btGeam)
+        val centerSeat = myDialog.findViewById<RadioButton>(R.id.btCentru)
+        val terraceSeat = myDialog.findViewById<RadioButton>(R.id.btTerasa)
+        var allSeats = myDialog.findViewById<RadioButton>(R.id.btAll)
+        //they are filtered based on a parameter
+        // currently by a string symbolising position of the table
+
+        var adapter = TableAdapter(this, TablesList, TablesList)
         tablesGridList.adapter = adapter
+
+        //gets the filtered array(the ones from the window)
+        //makes the changes visible by redoing the adapter; this can be improved
+        //the same can be said for the other ones; only the theString parameter changes
+        //
+
+        var currentArrayListFiltered = TablesList
+        //initially it is the unfiltered(all tables)
+        // you need to store this array for the onClickListener
+        windowSeat.setOnClickListener {
+
+            var newTableList = ArrayList<TablesClass>();
+            newTableList = getFilteredTables(TablesList, "la geam")
+            adapter = TableAdapter(this, newTableList, TablesList)
+            tablesGridList.adapter = adapter
+            currentArrayListFiltered = newTableList
+            //explanation up
+
+        }
+        centerSeat.setOnClickListener {
+            var newTableList = ArrayList<TablesClass>();
+            newTableList = getFilteredTables(TablesList, "centrale")
+            adapter = TableAdapter(this, newTableList, TablesList)
+            tablesGridList.adapter = adapter
+            currentArrayListFiltered = newTableList
+
+            //explanation up
+
+        }
+        terraceSeat.setOnClickListener {
+            var newTableList = ArrayList<TablesClass>();
+            newTableList = getFilteredTables(TablesList, "terasa")
+            adapter = TableAdapter(this, newTableList, TablesList)
+            tablesGridList.adapter = adapter
+            //explanation up
+            currentArrayListFiltered = newTableList
+
+
+        }
+        allSeats.setOnClickListener {
+            adapter = TableAdapter(this, TablesList, TablesList)
+            tablesGridList.adapter = adapter
+            //it does the initial array, without any filters
+            currentArrayListFiltered = TablesList
+        }
+
         tablesGridList.setOnItemClickListener { parent, view, position, id ->
             /// where the tables are changed
-            if (TablesList[position].getStatus() == 1) {
-                TablesList[position].setStatus(0)
-            } else if (TablesList[position].getStatus() == 0) {
-                TablesList[position].setStatus(1)
+            if (TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].getStatus() == 1) {
+                TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].setStatus(
+                    0
+                )
+            } else if (TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].getStatus() == 0) {
+                TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].setStatus(
+                    1
+                )
             }
 
-            adapter = TableAdapter(this, TablesList)
+            adapter = TableAdapter(this, currentArrayListFiltered, TablesList)
             tablesGridList.adapter = adapter
 
             tablesNumber = ArrayList<String>()
@@ -253,23 +314,33 @@ class ReservationActivity : AppCompatActivity() {
 /**
  * gets all tables from the restaurant with the restaurantId id
  */
-fun getTables (restaurantId: Int) : ArrayList<TablesClass>
-{
+fun getTables (restaurantId: Int) : ArrayList<TablesClass> {
     /// TODO These are hardcoded, 9 tables at restaurantId = 0
 
     var tablesList = ArrayList<TablesClass>()
 
-    var tablesFromDb = Database.runQuery("""
+    var tablesFromDb = Database.runQuery(
+        """
         SELECT table_id, is_reserved, position, nrOfPeople FROM tbl_tables WHERE restaurant_id = $restaurantId
-    """.trimIndent())
-
+    """.trimIndent()
+    )
+    var initPos = 0
+    //initial position in array
     while (tablesFromDb!!.next()) {
         val id = tablesFromDb.getInt(1)
         val is_reserved = tablesFromDb.getInt(2)
         val position = tablesFromDb.getString(3)
         val nrOfPeople = tablesFromDb.getInt(4)
+        //is reserved can be 1 or 0
+        //position can be "la geam","centrale","terasa"
 
-        tablesList.add(TablesClass(nrOfPeople, id, isReservedToStatus(is_reserved)))
+
+        var toBeAddedTable = TablesClass(nrOfPeople, id, isReservedToStatus(is_reserved), position)
+        toBeAddedTable.setInitialPositionInArray(initPos)
+        //each table needs an initial position
+        // did this so that I can add something that isn't a parameter for the class
+        ++initPos
+        tablesList.add(toBeAddedTable)
     }
 
     return tablesList
@@ -279,12 +350,26 @@ fun getTables (restaurantId: Int) : ArrayList<TablesClass>
  * given an array of tables arr = ArrayList<String> where arr[0] = id of first table (string format)
  * create string to put in db (string format: "tableid0;tableid1;...;tableidn;")
  */
-fun createTablesStr (tablesList: ArrayList<String>): String
-{
+fun createTablesStr(tablesList: ArrayList<String>): String {
     var tablesStr = ""
 
     for (table in tablesList)
         tablesStr += "$table;" /// insert table in tablesStr
 
     return tablesStr
+}
+
+fun getFilteredTables(
+    theInitialList: ArrayList<TablesClass>,
+    theString: String
+): ArrayList<TablesClass> {
+    // it returns the tables that contain the position(theString)
+
+    var newTableList = ArrayList<TablesClass>()
+    for (index in theInitialList.indices)
+        if (theInitialList[index].getTablePosition() == theString)
+            newTableList.add(theInitialList[index])
+
+    return newTableList
+
 }
