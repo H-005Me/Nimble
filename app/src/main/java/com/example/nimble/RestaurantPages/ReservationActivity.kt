@@ -24,6 +24,7 @@ import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
 import com.example.nimble.entities.isReservedToStatus
 import com.example.nimble.user.user
+import org.w3c.dom.Text
 import java.time.temporal.TemporalAdjusters.next
 
 
@@ -60,7 +61,7 @@ class ReservationActivity : AppCompatActivity() {
         var tableIsPicked: Boolean = false
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         var the_remark = ""
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         if (remarksEditor.text.toString() == "Remark") {
             the_remark = "Nothing"
         } else {
@@ -164,10 +165,7 @@ class ReservationActivity : AppCompatActivity() {
             }
 
         }
-        if (hour == -1)
-            chooseTableButton.isEnabled = false
-        else
-            chooseTableButton.isEnabled = true
+        chooseTableButton.isEnabled = hour != -1
 
         confirmReservation.isEnabled = tableIsPicked
 
@@ -219,6 +217,10 @@ class ReservationActivity : AppCompatActivity() {
         val centerSeat = myDialog.findViewById<RadioButton>(R.id.btCentru)
         val terraceSeat = myDialog.findViewById<RadioButton>(R.id.btTerasa)
         var allSeats = myDialog.findViewById<RadioButton>(R.id.btAll)
+        var tvNumberOfSeats = myDialog.findViewById<TextView>(R.id.tvNumberOfPeople)
+        var btFilter = myDialog.findViewById<Button>(R.id.btFilter)
+
+        var isAdaptedSeat = false
         //they are filtered based on a parameter
         // currently by a string symbolising position of the table
 
@@ -231,36 +233,45 @@ class ReservationActivity : AppCompatActivity() {
         //
 
         var currentArrayListFiltered = TablesList
+        var currentArrayListOfSeats = currentArrayListFiltered
         //initially it is the unfiltered(all tables)
         // you need to store this array for the onClickListener
+
+        // when you filter based on how many seats are at the tables
+        //you don't filter the current array(because it can already be filtered so you lose tables that
+        //otherwise would be good (ex: when you filter based on "Terasa" then you filter with "2" seats
+        //then you filter with "6" you don't get any tables),so you need a second array that is the currentArrayListOfSeats that
+        //memorises what should the seats thing filter for
+        //
         windowSeat.setOnClickListener {
 
-            var newTableList = ArrayList<TablesClass>();
+            var newTableList = ArrayList<TablesClass>()
             newTableList = getFilteredTables(TablesList, "la geam")
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
             currentArrayListFiltered = newTableList
+            currentArrayListOfSeats = newTableList
             //explanation up
 
         }
         centerSeat.setOnClickListener {
-            var newTableList = ArrayList<TablesClass>();
+            var newTableList = ArrayList<TablesClass>()
             newTableList = getFilteredTables(TablesList, "centrale")
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
             currentArrayListFiltered = newTableList
-
+            currentArrayListOfSeats = newTableList
             //explanation up
 
         }
         terraceSeat.setOnClickListener {
-            var newTableList = ArrayList<TablesClass>();
+            var newTableList = ArrayList<TablesClass>()
             newTableList = getFilteredTables(TablesList, "terasa")
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
             //explanation up
             currentArrayListFiltered = newTableList
-
+            currentArrayListOfSeats = newTableList
 
         }
         allSeats.setOnClickListener {
@@ -268,21 +279,47 @@ class ReservationActivity : AppCompatActivity() {
             tablesGridList.adapter = adapter
             //it does the initial array, without any filters
             currentArrayListFiltered = TablesList
+            currentArrayListOfSeats = currentArrayListFiltered
         }
+        btFilter.setOnClickListener {
+            var theTextOfSeats = tvNumberOfSeats.text.toString()
+            if (theTextOfSeats != "All" && theTextOfSeats != "") {
+                var possibleArray: ArrayList<TablesClass>
+                possibleArray =
+                    getFilteredForSeatsNumber(theTextOfSeats.toInt(), currentArrayListFiltered)
+                if (possibleArray.size != 0) {
+                    currentArrayListOfSeats = possibleArray
+                    adapter = TableAdapter(this, currentArrayListOfSeats, TablesList)
+                    tablesGridList.adapter = adapter
+                } else {
+                    Toast.makeText(
+                        this,
+                        "There are no tables with " + theTextOfSeats + " seats",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else if (theTextOfSeats == "") {
+                adapter = TableAdapter(this, currentArrayListFiltered, TablesList)
+                tablesGridList.adapter = adapter
+            }
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
 
         tablesGridList.setOnItemClickListener { parent, view, position, id ->
             /// where the tables are changed
-            if (TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].getStatus() == 1) {
-                TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].setStatus(
+            if (TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].getStatus() == 1) {
+                TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].setStatus(
                     0
                 )
-            } else if (TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].getStatus() == 0) {
-                TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].setStatus(
+            } else if (TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].getStatus() == 0) {
+                TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].setStatus(
                     1
                 )
             }
 
-            adapter = TableAdapter(this, currentArrayListFiltered, TablesList)
+            adapter = TableAdapter(this, currentArrayListOfSeats, TablesList)
             tablesGridList.adapter = adapter
 
             tablesNumber = ArrayList<String>()
@@ -302,7 +339,10 @@ class ReservationActivity : AppCompatActivity() {
             chooseTableButton.text = text
 
             val confirmReservation = findViewById<Button>(R.id.btConfirmedResevation)
+
+            
             confirmReservation.isEnabled = text != "Pick" /// if text != pick then you can complete the reservation TODO rewrite this comment in a better way
+
             myDialog.dismiss()
         }
 
@@ -359,6 +399,7 @@ fun createTablesStr(tablesList: ArrayList<String>): String {
     return tablesStr
 }
 
+// first function is to filter the tables based on position
 fun getFilteredTables(
     theInitialList: ArrayList<TablesClass>,
     theString: String
@@ -371,5 +412,18 @@ fun getFilteredTables(
             newTableList.add(theInitialList[index])
 
     return newTableList
+
+}
+
+//filters the tables based on the number of people
+fun getFilteredForSeatsNumber(
+    number: Int,
+    initialArray: ArrayList<TablesClass>
+): ArrayList<TablesClass> {
+    var newArrayList = ArrayList<TablesClass>()
+    for (x in initialArray.indices)
+        if (initialArray[x].getNumberOfPeople() == number)
+            newArrayList.add(initialArray[x])
+    return newArrayList
 
 }
