@@ -24,6 +24,7 @@ import com.example.nimble.entities.RestaurantsClass
 import com.example.nimble.entities.TablesClass
 import com.example.nimble.entities.isReservedToStatus
 import com.example.nimble.user.user
+import kotlinx.android.synthetic.main.activity_reservation.*
 import org.w3c.dom.Text
 import java.time.temporal.TemporalAdjusters.next
 
@@ -84,7 +85,7 @@ class ReservationActivity : AppCompatActivity() {
         }
         //TODO("It needs to get an array of activity so that in each day you can see the most popular hours,and based on reservation the color
         // of the hours and days changes")
-        pickDateBtn.setOnClickListener {
+        dateText.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val dpd =
                     DatePickerDialog(
@@ -119,11 +120,11 @@ class ReservationActivity : AppCompatActivity() {
         month++
         dateTv.text = "$day $month $year"
         month--
-        hourRes.text = "Enter an hour"
+        hourRes.text = "nu a fost ales nimic"
         if (hour != -1)
             chooseTableButton.isEnabled = true
 
-        pickHourBtn.setOnClickListener {
+        hourRes.setOnClickListener {
             val cal = Calendar.getInstance()
             chooseTableButton.isEnabled = true
             val timeSetLister =
@@ -151,6 +152,7 @@ class ReservationActivity : AppCompatActivity() {
         chooseTableButton.setOnClickListener {
 
             ShowPopup()
+            //TODO(you can make a  reservation without any tables Good or bad?)
             if (tablesNumber.size > 2) {
                 var text = tablesNumber.toString()
                 text = text.substring(2, text.length - 1)
@@ -162,15 +164,17 @@ class ReservationActivity : AppCompatActivity() {
                 chooseTableButton.text = "Pick"
                 confirmReservation.isEnabled = false
                 tableIsPicked = false
+                confirmReservation.isEnabled = tableIsPicked
             }
 
         }
         chooseTableButton.isEnabled = hour != -1
 
-        confirmReservation.isEnabled = tableIsPicked
+
 
         confirmReservation.setOnClickListener {
-            Toast.makeText(this, "Your reservation has been completed", Toast.LENGTH_SHORT).show()
+
+        Toast.makeText(this, "Your reservation has been completed", Toast.LENGTH_SHORT).show()
             var name = theList.getTitle()
             var firstV = user.getId()
             var statusV = 0
