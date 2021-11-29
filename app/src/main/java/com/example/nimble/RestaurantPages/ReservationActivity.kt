@@ -339,7 +339,8 @@ class ReservationActivity : AppCompatActivity() {
                 text = "Pick"
             chooseTableButton.text = text
             val confirmReservation = findViewById<Button>(R.id.btConfirmedResevation)
-            confirmReservation.isEnabled = text != "Pick"
+            confirmReservation.isEnabled =
+                text != "Pick" /// if text != pick then you can complete the reservation TODO rewrite this comment in a better way
             myDialog.dismiss()
         }
 
