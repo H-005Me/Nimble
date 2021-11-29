@@ -218,6 +218,9 @@ class ReservationActivity : AppCompatActivity() {
         val terraceSeat = myDialog.findViewById<RadioButton>(R.id.btTerasa)
         var allSeats = myDialog.findViewById<RadioButton>(R.id.btAll)
         var tvNumberOfSeats = myDialog.findViewById<TextView>(R.id.tvNumberOfPeople)
+        var btFilter = myDialog.findViewById<Button>(R.id.btFilter)
+
+        var isAdaptedSeat = false
         //they are filtered based on a parameter
         // currently by a string symbolising position of the table
 
@@ -230,9 +233,16 @@ class ReservationActivity : AppCompatActivity() {
         //
 
         var currentArrayListFiltered = TablesList
+        var currentArrayListOfSeats = currentArrayListFiltered
         //initially it is the unfiltered(all tables)
         // you need to store this array for the onClickListener
 
+        // when you filter based on how many seats are at the tables
+        //you don't filter the current array(because it can already be filtered so you lose tables that
+        //otherwise would be good (ex: when you filter based on "Terasa" then you filter with "2" seats
+        //then you filter with "6" you don't get any tables),so you need a second array that is the currentArrayListOfSeats that
+        //memorises what should the seats thing filter for
+        //
         windowSeat.setOnClickListener {
 
             var newTableList = ArrayList<TablesClass>()
@@ -240,6 +250,7 @@ class ReservationActivity : AppCompatActivity() {
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
             currentArrayListFiltered = newTableList
+            currentArrayListOfSeats = newTableList
             //explanation up
 
         }
@@ -249,7 +260,7 @@ class ReservationActivity : AppCompatActivity() {
             adapter = TableAdapter(this, newTableList, TablesList)
             tablesGridList.adapter = adapter
             currentArrayListFiltered = newTableList
-
+            currentArrayListOfSeats = newTableList
             //explanation up
 
         }
@@ -260,7 +271,7 @@ class ReservationActivity : AppCompatActivity() {
             tablesGridList.adapter = adapter
             //explanation up
             currentArrayListFiltered = newTableList
-
+            currentArrayListOfSeats = newTableList
 
         }
         allSeats.setOnClickListener {
@@ -268,25 +279,47 @@ class ReservationActivity : AppCompatActivity() {
             tablesGridList.adapter = adapter
             //it does the initial array, without any filters
             currentArrayListFiltered = TablesList
+            currentArrayListOfSeats = currentArrayListFiltered
         }
-
-        tvNumberOfSeats.setOnClickListener {
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-
+        btFilter.setOnClickListener {
+            var theTextOfSeats = tvNumberOfSeats.text.toString()
+            if (theTextOfSeats != "All" && theTextOfSeats != "") {
+                var possibleArray: ArrayList<TablesClass>
+                possibleArray =
+                    getFilteredForSeatsNumber(theTextOfSeats.toInt(), currentArrayListFiltered)
+                if (possibleArray.size != 0) {
+                    currentArrayListOfSeats = possibleArray
+                    adapter = TableAdapter(this, currentArrayListOfSeats, TablesList)
+                    tablesGridList.adapter = adapter
+                } else {
+                    Toast.makeText(
+                        this,
+                        "There are no tables with " + theTextOfSeats + " seats",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else if (theTextOfSeats == "") {
+                adapter = TableAdapter(this, currentArrayListFiltered, TablesList)
+                tablesGridList.adapter = adapter
+            }
         }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+
         tablesGridList.setOnItemClickListener { parent, view, position, id ->
             /// where the tables are changed
-            if (TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].getStatus() == 1) {
-                TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].setStatus(
+            if (TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].getStatus() == 1) {
+                TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].setStatus(
                     0
                 )
-            } else if (TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].getStatus() == 0) {
-                TablesList[currentArrayListFiltered[position].getInitialPositionInArray()].setStatus(
+            } else if (TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].getStatus() == 0) {
+                TablesList[currentArrayListOfSeats[position].getInitialPositionInArray()].setStatus(
                     1
                 )
             }
 
-            adapter = TableAdapter(this, currentArrayListFiltered, TablesList)
+            adapter = TableAdapter(this, currentArrayListOfSeats, TablesList)
             tablesGridList.adapter = adapter
 
             tablesNumber = ArrayList<String>()
