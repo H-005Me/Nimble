@@ -16,6 +16,9 @@
 package com.example.nimble.maps_activity
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
@@ -23,10 +26,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.example.nimble.R
+import com.example.nimble.RestaurantPages.GeneralRestaurant
+import com.example.nimble.RestaurantPages.RestaurantMenuActivity
+import com.example.nimble.entities.RestaurantsClass
+import com.example.nimble.restaurant_perspective.reservations.MainMenuRestaurantsPerspective
 
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -36,8 +47,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 
 // displaying the user's location.
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+//class MapsActivity : AppCompatActivity(), OnMapReadyCallback
 
+class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMapReadyCallback
+{
     private lateinit var map: GoogleMap
     private val TAG = MapsActivity::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
@@ -71,10 +84,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val homeLatLng = LatLng(latitude, longitude)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
-        map.addMarker(MarkerOptions().position(homeLatLng))
+
+        val marker1 = map.addMarker(MarkerOptions().position(homeLatLng))
+
         setMapStyle(map)
         enableMyLocation()
 
+        marker1.showInfoWindow()
+
+        map.setOnMarkerClickListener(this)
+
+        //map.setOnInfoWindowClickListener
+
+        /**
+         * See CustomInfoWindowForGoogleMap class below
+         */
+        //map.setInfoWindowAdapter(CustomInfoWindowForGoogleMap(this))
     }
 
     // Initializes contents of Activity's standard options menu. Only called the first time options
@@ -164,4 +189,56 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
+    /// TODO
+    override fun onMarkerClick(marker: Marker?): Boolean
+    {
+        Log.d("dbg", "Marker clicked $marker")
+
+        var intent = Intent(this, GeneralRestaurant::class.java)
+
+        /// TODO hardcoded, change some stuff, etc
+        var currentRestaurant = RestaurantsClass("Casa Piratilor", 0, 0.0, R.drawable.logo_restaurant_1, R.drawable.bg_simple_casa_piratilor,
+                                                    0.0, 0.0, arrayOf("Peste", "Supa", "Pizza", "Desert", "Racoritoare"))
+        currentRestaurant.setBackground(R.drawable.bg_banner_casa_piratilor)
+        currentRestaurant.setIcon(R.drawable.logo_casa_piratilor)
+        currentRestaurant.setPageBackground("https://i.imgur.com/D0jh4p2.jpg")
+        currentRestaurant.setLocationMap(R.drawable.bg_maps_casa_piratilor)
+
+        intent.putExtra("LIST", currentRestaurant)
+        startActivity(Intent(intent))
+
+        return false
+    }
 }
+
+
+/**
+ * idfk wtf this is, but it DOESN'T work
+ */
+/*class CustomInfoWindowForGoogleMap(context: Context) : GoogleMap.InfoWindowAdapter {
+
+    var mContext = context
+    var mWindow = (context as Activity).layoutInflater.inflate(R.layout.maps_infowindow, null)
+    var btOpenMenu: Button? = null
+
+    private fun rendowWindowText(marker: Marker, view: View) {
+
+        btOpenMenu = view.findViewById<Button>(R.id.openMenu)
+
+        btOpenMenu!!.setOnClickListener {
+            Log.d("dbg", "it works")
+        }
+    }
+
+    override fun getInfoContents(marker: Marker): View {
+        rendowWindowText(marker, mWindow)
+        return mWindow
+    }
+
+    override fun getInfoWindow(marker: Marker): View? {
+        rendowWindowText(marker, mWindow)
+        return mWindow
+    }
+}*/
+
