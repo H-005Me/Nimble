@@ -203,9 +203,9 @@ class RestaurantMenuActivity : AppCompatActivity() {
                 var userName = user.getFullName()
                 var minute = date.minutes
                 var hour = date.hours
-                var day = date.day
-                var month = date.month
-                var year = date.year
+                var day = date.date
+                var month = date.month + 1
+                var year = date.year + 1900
                 var id = 0
 
                 Database.runUpdate(
