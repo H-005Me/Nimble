@@ -198,12 +198,13 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener, OnMap
         var intent = Intent(this, GeneralRestaurant::class.java)
 
         /// TODO hardcoded, change some stuff, etc
-        var currentRestaurant = RestaurantsClass("Casa Piratilor", 0, 0.0, R.drawable.logo_restaurant_1, R.drawable.bg_simple_casa_piratilor,
-                                                    0.0, 0.0, arrayOf("Peste", "Supa", "Pizza", "Desert", "Racoritoare"))
+        var currentRestaurant = RestaurantsClass("Casa Piratilor", 1666, 3.9, R.drawable.logo_restaurant_1, R.drawable.bg_simple_casa_piratilor,
+            46.754644, 23.549038, arrayOf("Peste", "Supa", "Pizza", "Desert", "Racoritoare"))
         currentRestaurant.setBackground(R.drawable.bg_banner_casa_piratilor)
         currentRestaurant.setIcon(R.drawable.logo_casa_piratilor)
         currentRestaurant.setPageBackground("https://i.imgur.com/D0jh4p2.jpg")
         currentRestaurant.setLocationMap(R.drawable.bg_maps_casa_piratilor)
+        currentRestaurant.setStreet("Str. Ravasului 16")
 
         intent.putExtra("LIST", currentRestaurant)
         startActivity(Intent(intent))
