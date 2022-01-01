@@ -15,7 +15,10 @@ class TablesClass(numberOfPeople: Int, id: Int, status: Int, tablePosition: Stri
     private var initialPositionInArray: Int
 
     /**
-     * TODO what do status values mean 0 - free, 1 - reserved, 2 - expired (YES)
+     *
+     * 0 means free
+     * 1 reserved
+     * 2 expired
      */
 
     private var status: Int
@@ -30,6 +33,10 @@ class TablesClass(numberOfPeople: Int, id: Int, status: Int, tablePosition: Stri
 
     fun getId(): Int {
         return this.id
+    }
+
+    fun setId(newId: Int) {
+        this.id = newId
     }
 
     fun getInitialPositionInArray(): Int {
