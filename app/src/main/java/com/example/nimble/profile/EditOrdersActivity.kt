@@ -29,14 +29,14 @@ class EditOrdersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_orders_edit_activity)
-        var backButton = findViewById<Button>(R.id.backbutton)
-        var cancelButton = findViewById<Button>(R.id.btCancel)
-        var saveButton = findViewById<Button>(R.id.btSave)
-        var theList = intent.getSerializableExtra("LIST") as OrdersClass
-        var pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
-        var pickDateBtn = findViewById<Button>(R.id.new_datebutton)
-        var pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
-        var editRemarkTxt = findViewById<EditText>(R.id.remarkstext)
+        val backButton = findViewById<Button>(R.id.backbutton)
+        val cancelButton = findViewById<Button>(R.id.btCancel)
+        val saveButton = findViewById<Button>(R.id.btSave)
+        val theList = intent.getSerializableExtra("LIST") as OrdersClass
+        val pickHourBtn = findViewById<Button>(R.id.new_hourbutton)
+        val pickDateBtn = findViewById<Button>(R.id.new_datebutton)
+        val pickTableBtn = findViewById<Button>(R.id.new_tablebutton)
+        val editRemarkTxt = findViewById<EditText>(R.id.remarkstext)
         val deleteReservation = findViewById<Button>(R.id.btReservationDelete)
         //firstly declared are the elements of the layout
         var thehour = 0
@@ -163,9 +163,9 @@ class EditOrdersActivity : AppCompatActivity() {
         pickTableBtn.setOnClickListener {
             saveButton.isEnabled = true
             new_showPopUp()
-            var new_string = pickTableBtn.text.toString()
+            var new_string = getTableStringToShow(pickTableBtn.toString())
             //tables = new_string.toUInt().toInt() (tables is string now)
-            tables = new_string
+            tables = new_string.toString()
 
         }
         //data resets to the original
@@ -268,24 +268,51 @@ class EditOrdersActivity : AppCompatActivity() {
             pickHourBtn.text = "0$hour:$minutes"
         else
             pickHourBtn.text = "$hour:$minutes"
+
         pickTableBtn.text = tables
+        pickTableBtn.text = getTableStringToShow(pickTableBtn.text)
+        Toast.makeText(this, pickTableBtn.text, Toast.LENGTH_SHORT).show()
         editRemarkTxt.setText(remarks)
     }
 
     fun getTables() {
         //TODO("aici se iau din baza de date")
         var table = TablesClass(2, 1, 0, "Center")
+        table.setInitialPositionInArray(0)
         TablesList.add(table)
         table = TablesClass(2, 2, 0, "Center")
+        table.setInitialPositionInArray(1)
+
         TablesList.add(table)
         table = TablesClass(2, 3, 0, "Window")
+        table.setInitialPositionInArray(2)
+
         TablesList.add(table)
         table = TablesClass(2, 4, 0, "Terrace")
+        table.setInitialPositionInArray(3)
+
         TablesList.add(table)
         table = TablesClass(2, 5, 0, "Window")
+        table.setInitialPositionInArray(4)
+
         TablesList.add(table)
         table = TablesClass(2, 6, 0, "Terrace")
+        table.setInitialPositionInArray(5)
+
         TablesList.add(table)
     }
 
 }
+
+fun getTableStringToShow(tableString: CharSequence): CharSequence {
+
+    for (x in tableString.indices) {
+        if (tableString[x] == ';')
+            tableString.replaceRange(x, x, ','.toString());
+    }
+    if (tableString[tableString.length - 1] == ',')
+        tableString.replaceRange(tableString.length - 1, tableString.length - 1, ','.toString())
+    return tableString
+}
+
+

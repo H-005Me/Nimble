@@ -63,6 +63,7 @@ class ReservationActivity : AppCompatActivity() {
         var theList = intent.getSerializableExtra("LIST") as RestaurantsClass
         var the_remark = ""
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        //this is so that the keyboard adapts to the amount of text written
         if (remarksEditor.text.toString() == "Remark") {
             the_remark = "Nothing"
         } else {
@@ -155,7 +156,8 @@ class ReservationActivity : AppCompatActivity() {
             //TODO(you can make a  reservation without any tables Good or bad?)
             if (tablesNumber.size > 2) {
                 var text = tablesNumber.toString()
-                text = text.substring(2, text.length - 1)
+                if (text[0] == '[')
+                    text = text.substring(1, text.length - 1)
                 chooseTableButton.text = text
                 tableIsPicked = true
                 confirmReservation.isEnabled = true
@@ -227,20 +229,31 @@ class ReservationActivity : AppCompatActivity() {
         var isAdaptedSeat = false
         //they are filtered based on a parameter
         // currently by a string symbolising position of the table
-
-        var adapter = TableAdapter(this, TablesList, TablesList)
+        var currentArrayListFiltered = TablesList
+        var currentArrayListOfSeats = currentArrayListFiltered
+        var adapter = TableAdapter(this, currentArrayListOfSeats, TablesList)
         tablesGridList.adapter = adapter
 
         //gets the filtered array(the ones from the window)
         //makes the changes visible by redoing the adapter; this can be improved
         //the same can be said for the other ones; only the theString parameter changes
         //
+        /**
+         * there are three arrays
+         * 1.TableList(initial array,don't modify it,be it life or death)
+         * 2.currentArrayListFiltered(array filtered by position ex"geam", "fereastra")
+         * 3.currentArrayListOfSeats(array that filters the currentArrayListFiltered by the number of seats)
+         * you always filter based on currentArrayListOfSeats
+         * i didn't take the case where you filter first by seats than by position
+         * it can be done
+         */
 
-        var currentArrayListFiltered = TablesList
-        var currentArrayListOfSeats = currentArrayListFiltered
         //initially it is the unfiltered(all tables)
         // you need to store this array for the onClickListener
-
+        //(you need it in the onClickListener because when you click on the table
+        //you don't select the table currently shown(if you press the first table when you filter "2" for
+        //seats,and then you go back without any filters or doesn't matter what filter,the first position is
+        //always selected even if it has a different filter)
         // when you filter based on how many seats are at the tables
         //you don't filter the current array(because it can already be filtered so you lose tables that
         //otherwise would be good (ex: when you filter based on "Terasa" then you filter with "2" seats
@@ -291,6 +304,9 @@ class ReservationActivity : AppCompatActivity() {
                 var possibleArray: ArrayList<TablesClass>
                 possibleArray =
                     getFilteredForSeatsNumber(theTextOfSeats.toInt(), currentArrayListFiltered)
+                //you check if there is a filter than check if there are tables with that filter
+                //the filter is position+numberOfSeats(e.g. "geam" + "2")
+
                 if (possibleArray.size != 0) {
                     currentArrayListOfSeats = possibleArray
                     adapter = TableAdapter(this, currentArrayListOfSeats, TablesList)
@@ -323,9 +339,11 @@ class ReservationActivity : AppCompatActivity() {
                 )
             }
 
+            /*
             adapter = TableAdapter(this, currentArrayListOfSeats, TablesList)
             tablesGridList.adapter = adapter
-
+            */
+            adapter.notifyDataSetChanged()
             tablesNumber = ArrayList<String>()
             for (i in TablesList.indices)
                 if (TablesList[i].getStatus() == 1)
@@ -336,16 +354,23 @@ class ReservationActivity : AppCompatActivity() {
             /// TODO Bug - after deselecting all tables, no message is shown
             val chooseTableButton = findViewById<Button>(R.id.btChooseTable)
             var text = tablesNumber.toString()
-            if (text.length > 1)
-                text = text.substring(1, text.length - 1)
-            else
-                text = "Pick"
-            chooseTableButton.text = text
-
             val confirmReservation = findViewById<Button>(R.id.btConfirmedResevation)
 
-            
-            confirmReservation.isEnabled = text != "Pick" /// if text != pick then you can complete the reservation TODO rewrite this comment in a better way
+            if (text.length > 2) {
+                if (text[0] == '[')
+                    text = text.substring(1, text.length - 1)
+
+            } else {
+                text = "Pick"
+                confirmReservation.isEnabled = false
+
+            }
+            chooseTableButton.text = text
+
+
+
+            confirmReservation.isEnabled =
+                text != "Pick" /// if text != pick then you can complete the reservation TODO rewrite this comment in a better way
 
             myDialog.dismiss()
         }
