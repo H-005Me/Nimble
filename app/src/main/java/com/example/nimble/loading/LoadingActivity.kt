@@ -10,6 +10,7 @@ import com.example.nimble.R
 import com.example.nimble.database.Database
 import com.example.nimble.login.LoginActivity
 import com.example.nimble.mainmenu.MainMenu
+import com.lambdapioneer.argon2kt.Argon2Kt
 
 class LoadingActivity : AppCompatActivity() {
     private val LOGTAG = "LoadingActivity" /// for logging

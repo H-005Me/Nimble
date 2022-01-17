@@ -1,8 +1,11 @@
 package com.example.nimble
 
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.lambdapioneer.argon2kt.Argon2Kt
+import com.lambdapioneer.argon2kt.Argon2Mode
 import java.security.MessageDigest
 
 /**
@@ -46,6 +49,8 @@ fun makeLToast (activity: AppCompatActivity, msg: String) {
     makeToast(activity, msg, Toast.LENGTH_LONG)
 }
 
+/** !!! NOTE: do not use sha, use argon2 */
+
 /**
  * sha256(my_string) returns the sha256 hash of my_string
  */
@@ -57,7 +62,21 @@ fun sha256 (str: String): String {
  * returns the hashed password
  */
 fun hashPassword (email: String, password: String, salt: String): String {
-    return sha256(email + password + salt)
+    //return sha256(email + password + salt)
+
+    val mode = Argon2Mode.ARGON2_I
+    val hashLen = 64
+
+    val argon2 = Argon2Kt(); /// init argon2
+
+    val res = argon2.hash( /// hash result as string
+        mode = mode,
+        password = password.toByteArray(),
+        salt = salt.toByteArray(),
+        hashLengthInBytes = hashLen
+    ).encodedOutputAsString()
+
+    return res.substring(res.lastIndexOf('$') + 1) /// only what is after the last '$' in res is the actual hash
 }
 
 /**
