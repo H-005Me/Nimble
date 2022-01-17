@@ -65,18 +65,21 @@ fun hashPassword (email: String, password: String, salt: String): String {
     //return sha256(email + password + salt)
 
     val mode = Argon2Mode.ARGON2_I
-    val hashLen = 64
 
     val argon2 = Argon2Kt(); /// init argon2
 
-    val res = argon2.hash( /// hash result as string
+    val hash = argon2.hash( /// hash result as string
         mode = mode,
         password = password.toByteArray(),
         salt = salt.toByteArray(),
-        hashLengthInBytes = hashLen
     ).encodedOutputAsString()
 
-    return res.substring(res.lastIndexOf('$') + 1) /// only what is after the last '$' in res is the actual hash
+    val res = hash.substring(hash.lastIndexOf('$') + 1) /// only what is after the last '$' in res is the actual hash (128 bytes I think)
+
+    Log.d("dbg", "${res.length}")
+    Log.d("dbg", res)
+
+    return res
 }
 
 /**
