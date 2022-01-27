@@ -110,7 +110,7 @@ class SignupActivity : AppCompatActivity() {
             val salt = makeSalt(email, currentTime, randomNr)
 
             /// hash password
-            password = hashPassword(email, password, salt)
+            password = hashPassword(password, salt)
 
             /// signup success
             /// TODO send verification code (might need a new activity)

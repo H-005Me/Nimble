@@ -1,5 +1,6 @@
 package com.example.nimble
 
+import android.os.SystemClock.sleep
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -61,8 +62,8 @@ fun sha256 (str: String): String {
 /**
  * returns the hashed password
  */
-fun hashPassword (email: String, password: String, salt: String): String {
-    //return sha256(email + password + salt)
+fun hashPassword (password: String, salt: String): String {
+    //return argon2(password, salt)
 
     val mode = Argon2Mode.ARGON2_I
 
@@ -72,12 +73,10 @@ fun hashPassword (email: String, password: String, salt: String): String {
         mode = mode,
         password = password.toByteArray(),
         salt = salt.toByteArray(),
+        hashLengthInBytes = 128
     ).encodedOutputAsString()
 
     val res = hash.substring(hash.lastIndexOf('$') + 1) /// only what is after the last '$' in res is the actual hash (128 bytes I think)
-
-    Log.d("dbg", "${res.length}")
-    Log.d("dbg", res)
 
     return res
 }

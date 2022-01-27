@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
 
             /// get password from tbLoginPassword & hash it
             val tbLoginPassword = findViewById<View>(R.id.tbLoginPassword) as EditText
-            val password = hashPassword(email, tbLoginPassword.text.toString(), salt)
+            val password = hashPassword(tbLoginPassword.text.toString(), salt)
 
             /// validate login
             if (correctLogin(email, password)) { /// if the account exists and the password is correct

@@ -2,7 +2,7 @@ CREATE TABLE tbl_users (
     id INT IDENTITY(1,1) PRIMARY KEY,
     email NVARCHAR(255) NOT NULL UNIQUE,
     salt CHAR(64) NOT NULL,
-    password CHAR(64) NOT NULL,
+    password CHAR(64) NOT NULL, --changed to CHAR(171) NOT NULL for argon2 128 byte hash
     firstName NVARCHAR(64),
     lastName NVARCHAR(64),
     phone VARCHAR(32)
